@@ -44,11 +44,11 @@
 
 ## 6. 文件清單
 - `PRD.md`
-- `MARKET_RESEARCH.md`
-- `DEVELOPMENT_PLAN.md`
-- `DEVELOPMENT_PLAN_AI.md`
-- `AI_HANDOFF_RUNBOOK.md`
-- `KANBAN_SETUP.md`
+- `docs/MARKET_RESEARCH.md`
+- `docs/DEVELOPMENT_PLAN.md`
+- `docs/DEVELOPMENT_PLAN_AI.md`
+- `docs/AI_HANDOFF_RUNBOOK.md`
+- `docs/KANBAN_SETUP.md`
 - `CHECKPOINT.md`
 
 ## 7. 開發標準

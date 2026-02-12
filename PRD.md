@@ -290,16 +290,16 @@
 - GitHub no-license guidance: https://choosealicense.com/no-permission/
 
 ## 20. 市場需求驗證
-- 市場調查已獨立維護於 `MARKET_RESEARCH.md`。
+- 市場調查已獨立維護於 `docs/MARKET_RESEARCH.md`。
 - PRD 僅保留結論:
   - 此產品有需求，但屬於中等規模、分眾明確的教育/知識工具市場。
   - 策略採 `B2C 免費探索 + 教師/課堂導向`，以留存與課堂採用率驗證。
 
 ## 21. 開發計畫索引
-- 人類可讀版請參考 `DEVELOPMENT_PLAN.md`。
-- AI 執行版請參考 `DEVELOPMENT_PLAN_AI.md`。
-- AI 中斷續跑規範請參考 `AI_HANDOFF_RUNBOOK.md`。
-- 免費看板設定請參考 `KANBAN_SETUP.md`。
-- 本次對話與決策紀錄請參考 `PROJECT_DISCOVERY_LOG.md`。
-- 新專案可重用樣板請參考 `PROJECT_KICKOFF_TEMPLATE.md`。
-- AI 開發提示詞請參考 `AI_DEV_PROMPT.md`。
+- 人類可讀版請參考 `docs/DEVELOPMENT_PLAN.md`。
+- AI 執行版請參考 `docs/DEVELOPMENT_PLAN_AI.md`。
+- AI 中斷續跑規範請參考 `docs/AI_HANDOFF_RUNBOOK.md`。
+- 免費看板設定請參考 `docs/KANBAN_SETUP.md`。
+- 本次對話與決策紀錄請參考 `docs/PROJECT_DISCOVERY_LOG.md`。
+- 新專案可重用樣板請參考 `docs/PROJECT_KICKOFF_TEMPLATE.md`。
+- AI 開發提示詞請參考 `docs/AI_DEV_PROMPT.md`。

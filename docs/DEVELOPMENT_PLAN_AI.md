@@ -4,7 +4,7 @@
 用途: 給 AI agent 逐步執行，避免任務遺漏與重工
 
 ## 0. Execution Contract
-- 目標: 交付 MVP，不偏離 `PRD.md` 與 `DEVELOPMENT_PLAN.md`。
+- 目標: 交付 MVP，不偏離 `PRD.md` 與 `docs/DEVELOPMENT_PLAN.md`。
 - 原則:
   - 小步提交，單一責任 PR。
   - 任何 schema/API 變更先更新文件。
@@ -99,8 +99,8 @@
 ## 3.1 Documentation Sync Gate (Mandatory)
 - 每次提交前必做:
   - 檢查是否影響 `PRD.md`
-  - 檢查是否影響 `DEVELOPMENT_PLAN.md`
-  - 檢查是否影響 `DEVELOPMENT_PLAN_AI.md`
+  - 檢查是否影響 `docs/DEVELOPMENT_PLAN.md`
+  - 檢查是否影響 `docs/DEVELOPMENT_PLAN_AI.md`
 - 合併條件:
   - 程式碼與文件同 PR 同步
   - 若有規格差異，以 `PRD.md` 為準，先更新規格再合併

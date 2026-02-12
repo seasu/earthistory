@@ -47,20 +47,20 @@
 - Sprint 週期: `1 週`
 
 ## 7. AI 執行版對照
-- AI 專用任務拆解、執行順序、驗收清單請看 `DEVELOPMENT_PLAN_AI.md`。
+- AI 專用任務拆解、執行順序、驗收清單請看 `docs/DEVELOPMENT_PLAN_AI.md`。
 
 ## 8. 文件即時同步規則
 - 每次開發提交都必須檢查:
   - `PRD.md` 是否需更新（需求/架構/API/授權變更）
-  - `DEVELOPMENT_PLAN.md` 是否需更新（里程碑/流程/標準變更）
-  - `DEVELOPMENT_PLAN_AI.md` 是否需更新（任務拆解/驗收條件變更）
+  - `docs/DEVELOPMENT_PLAN.md` 是否需更新（里程碑/流程/標準變更）
+  - `docs/DEVELOPMENT_PLAN_AI.md` 是否需更新（任務拆解/驗收條件變更）
 - 規則:
   - 文件更新與程式碼變更同一個 PR 提交，不延後補文件。
   - 若文件衝突，先以 `PRD.md` 決策為準，再回填兩份計畫文件。
 
 ## 9. 中斷續跑與看板追蹤
-- AI 中斷續跑規範: `AI_HANDOFF_RUNBOOK.md`
-- 免費看板規範: `KANBAN_SETUP.md`
+- AI 中斷續跑規範: `docs/AI_HANDOFF_RUNBOOK.md`
+- 免費看板規範: `docs/KANBAN_SETUP.md`
 - 補充要求:
   - 每次開發 session 結束前必須更新 `CHECKPOINT.md`
   - 看板卡片需對應 `TaskID`（T0~T5）並即時更新狀態

@@ -14,12 +14,12 @@
 ## 2. 關鍵決策摘要
 - Git 分支建立: `codex/prd-setup`
 - PRD 建立並持續迭代: `PRD.md`
-- 市場調查獨立: `MARKET_RESEARCH.md`
+- 市場調查獨立: `docs/MARKET_RESEARCH.md`
 - 開發計畫雙版本:
-  - 人類版: `DEVELOPMENT_PLAN.md`
-  - AI 執行版: `DEVELOPMENT_PLAN_AI.md`
-- AI 中斷續跑規範: `AI_HANDOFF_RUNBOOK.md`
-- 免費看板規範: `KANBAN_SETUP.md`
+  - 人類版: `docs/DEVELOPMENT_PLAN.md`
+  - AI 執行版: `docs/DEVELOPMENT_PLAN_AI.md`
+- AI 中斷續跑規範: `docs/AI_HANDOFF_RUNBOOK.md`
+- 免費看板規範: `docs/KANBAN_SETUP.md`
 
 ## 3. 產品與技術方向決策
 - 地圖技術:
@@ -54,5 +54,5 @@
 - 每次 session 結束都更新 `CHECKPOINT.md`，確保可恢復
 
 ## 7. 後續可重用資產
-- 本次流程樣板請參考: `PROJECT_KICKOFF_TEMPLATE.md`
-- AI 啟動提示詞請參考: `AI_DEV_PROMPT.md`
+- 本次流程樣板請參考: `docs/PROJECT_KICKOFF_TEMPLATE.md`
+- AI 啟動提示詞請參考: `docs/AI_DEV_PROMPT.md`
