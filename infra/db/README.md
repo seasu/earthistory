@@ -36,4 +36,18 @@ psql "postgresql://earthistory:earthistory@localhost:5432/earthistory" \
   -c "SELECT tablename FROM pg_tables WHERE schemaname='public' AND tablename IN ('sources','geo_layers','events') ORDER BY tablename;"
 ```
 
+## 6. Apply index strategy migration
+
+```bash
+psql "postgresql://earthistory:earthistory@localhost:5432/earthistory" \
+  -f infra/db/migrations/0003_index_strategy.sql
+```
+
+## 7. Verify index set
+
+```bash
+psql "postgresql://earthistory:earthistory@localhost:5432/earthistory" \
+  -c "SELECT indexname FROM pg_indexes WHERE schemaname='public' AND tablename='events' ORDER BY indexname;"
+```
+
 Migrations are idempotent (`IF NOT EXISTS`), so they can be safely re-run.

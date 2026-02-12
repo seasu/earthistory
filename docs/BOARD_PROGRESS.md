@@ -5,21 +5,21 @@
 
 ## Summary
 - Total Points: 67
-- Done Points: 16
-- Overall Progress: 23.88%
+- Done Points: 19
+- Overall Progress: 28.36%
 - Current Sprint: S0
 
 ## By Sprint
 | Sprint | Total Points | Done Points | Progress |
 |---|---:|---:|---:|
 | S0 | 8 | 8 | 100% |
-| S1 | 18 | 8 | 44.44% |
+| S1 | 18 | 11 | 61.11% |
 | S2 | 16 | 0 | 0% |
 | S3 | 8 | 0 | 0% |
 | S4 | 11 | 0 | 0% |
 
 ## Current In Progress
-- T1.3 核心索引策略（時間/地理/全文）
+- T2.1 Fastify 模組邊界骨架
 
 ## Blocked
 - None

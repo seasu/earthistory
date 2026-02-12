@@ -1,17 +1,18 @@
 # Checkpoint
-- Date: 2026-02-13 01:24 (UTC+8)
-- Branch: codex/t1-2-core-tables
-- Last Commit: 3ee562a
+- Date: 2026-02-13 01:31 (UTC+8)
+- Branch: codex/t1-3-index-strategy
+- Last Commit: 7375497
 - Completed:
   - T0.1
   - T0.2
   - T0.3
   - T1.1
   - T1.2
-- In Progress:
   - T1.3
+- In Progress:
+  - T2.1
 - Next:
-  - 強化索引策略（時間/地理/全文）
+  - 建立 Fastify 模組邊界骨架（query/search/ingestion/admin）
 - Blockers:
   - none
 - Docs Synced:
