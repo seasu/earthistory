@@ -2,7 +2,7 @@
 
 ## 1. 文件資訊
 - 專案名稱: Earthistory
-- 版本: v0.6 (Free-Cloud Ops Strategy Locked)
+- 版本: v0.7 (Market Demand Validation Added)
 - 最後更新: 2026-02-12
 - 文件維護: Seasu + Codex
 
@@ -284,3 +284,26 @@
 - Google Maps Service Terms (content restrictions): https://cloud.google.com/maps-platform/terms/maps-service-terms/index-20191121
 - US Copyright Office (facts are not protected by copyright): https://www.copyright.gov/circs/circ33.pdf
 - GitHub no-license guidance: https://choosealicense.com/no-permission/
+
+## 20. 市場需求驗證 (2026-02-12)
+### 20.1 正向需求訊號
+- 歷史學習族群規模大且可持續:
+  - AP World History 2025 年考生為 `411,547`，較 2024 年 `379,385` 成長。
+  - College Board 公告顯示 2024 屆超過 `1.2M` 名學生參與超過 `4.3M` 場 AP 考試，整體參與持續增加。
+- 數位學習整體需求仍在:
+  - Khan Academy SY24-25 公布 `104.9M` 年活躍學習者、`66.8B` 學習分鐘，代表大規模線上學習行為仍強。
+- 已有「地圖 + 歷史」產品與社群存在:
+  - Chronas 自述有超過 `50M` data points，Patreon 約 `298` members（其中 `53` paid）。
+  - OpenHistoricalMap 社群仍持續開發與更新（多個 repo 於 2026-02 有更新）。
+
+### 20.2 反向訊號與風險
+- 歷史內容網站商業化壓力高:
+  - TimeMaps 已暫停新 Premium 訂閱，理由包含 AI 導致內容站流量下滑與營運成本壓力。
+- 推論: 「有需求」不等於「直接訂閱就能成長」，需要更明確的使用場景與分眾策略。
+
+### 20.3 結論 (決策)
+- 結論: 此產品「有需求」，但屬於 `中等規模、分眾明確` 的教育/知識工具市場，不是大眾娛樂型爆量市場。
+- 產品方向建議:
+  - 先做 `B2C 免費探索 + 教師/課堂導向 B2B2C`。
+  - 先驗證高頻場景: `課堂投影、作業查詢、考前複習`。
+  - 以留存與課堂採用率為核心指標，不以短期付費轉換率作唯一目標。
