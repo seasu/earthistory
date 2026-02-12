@@ -5,21 +5,21 @@
 
 ## Summary
 - Total Points: 67
-- Done Points: 27
-- Overall Progress: 40.30%
+- Done Points: 29
+- Overall Progress: 43.28%
 - Current Sprint: S0
 
 ## By Sprint
 | Sprint | Total Points | Done Points | Progress |
 |---|---:|---:|---:|
 | S0 | 8 | 8 | 100% |
-| S1 | 21 | 19 | 90.48% |
+| S1 | 21 | 21 | 100% |
 | S2 | 19 | 0 | 0% |
 | S3 | 8 | 0 | 0% |
 | S4 | 11 | 0 | 0% |
 
 ## Current In Progress
-- T2.3 OpenAPI 文件產生
+- T3.1 Seed ingestion script v1
 
 ## Blocked
 - None

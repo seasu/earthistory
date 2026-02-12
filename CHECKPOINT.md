@@ -1,7 +1,7 @@
 # Checkpoint
-- Date: 2026-02-13 01:55 (UTC+8)
-- Branch: codex/t2-2-api-v1-endpoints
-- Last Commit: ea7b9c5
+- Date: 2026-02-13 02:02 (UTC+8)
+- Branch: codex/t2-3-openapi-docs
+- Last Commit: c74c0da
 - Completed:
   - T0.1
   - T0.2
@@ -11,10 +11,11 @@
   - T1.3
   - T2.1
   - T2.2
-- In Progress:
   - T2.3
+- In Progress:
+  - T3.1
 - Next:
-  - 產生 OpenAPI 文件並接入 API
+  - 建立 seed ingestion script v1
 - Blockers:
   - none
 - Docs Synced:
