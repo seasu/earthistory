@@ -17,7 +17,7 @@
 | T0.2 | Lint/Typecheck/Test 命令基線 | S0 | DevOps | P0 | 2 | Done | `pnpm -r lint/typecheck/test` 可執行 |
 | T0.3 | CI workflow baseline | S0 | DevOps | P0 | 3 | Done | PR 觸發 `lint+typecheck+test+build` |
 | T1.1 | Postgres + PostGIS migration 初始化 | S1 | Backend | P0 | 3 | Done | migration 可重複執行 |
-| T1.2 | 核心資料表建立 (`events`,`geo_layers`,`sources`) | S1 | Data | P0 | 5 | Todo | schema 與文件一致 |
+| T1.2 | 核心資料表建立 (`events`,`geo_layers`,`sources`) | S1 | Data | P0 | 5 | Done | schema 與文件一致 |
 | T1.3 | 核心索引策略（時間/地理/全文） | S1 | Data | P1 | 3 | Todo | 查詢計畫可用 index |
 | T2.1 | Fastify 模組邊界骨架 | S1 | Backend | P0 | 3 | Todo | `query/search/ingestion/admin` 模組存在 |
 | T2.2 | API v1 端點實作 | S1 | Backend | P0 | 5 | Todo | `/events,/search,/regions,/sources` 可回應 |
@@ -36,5 +36,5 @@
 
 ## 整體進度
 - Total Points: 67
-- Done Points: 11
-- Overall Progress: 16.42%
+- Done Points: 16
+- Overall Progress: 23.88%

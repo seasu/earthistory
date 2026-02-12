@@ -1,16 +1,17 @@
 # Checkpoint
-- Date: 2026-02-13 01:16 (UTC+8)
-- Branch: codex/t1-1-postgis-migration
-- Last Commit: 0101e0f
+- Date: 2026-02-13 01:24 (UTC+8)
+- Branch: codex/t1-2-core-tables
+- Last Commit: 3ee562a
 - Completed:
   - T0.1
   - T0.2
   - T0.3
   - T1.1
-- In Progress:
   - T1.2
+- In Progress:
+  - T1.3
 - Next:
-  - 建立核心資料表 (`events`, `geo_layers`, `sources`)
+  - 強化索引策略（時間/地理/全文）
 - Blockers:
   - none
 - Docs Synced:
