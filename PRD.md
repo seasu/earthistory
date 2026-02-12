@@ -2,7 +2,7 @@
 
 ## 1. 文件資訊
 - 專案名稱: Earthistory
-- 版本: v0.1 (Draft)
+- 版本: v0.2 (Research-aligned Draft)
 - 最後更新: 2026-02-12
 - 文件維護: Seasu + Codex
 
@@ -76,27 +76,83 @@
 - 留存/互動:
   - 事件點擊率、搜尋使用率、平均探索時長（待定義目標值）
 
-## 10. 技術與架構方向 (待定)
-- 前端: Web 地圖/3D 地球框架（待選型）
-- 後端: 事件資料 API 與搜尋服務
-- 資料層: 可擴展的事件結構與索引策略
+## 10. 技術選型結論 (成本與效率優先)
+### 10.1 選型原則
+- 優先使用可自訂程度高、可自架、可逐步擴展的開源技術。
+- 避免在 MVP 階段綁定高浮動雲端地圖計費。
+- 先做「資料與互動體驗驗證」，再投入高擬真 3D 成本。
 
-## 11. 里程碑 (草案)
-- Milestone 1: 明確 MVP 範圍與 wireframe
-- Milestone 2: 地圖 + 時間軸 + 事件點位 MVP
-- Milestone 3: 搜尋/篩選 + 初始資料集 + 對外測試
+### 10.2 Google Earth 路線評估
+- Google Earth 可匯入 KML/KMZ 與其他地理資料，適合原型展示。
+- Google Maps Platform 的 Earth 3D Tiles 與資料層功能屬商業計費範疇，且資料層文件目前示例聚焦美國邊界/地理單元。
+- 結論: Google 生態可做參考與輔助，不作為 MVP 核心渲染引擎，避免客製化受限與成本不確定性。
 
-## 12. 風險與假設
+### 10.3 MVP 推薦技術
+- 前端 3D 地球: CesiumJS
+- 前端框架: React + TypeScript + Vite
+- 地圖底圖: OpenStreetMap 向量/影像服務 (初期可先用公開來源，後續改自架 tile)
+- 後端 API: Node.js (Fastify/Nest 擇一) + PostgreSQL + PostGIS
+- 搜尋: PostgreSQL full-text + trigram (MVP)，後續再評估 OpenSearch/Meilisearch
+- 快取/CDN: Cloudflare (靜態資源 + tile 快取)
+
+## 11. 系統架構方向 (MVP)
+### 11.1 前端模組
+- Globe Viewer: 地球渲染、相機控制、點位與圖層管理
+- Timeline Controller: 年代切換、播放/暫停、時間範圍控制
+- Event Panel: 事件詳情、來源、關聯事件
+- Filter/Search Bar: 關鍵字、主題、地區、時間條件
+
+### 11.2 後端模組
+- Event API: 查詢事件、時間區間、地理範圍
+- Ingestion Pipeline: 匯入 seed data、正規化、去重、來源追蹤
+- Admin Tools (internal): 資料校正與批次上傳
+
+### 11.3 資料模型補充
+- 新增欄位:
+  - `region_name` (人可讀地區)
+  - `precision_level` (year/decade/century)
+  - `confidence_score` (資料可信度)
+  - `source_name` (來源名稱)
+
+## 12. 成本策略
+### 12.1 成本控制原則
+- 原則 1: 先固定成本，後可變成本。
+- 原則 2: 先限制資料量與圖層數量，確保每次擴張可量化。
+- 原則 3: 優先可替換元件，避免早期 vendor lock-in。
+
+### 12.2 MVP 成本分層 (相對級距)
+- 低成本方案 (推薦): CesiumJS + OSM + 單一雲主機 + PostGIS
+- 中成本方案: 加入商業向量 tile 或地理搜尋服務
+- 高成本方案: 大量依賴商業 3D Tiles 與高頻地圖 API 呼叫
+
+### 12.3 階段化投入
+- Phase A (0 -> MVP): 僅上線核心功能與小型 seed dataset
+- Phase B (MVP -> Beta): 擴資料規模、加入快取與可觀測性
+- Phase C (Beta -> Growth): 視使用量導入商業地圖能力
+
+## 13. 參考專案與可重用性
+- OpenHistoricalMap (`github.com/OpenHistoricalMap`): 可作為歷史地理資料與社群協作參考。
+- historical-basemaps (`github.com/halaszg/historical-basemaps`): 提供歷史底圖資料來源索引，可作內容層參考。
+- history-map (`github.com/yorkeccak/history-map`): React + Mapbox + timeline 的互動型歷史地圖實作，可借鏡前端互動設計。
+
+## 14. 里程碑 (更新)
+- Milestone 1: PRD 定稿 + wireframe + 技術 PoC (Cesium 地球 + timeline 假資料)
+- Milestone 2: 事件 API + PostGIS + 基礎搜尋/篩選
+- Milestone 3: MVP 封測 (地球瀏覽 + 年代切換 + 點擊事件詳情)
+- Milestone 4: Beta 前優化 (效能、資料品質、觀測指標)
+
+## 15. 風險與假設
 - 假設: 初期資料量可控，先追求體驗驗證。
 - 風險: 歷史資料正確性與來源一致性不易維持。
 - 風險: 大量點位在地圖上可能造成效能瓶頸。
+- 風險: 跨時代/跨地區分類標準不一，影響搜尋與比較體驗。
 
-## 13. 開放問題 (待討論)
-- 時間精度要到哪個層級（年/十年/世紀）？
-- 地圖預設是 2D 還是 3D 地球？
-- 初期主題要先聚焦哪些類別？
-- 資料授權與來源治理流程如何設計？
+## 16. 開放問題 (下一輪需定案)
+- 時間精度預設要到哪個層級（年/十年/世紀）？
+- 首發版本預設 3D 地球還是 2D 地圖，或提供切換？
+- 初期內容主題是否聚焦 2-3 類（例如文明、戰爭、科技）？
+- `source_url` 顯示策略是單一主來源，或多來源並列？
 
-## 14. 維護規則
+## 17. 維護規則
 - 本文件作為專案 PRD 單一真實來源（single source of truth）。
 - 每次需求討論後，將更新本檔案並記錄版本與日期。
