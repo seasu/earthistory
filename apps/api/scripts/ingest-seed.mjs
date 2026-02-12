@@ -1,43 +1,15 @@
 import { access, mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-type SeedSource = {
-  id: number;
-  source_name: string;
-  source_url: string;
-  license: string;
-  attribution_text: string;
-  retrieved_at: string;
-};
-
-type SeedEvent = {
-  id: number;
-  title: string;
-  summary: string;
-  category: string;
-  region_name: string;
-  precision_level: "year" | "decade" | "century";
-  confidence_score: number;
-  time_start: number;
-  time_end: number | null;
-  source_id: number;
-  source_url: string;
-};
-
-type SeedPayload = {
-  sources: SeedSource[];
-  events: SeedEvent[];
-};
-
 const ALLOWED_LICENSES = new Set(["CC0", "CC BY 4.0", "ODbL"]);
 
-const requireField = (value: unknown, name: string) => {
+const requireField = (value, name) => {
   if (value === null || value === undefined || value === "") {
     throw new Error(`Missing required field: ${name}`);
   }
 };
 
-const normalizeSource = (source: SeedSource) => {
+const normalizeSource = (source) => {
   requireField(source.source_name, "source_name");
   requireField(source.source_url, "source_url");
   requireField(source.license, "license");
@@ -54,7 +26,7 @@ const normalizeSource = (source: SeedSource) => {
   };
 };
 
-const normalizeEvent = (event: SeedEvent) => {
+const normalizeEvent = (event) => {
   requireField(event.title, "title");
   requireField(event.summary, "summary");
   requireField(event.category, "category");
@@ -85,7 +57,7 @@ const detectRepoRoot = async () => {
       await access(path.join(candidate, "pnpm-workspace.yaml"));
       return candidate;
     } catch {
-      // keep scanning
+      // try next
     }
   }
 
@@ -99,19 +71,36 @@ const run = async () => {
   const outputPath = path.join(outputDir, "events.normalized.json");
 
   const raw = await readFile(seedPath, "utf8");
-  const parsed = JSON.parse(raw) as SeedPayload;
+  const parsed = JSON.parse(raw);
 
   const normalizedSources = parsed.sources.map(normalizeSource);
-  const normalizedEvents = parsed.events.map(normalizeEvent);
-  const licenseMap = new Map(normalizedSources.map((source) => [source.id, source.license]));
+  const sourceMap = new Map(normalizedSources.map((source) => [source.id, source]));
+  const normalizedEvents = parsed.events.map((event) => {
+    const normalized = normalizeEvent(event);
+    const source = sourceMap.get(normalized.sourceId);
+
+    if (!source) {
+      throw new Error(`Missing source for event id=${normalized.id} source_id=${normalized.sourceId}`);
+    }
+
+    return {
+      ...normalized,
+      provenance: {
+        sourceId: source.id,
+        sourceName: source.sourceName,
+        sourceUrl: source.sourceUrl,
+        license: source.license,
+        attributionText: source.attributionText,
+        retrievedAt: source.retrievedAt
+      }
+    };
+  });
 
   for (const event of normalizedEvents) {
-    const license = licenseMap.get(event.sourceId);
-    if (!license) {
-      throw new Error(`Missing source for event id=${event.id} source_id=${event.sourceId}`);
-    }
-    if (!ALLOWED_LICENSES.has(license)) {
-      throw new Error(`Disallowed license "${license}" for source_id=${event.sourceId}`);
+    if (!ALLOWED_LICENSES.has(event.provenance.license)) {
+      throw new Error(
+        `Disallowed license "${event.provenance.license}" for source_id=${event.sourceId}`
+      );
     }
   }
 
@@ -122,6 +111,14 @@ const run = async () => {
       {
         generatedAt: new Date().toISOString(),
         sources: normalizedSources,
+        provenanceFields: [
+          "sourceId",
+          "sourceName",
+          "sourceUrl",
+          "license",
+          "attributionText",
+          "retrievedAt"
+        ],
         events: normalizedEvents
       },
       null,
@@ -144,4 +141,4 @@ const run = async () => {
   );
 };
 
-void run();
+run();

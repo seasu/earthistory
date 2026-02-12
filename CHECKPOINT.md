@@ -1,7 +1,7 @@
 # Checkpoint
-- Date: 2026-02-13 02:00 (UTC+8)
-- Branch: codex/t3-1-seed-ingestion
-- Last Commit: 36e6ef8
+- Date: 2026-02-13 02:02 (UTC+8)
+- Branch: codex/t3-2-provenance
+- Last Commit: 1c8f3af
 - Completed:
   - T0.1
   - T0.2
@@ -13,10 +13,11 @@
   - T2.2
   - T2.3
   - T3.1
-- In Progress:
   - T3.2
+- In Progress:
+  - T3.3
 - Next:
-  - 落實 provenance 欄位（來源追溯）到匯入結果
+  - 實作 license gate 規則（拒絕不相容授權）
 - Blockers:
   - none
 - Docs Synced:
