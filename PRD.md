@@ -273,6 +273,10 @@
 ## 18. 維護規則
 - 本文件作為專案 PRD 單一真實來源（single source of truth）。
 - 每次需求討論後，將更新本檔案並記錄版本與日期。
+- 文件同步規範:
+  - 任何程式碼變更若影響需求/架構/API/資料授權，必須同一個 PR 同步更新文件。
+  - `PRD.md`, `DEVELOPMENT_PLAN.md`, `DEVELOPMENT_PLAN_AI.md` 三份文件需保持一致。
+  - 若實作與 PRD 不一致，先更新 PRD 再合併程式碼。
 
 ## 19. 研究依據連結
 - Wikidata license (CC0): https://www.wikidata.org/wiki/Wikidata:Licensing
@@ -290,3 +294,7 @@
 - PRD 僅保留結論:
   - 此產品有需求，但屬於中等規模、分眾明確的教育/知識工具市場。
   - 策略採 `B2C 免費探索 + 教師/課堂導向`，以留存與課堂採用率驗證。
+
+## 21. 開發計畫索引
+- 人類可讀版請參考 `DEVELOPMENT_PLAN.md`。
+- AI 執行版請參考 `DEVELOPMENT_PLAN_AI.md`。
