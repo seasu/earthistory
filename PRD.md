@@ -2,7 +2,7 @@
 
 ## 1. 文件資訊
 - 專案名稱: Earthistory
-- 版本: v0.4 (Licensing Policy Locked)
+- 版本: v0.5 (Tech Stack Locked for MVP)
 - 最後更新: 2026-02-12
 - 文件維護: Seasu + Codex
 
@@ -98,24 +98,32 @@
 - 留存/互動:
   - 事件點擊率、搜尋使用率、平均探索時長（待定義目標值）
 
-## 10. 技術選型結論 (成本與效率優先)
+## 10. 技術選型結論 (已定案)
 ### 10.1 選型原則
 - 優先使用可自訂程度高、可自架、可逐步擴展的開源技術。
 - 避免在 MVP 階段綁定高浮動雲端地圖計費。
 - 先做「資料與互動體驗驗證」，再投入高擬真 3D 成本。
+- 採「模組化單體」優先，先穩定資料模型與 API 邊界，再視流量拆分服務。
 
 ### 10.2 Google Earth 路線評估
 - Google Earth 可匯入 KML/KMZ 與其他地理資料，適合原型展示。
 - Google Maps Platform 的 Earth 3D Tiles 與資料層功能屬商業計費範疇，且資料層文件目前示例聚焦美國邊界/地理單元。
 - 結論: Google 生態可做參考與輔助，不作為 MVP 核心渲染引擎，避免客製化受限與成本不確定性。
 
-### 10.3 MVP 推薦技術
-- 前端 3D 地球: CesiumJS
-- 前端框架: React + TypeScript + Vite
-- 地圖底圖: OpenStreetMap 向量/影像服務 (初期可先用公開來源，後續改自架 tile)
-- 後端 API: Node.js (Fastify/Nest 擇一) + PostgreSQL + PostGIS
-- 搜尋: PostgreSQL full-text + trigram (MVP)，後續再評估 OpenSearch/Meilisearch
-- 快取/CDN: Cloudflare (靜態資源 + tile 快取)
+### 10.3 MVP 定版技術
+- 前端: React + TypeScript + Vite
+- 地球引擎: CesiumJS (預設 3D)
+- 2D 模式: MapLibre GL (以同一份 GeoJSON/Vector schema 共用資料)
+- UI 元件: shadcn/ui + Tailwind CSS
+- 狀態管理: Zustand + TanStack Query
+- 後端: Node.js + Fastify + TypeScript (modular monolith)
+- API 介面: REST (OpenAPI 規格先行)
+- 資料庫: PostgreSQL + PostGIS
+- ORM/SQL: Drizzle ORM (以 SQL-first 管理 migration)
+- 搜尋: PostgreSQL full-text + trigram
+- 背景工作: BullMQ + Redis (資料匯入、重建索引、快取預熱)
+- 部署: Docker + single VM (MVP)，Cloudflare 作 CDN/快取
+- 觀測: OpenTelemetry + Grafana/Loki (Phase B 導入完整 dashboard)
 
 ### 10.4 Google Maps 納入考量 (新增)
 - 可行性: Google Maps JavaScript API + Data layer/GeoJSON 可快速做 2D 地圖事件疊圖與點擊互動。
@@ -126,21 +134,24 @@
   - 若要「Google Earth 感」3D 全球沉浸體驗，仍需額外評估 3D 能力與產品一致性。
   - 大量流量與高頻呼叫時，商業 API 計費波動需要嚴格監控。
 - 建議採用方式:
-  - 方案 A (成本優先): MVP 以 Cesium 為主，Google Maps 僅做地理搜尋補強。
-  - 方案 B (速度優先): 先用 Google Maps 做 2D MVP，上線驗證後再評估是否轉 Cesium 3D 核心。
-  - 方案 C (混合): 提供 2D (Google Maps) + 3D (Cesium) 雙模式，後期再看使用行為收斂。
+  - 定案: MVP 不使用 Google Maps 當主地圖引擎。
+  - 保留: 僅在「地點搜尋品質不足」時，評估導入 Places API 作輔助服務。
+  - 原則: 任何 Google API 依賴都需可替換，禁止耦合到核心事件資料模型。
 
-## 11. 系統架構方向 (MVP)
+## 11. 系統架構方向 (MVP 定版)
 ### 11.1 前端模組
 - Globe Viewer: 地球渲染、相機控制、點位與圖層管理
 - Timeline Controller: 年代切換、播放/暫停、時間範圍控制
 - Event Panel: 事件詳情、來源、關聯事件
 - Filter/Search Bar: 關鍵字、主題、地區、時間條件
+- Map Mode Switch: 3D (Cesium) / 2D (MapLibre) 共用同一份資料契約
 
 ### 11.2 後端模組
 - Event API: 查詢事件、時間區間、地理範圍
 - Ingestion Pipeline: 匯入 seed data、正規化、去重、來源追蹤
 - Admin Tools (internal): 資料校正與批次上傳
+- Search Service: 事件全文檢索 + 地名模糊比對
+- Auth (internal first): 僅管理後台需要登入，前台匿名可讀
 
 ### 11.3 資料模型補充
 - 新增欄位:
@@ -148,6 +159,12 @@
   - `precision_level` (year/decade/century)
   - `confidence_score` (資料可信度)
   - `source_name` (來源名稱)
+
+### 11.4 不重構擴展策略 (重要)
+- API 穩定化: 先固定 `v1` API schema，新增欄位只做向後相容擴充。
+- 儲存分層: `events` (核心事件) 與 `geo_layers` (地理圖層) 分離，避免授權與查詢耦合。
+- 模組邊界: `ingestion`, `query`, `search`, `admin` 以獨立模組實作，之後可拆服務不改介面。
+- 前端可替換: 地圖渲染層與業務層分離，切換地圖供應商不影響 timeline/filter/event panel。
 
 ## 12. 成本策略
 ### 12.1 成本控制原則
@@ -197,10 +214,11 @@
   - 僅發布通過法務 gate 的資料批次。
 
 ## 15. 里程碑 (更新)
-- Milestone 1: PRD 定稿 + wireframe + 技術 PoC (Cesium 地球 + timeline 假資料)
-- Milestone 2: 事件 API + PostGIS + 基礎搜尋/篩選
-- Milestone 3: MVP 封測 (地球瀏覽 + 年代切換 + 點擊事件詳情)
-- Milestone 4: Beta 前優化 (效能、資料品質、觀測指標)
+- Milestone 1: PRD 定稿 + schema 定案 + 技術 PoC (Cesium + timeline 假資料)
+- Milestone 2: Fastify API + PostGIS + 資料匯入管線 v1
+- Milestone 3: 前端 3D/2D 共用資料契約 + 搜尋/篩選整合
+- Milestone 4: MVP 封測 (地球瀏覽 + 年代切換 + 點擊事件詳情)
+- Milestone 5: Beta 前優化 (效能、資料品質、觀測指標)
 
 ## 16. 風險與假設
 - 假設: 初期資料量可控，先追求體驗驗證。
@@ -211,7 +229,6 @@
 
 ## 17. 開放問題 (下一輪需定案)
 - 時間精度預設要到哪個層級（年/十年/世紀）？
-- 首發版本預設 3D 地球還是 2D 地圖，或提供切換？
 - 初期內容主題是否聚焦 2-3 類（例如文明、戰爭、科技）？
 - `source_url` 顯示策略是單一主來源，或多來源並列？
 
