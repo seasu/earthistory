@@ -95,6 +95,19 @@
 - 搜尋: PostgreSQL full-text + trigram (MVP)，後續再評估 OpenSearch/Meilisearch
 - 快取/CDN: Cloudflare (靜態資源 + tile 快取)
 
+### 10.4 Google Maps 納入考量 (新增)
+- 可行性: Google Maps JavaScript API + Data layer/GeoJSON 可快速做 2D 地圖事件疊圖與點擊互動。
+- 優勢:
+  - 生態成熟、文件完整、前端整合速度快。
+  - 地點搜尋與地理服務能力完整，適合早期快速驗證。
+- 限制:
+  - 若要「Google Earth 感」3D 全球沉浸體驗，仍需額外評估 3D 能力與產品一致性。
+  - 大量流量與高頻呼叫時，商業 API 計費波動需要嚴格監控。
+- 建議採用方式:
+  - 方案 A (成本優先): MVP 以 Cesium 為主，Google Maps 僅做地理搜尋補強。
+  - 方案 B (速度優先): 先用 Google Maps 做 2D MVP，上線驗證後再評估是否轉 Cesium 3D 核心。
+  - 方案 C (混合): 提供 2D (Google Maps) + 3D (Cesium) 雙模式，後期再看使用行為收斂。
+
 ## 11. 系統架構方向 (MVP)
 ### 11.1 前端模組
 - Globe Viewer: 地球渲染、相機控制、點位與圖層管理
