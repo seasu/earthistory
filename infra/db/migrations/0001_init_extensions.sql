@@ -1,0 +1,4 @@
+-- T1.1 bootstrap: enable required PostgreSQL extensions for geo and search.
+CREATE EXTENSION IF NOT EXISTS postgis;
+CREATE EXTENSION IF NOT EXISTS pg_trgm;
+CREATE EXTENSION IF NOT EXISTS btree_gist;
