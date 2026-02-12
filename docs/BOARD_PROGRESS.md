@@ -5,21 +5,21 @@
 
 ## Summary
 - Total Points: 67
-- Done Points: 11
-- Overall Progress: 16.42%
+- Done Points: 16
+- Overall Progress: 23.88%
 - Current Sprint: S0
 
 ## By Sprint
 | Sprint | Total Points | Done Points | Progress |
 |---|---:|---:|---:|
 | S0 | 8 | 8 | 100% |
-| S1 | 18 | 3 | 16.67% |
+| S1 | 18 | 8 | 44.44% |
 | S2 | 16 | 0 | 0% |
 | S3 | 8 | 0 | 0% |
 | S4 | 11 | 0 | 0% |
 
 ## Current In Progress
-- T1.2 核心資料表建立 (`events`,`geo_layers`,`sources`)
+- T1.3 核心索引策略（時間/地理/全文）
 
 ## Blocked
 - None
