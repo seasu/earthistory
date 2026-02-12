@@ -1,7 +1,7 @@
 # Checkpoint
-- Date: 2026-02-13 02:02 (UTC+8)
-- Branch: codex/t3-2-provenance
-- Last Commit: 1c8f3af
+- Date: 2026-02-13 02:08 (UTC+8)
+- Branch: codex/t3-3-license-gate
+- Last Commit: 9c6f28e
 - Completed:
   - T0.1
   - T0.2
@@ -14,10 +14,11 @@
   - T2.3
   - T3.1
   - T3.2
-- In Progress:
   - T3.3
+- In Progress:
+  - T4.1
 - Next:
-  - 實作 license gate 規則（拒絕不相容授權）
+  - 建立 Web app 骨架與 layout
 - Blockers:
   - none
 - Docs Synced:

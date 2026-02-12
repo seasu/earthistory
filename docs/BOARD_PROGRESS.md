@@ -5,8 +5,8 @@
 
 ## Summary
 - Total Points: 67
-- Done Points: 37
-- Overall Progress: 55.22%
+- Done Points: 40
+- Overall Progress: 59.70%
 - Current Sprint: S0
 
 ## By Sprint
@@ -14,12 +14,12 @@
 |---|---:|---:|---:|
 | S0 | 8 | 8 | 100% |
 | S1 | 21 | 21 | 100% |
-| S2 | 19 | 8 | 42.11% |
+| S2 | 19 | 11 | 57.89% |
 | S3 | 8 | 0 | 0% |
 | S4 | 11 | 0 | 0% |
 
 ## Current In Progress
-- T3.3 License gate 規則
+- T4.1 Web app 骨架與 layout
 
 ## Blocked
 - None
