@@ -1,0 +1,49 @@
+{
+  "generatedAt": "2026-02-12T17:53:22.489Z",
+  "sources": [
+    {
+      "id": 1,
+      "sourceName": "Wikidata",
+      "sourceUrl": "https://www.wikidata.org/",
+      "license": "CC0",
+      "attributionText": "Data from Wikidata",
+      "retrievedAt": "2026-02-13T00:00:00Z"
+    },
+    {
+      "id": 2,
+      "sourceName": "GeoNames",
+      "sourceUrl": "https://www.geonames.org/",
+      "license": "CC BY 4.0",
+      "attributionText": "Contains GeoNames data",
+      "retrievedAt": "2026-02-13T00:00:00Z"
+    }
+  ],
+  "events": [
+    {
+      "id": 101,
+      "title": "Founding of the Han Dynasty",
+      "summary": "Liu Bang established the Han dynasty.",
+      "category": "civilization",
+      "regionName": "China",
+      "precisionLevel": "year",
+      "confidenceScore": 0.93,
+      "timeStart": -202,
+      "timeEnd": null,
+      "sourceId": 1,
+      "sourceUrl": "https://www.wikidata.org/wiki/Q7209"
+    },
+    {
+      "id": 102,
+      "title": "Norman Conquest of England",
+      "summary": "William the Conqueror defeated Harold II at Hastings.",
+      "category": "war",
+      "regionName": "England",
+      "precisionLevel": "year",
+      "confidenceScore": 0.96,
+      "timeStart": 1066,
+      "timeEnd": null,
+      "sourceId": 1,
+      "sourceUrl": "https://www.wikidata.org/wiki/Q175117"
+    }
+  ]
+}

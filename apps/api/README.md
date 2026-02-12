@@ -23,3 +23,9 @@ Core endpoints (T2.2):
 OpenAPI document (T2.3):
 
 - `GET /openapi.json`
+
+Seed ingestion (T3.1):
+
+```bash
+pnpm --filter @earthistory/api ingest:seed
+```
