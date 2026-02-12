@@ -25,7 +25,7 @@
 | T3.1 | Seed ingestion script v1 | S2 | Data | P0 | 5 | Done | 可匯入合法資料來源 |
 | T3.2 | Provenance 欄位落地 | S2 | Data | P0 | 3 | Done | 每筆資料含來源追溯欄位 |
 | T3.3 | License gate 規則 | S2 | Data | P0 | 3 | Done | 不合規資料被拒絕 |
-| T4.1 | Web app 骨架與 layout | S2 | Frontend | P0 | 3 | Todo | 首頁可載入與基本導覽 |
+| T4.1 | Web app 骨架與 layout | S2 | Frontend | P0 | 3 | Done | 首頁可載入與基本導覽 |
 | T4.2 | Map provider 抽象層 (Cesium/MapLibre) | S2 | Frontend | P0 | 5 | Todo | 2D/3D 可切換 |
 | T4.3 | Timeline + Filters + Event Panel | S3 | Frontend | P0 | 5 | Todo | 可切年代、篩選、看事件詳情 |
 | T4.4 | API 整合與錯誤狀態 | S3 | Frontend | P1 | 3 | Todo | Loading/Empty/Error 完整 |
@@ -36,5 +36,5 @@
 
 ## 整體進度
 - Total Points: 67
-- Done Points: 40
-- Overall Progress: 59.70%
+- Done Points: 43
+- Overall Progress: 64.18%
