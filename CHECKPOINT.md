@@ -1,0 +1,16 @@
+# Checkpoint
+- Date: 2026-02-13 01:02 (UTC+8)
+- Branch: codex/prd-setup
+- Last Commit: 0a79d42
+- Completed:
+  - T0.1
+- In Progress:
+  - T0.2
+- Next:
+  - 建立 lint/typecheck/test baseline 可執行命令
+- Blockers:
+  - `pnpm` 尚未安裝，暫時無法驗證 workspace 指令
+- Docs Synced:
+  - [x] PRD.md
+  - [x] docs/DEVELOPMENT_PLAN.md
+  - [x] docs/DEVELOPMENT_PLAN_AI.md

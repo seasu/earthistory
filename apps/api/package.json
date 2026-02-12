@@ -1,0 +1,11 @@
+{
+  "name": "@earthistory/api",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "build": "echo \"api build placeholder\"",
+    "lint": "echo \"api lint placeholder\"",
+    "typecheck": "echo \"api typecheck placeholder\"",
+    "test": "echo \"api test placeholder\""
+  }
+}

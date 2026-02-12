@@ -5,21 +5,21 @@
 
 ## Summary
 - Total Points: 67
-- Done Points: 0
-- Overall Progress: 0%
+- Done Points: 3
+- Overall Progress: 4.48%
 - Current Sprint: S0
 
 ## By Sprint
 | Sprint | Total Points | Done Points | Progress |
 |---|---:|---:|---:|
-| S0 | 8 | 0 | 0% |
+| S0 | 8 | 3 | 37.5% |
 | S1 | 18 | 0 | 0% |
 | S2 | 16 | 0 | 0% |
 | S3 | 8 | 0 | 0% |
 | S4 | 11 | 0 | 0% |
 
 ## Current In Progress
-- None
+- T0.2 Lint/Typecheck/Test 命令基線
 
 ## Blocked
 - None

@@ -13,7 +13,7 @@
 ## Tickets
 | Ticket | Title | Sprint | Track | Priority | Size | Status | Acceptance |
 |---|---|---|---|---|---:|---|---|
-| T0.1 | Monorepo workspace 初始化 | S0 | DevOps | P0 | 3 | Todo | `apps/web`,`apps/api`,`packages/shared` 可建置 |
+| T0.1 | Monorepo workspace 初始化 | S0 | DevOps | P0 | 3 | Done | `apps/web`,`apps/api`,`packages/shared` 可建置 |
 | T0.2 | Lint/Typecheck/Test 命令基線 | S0 | DevOps | P0 | 2 | Todo | `pnpm -r lint/typecheck/test` 可執行 |
 | T0.3 | CI workflow baseline | S0 | DevOps | P0 | 3 | Todo | PR 觸發 `lint+typecheck+test+build` |
 | T1.1 | Postgres + PostGIS migration 初始化 | S1 | Backend | P0 | 3 | Todo | migration 可重複執行 |
@@ -36,5 +36,5 @@
 
 ## 整體進度
 - Total Points: 67
-- Done Points: 0
-- Overall Progress: 0%
+- Done Points: 3
+- Overall Progress: 4.48%
