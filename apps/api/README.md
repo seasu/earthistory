@@ -19,3 +19,7 @@ Core endpoints (T2.2):
 - `GET /search?q=<keyword>`
 - `GET /regions`
 - `GET /sources`
+
+OpenAPI document (T2.3):
+
+- `GET /openapi.json`
