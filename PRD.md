@@ -300,3 +300,6 @@
 - AI 執行版請參考 `DEVELOPMENT_PLAN_AI.md`。
 - AI 中斷續跑規範請參考 `AI_HANDOFF_RUNBOOK.md`。
 - 免費看板設定請參考 `KANBAN_SETUP.md`。
+- 本次對話與決策紀錄請參考 `PROJECT_DISCOVERY_LOG.md`。
+- 新專案可重用樣板請參考 `PROJECT_KICKOFF_TEMPLATE.md`。
+- AI 開發提示詞請參考 `AI_DEV_PROMPT.md`。
