@@ -298,3 +298,5 @@
 ## 21. 開發計畫索引
 - 人類可讀版請參考 `DEVELOPMENT_PLAN.md`。
 - AI 執行版請參考 `DEVELOPMENT_PLAN_AI.md`。
+- AI 中斷續跑規範請參考 `AI_HANDOFF_RUNBOOK.md`。
+- 免費看板設定請參考 `KANBAN_SETUP.md`。
