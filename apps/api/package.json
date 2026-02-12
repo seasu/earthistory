@@ -2,10 +2,20 @@
   "name": "@earthistory/api",
   "private": true,
   "version": "0.1.0",
+  "type": "module",
   "scripts": {
-    "build": "echo \"api build placeholder\"",
-    "lint": "echo \"api lint placeholder\"",
-    "typecheck": "echo \"api typecheck placeholder\"",
-    "test": "echo \"api test placeholder\""
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc -p tsconfig.json",
+    "lint": "echo \"api lint TODO\"",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "echo \"api test TODO\""
+  },
+  "dependencies": {
+    "fastify": "^5.2.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.14",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2"
   }
 }
