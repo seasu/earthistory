@@ -1,7 +1,7 @@
 # Checkpoint
-- Date: 2026-02-13 01:31 (UTC+8)
-- Branch: codex/t1-3-index-strategy
-- Last Commit: 7375497
+- Date: 2026-02-13 01:43 (UTC+8)
+- Branch: codex/t2-1-fastify-modules
+- Last Commit: bda73e3
 - Completed:
   - T0.1
   - T0.2
@@ -9,10 +9,11 @@
   - T1.1
   - T1.2
   - T1.3
-- In Progress:
   - T2.1
+- In Progress:
+  - T2.2
 - Next:
-  - 建立 Fastify 模組邊界骨架（query/search/ingestion/admin）
+  - 實作 API v1 端點（/events, /search, /regions, /sources）
 - Blockers:
   - none
 - Docs Synced:
