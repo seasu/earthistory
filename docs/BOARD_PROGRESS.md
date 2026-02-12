@@ -5,8 +5,8 @@
 
 ## Summary
 - Total Points: 67
-- Done Points: 43
-- Overall Progress: 64.18%
+- Done Points: 48
+- Overall Progress: 71.64%
 - Current Sprint: S0
 
 ## By Sprint
@@ -14,12 +14,12 @@
 |---|---:|---:|---:|
 | S0 | 8 | 8 | 100% |
 | S1 | 21 | 21 | 100% |
-| S2 | 19 | 14 | 73.68% |
+| S2 | 19 | 19 | 100% |
 | S3 | 8 | 0 | 0% |
 | S4 | 11 | 0 | 0% |
 
 ## Current In Progress
-- T4.2 Map provider 抽象層 (Cesium/MapLibre)
+- T4.3 Timeline + Filters + Event Panel
 
 ## Blocked
 - None

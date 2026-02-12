@@ -1,7 +1,7 @@
 # Checkpoint
-- Date: 2026-02-13 03:02 (UTC+8)
-- Branch: codex/t4-1-web-skeleton
-- Last Commit: 05591ac
+- Date: 2026-02-13 03:08 (UTC+8)
+- Branch: codex/t4-2-map-provider-abstraction
+- Last Commit: 411bdeb
 - Completed:
   - T0.1
   - T0.2
@@ -16,10 +16,11 @@
   - T3.2
   - T3.3
   - T4.1
-- In Progress:
   - T4.2
+- In Progress:
+  - T4.3
 - Next:
-  - 實作 map provider 抽象層（Cesium / MapLibre）
+  - 實作 Timeline + Filters + Event Panel
 - Blockers:
   - none
 - Docs Synced:
