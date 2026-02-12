@@ -2,10 +2,23 @@
   "name": "@earthistory/web",
   "private": true,
   "version": "0.1.0",
+  "type": "module",
   "scripts": {
-    "build": "echo \"web build placeholder\"",
-    "lint": "echo \"web lint placeholder\"",
-    "typecheck": "echo \"web typecheck placeholder\"",
-    "test": "echo \"web test placeholder\""
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "echo \"web lint TODO\"",
+    "typecheck": "tsc --noEmit",
+    "test": "echo \"web test TODO\""
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "^5.8.2",
+    "vite": "^6.2.0"
   }
 }

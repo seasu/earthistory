@@ -1,7 +1,7 @@
 # Checkpoint
-- Date: 2026-02-13 02:08 (UTC+8)
-- Branch: codex/t3-3-license-gate
-- Last Commit: 9c6f28e
+- Date: 2026-02-13 03:02 (UTC+8)
+- Branch: codex/t4-1-web-skeleton
+- Last Commit: 05591ac
 - Completed:
   - T0.1
   - T0.2
@@ -15,10 +15,11 @@
   - T3.1
   - T3.2
   - T3.3
-- In Progress:
   - T4.1
+- In Progress:
+  - T4.2
 - Next:
-  - 建立 Web app 骨架與 layout
+  - 實作 map provider 抽象層（Cesium / MapLibre）
 - Blockers:
   - none
 - Docs Synced:
