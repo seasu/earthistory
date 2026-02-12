@@ -5,6 +5,7 @@
 - 版本: v0.7 (Market Demand Validation Added)
 - 最後更新: 2026-02-12
 - 文件維護: Seasu + Codex
+- 開發工具註記: `Codex GPT-5.3-Codex Medium`
 
 ## 2. 產品願景
 建立一個「類 Google Earth」的互動式地球介面，讓使用者用時間軸探索地球與人類歷史事件，並能以地理位置為核心理解歷史脈絡。
