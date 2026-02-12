@@ -48,3 +48,30 @@ h1 {
 h2 {
   margin-top: 0;
 }
+
+.mode-switch {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.mode-switch button {
+  border: 1px solid #bed0f5;
+  background: #f6f9ff;
+  border-radius: 999px;
+  padding: 8px 14px;
+  cursor: pointer;
+}
+
+.mode-switch button.active {
+  background: #2455c4;
+  color: #ffffff;
+  border-color: #2455c4;
+}
+
+.map-provider {
+  border: 1px dashed #9fb5e8;
+  border-radius: 12px;
+  padding: 16px;
+  background: #f9fcff;
+}
