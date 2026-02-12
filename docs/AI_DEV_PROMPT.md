@@ -10,6 +10,9 @@
 
 ## 執行規則
 - 依 `docs/DEVELOPMENT_PLAN_AI.md` 的 Task Sequence 從 `T0` 開始。
+- 依 `docs/TICKET_BACKLOG.md` 逐張票執行:
+  - 每次只允許 1 張票在 `In Progress`
+  - 完成並更新為 `Done` 後才能拿下一張
 - 小步提交、單一責任，每完成一個子任務至少一次 commit。
 - 任何程式碼變更若影響需求/架構/API/授權，必須同 PR 更新文件。
 - 嚴格維持 free-tier 優先，不引入未核准的付費依賴。
@@ -29,6 +32,9 @@
 ## 看板要求
 - 使用 GitHub Projects（Free）維護任務進度。
 - 每個任務需對應 `TaskID`（T0~T5）並更新狀態。
+- 同步更新:
+  - `docs/TICKET_BACKLOG.md`
+  - `docs/BOARD_PROGRESS.md`
 
 ## 開始動作
 - 先回覆將執行的第一個子任務（例如 `T0.1`）與驗收方式，然後直接開始實作。

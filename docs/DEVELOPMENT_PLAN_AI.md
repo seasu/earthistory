@@ -12,6 +12,7 @@
 - 禁止:
   - 未經確認引入付費雲端依賴。
   - 未標授權來源的資料進入 production data。
+  - 同一時間開工超過 1 張票（必須一張一張做）。
 
 ## 1. Repository Structure (Target)
 - `apps/web`: React + Vite + TypeScript
@@ -21,6 +22,11 @@
 - `docs`: 架構與操作文件 (可選)
 
 ## 2. Task Sequence
+執行方式:
+- 先讀 `docs/TICKET_BACKLOG.md`，挑選「最前面的 P0 + Todo」票。
+- 將該票狀態改為 `In Progress` 後才可開始實作。
+- 完成並驗收後改為 `Done`，再拿下一張票。
+
 ## T0 初始化與基線
 - T0.1 建立 monorepo 與 workspace 管理
 - T0.2 建立 lint/typecheck/test 命令

@@ -61,6 +61,9 @@
 ## 9. 中斷續跑與看板追蹤
 - AI 中斷續跑規範: `docs/AI_HANDOFF_RUNBOOK.md`
 - 免費看板規範: `docs/KANBAN_SETUP.md`
+- 票務清單: `docs/TICKET_BACKLOG.md`
+- 看板整體進度: `docs/BOARD_PROGRESS.md`
 - 補充要求:
   - 每次開發 session 結束前必須更新 `CHECKPOINT.md`
   - 看板卡片需對應 `TaskID`（T0~T5）並即時更新狀態
+  - AI 每次僅能處理 1 張票，完成後才可拿下一張
