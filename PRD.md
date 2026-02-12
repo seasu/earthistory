@@ -2,7 +2,7 @@
 
 ## 1. 文件資訊
 - 專案名稱: Earthistory
-- 版本: v0.5 (Tech Stack Locked for MVP)
+- 版本: v0.6 (Free-Cloud Ops Strategy Locked)
 - 最後更新: 2026-02-12
 - 文件維護: Seasu + Codex
 
@@ -166,21 +166,58 @@
 - 模組邊界: `ingestion`, `query`, `search`, `admin` 以獨立模組實作，之後可拆服務不改介面。
 - 前端可替換: 地圖渲染層與業務層分離，切換地圖供應商不影響 timeline/filter/event panel。
 
-## 12. 成本策略
+### 11.5 部署拓樸 (免費雲端優先)
+- Web/Edge:
+  - 首選: Cloudflare Pages + Workers (前端靜態免費，API 走 Workers 免費額度)
+- Database:
+  - 首選: Supabase Free 或 Neon Free (PostgreSQL)
+  - 規則: schema 與 migration 不綁平台，避免未來搬遷重寫
+- Cache/Queue:
+  - MVP 先用應用層快取 + DB materialized view
+  - 背景工作在免費額度內以 cron + 批次 job 取代常駐 worker
+- Storage:
+  - 靜態資料與匯入檔優先放 Git LFS 或 Cloudflare R2 free tier
+- CI/CD:
+  - GitHub Actions（公開 repo 可免費；私有 repo 採配額控管）
+
+## 12. 成本策略 (免費資源優先定案)
 ### 12.1 成本控制原則
 - 原則 1: 先固定成本，後可變成本。
 - 原則 2: 先限制資料量與圖層數量，確保每次擴張可量化。
 - 原則 3: 優先可替換元件，避免早期 vendor lock-in。
+- 原則 4: 月成本預設目標為 `$0`，僅在超額風險可量化時才升級付費。
 
-### 12.2 MVP 成本分層 (相對級距)
-- 低成本方案 (推薦): CesiumJS + OSM + 單一雲主機 + PostGIS
-- 中成本方案: 加入商業向量 tile 或地理搜尋服務
-- 高成本方案: 大量依賴商業 3D Tiles 與高頻地圖 API 呼叫
+### 12.2 免費雲端組合 (定版)
+- 組合 A (首選, 全免費優先):
+  - Frontend/API: Cloudflare Pages + Workers Free
+  - DB: Supabase Free (2 projects) 或 Neon Free
+  - Storage/CDN: Cloudflare (靜態免費), R2 free tier
+  - 適用: MVP、封測、低到中流量驗證
+- 組合 B (備援, 仍以免費為主):
+  - Frontend: Vercel Hobby 或 Cloudflare Pages
+  - API: Cloudflare Workers Free
+  - DB: Neon Free
+  - 適用: 若某平台額度或功能限制影響交付速度
 
-### 12.3 階段化投入
-- Phase A (0 -> MVP): 僅上線核心功能與小型 seed dataset
-- Phase B (MVP -> Beta): 擴資料規模、加入快取與可觀測性
-- Phase C (Beta -> Growth): 視使用量導入商業地圖能力
+### 12.3 免費額度防爆策略
+- API 防爆:
+  - 啟用 response cache、ETag、ISR/靜態化熱門查詢
+  - 時間軸查詢採分片與預聚合，降低每次互動查詢量
+- DB 防爆:
+  - 熱門時段資料做 materialized view
+  - 寫入流程批次化，避免高頻小寫入
+- 流量防爆:
+  - 圖層資料按 zoom/time chunk lazy-load
+  - 超出閾值時自動降級為「摘要模式」（減少即時查詢）
+- 成本閾值機制:
+  - 每週檢查平台 usage dashboard
+  - 任一服務達 70% 免費額度即觸發優化任務
+  - 達 90% 進入凍結新功能，先做成本優化
+
+### 12.4 階段化投入
+- Phase A (0 -> MVP): 僅上線核心功能與小型 seed dataset，目標 `$0/月`
+- Phase B (MVP -> Beta): 擴資料規模、加入快取與可觀測性，仍以 free tier 為主
+- Phase C (Beta -> Growth): 只有當核心指標達標且免費額度長期不足，才逐項升級付費元件
 
 ## 13. 開源專案與資料重用評估 (新增)
 ### 13.1 可重用優先清單
@@ -226,6 +263,7 @@
 - 風險: 大量點位在地圖上可能造成效能瓶頸。
 - 風險: 跨時代/跨地區分類標準不一，影響搜尋與比較體驗。
 - 風險: 不同資料來源授權混用，可能導致再散布義務衝突。
+- 風險: 雲端平台免費方案與額度可能調整，需有替代部署路徑。
 
 ## 17. 開放問題 (下一輪需定案)
 - 時間精度預設要到哪個層級（年/十年/世紀）？
