@@ -1,15 +1,16 @@
 # Checkpoint
-- Date: 2026-02-13 01:12 (UTC+8)
-- Branch: codex/t0-3-ci-baseline-v2
-- Last Commit: 3949d31
+- Date: 2026-02-13 01:16 (UTC+8)
+- Branch: codex/t1-1-postgis-migration
+- Last Commit: 0101e0f
 - Completed:
   - T0.1
   - T0.2
   - T0.3
-- In Progress:
   - T1.1
+- In Progress:
+  - T1.2
 - Next:
-  - 建立 PostgreSQL + PostGIS migration 初始化
+  - 建立核心資料表 (`events`, `geo_layers`, `sources`)
 - Blockers:
   - none
 - Docs Synced:

@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgis/postgis:16-3.4
+    container_name: earthistory-postgres
+    environment:
+      POSTGRES_DB: earthistory
+      POSTGRES_USER: earthistory
+      POSTGRES_PASSWORD: earthistory
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
