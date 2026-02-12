@@ -2,7 +2,7 @@
 
 ## 1. 文件資訊
 - 專案名稱: Earthistory
-- 版本: v0.2 (Research-aligned Draft)
+- 版本: v0.3 (Data-Legal Research Draft)
 - 最後更新: 2026-02-12
 - 文件維護: Seasu + Codex
 
@@ -65,6 +65,24 @@
 - 初期資料來源策略:
   - 先以少量高品質 seed dataset 驗證體驗
   - 後續擴展來源與資料清洗流程
+
+### 8.1 法務與授權策略 (新增)
+- 本專案以「可再散布、可商用、可標示來源」資料為優先。
+- 不直接抓取無明確授權的網站內容（即使可瀏覽，也不代表可再利用）。
+- 每筆事件都必須保留 `source_name`, `source_url`, `license`, `attribution_text`, `retrieved_at`。
+- 上線前執行 License Audit，未通過的資料不進 production。
+
+### 8.2 可優先導入的資料來源 (授權相容)
+- Wikidata (CC0): 適合事件結構化欄位與實體連結。
+- Wikimedia API/內容生態 (CC BY-SA 為主): 可用於摘要與補充，但需落實署名與相同方式分享義務。
+- OpenStreetMap (ODbL): 適合地理底圖與地理物件，需遵循 ODbL 與署名規則。
+- World Historical Gazetteer (資料聚合型歷史地名): 適合歷史地名對照與地理參照。
+- GeoNames (CC BY 4.0): 適合地名標準化與地理編碼補強。
+
+### 8.3 暫不建議直接匯入的來源
+- 未標示授權條款或授權不明確的網站內容。
+- 僅允許個人/教育瀏覽、不允許再散布的資料庫。
+- ToS 明確禁止抓取、重製或衍生使用的服務內容。
 
 ## 9. 成功指標 (MVP)
 - 使用者可在 3 分鐘內完成:
@@ -143,29 +161,68 @@
 - Phase B (MVP -> Beta): 擴資料規模、加入快取與可觀測性
 - Phase C (Beta -> Growth): 視使用量導入商業地圖能力
 
-## 13. 參考專案與可重用性
-- OpenHistoricalMap (`github.com/OpenHistoricalMap`): 可作為歷史地理資料與社群協作參考。
-- historical-basemaps (`github.com/halaszg/historical-basemaps`): 提供歷史底圖資料來源索引，可作內容層參考。
-- history-map (`github.com/yorkeccak/history-map`): React + Mapbox + timeline 的互動型歷史地圖實作，可借鏡前端互動設計。
+## 13. 開源專案與資料重用評估 (新增)
+### 13.1 可重用優先清單
+- OpenHistoricalMap (`github.com/OpenHistoricalMap`)
+  - 可借鏡: 歷史 OSM 協作模型、歷史要素標註方式。
+  - 注意: ODbL 相容性與 attribution 展示策略需先定義。
+- historical-basemaps (`github.com/halaszg/historical-basemaps`)
+  - 可借鏡: 歷史底圖來源索引與圖層管理思路。
+  - 注意: 各子來源授權不同，不可視為單一授權資料包。
+- history-map (`github.com/yorkeccak/history-map`)
+  - 可借鏡: 前端 timeline + map 互動 UX。
+  - 注意: 先確認該 repo 的授權條款與第三方資料來源授權。
+- World Historical Gazetteer (`github.com/whgazetteer`)
+  - 可借鏡: 歷史地名對齊、時間屬性與地理關聯資料模型。
 
-## 14. 里程碑 (更新)
+### 13.2 授權風險標準
+- 若 GitHub repo 無 `LICENSE` 檔，預設不納入程式碼重用（僅作設計參考）。
+- 若資料授權要求 share-alike（如 CC BY-SA/ODbL），需評估是否會影響專案資料散布方式。
+- 若使用 Google Maps Platform 資料，需遵守 Google Maps Platform Terms，特別是內容使用限制與歸屬要求。
+
+## 14. 資料治理流程 (新增)
+- Step 1: Source Intake
+  - 登記來源網址、授權型態、ToS 限制、更新頻率。
+- Step 2: License Review
+  - 分類為 `ALLOW`, `ALLOW_WITH_ATTRIBUTION`, `REJECT`, `REVIEW_WITH_COUNSEL`。
+- Step 3: Normalization
+  - 將來源資料映射至統一 schema，保留 provenance 欄位。
+- Step 4: QA & Legal Gate
+  - 抽樣核對事件真實性、版權標示、授權相容性。
+- Step 5: Publish
+  - 僅發布通過法務 gate 的資料批次。
+
+## 15. 里程碑 (更新)
 - Milestone 1: PRD 定稿 + wireframe + 技術 PoC (Cesium 地球 + timeline 假資料)
 - Milestone 2: 事件 API + PostGIS + 基礎搜尋/篩選
 - Milestone 3: MVP 封測 (地球瀏覽 + 年代切換 + 點擊事件詳情)
 - Milestone 4: Beta 前優化 (效能、資料品質、觀測指標)
 
-## 15. 風險與假設
+## 16. 風險與假設
 - 假設: 初期資料量可控，先追求體驗驗證。
 - 風險: 歷史資料正確性與來源一致性不易維持。
 - 風險: 大量點位在地圖上可能造成效能瓶頸。
 - 風險: 跨時代/跨地區分類標準不一，影響搜尋與比較體驗。
+- 風險: 不同資料來源授權混用，可能導致再散布義務衝突。
 
-## 16. 開放問題 (下一輪需定案)
+## 17. 開放問題 (下一輪需定案)
 - 時間精度預設要到哪個層級（年/十年/世紀）？
 - 首發版本預設 3D 地球還是 2D 地圖，或提供切換？
 - 初期內容主題是否聚焦 2-3 類（例如文明、戰爭、科技）？
 - `source_url` 顯示策略是單一主來源，或多來源並列？
+- share-alike 授權資料（CC BY-SA/ODbL）是否進入同一公開資料集？
 
-## 17. 維護規則
+## 18. 維護規則
 - 本文件作為專案 PRD 單一真實來源（single source of truth）。
 - 每次需求討論後，將更新本檔案並記錄版本與日期。
+
+## 19. 研究依據連結
+- Wikidata license (CC0): https://www.wikidata.org/wiki/Wikidata:Licensing
+- Wikipedia/Wikimedia API terms: https://api.wikimedia.org/wiki/Terms_and_conditions
+- OpenStreetMap copyright and license (ODbL): https://www.openstreetmap.org/copyright
+- GeoNames license (CC BY 4.0): https://www.geonames.org/about.html
+- World Historical Gazetteer: https://whgazetteer.org/
+- Google Maps Platform Terms: https://cloud.google.com/maps-platform/terms
+- Google Maps Service Terms (content restrictions): https://cloud.google.com/maps-platform/terms/maps-service-terms/index-20191121
+- US Copyright Office (facts are not protected by copyright): https://www.copyright.gov/circs/circ33.pdf
+- GitHub no-license guidance: https://choosealicense.com/no-permission/
