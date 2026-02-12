@@ -1,0 +1,11 @@
+{
+  "name": "@earthistory/web",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "build": "echo \"web build placeholder\"",
+    "lint": "echo \"web lint placeholder\"",
+    "typecheck": "echo \"web typecheck placeholder\"",
+    "test": "echo \"web test placeholder\""
+  }
+}

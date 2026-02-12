@@ -1,0 +1,18 @@
+# Checkpoint
+- Date: 2026-02-13 01:12 (UTC+8)
+- Branch: codex/t0-3-ci-baseline-v2
+- Last Commit: 3949d31
+- Completed:
+  - T0.1
+  - T0.2
+  - T0.3
+- In Progress:
+  - T1.1
+- Next:
+  - 建立 PostgreSQL + PostGIS migration 初始化
+- Blockers:
+  - none
+- Docs Synced:
+  - [x] PRD.md
+  - [x] docs/DEVELOPMENT_PLAN.md
+  - [x] docs/DEVELOPMENT_PLAN_AI.md
