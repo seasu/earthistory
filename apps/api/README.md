@@ -29,3 +29,8 @@ Seed ingestion (T3.1):
 ```bash
 pnpm --filter @earthistory/api ingest:seed
 ```
+
+License gate (T3.3):
+
+- allowlist: `infra/data/license-allowlist.json`
+- audit output: `infra/data/normalized/license-audit.json`

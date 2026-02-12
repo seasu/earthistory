@@ -1,8 +1,6 @@
 import { access, mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-const ALLOWED_LICENSES = new Set(["CC0", "CC BY 4.0", "ODbL"]);
-
 const requireField = (value, name) => {
   if (value === null || value === undefined || value === "") {
     throw new Error(`Missing required field: ${name}`);
@@ -67,11 +65,15 @@ const detectRepoRoot = async () => {
 const run = async () => {
   const root = await detectRepoRoot();
   const seedPath = path.join(root, "infra/data/seed/events.seed.json");
+  const allowlistPath = path.join(root, "infra/data/license-allowlist.json");
   const outputDir = path.join(root, "infra/data/normalized");
   const outputPath = path.join(outputDir, "events.normalized.json");
+  const auditPath = path.join(outputDir, "license-audit.json");
 
   const raw = await readFile(seedPath, "utf8");
+  const allowlistRaw = await readFile(allowlistPath, "utf8");
   const parsed = JSON.parse(raw);
+  const allowlist = new Set(JSON.parse(allowlistRaw).allowed_licenses ?? []);
 
   const normalizedSources = parsed.sources.map(normalizeSource);
   const sourceMap = new Map(normalizedSources.map((source) => [source.id, source]));
@@ -96,15 +98,39 @@ const run = async () => {
     };
   });
 
+  const violations = [];
   for (const event of normalizedEvents) {
-    if (!ALLOWED_LICENSES.has(event.provenance.license)) {
-      throw new Error(
-        `Disallowed license "${event.provenance.license}" for source_id=${event.sourceId}`
-      );
+    if (!allowlist.has(event.provenance.license)) {
+      violations.push({
+        eventId: event.id,
+        sourceId: event.sourceId,
+        license: event.provenance.license
+      });
     }
   }
 
   await mkdir(outputDir, { recursive: true });
+  await writeFile(
+    auditPath,
+    JSON.stringify(
+      {
+        generatedAt: new Date().toISOString(),
+        ok: violations.length === 0,
+        allowedLicenses: [...allowlist],
+        violations
+      },
+      null,
+      2
+    ),
+    "utf8"
+  );
+
+  if (violations.length > 0) {
+    throw new Error(
+      `License gate failed with ${violations.length} violation(s). See ${auditPath}`
+    );
+  }
+
   await writeFile(
     outputPath,
     JSON.stringify(
@@ -133,7 +159,8 @@ const run = async () => {
         ok: true,
         sourceCount: normalizedSources.length,
         eventCount: normalizedEvents.length,
-        outputPath
+        outputPath,
+        auditPath
       },
       null,
       2
