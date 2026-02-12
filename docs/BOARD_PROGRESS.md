@@ -5,8 +5,8 @@
 
 ## Summary
 - Total Points: 67
-- Done Points: 29
-- Overall Progress: 43.28%
+- Done Points: 34
+- Overall Progress: 50.75%
 - Current Sprint: S0
 
 ## By Sprint
@@ -14,12 +14,12 @@
 |---|---:|---:|---:|
 | S0 | 8 | 8 | 100% |
 | S1 | 21 | 21 | 100% |
-| S2 | 19 | 0 | 0% |
+| S2 | 19 | 5 | 26.32% |
 | S3 | 8 | 0 | 0% |
 | S4 | 11 | 0 | 0% |
 
 ## Current In Progress
-- T3.1 Seed ingestion script v1
+- T3.2 Provenance 欄位落地
 
 ## Blocked
 - None

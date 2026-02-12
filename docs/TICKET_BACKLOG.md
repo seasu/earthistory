@@ -22,7 +22,7 @@
 | T2.1 | Fastify 模組邊界骨架 | S1 | Backend | P0 | 3 | Done | `query/search/ingestion/admin` 模組存在 |
 | T2.2 | API v1 端點實作 | S1 | Backend | P0 | 5 | Done | `/events,/search,/regions,/sources` 可回應 |
 | T2.3 | OpenAPI 文件產生 | S1 | Backend | P1 | 2 | Done | OpenAPI 與實作一致 |
-| T3.1 | Seed ingestion script v1 | S2 | Data | P0 | 5 | Todo | 可匯入合法資料來源 |
+| T3.1 | Seed ingestion script v1 | S2 | Data | P0 | 5 | Done | 可匯入合法資料來源 |
 | T3.2 | Provenance 欄位落地 | S2 | Data | P0 | 3 | Todo | 每筆資料含來源追溯欄位 |
 | T3.3 | License gate 規則 | S2 | Data | P0 | 3 | Todo | 不合規資料被拒絕 |
 | T4.1 | Web app 骨架與 layout | S2 | Frontend | P0 | 3 | Todo | 首頁可載入與基本導覽 |
@@ -36,5 +36,5 @@
 
 ## 整體進度
 - Total Points: 67
-- Done Points: 29
-- Overall Progress: 43.28%
+- Done Points: 34
+- Overall Progress: 50.75%

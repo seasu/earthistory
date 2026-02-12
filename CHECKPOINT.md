@@ -1,7 +1,7 @@
 # Checkpoint
-- Date: 2026-02-13 02:02 (UTC+8)
-- Branch: codex/t2-3-openapi-docs
-- Last Commit: c74c0da
+- Date: 2026-02-13 02:00 (UTC+8)
+- Branch: codex/t3-1-seed-ingestion
+- Last Commit: 36e6ef8
 - Completed:
   - T0.1
   - T0.2
@@ -12,10 +12,11 @@
   - T2.1
   - T2.2
   - T2.3
-- In Progress:
   - T3.1
+- In Progress:
+  - T3.2
 - Next:
-  - 建立 seed ingestion script v1
+  - 落實 provenance 欄位（來源追溯）到匯入結果
 - Blockers:
   - none
 - Docs Synced:

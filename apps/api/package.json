@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/server.ts",
+    "ingest:seed": "tsx src/ingestion/seed.ts",
     "build": "tsc -p tsconfig.json",
     "lint": "echo \"api lint TODO\"",
     "typecheck": "tsc -p tsconfig.json --noEmit",
