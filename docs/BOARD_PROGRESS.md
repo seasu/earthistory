@@ -5,21 +5,21 @@
 
 ## Summary
 - Total Points: 67
-- Done Points: 22
-- Overall Progress: 32.84%
+- Done Points: 27
+- Overall Progress: 40.30%
 - Current Sprint: S0
 
 ## By Sprint
 | Sprint | Total Points | Done Points | Progress |
 |---|---:|---:|---:|
 | S0 | 8 | 8 | 100% |
-| S1 | 18 | 14 | 77.78% |
-| S2 | 16 | 0 | 0% |
+| S1 | 21 | 19 | 90.48% |
+| S2 | 19 | 0 | 0% |
 | S3 | 8 | 0 | 0% |
 | S4 | 11 | 0 | 0% |
 
 ## Current In Progress
-- T2.2 API v1 端點實作
+- T2.3 OpenAPI 文件產生
 
 ## Blocked
 - None

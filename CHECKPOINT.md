@@ -1,7 +1,7 @@
 # Checkpoint
-- Date: 2026-02-13 01:43 (UTC+8)
-- Branch: codex/t2-1-fastify-modules
-- Last Commit: bda73e3
+- Date: 2026-02-13 01:55 (UTC+8)
+- Branch: codex/t2-2-api-v1-endpoints
+- Last Commit: ea7b9c5
 - Completed:
   - T0.1
   - T0.2
@@ -10,10 +10,11 @@
   - T1.2
   - T1.3
   - T2.1
-- In Progress:
   - T2.2
+- In Progress:
+  - T2.3
 - Next:
-  - 實作 API v1 端點（/events, /search, /regions, /sources）
+  - 產生 OpenAPI 文件並接入 API
 - Blockers:
   - none
 - Docs Synced:

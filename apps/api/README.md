@@ -12,3 +12,10 @@ Run locally:
 ```bash
 pnpm --filter @earthistory/api dev
 ```
+
+Core endpoints (T2.2):
+
+- `GET /events`
+- `GET /search?q=<keyword>`
+- `GET /regions`
+- `GET /sources`

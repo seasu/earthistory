@@ -9,8 +9,8 @@ export const buildApp = () => {
 
   app.get("/health", async () => ({ ok: true }));
 
-  app.register(queryPlugin, { prefix: "/query" });
-  app.register(searchPlugin, { prefix: "/search" });
+  app.register(queryPlugin);
+  app.register(searchPlugin);
   app.register(ingestionPlugin, { prefix: "/ingestion" });
   app.register(adminPlugin, { prefix: "/admin" });
 
