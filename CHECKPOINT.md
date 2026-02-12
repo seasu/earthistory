@@ -1,15 +1,17 @@
 # Checkpoint
-- Date: 2026-02-13 01:02 (UTC+8)
-- Branch: codex/prd-setup
-- Last Commit: 0a79d42
+- Date: 2026-02-13 01:12 (UTC+8)
+- Branch: codex/t0-3-ci-baseline-v2
+- Last Commit: 3949d31
 - Completed:
   - T0.1
-- In Progress:
   - T0.2
+  - T0.3
+- In Progress:
+  - T1.1
 - Next:
-  - 建立 lint/typecheck/test baseline 可執行命令
+  - 建立 PostgreSQL + PostGIS migration 初始化
 - Blockers:
-  - `pnpm` 尚未安裝，暫時無法驗證 workspace 指令
+  - none
 - Docs Synced:
   - [x] PRD.md
   - [x] docs/DEVELOPMENT_PLAN.md

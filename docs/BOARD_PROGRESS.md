@@ -5,21 +5,21 @@
 
 ## Summary
 - Total Points: 67
-- Done Points: 3
-- Overall Progress: 4.48%
+- Done Points: 8
+- Overall Progress: 11.94%
 - Current Sprint: S0
 
 ## By Sprint
 | Sprint | Total Points | Done Points | Progress |
 |---|---:|---:|---:|
-| S0 | 8 | 3 | 37.5% |
+| S0 | 8 | 8 | 100% |
 | S1 | 18 | 0 | 0% |
 | S2 | 16 | 0 | 0% |
 | S3 | 8 | 0 | 0% |
 | S4 | 11 | 0 | 0% |
 
 ## Current In Progress
-- T0.2 Lint/Typecheck/Test 命令基線
+- T1.1 Postgres + PostGIS migration 初始化
 
 ## Blocked
 - None
