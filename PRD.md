@@ -2,7 +2,7 @@
 
 ## 1. 文件資訊
 - 專案名稱: Earthistory
-- 版本: v0.3 (Data-Legal Research Draft)
+- 版本: v0.4 (Licensing Policy Locked)
 - 最後更新: 2026-02-12
 - 文件維護: Seasu + Codex
 
@@ -71,6 +71,10 @@
 - 不直接抓取無明確授權的網站內容（即使可瀏覽，也不代表可再利用）。
 - 每筆事件都必須保留 `source_name`, `source_url`, `license`, `attribution_text`, `retrieved_at`。
 - 上線前執行 License Audit，未通過的資料不進 production。
+- 正式決策: 採用 `嚴格開放授權-only` 政策，作為長期維護預設。
+- 核心事件資料白名單: `CC0`, `CC BY 4.0` (或等價相容授權)。
+- 地理圖層規則: `ODbL` 可使用，但必須與核心事件資料分層/分庫管理，避免授權義務混淆。
+- 禁止進 production: `CC BY-SA`、授權不明、或 ToS 限制再散布之來源（除非未來另開隔離資料產品線）。
 
 ### 8.2 可優先導入的資料來源 (授權相容)
 - Wikidata (CC0): 適合事件結構化欄位與實體連結。
@@ -210,7 +214,6 @@
 - 首發版本預設 3D 地球還是 2D 地圖，或提供切換？
 - 初期內容主題是否聚焦 2-3 類（例如文明、戰爭、科技）？
 - `source_url` 顯示策略是單一主來源，或多來源並列？
-- share-alike 授權資料（CC BY-SA/ODbL）是否進入同一公開資料集？
 
 ## 18. 維護規則
 - 本文件作為專案 PRD 單一真實來源（single source of truth）。
