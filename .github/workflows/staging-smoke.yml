@@ -1,0 +1,28 @@
+name: Staging Smoke
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows:
+      - Web Staging Deploy
+    types:
+      - completed
+
+jobs:
+  smoke:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run smoke test
+        env:
+          STAGING_WEB_URL: ${{ vars.STAGING_WEB_URL || 'https://seasu.github.io/earthistory/' }}
+          STAGING_API_URL: ${{ vars.STAGING_API_URL || 'https://earthistory-api-staging.onrender.com' }}
+        run: node infra/ops/staging-smoke.mjs
