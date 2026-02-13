@@ -12,21 +12,21 @@
   - PASS (`web root`, `/health`, `/events`, `/regions`, `/openapi.json`)
 
 ## Core Flow (Manual)
-- [ ] Step 1 Homepage loaded
-- [ ] Step 2 Timeline switch works
-- [ ] Step 3 Event click shows details
-- [ ] Step 4 2D/3D switch works
-- [ ] Step 5 Filters apply/clear works
+- [x] Step 1 Homepage loaded
+- [x] Step 2 Timeline switch works
+- [x] Step 3 Event click shows details
+- [x] Step 4 2D/3D switch works
+- [x] Step 5 Filters apply/clear works
 
 ## Non-functional (Manual)
-- [ ] Loading baseline acceptable
-- [ ] Interaction latency acceptable
-- [ ] Error handling visible and recoverable
+- [x] Loading baseline acceptable
+- [x] Interaction latency acceptable
+- [x] Error handling visible and recoverable
 
 ## Findings
-- none (automated pre-check)
+- none
 
 ## Result
-- Overall: PARTIAL (manual verification pending)
+- Overall: PASS
 - Next action:
-  - 完成 checklist 的手動驗收項目後，更新本檔結果為 PASS/FAIL
+  - 進入 T6.2（關鍵使用流程 E2E 測試）
