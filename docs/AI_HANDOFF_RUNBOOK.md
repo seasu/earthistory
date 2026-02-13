@@ -48,7 +48,7 @@
 - 不可在未讀 `CHECKPOINT.md` 前直接開始新任務。
 - 不可跨多個 task 大量修改後一次提交。
 - 不可只改程式碼不更新文件。
-- 多 agent 模式下不可跳過領票流程（詳見 `docs/COLLABORATION_WORKMODE.md`）。
+- 協作模式下不可跳過領票流程（詳見 `docs/COLLABORATION_WORKMODE.md`）。
 
 ## 5. 驗證指令 (建議)
 - `git status --short --branch`

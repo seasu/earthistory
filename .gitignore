@@ -2,3 +2,5 @@
 node_modules
 dist
 infra/ops/usage-snapshot.json
+.env
+.env.*

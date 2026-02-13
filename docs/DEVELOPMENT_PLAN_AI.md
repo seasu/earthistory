@@ -13,8 +13,8 @@
   - 未經確認引入付費雲端依賴。
   - 未標授權來源的資料進入 production data。
   - 同一時間開工超過 1 張票（必須一張一張做）。
-- 多 agent 協作時:
-  - 需遵守 `docs/COLLABORATION_WORKMODE.md`
+- 協作模式:
+  - 遵守 `docs/COLLABORATION_WORKMODE.md`
   - 先領票再開發，禁止未領票直接改程式
 
 ## 1. Repository Structure (Target)

@@ -12,7 +12,6 @@
 - `Priority`: P0 / P1 / P2
 - `Track`: Product / Data / Backend / Frontend / DevOps
 - `Owner`: 負責人（或 agent 名稱）
-- `Agent`: codex / antigravity
 - `BlockedBy`: ticket id 或 none
 - `ContractImpact`: yes / no
 - `Sprint`: S0 / S1 / S2 / S3 / S4
