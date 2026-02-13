@@ -1,7 +1,7 @@
 # Checkpoint
-- Date: 2026-02-13 17:44 (UTC+8)
+- Date: 2026-02-13 18:16 (UTC+8)
 - Branch: main
-- Last Commit: c884dc4
+- Last Commit: b3a5ee7
 - Completed:
   - T0.1
   - T0.2
@@ -26,9 +26,10 @@
 - In Progress:
   - none
 - Next:
-  - 上線前跑 Staging Smoke + Release Checklist
+  - 重跑 `Web Staging Deploy`（已修 pnpm 版本衝突）
+  - 通過後執行 `Staging Smoke` + `docs/RELEASE_CHECKLIST.md`
 - Blockers:
-  - none
+  - GitHub Pages staging URL 先前回 404，需在 deploy 後再驗證
 - Docs Synced:
   - [x] PRD.md
   - [x] docs/DEVELOPMENT_PLAN.md
