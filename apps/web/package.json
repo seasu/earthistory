@@ -13,6 +13,7 @@
     "test:e2e:headed": "playwright test --headed"
   },
   "dependencies": {
+    "maplibre-gl": "^5.18.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
