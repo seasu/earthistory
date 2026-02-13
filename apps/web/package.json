@@ -7,14 +7,18 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "echo \"web lint TODO\"",
-    "typecheck": "tsc --noEmit",
-    "test": "echo \"web test TODO\""
+    "typecheck": "tsc -p tsconfig.app.json --noEmit",
+    "test": "echo \"web test TODO\"",
+    "test:e2e": "playwright test",
+    "test:e2e:headed": "playwright test --headed"
   },
   "dependencies": {
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@types/node": "^22.13.10",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@vitejs/plugin-react": "^4.3.4",

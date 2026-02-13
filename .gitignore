@@ -4,3 +4,5 @@ dist
 infra/ops/usage-snapshot.json
 .env
 .env.*
+apps/web/test-results/
+apps/web/playwright-report/

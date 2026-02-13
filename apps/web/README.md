@@ -31,6 +31,20 @@ Build:
 pnpm --filter @earthistory/web build
 ```
 
+E2E tests (T6.2):
+
+```bash
+pnpm --filter @earthistory/web exec playwright install chromium
+pnpm --filter @earthistory/web test:e2e
+```
+
+E2E scenarios:
+
+- timeline year change updates event list
+- 3D/2D map mode switch
+- event detail panel interaction
+- API error state + retry recovery
+
 Map provider abstraction (T4.2):
 
 - `src/map/MapViewport.tsx`
