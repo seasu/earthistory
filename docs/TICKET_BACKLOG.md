@@ -34,11 +34,11 @@
 | T5.3 | DB 免費方案部署 | S4 | DevOps | P0 | 3 | Done | DB 可連線且 schema 完整 |
 | T5.4 | 使用量監控與額度預警 | S4 | DevOps | P1 | 2 | Done | 70/90% usage 規則可追蹤 |
 | T6.1 | MVP 任務流程手動驗收腳本與清單 | S5 | QA | P0 | 3 | Done | 3 分鐘流程驗收可重複執行且可記錄結果 |
-| T6.2 | 關鍵使用流程 E2E 測試 | S5 | QA | P0 | 5 | In Progress | 時間軸/點擊事件/2D-3D 切換/API 錯誤狀態有 E2E |
-| T6.3 | 前後端效能基線與監測門檻 | S5 | DevOps | P1 | 3 | Todo | 產出首屏、互動延遲、API P95 基線與告警門檻 |
-| T6.4 | Rollback drill 演練與紀錄 | S5 | DevOps | P0 | 2 | Todo | 前端/API/DB 各完成 1 次回滾演練並留存紀錄 |
+| T6.2 | 關鍵使用流程 E2E 測試 | S5 | QA | P0 | 5 | Done | 時間軸/點擊事件/2D-3D 切換/API 錯誤狀態有 E2E |
+| T6.3 | 前後端效能基線與監測門檻 | S5 | DevOps | P1 | 3 | Done | 產出首屏、互動延遲、API P95 基線與告警門檻 |
+| T6.4 | Rollback drill 演練與紀錄 | S5 | DevOps | P0 | 2 | In Progress | 前端/API/DB 各完成 1 次回滾演練並留存紀錄 |
 
 ## 整體進度
 - Total Points: 80
-- Done Points: 70
-- Overall Progress: 88%
+- Done Points: 78
+- Overall Progress: 98%

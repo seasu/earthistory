@@ -2,6 +2,7 @@
 node_modules
 dist
 infra/ops/usage-snapshot.json
+infra/ops/performance-baseline.json
 .env
 .env.*
 apps/web/test-results/

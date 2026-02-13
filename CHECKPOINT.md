@@ -1,7 +1,7 @@
 # Checkpoint
-- Date: 2026-02-14 00:10 (UTC+8)
+- Date: 2026-02-14 03:20 (UTC+8)
 - Branch: codex/t6-2-e2e-critical-flows
-- Last Commit: 48bd16a
+- Last Commit: 9a66ef3
 - Completed:
   - T0.1
   - T0.2
@@ -24,11 +24,11 @@
   - T5.3
   - T5.4
   - T6.1
+  - T6.2
+  - T6.3
 - In Progress:
-  - T6.2 關鍵使用流程 E2E 測試
-- Next:
-  - T6.3 前後端效能基線與監測門檻
   - T6.4 Rollback drill 演練與紀錄
+- Next:
   - T6A 全部完成後，先重新討論下一階段工作重點，再開新 phase 票
 - Blockers:
   - none
