@@ -7,3 +7,4 @@ Frontend staging: `https://seasu.github.io/earthistory/`
 API staging: `https://earthistory-api-staging.onrender.com`
 DB deploy runbook: `docs/DB_DEPLOYMENT.md`
 Usage monitoring runbook: `docs/USAGE_MONITORING.md`
+Release checklist: `docs/RELEASE_CHECKLIST.md`

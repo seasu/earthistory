@@ -1,7 +1,7 @@
 # Checkpoint
-- Date: 2026-02-13 17:21 (UTC+8)
+- Date: 2026-02-13 17:44 (UTC+8)
 - Branch: main
-- Last Commit: d989e93
+- Last Commit: c884dc4
 - Completed:
   - T0.1
   - T0.2
@@ -26,7 +26,7 @@
 - In Progress:
   - none
 - Next:
-  - MVP 驗收與 release checklist
+  - 上線前跑 Staging Smoke + Release Checklist
 - Blockers:
   - none
 - Docs Synced:

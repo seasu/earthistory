@@ -28,3 +28,9 @@
 2. 頁面可載入並可切換 `Cesium/MapLibre`
 3. Timeline/Filters/Event panel 可互動
 4. 若 API 尚未上線，應顯示可理解的錯誤與 retry 狀態（T4.4）
+
+## Troubleshooting
+- 若 `https://seasu.github.io/earthistory/` 回 `404`
+  1. Repository Settings -> Pages -> Source 必須是 `GitHub Actions`
+  2. 確認 `Web Staging Deploy` workflow 最近一次為成功
+  3. 重新手動觸發 `.github/workflows/web-staging-deploy.yml`
