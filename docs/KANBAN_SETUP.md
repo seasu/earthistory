@@ -1,6 +1,6 @@
 # Earthistory Kanban Setup (Free)
 
-更新日期: 2026-02-12
+更新日期: 2026-02-13
 工具: GitHub Projects (Free)
 
 ## 1. 目標
@@ -11,6 +11,10 @@
 - `Status`: Todo / In Progress / Review / Done / Blocked
 - `Priority`: P0 / P1 / P2
 - `Track`: Product / Data / Backend / Frontend / DevOps
+- `Owner`: 負責人（或 agent 名稱）
+- `Agent`: codex / antigravity
+- `BlockedBy`: ticket id 或 none
+- `ContractImpact`: yes / no
 - `Sprint`: S0 / S1 / S2 / S3 / S4
 - `TaskID`: 例如 `T2.1`
 - `Size`: 1 / 2 / 3 / 5 / 8（story points）
@@ -83,3 +87,4 @@ T?.? <task title>
   - `docs/TICKET_BACKLOG.md`
   - GitHub Project board
   - `docs/DEVELOPMENT_PLAN_AI.md`（若任務序列改動）
+  - `docs/COLLABORATION_WORKMODE.md`（若協作規範改動）
