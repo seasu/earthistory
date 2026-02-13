@@ -5,8 +5,8 @@
 
 ## Summary
 - Total Points: 67
-- Done Points: 62
-- Overall Progress: 92.54%
+- Done Points: 67
+- Overall Progress: 100%
 - Current Sprint: S4
 
 ## By Sprint
@@ -16,7 +16,7 @@
 | S1 | 21 | 21 | 100% |
 | S2 | 19 | 19 | 100% |
 | S3 | 8 | 8 | 100% |
-| S4 | 11 | 6 | 54.55% |
+| S4 | 11 | 11 | 100% |
 
 ## Current In Progress
 - None

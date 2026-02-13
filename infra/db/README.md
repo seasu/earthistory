@@ -51,3 +51,46 @@ psql "postgresql://earthistory:earthistory@localhost:5432/earthistory" \
 ```
 
 Migrations are idempotent (`IF NOT EXISTS`), so they can be safely re-run.
+
+---
+
+# Hosted DB Deployment (T5.3)
+
+Use free hosted PostgreSQL (recommended: Supabase Free) and apply the same migrations.
+
+## A. Prepare connection string
+
+Set `DATABASE_URL` from your provider dashboard:
+
+```bash
+export DATABASE_URL='postgresql://postgres:<password>@db.<project-ref>.supabase.co:5432/postgres?sslmode=require'
+```
+
+## B. Run full migration set
+
+```bash
+bash infra/db/scripts/run-migrations.sh
+```
+
+## C. Verify schema completeness
+
+```bash
+bash infra/db/scripts/verify-schema.sh
+```
+
+## D. Expected verification result
+
+- Extensions: `postgis`, `pg_trgm`, `btree_gist`
+- Tables: `sources`, `geo_layers`, `events`
+- Indexes on `events` include:
+  - `idx_events_time_start`
+  - `idx_events_time_end`
+  - `idx_events_category`
+  - `idx_events_precision_level`
+  - `idx_events_location`
+  - `idx_events_title_trgm`
+  - `idx_events_summary_trgm`
+  - `idx_events_search_vector`
+  - `idx_events_time_category`
+  - `idx_events_time_start_brin`
+  - `idx_events_region_name`

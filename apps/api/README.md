@@ -50,3 +50,11 @@ T5.2 API deploy:
 - Env:
   - `PORT` (provided by platform)
   - `CORS_ORIGINS` (comma separated allowlist)
+
+T5.3 DB deploy:
+
+- Provider: Supabase Free (recommended)
+- Runbook: `docs/DB_DEPLOYMENT.md`
+- DB scripts:
+  - `infra/db/scripts/run-migrations.sh`
+  - `infra/db/scripts/verify-schema.sh`

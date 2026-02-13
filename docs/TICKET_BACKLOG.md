@@ -31,10 +31,10 @@
 | T4.4 | API 整合與錯誤狀態 | S3 | Frontend | P1 | 3 | Done | Loading/Empty/Error 完整 |
 | T5.1 | Frontend 免費雲端部署 | S4 | DevOps | P0 | 3 | Done | 產生 staging URL |
 | T5.2 | API 免費雲端部署 | S4 | DevOps | P0 | 3 | Done | API 可公開呼叫 |
-| T5.3 | DB 免費方案部署 | S4 | DevOps | P0 | 3 | Todo | DB 可連線且 schema 完整 |
-| T5.4 | 使用量監控與額度預警 | S4 | DevOps | P1 | 2 | Todo | 70/90% usage 規則可追蹤 |
+| T5.3 | DB 免費方案部署 | S4 | DevOps | P0 | 3 | Done | DB 可連線且 schema 完整 |
+| T5.4 | 使用量監控與額度預警 | S4 | DevOps | P1 | 2 | Done | 70/90% usage 規則可追蹤 |
 
 ## 整體進度
 - Total Points: 67
-- Done Points: 62
-- Overall Progress: 92.54%
+- Done Points: 67
+- Overall Progress: 100%
