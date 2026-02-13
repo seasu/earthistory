@@ -96,6 +96,22 @@
   - 能穩定部署與回滾
   - 70/90% usage threshold 可追蹤
 
+## T6A MVP Acceptance + Stabilization
+- T6.1 建立 MVP 手動驗收腳本（3 分鐘任務流程）
+- T6.2 建立關鍵 E2E 測試（時間軸/事件詳情/2D-3D/API error）
+- T6.3 建立效能基線（Web 首屏、互動延遲、API P95）
+- T6.4 完成 rollback drill（Web/API/DB 各 1 次）
+- Output:
+  - 驗收清單與結果紀錄
+  - E2E 測試可在 CI 執行
+  - 效能基線與告警門檻文件
+  - 回滾演練紀錄與修正項目
+- Acceptance:
+  - MVP 任務流程可重複通過
+  - E2E 維持穩定（無 flaky blocker）
+  - 回滾演練全數通過
+  - T6A 全部完成後，必須先進行「下一階段重點檢討」再開新 phase 票
+
 ## 3. Quality Gates
 - 每個 T 階段都需:
   - 單元測試或整合測試
