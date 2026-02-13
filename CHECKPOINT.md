@@ -1,7 +1,7 @@
 # Checkpoint
-- Date: 2026-02-13 22:18 (UTC+8)
-- Branch: main
-- Last Commit: af10834
+- Date: 2026-02-13 23:40 (UTC+8)
+- Branch: codex/t6-1-mvp-acceptance-checklist
+- Last Commit: 4ef28d4
 - Completed:
   - T0.1
   - T0.2
@@ -24,10 +24,12 @@
   - T5.3
   - T5.4
 - In Progress:
-  - none
+  - T6.1 MVP 任務流程手動驗收腳本與清單
 - Next:
-  - 手動驗收 `Timeline + Filters + Event Panel` 互動
-  - 完成 rollback 演練 3 項檢核
+  - T6.2 關鍵使用流程 E2E 測試
+  - T6.3 前後端效能基線與監測門檻
+  - T6.4 Rollback drill 演練與紀錄
+  - T6A 全部完成後，先重新討論下一階段工作重點，再開新 phase 票
 - Blockers:
   - none
 - Docs Synced:
