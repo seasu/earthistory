@@ -1,7 +1,7 @@
 # Checkpoint
-- Date: 2026-02-13 03:08 (UTC+8)
-- Branch: codex/t4-2-map-provider-abstraction
-- Last Commit: 411bdeb
+- Date: 2026-02-13 14:58 (UTC+8)
+- Branch: main
+- Last Commit: cd7fa17
 - Completed:
   - T0.1
   - T0.2
@@ -17,10 +17,14 @@
   - T3.3
   - T4.1
   - T4.2
-- In Progress:
   - T4.3
+  - T4.4
+  - T5.1
+  - T5.2
+- In Progress:
+  - none
 - Next:
-  - 實作 Timeline + Filters + Event Panel
+  - T5.3 DB 免費方案部署
 - Blockers:
   - none
 - Docs Synced:
