@@ -1,15 +1,15 @@
 import { CesiumProvider } from "./providers/CesiumProvider";
 import { MapLibreProvider } from "./providers/MapLibreProvider";
-import { MapMode } from "./types";
+import { MapMode, MapProviderProps } from "./types";
 
-type MapViewportProps = {
+type MapViewportProps = Omit<MapProviderProps, "className"> & {
   mode: MapMode;
 };
 
-export const MapViewport = ({ mode }: MapViewportProps) => {
+export const MapViewport = ({ mode, ...mapProps }: MapViewportProps) => {
   if (mode === "cesium") {
-    return <CesiumProvider className="map-provider" />;
+    return <CesiumProvider className="map-provider" {...mapProps} />;
   }
 
-  return <MapLibreProvider className="map-provider" />;
+  return <MapLibreProvider className="map-provider" {...mapProps} />;
 };

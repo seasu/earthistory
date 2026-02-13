@@ -13,6 +13,8 @@ type EventRecord = {
   timeStart: number;
   timeEnd: number | null;
   sourceUrl: string;
+  lat: number;
+  lng: number;
 };
 
 type ListResponse<T> = {
@@ -21,8 +23,9 @@ type ListResponse<T> = {
 };
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "/api";
-const TIMELINE_MIN_YEAR = -3000;
+const TIMELINE_MIN_YEAR = -3500;
 const TIMELINE_MAX_YEAR = 2026;
+const WINDOW_SIZE = 50;
 
 const formatYear = (value: number) => {
   if (value < 0) {
@@ -43,9 +46,8 @@ const fetchJson = async <T,>(path: string, signal?: AbortSignal): Promise<T> => 
 };
 
 export const App = () => {
-  const [mode, setMode] = useState<MapMode>("cesium");
+  const [mode, setMode] = useState<MapMode>("maplibre");
   const [activeYear, setActiveYear] = useState(1450);
-  const [windowSize, setWindowSize] = useState(150);
   const [events, setEvents] = useState<EventRecord[]>([]);
   const [regions, setRegions] = useState<string[]>([]);
   const [knownCategories, setKnownCategories] = useState<string[]>([]);
@@ -58,6 +60,7 @@ export const App = () => {
   const [eventsError, setEventsError] = useState<string | null>(null);
   const [regionsError, setRegionsError] = useState<string | null>(null);
   const [reloadToken, setReloadToken] = useState(0);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -90,8 +93,8 @@ export const App = () => {
       setEventsError(null);
 
       const params = new URLSearchParams({
-        from: String(activeYear - windowSize),
-        to: String(activeYear + windowSize),
+        from: String(activeYear - WINDOW_SIZE),
+        to: String(activeYear + WINDOW_SIZE),
         limit: "200"
       });
 
@@ -121,7 +124,7 @@ export const App = () => {
 
     void loadEvents();
     return () => controller.abort();
-  }, [activeYear, categoryFilter, reloadToken, windowSize]);
+  }, [activeYear, categoryFilter, reloadToken]);
 
   const categories = useMemo(() => knownCategories, [knownCategories]);
 
@@ -162,72 +165,70 @@ export const App = () => {
   const selectedEvent =
     filteredEvents.find((event) => event.id === selectedEventId) ?? filteredEvents[0] ?? null;
 
+  const flyToLocation = selectedEvent
+    ? { lat: selectedEvent.lat, lng: selectedEvent.lng }
+    : null;
+
   const hasEventError = Boolean(eventsError);
   const hasRegionError = Boolean(regionsError);
   const isAnyLoading = isLoadingEvents || isLoadingRegions;
 
   return (
-    <main className="page">
-      <header className="hero">
-        <p className="kicker">Earthistory MVP</p>
-        <h1>Time + Place + Event</h1>
-        <p>
-          Explore history by timeline, region, and category. Switch between 3D and 2D map providers
-          while inspecting filtered events.
-        </p>
-      </header>
+    <div className="app-root">
+      {/* Fullscreen map layer */}
+      <div className="map-container">
+        <MapViewport
+          mode={mode}
+          events={filteredEvents.map((e) => ({
+            id: e.id,
+            title: e.title,
+            category: e.category,
+            lat: e.lat,
+            lng: e.lng,
+            timeStart: e.timeStart,
+            timeEnd: e.timeEnd
+          }))}
+          selectedEventId={selectedEventId}
+          onEventSelect={setSelectedEventId}
+          flyToLocation={flyToLocation}
+        />
+      </div>
 
-      <section className="panel">
-        <h2>Map Mode</h2>
-        <div className="mode-switch">
-          <button
-            className={mode === "cesium" ? "active" : ""}
-            onClick={() => setMode("cesium")}
-            type="button"
-          >
-            Cesium (3D)
-          </button>
-          <button
-            className={mode === "maplibre" ? "active" : ""}
-            onClick={() => setMode("maplibre")}
-            type="button"
-          >
-            MapLibre (2D)
-          </button>
-        </div>
-        <MapViewport mode={mode} />
-      </section>
+      {/* Map mode toggle — top right */}
+      <div className="overlay-mode-switch">
+        <button
+          className={mode === "cesium" ? "active" : ""}
+          onClick={() => setMode("cesium")}
+          type="button"
+        >
+          3D
+        </button>
+        <button
+          className={mode === "maplibre" ? "active" : ""}
+          onClick={() => setMode("maplibre")}
+          type="button"
+        >
+          2D
+        </button>
+      </div>
 
-      <section className="panel">
-        <h2>Timeline + Filters</h2>
-        <div className="timeline-layout">
-          <div className="timeline-track">
-            <label htmlFor="active-year">
-              Active Year: <strong>{formatYear(activeYear)}</strong>
-            </label>
-            <input
-              id="active-year"
-              max={TIMELINE_MAX_YEAR}
-              min={TIMELINE_MIN_YEAR}
-              onChange={(event) => setActiveYear(Number(event.target.value))}
-              type="range"
-              value={activeYear}
-            />
-          </div>
-
-          <label className="control">
-            Window
-            <select
-              onChange={(event) => setWindowSize(Number(event.target.value))}
-              value={windowSize}
-            >
-              <option value={25}>+/- 25 years</option>
-              <option value={75}>+/- 75 years</option>
-              <option value={150}>+/- 150 years</option>
-              <option value={300}>+/- 300 years</option>
-            </select>
+      {/* Timeline + Filters overlay — top center */}
+      <div className="overlay-top">
+        <div className="timeline-track">
+          <label htmlFor="active-year">
+            <strong>{formatYear(activeYear)}</strong>
+            <span className="window-hint">{"\u00B1"}50 years</span>
           </label>
-
+          <input
+            id="active-year"
+            max={TIMELINE_MAX_YEAR}
+            min={TIMELINE_MIN_YEAR}
+            onChange={(event) => setActiveYear(Number(event.target.value))}
+            type="range"
+            value={activeYear}
+          />
+        </div>
+        <div className="filter-row">
           <label className="control">
             Category
             <select
@@ -242,7 +243,6 @@ export const App = () => {
               ))}
             </select>
           </label>
-
           <label className="control">
             Region
             <select onChange={(event) => setRegionFilter(event.target.value)} value={regionFilter}>
@@ -254,24 +254,37 @@ export const App = () => {
               ))}
             </select>
           </label>
-
           <label className="control">
             Keyword
             <input
               onChange={(event) => setKeyword(event.target.value)}
-              placeholder="Search title or summary"
+              placeholder="Search..."
               type="text"
               value={keyword}
             />
           </label>
         </div>
-        {hasRegionError && <p className="status error">Region load error: {regionsError}</p>}
-      </section>
+        {hasRegionError && <p className="status error">Region error: {regionsError}</p>}
+      </div>
 
-      <section className="panel event-panel">
-        <h2>Event Panel</h2>
-        <p className="event-count">{filteredEvents.length} events in current timeline window</p>
-        {isAnyLoading && <p className="status loading">Loading timeline events...</p>}
+      {/* Sidebar toggle button */}
+      <button
+        className={`sidebar-toggle ${sidebarOpen ? "open" : ""}`}
+        onClick={() => setSidebarOpen((v) => !v)}
+        type="button"
+        aria-label={sidebarOpen ? "Collapse event panel" : "Expand event panel"}
+      >
+        {sidebarOpen ? "\u25C0" : "\u25B6"}
+      </button>
+
+      {/* Events sidebar — left side */}
+      <aside className={`overlay-events ${sidebarOpen ? "" : "collapsed"}`}>
+        <div className="overlay-events-header">
+          <h2>Events</h2>
+          <p className="event-count">{filteredEvents.length} events in view</p>
+        </div>
+
+        {isAnyLoading && <p className="status loading">Loading...</p>}
         {hasEventError && (
           <div className="status error">
             <p>Event load error: {eventsError}</p>
@@ -281,52 +294,46 @@ export const App = () => {
           </div>
         )}
 
-        <div className="event-layout">
-          <aside className="event-list" aria-label="Filtered events">
-            {!isLoadingEvents && !hasEventError && filteredEvents.length === 0 && (
-              <p className="empty">No events matched this time window and filter set.</p>
-            )}
-            {filteredEvents.map((event) => (
-              <button
-                className={event.id === selectedEvent?.id ? "active" : ""}
-                key={event.id}
-                onClick={() => setSelectedEventId(event.id)}
-                type="button"
-              >
-                <strong>{event.title}</strong>
-                <span>
-                  {formatYear(event.timeStart)}
-                  {event.timeEnd ? ` - ${formatYear(event.timeEnd)}` : ""}
-                </span>
-              </button>
-            ))}
-          </aside>
-
-          <article className="event-detail" aria-live="polite">
-            {selectedEvent ? (
-              <>
-                <p className="pill">{selectedEvent.category}</p>
-                <h3>{selectedEvent.title}</h3>
-                <p>{selectedEvent.summary}</p>
-                <ul>
-                  <li>Region: {selectedEvent.regionName}</li>
-                  <li>
-                    Time: {formatYear(selectedEvent.timeStart)}
-                    {selectedEvent.timeEnd ? ` - ${formatYear(selectedEvent.timeEnd)}` : ""}
-                  </li>
-                  <li>Precision: {selectedEvent.precisionLevel}</li>
-                  <li>Confidence: {(selectedEvent.confidenceScore * 100).toFixed(0)}%</li>
-                </ul>
-                <a href={selectedEvent.sourceUrl} rel="noreferrer" target="_blank">
-                  Source Link
-                </a>
-              </>
-            ) : (
-              <p>{hasEventError ? "Fix API connection and retry." : "Select an event to view details."}</p>
-            )}
-          </article>
+        <div className="event-list" aria-label="Filtered events">
+          {!isLoadingEvents && !hasEventError && filteredEvents.length === 0 && (
+            <p className="empty">No events in this time window.</p>
+          )}
+          {filteredEvents.map((event) => (
+            <button
+              className={event.id === selectedEvent?.id ? "active" : ""}
+              key={event.id}
+              onClick={() => setSelectedEventId(event.id)}
+              type="button"
+            >
+              <strong>{event.title}</strong>
+              <span>
+                {formatYear(event.timeStart)}
+                {event.timeEnd ? ` \u2013 ${formatYear(event.timeEnd)}` : ""}
+              </span>
+            </button>
+          ))}
         </div>
-      </section>
-    </main>
+
+        {selectedEvent && (
+          <article className="event-detail" aria-live="polite">
+            <p className="pill">{selectedEvent.category}</p>
+            <h3>{selectedEvent.title}</h3>
+            <p className="event-summary">{selectedEvent.summary}</p>
+            <ul>
+              <li>Region: {selectedEvent.regionName}</li>
+              <li>
+                Time: {formatYear(selectedEvent.timeStart)}
+                {selectedEvent.timeEnd ? ` \u2013 ${formatYear(selectedEvent.timeEnd)}` : ""}
+              </li>
+              <li>Precision: {selectedEvent.precisionLevel}</li>
+              <li>Confidence: {(selectedEvent.confidenceScore * 100).toFixed(0)}%</li>
+            </ul>
+            <a href={selectedEvent.sourceUrl} rel="noreferrer" target="_blank">
+              Source
+            </a>
+          </article>
+        )}
+      </aside>
+    </div>
   );
 };
