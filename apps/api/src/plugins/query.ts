@@ -3,9 +3,9 @@ import { events, sources } from "../data/mock.js";
 
 type EventsQuery = {
   category?: string;
-  from?: number;
-  to?: number;
-  limit?: number;
+  from?: number | string;
+  to?: number | string;
+  limit?: number | string;
 };
 
 export const queryPlugin: FastifyPluginAsync = async (app) => {
@@ -15,17 +15,23 @@ export const queryPlugin: FastifyPluginAsync = async (app) => {
 
   app.get<{ Querystring: EventsQuery }>("/events", async (request) => {
     const { category, from, to, limit = 50 } = request.query;
+    const parsedFrom =
+      typeof from === "number" ? from : typeof from === "string" ? Number(from) : undefined;
+    const parsedTo = typeof to === "number" ? to : typeof to === "string" ? Number(to) : undefined;
+    const parsedLimit =
+      typeof limit === "number" ? limit : typeof limit === "string" ? Number(limit) : 50;
+    const safeLimit = Number.isFinite(parsedLimit) ? parsedLimit : 50;
 
     const filtered = events.filter((event) => {
       if (category && event.category !== category) {
         return false;
       }
 
-      if (typeof from === "number" && event.timeStart < from) {
+      if (Number.isFinite(parsedFrom) && event.timeStart < (parsedFrom as number)) {
         return false;
       }
 
-      if (typeof to === "number" && event.timeStart > to) {
+      if (Number.isFinite(parsedTo) && event.timeStart > (parsedTo as number)) {
         return false;
       }
 
@@ -34,7 +40,7 @@ export const queryPlugin: FastifyPluginAsync = async (app) => {
 
     return {
       total: filtered.length,
-      items: filtered.slice(0, Math.max(1, Math.min(limit, 200)))
+      items: filtered.slice(0, Math.max(1, Math.min(safeLimit, 200)))
     };
   });
 

@@ -13,6 +13,13 @@ Run locally:
 pnpm --filter @earthistory/api dev
 ```
 
+Production run:
+
+```bash
+pnpm --filter @earthistory/api build
+pnpm --filter @earthistory/api start
+```
+
 Core endpoints (T2.2):
 
 - `GET /events`
@@ -34,3 +41,12 @@ License gate (T3.3):
 
 - allowlist: `infra/data/license-allowlist.json`
 - audit output: `infra/data/normalized/license-audit.json`
+
+T5.2 API deploy:
+
+- Provider: Render free web service
+- Config: `render.yaml`
+- Staging URL: `https://earthistory-api-staging.onrender.com`
+- Env:
+  - `PORT` (provided by platform)
+  - `CORS_ORIGINS` (comma separated allowlist)

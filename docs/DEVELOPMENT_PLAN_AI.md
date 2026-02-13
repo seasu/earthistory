@@ -82,8 +82,8 @@
   - 可完成 3 分鐘 MVP 任務流程（PRD 定義）
 
 ## T5 Deploy + Ops
-- T5.1 Frontend deploy (Cloudflare Pages)
-- T5.2 API deploy (Workers 或免費替代)
+- T5.1 Frontend deploy (GitHub Pages)
+- T5.2 API deploy (Render Free)
 - T5.3 DB deploy (Supabase Free/Neon Free)
 - T5.4 使用量監控與額度預警
 - Output:

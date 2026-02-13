@@ -3,7 +3,7 @@ import { events } from "../data/mock.js";
 
 type SearchQuery = {
   q?: string;
-  limit?: number;
+  limit?: number | string;
 };
 
 export const searchPlugin: FastifyPluginAsync = async (app) => {
@@ -14,6 +14,9 @@ export const searchPlugin: FastifyPluginAsync = async (app) => {
   app.get<{ Querystring: SearchQuery }>("/search", async (request) => {
     const { q = "", limit = 20 } = request.query;
     const keyword = q.trim().toLowerCase();
+    const parsedLimit =
+      typeof limit === "number" ? limit : typeof limit === "string" ? Number(limit) : 20;
+    const safeLimit = Number.isFinite(parsedLimit) ? parsedLimit : 20;
 
     if (!keyword) {
       return { total: 0, items: [] };
@@ -29,7 +32,7 @@ export const searchPlugin: FastifyPluginAsync = async (app) => {
 
     return {
       total: items.length,
-      items: items.slice(0, Math.max(1, Math.min(limit, 100)))
+      items: items.slice(0, Math.max(1, Math.min(safeLimit, 100)))
     };
   });
 };

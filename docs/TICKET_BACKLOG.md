@@ -1,6 +1,6 @@
 # Earthistory Ticket Backlog
 
-更新日期: 2026-02-12  
+更新日期: 2026-02-13  
 用途: AI 按票實作的唯一票務來源（再同步到 GitHub Projects）
 
 ## 狀態定義
@@ -27,14 +27,14 @@
 | T3.3 | License gate 規則 | S2 | Data | P0 | 3 | Done | 不合規資料被拒絕 |
 | T4.1 | Web app 骨架與 layout | S2 | Frontend | P0 | 3 | Done | 首頁可載入與基本導覽 |
 | T4.2 | Map provider 抽象層 (Cesium/MapLibre) | S2 | Frontend | P0 | 5 | Done | 2D/3D 可切換 |
-| T4.3 | Timeline + Filters + Event Panel | S3 | Frontend | P0 | 5 | Todo | 可切年代、篩選、看事件詳情 |
-| T4.4 | API 整合與錯誤狀態 | S3 | Frontend | P1 | 3 | Todo | Loading/Empty/Error 完整 |
-| T5.1 | Frontend 免費雲端部署 | S4 | DevOps | P0 | 3 | Todo | 產生 staging URL |
-| T5.2 | API 免費雲端部署 | S4 | DevOps | P0 | 3 | Todo | API 可公開呼叫 |
+| T4.3 | Timeline + Filters + Event Panel | S3 | Frontend | P0 | 5 | Done | 可切年代、篩選、看事件詳情 |
+| T4.4 | API 整合與錯誤狀態 | S3 | Frontend | P1 | 3 | Done | Loading/Empty/Error 完整 |
+| T5.1 | Frontend 免費雲端部署 | S4 | DevOps | P0 | 3 | Done | 產生 staging URL |
+| T5.2 | API 免費雲端部署 | S4 | DevOps | P0 | 3 | Done | API 可公開呼叫 |
 | T5.3 | DB 免費方案部署 | S4 | DevOps | P0 | 3 | Todo | DB 可連線且 schema 完整 |
 | T5.4 | 使用量監控與額度預警 | S4 | DevOps | P1 | 2 | Todo | 70/90% usage 規則可追蹤 |
 
 ## 整體進度
 - Total Points: 67
-- Done Points: 48
-- Overall Progress: 71.64%
+- Done Points: 62
+- Overall Progress: 92.54%

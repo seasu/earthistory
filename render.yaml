@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: earthistory-api-staging
+    runtime: node
+    rootDir: .
+    plan: free
+    buildCommand: corepack pnpm install --frozen-lockfile=false && corepack pnpm --filter @earthistory/api build
+    startCommand: corepack pnpm --filter @earthistory/api start
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: CORS_ORIGINS
+        value: https://seasu.github.io,http://localhost:5173
