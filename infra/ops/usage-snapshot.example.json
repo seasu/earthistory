@@ -1,0 +1,17 @@
+{
+  "generatedAt": "2026-02-13T00:00:00.000Z",
+  "services": [
+    {
+      "name": "frontend_pages",
+      "usagePercent": 31.2
+    },
+    {
+      "name": "api_render",
+      "usagePercent": 42.5
+    },
+    {
+      "name": "db_supabase",
+      "usagePercent": 37.4
+    }
+  ]
+}

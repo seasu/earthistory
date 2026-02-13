@@ -1,7 +1,7 @@
 # Checkpoint
-- Date: 2026-02-13 14:58 (UTC+8)
+- Date: 2026-02-13 17:21 (UTC+8)
 - Branch: main
-- Last Commit: cd7fa17
+- Last Commit: d989e93
 - Completed:
   - T0.1
   - T0.2
@@ -21,10 +21,12 @@
   - T4.4
   - T5.1
   - T5.2
+  - T5.3
+  - T5.4
 - In Progress:
   - none
 - Next:
-  - T5.3 DB 免費方案部署
+  - MVP 驗收與 release checklist
 - Blockers:
   - none
 - Docs Synced:

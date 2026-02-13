@@ -1,0 +1,34 @@
+name: Usage Monitor
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 1 * * *"
+
+jobs:
+  check-usage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Generate Usage Snapshot
+        env:
+          FRONTEND_USAGE_PCT: ${{ vars.FRONTEND_USAGE_PCT }}
+          API_USAGE_PCT: ${{ vars.API_USAGE_PCT }}
+          DB_USAGE_PCT: ${{ vars.DB_USAGE_PCT }}
+        run: node infra/ops/generate-usage-snapshot.mjs
+
+      - name: Check Thresholds (70/90)
+        run: node infra/ops/check-usage-thresholds.mjs --input infra/ops/usage-snapshot.json
+
+      - name: Upload Snapshot
+        uses: actions/upload-artifact@v4
+        with:
+          name: usage-snapshot
+          path: infra/ops/usage-snapshot.json
