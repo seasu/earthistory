@@ -26,6 +26,7 @@
 - In Progress:
   - T6.1 MVP 任務流程手動驗收腳本與清單
 - Next:
+  - 依 `docs/MVP_ACCEPTANCE_CHECKLIST.md` 完成手動驗收並更新 `docs/MVP_ACCEPTANCE_RUN_2026-02-13.md`
   - T6.2 關鍵使用流程 E2E 測試
   - T6.3 前後端效能基線與監測門檻
   - T6.4 Rollback drill 演練與紀錄
