@@ -395,6 +395,7 @@ export const App = () => {
                     src={event.imageUrl}
                     alt=""
                     loading="lazy"
+                    onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
                   />
                 )}
                 <div className="event-list-text">
@@ -416,6 +417,7 @@ export const App = () => {
                     src={selectedEvent.imageUrl}
                     alt={selectedEvent.title}
                     loading="lazy"
+                    onError={(e) => { (e.target as HTMLImageElement).parentElement!.style.display = "none"; }}
                   />
                   {selectedEvent.imageAttribution && (
                     <span className="image-attribution">{selectedEvent.imageAttribution}</span>
@@ -526,6 +528,7 @@ export const App = () => {
                         src={selectedEvent.imageUrl}
                         alt={selectedEvent.title}
                         loading="lazy"
+                        onError={(e) => { (e.target as HTMLImageElement).parentElement!.style.display = "none"; }}
                       />
                       {selectedEvent.imageAttribution && (
                         <span className="image-attribution">{selectedEvent.imageAttribution}</span>
