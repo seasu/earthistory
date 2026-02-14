@@ -16,6 +16,9 @@ type EventRecord = {
   sourceUrl: string;
   lat: number;
   lng: number;
+  imageUrl: string | null;
+  imageAttribution: string | null;
+  wikipediaUrl: string | null;
 };
 
 type ListResponse<T> = {
@@ -381,37 +384,68 @@ export const App = () => {
             )}
             {filteredEvents.map((event) => (
               <button
-                className={event.id === selectedEvent?.id ? "active" : ""}
+                className={`event-list-item ${event.id === selectedEvent?.id ? "active" : ""}`}
                 key={event.id}
                 onClick={() => setSelectedEventId(event.id)}
                 type="button"
               >
-                <strong>{event.title}</strong>
-                <span>
-                  {formatYear(event.timeStart)}
-                  {event.timeEnd ? ` \u2013 ${formatYear(event.timeEnd)}` : ""}
-                </span>
+                {event.imageUrl && (
+                  <img
+                    className="event-list-thumb"
+                    src={event.imageUrl}
+                    alt=""
+                    loading="lazy"
+                  />
+                )}
+                <div className="event-list-text">
+                  <strong>{event.title}</strong>
+                  <span>
+                    {formatYear(event.timeStart)}
+                    {event.timeEnd ? ` \u2013 ${formatYear(event.timeEnd)}` : ""}
+                  </span>
+                </div>
               </button>
             ))}
           </div>
 
           {selectedEvent && (
             <article className="event-detail" aria-live="polite">
-              <p className="pill">{tCategory(selectedEvent.category)}</p>
-              <h3>{selectedEvent.title}</h3>
-              <p className="event-summary">{selectedEvent.summary}</p>
-              <ul>
-                <li>{t("regionLabel")}{selectedEvent.regionName}</li>
-                <li>
-                  {t("timeLabel")}{formatYear(selectedEvent.timeStart)}
-                  {selectedEvent.timeEnd ? ` \u2013 ${formatYear(selectedEvent.timeEnd)}` : ""}
-                </li>
-                <li>{t("precisionLabel")}{tPrecision(selectedEvent.precisionLevel)}</li>
-                <li>{t("confidenceLabel")}{(selectedEvent.confidenceScore * 100).toFixed(0)}%</li>
-              </ul>
-              <a href={selectedEvent.sourceUrl} rel="noreferrer" target="_blank">
-                {t("source")}
-              </a>
+              {selectedEvent.imageUrl && (
+                <div className="event-detail-hero">
+                  <img
+                    src={selectedEvent.imageUrl}
+                    alt={selectedEvent.title}
+                    loading="lazy"
+                  />
+                  {selectedEvent.imageAttribution && (
+                    <span className="image-attribution">{selectedEvent.imageAttribution}</span>
+                  )}
+                </div>
+              )}
+              <div className="event-detail-body">
+                <p className="pill">{tCategory(selectedEvent.category)}</p>
+                <h3>{selectedEvent.title}</h3>
+                <p className="event-summary">{selectedEvent.summary}</p>
+                <ul>
+                  <li>{t("regionLabel")}{selectedEvent.regionName}</li>
+                  <li>
+                    {t("timeLabel")}{formatYear(selectedEvent.timeStart)}
+                    {selectedEvent.timeEnd ? ` \u2013 ${formatYear(selectedEvent.timeEnd)}` : ""}
+                  </li>
+                  <li>{t("precisionLabel")}{tPrecision(selectedEvent.precisionLevel)}</li>
+                  <li>{t("confidenceLabel")}{(selectedEvent.confidenceScore * 100).toFixed(0)}%</li>
+                </ul>
+                <div className="event-detail-links">
+                  <a href={selectedEvent.sourceUrl} rel="noreferrer" target="_blank">
+                    {t("source")}
+                  </a>
+                  {selectedEvent.wikipediaUrl && (
+                    <a href={selectedEvent.wikipediaUrl} rel="noreferrer" target="_blank">
+                      Wikipedia
+                    </a>
+                  )}
+                </div>
+              </div>
             </article>
           )}
         </aside>
@@ -486,21 +520,42 @@ export const App = () => {
                 </button>
 
                 <article className="mobile-event-card" aria-live="polite">
-                  <p className="pill">{tCategory(selectedEvent.category)}</p>
-                  <h3>{selectedEvent.title}</h3>
-                  <p className="mobile-card-time">
-                    {formatYear(selectedEvent.timeStart)}
-                    {selectedEvent.timeEnd ? ` \u2013 ${formatYear(selectedEvent.timeEnd)}` : ""}
-                  </p>
-                  <p className="event-summary">{selectedEvent.summary}</p>
-                  <ul>
-                    <li>{t("regionLabel")}{selectedEvent.regionName}</li>
-                    <li>{t("precisionLabel")}{tPrecision(selectedEvent.precisionLevel)}</li>
-                    <li>{t("confidenceLabel")}{(selectedEvent.confidenceScore * 100).toFixed(0)}%</li>
-                  </ul>
-                  <a href={selectedEvent.sourceUrl} rel="noreferrer" target="_blank">
-                    {t("source")}
-                  </a>
+                  {selectedEvent.imageUrl && (
+                    <div className="mobile-card-hero">
+                      <img
+                        src={selectedEvent.imageUrl}
+                        alt={selectedEvent.title}
+                        loading="lazy"
+                      />
+                      {selectedEvent.imageAttribution && (
+                        <span className="image-attribution">{selectedEvent.imageAttribution}</span>
+                      )}
+                    </div>
+                  )}
+                  <div className="mobile-card-body">
+                    <p className="pill">{tCategory(selectedEvent.category)}</p>
+                    <h3>{selectedEvent.title}</h3>
+                    <p className="mobile-card-time">
+                      {formatYear(selectedEvent.timeStart)}
+                      {selectedEvent.timeEnd ? ` \u2013 ${formatYear(selectedEvent.timeEnd)}` : ""}
+                    </p>
+                    <p className="event-summary">{selectedEvent.summary}</p>
+                    <ul>
+                      <li>{t("regionLabel")}{selectedEvent.regionName}</li>
+                      <li>{t("precisionLabel")}{tPrecision(selectedEvent.precisionLevel)}</li>
+                      <li>{t("confidenceLabel")}{(selectedEvent.confidenceScore * 100).toFixed(0)}%</li>
+                    </ul>
+                    <div className="event-detail-links">
+                      <a href={selectedEvent.sourceUrl} rel="noreferrer" target="_blank">
+                        {t("source")}
+                      </a>
+                      {selectedEvent.wikipediaUrl && (
+                        <a href={selectedEvent.wikipediaUrl} rel="noreferrer" target="_blank">
+                          Wikipedia
+                        </a>
+                      )}
+                    </div>
+                  </div>
                 </article>
 
                 <button

@@ -5,6 +5,7 @@ import { adminPlugin } from "./plugins/admin.js";
 import { ingestionPlugin } from "./plugins/ingestion.js";
 import { queryPlugin } from "./plugins/query.js";
 import { searchPlugin } from "./plugins/search.js";
+import { closePool, getPool } from "./db.js";
 
 export const buildApp = () => {
   const app = Fastify({ logger: true });
@@ -16,13 +17,20 @@ export const buildApp = () => {
     origin: corsOrigins
   });
 
-  app.get("/health", async () => ({ ok: true }));
+  app.get("/health", async () => {
+    const pool = getPool();
+    return { ok: true, dataSource: pool ? "postgres" : "mock" };
+  });
   app.get("/openapi.json", async () => openApiSpec);
 
   app.register(queryPlugin);
   app.register(searchPlugin);
   app.register(ingestionPlugin, { prefix: "/ingestion" });
   app.register(adminPlugin, { prefix: "/admin" });
+
+  app.addHook("onClose", async () => {
+    await closePool();
+  });
 
   return app;
 };
