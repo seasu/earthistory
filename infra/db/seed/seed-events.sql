@@ -712,6 +712,132 @@ INSERT INTO events (title, summary, category, region_name, precision_level, conf
 ('Tiananmen Square Protests', 'Student-led pro-democracy protests in Beijing were crushed by military force on June 4, an event with lasting impact on China''s political trajectory and international relations.', 'politics', 'China', 'year', 0.97, 1989, NULL, ST_SetSRID(ST_MakePoint(116.40, 39.91), 4326), 1, 'https://www.wikidata.org/wiki/Q174754', '六四天安門事件', '學生主導的民主運動在六月四日遭軍隊武力鎮壓，對中國的政治走向與國際關係產生深遠影響。', '中國', NULL, NULL, 'https://en.wikipedia.org/wiki/1989_Tiananmen_Square_protests');
 
 
+-- ── Japan ────────────────────────────────────────────────────
+
+INSERT INTO events (title, summary, category, region_name, precision_level, confidence_score, time_start, time_end, location, source_id, source_url, title_zh, summary_zh, region_name_zh, image_url, image_attribution, wikipedia_url) VALUES
+('Heian Period and The Tale of Genji', 'The Heian period saw the flowering of Japanese court culture. Murasaki Shikibu wrote The Tale of Genji, widely regarded as the world''s first novel.', 'culture', 'Japan', 'century', 0.9, 794, 1185, ST_SetSRID(ST_MakePoint(135.77, 35.01), 4326), 1, 'https://www.wikidata.org/wiki/Q188490', '平安時代與《源氏物語》', '平安時代是日本宮廷文化的鼎盛期，紫式部創作了被視為世界第一部長篇小說的《源氏物語》。', '日本', NULL, NULL, 'https://en.wikipedia.org/wiki/Heian_period');
+
+INSERT INTO events (title, summary, category, region_name, precision_level, confidence_score, time_start, time_end, location, source_id, source_url, title_zh, summary_zh, region_name_zh, image_url, image_attribution, wikipedia_url) VALUES
+('Kamakura Shogunate Established', 'Minamoto no Yoritomo established the Kamakura shogunate, inaugurating nearly seven centuries of military rule in Japan.', 'politics', 'Japan', 'year', 0.92, 1185, NULL, ST_SetSRID(ST_MakePoint(139.55, 35.32), 4326), 1, 'https://www.wikidata.org/wiki/Q334510', '鎌倉幕府成立', '源賴朝建立鎌倉幕府，開啟了日本近七百年的武家政治時代。', '日本', NULL, NULL, 'https://en.wikipedia.org/wiki/Kamakura_shogunate');
+
+INSERT INTO events (title, summary, category, region_name, precision_level, confidence_score, time_start, time_end, location, source_id, source_url, title_zh, summary_zh, region_name_zh, image_url, image_attribution, wikipedia_url) VALUES
+('Atomic Bombing of Hiroshima and Nagasaki', 'The United States dropped atomic bombs on Hiroshima and Nagasaki, the only use of nuclear weapons in warfare, leading to Japan''s surrender and the end of World War II.', 'war', 'Japan', 'year', 0.99, 1945, NULL, ST_SetSRID(ST_MakePoint(132.45, 34.39), 4326), 1, 'https://www.wikidata.org/wiki/Q171251', '廣島與長崎原子彈爆炸', '美國向廣島和長崎投下原子彈，為人類史上唯一的核武器實戰使用，促使日本投降並結束二戰。', '日本', NULL, NULL, 'https://en.wikipedia.org/wiki/Atomic_bombings_of_Hiroshima_and_Nagasaki');
+
+-- ── Korea ────────────────────────────────────────────────────
+
+INSERT INTO events (title, summary, category, region_name, precision_level, confidence_score, time_start, time_end, location, source_id, source_url, title_zh, summary_zh, region_name_zh, image_url, image_attribution, wikipedia_url) VALUES
+('Three Kingdoms of Korea', 'The Korean peninsula was divided among three rival kingdoms — Goguryeo, Baekje, and Silla — each developing distinct cultures that shaped Korean identity.', 'civilization', 'Korea', 'century', 0.85, -57, 668, ST_SetSRID(ST_MakePoint(126.98, 37.57), 4326), 1, 'https://www.wikidata.org/wiki/Q28845', '朝鮮三國時代', '朝鮮半島分裂為高句麗、百濟、新羅三國鼎立，各自發展出塑造韓國認同的獨特文化。', '朝鮮半島', NULL, NULL, 'https://en.wikipedia.org/wiki/Three_Kingdoms_of_Korea');
+
+INSERT INTO events (title, summary, category, region_name, precision_level, confidence_score, time_start, time_end, location, source_id, source_url, title_zh, summary_zh, region_name_zh, image_url, image_attribution, wikipedia_url) VALUES
+('Goryeo Dynasty Founded', 'Wang Geon founded the Goryeo dynasty, which unified the Korean peninsula, gave Korea its Western name, and produced the world''s earliest metal movable type.', 'politics', 'Korea', 'year', 0.9, 918, NULL, ST_SetSRID(ST_MakePoint(126.56, 37.97), 4326), 1, 'https://www.wikidata.org/wiki/Q28845', '高麗王朝建立', '王建建立高麗王朝，統一朝鮮半島，Korea 一詞即源於高麗，且發明了世界最早的金屬活字印刷。', '朝鮮半島', NULL, NULL, 'https://en.wikipedia.org/wiki/Goryeo');
+
+INSERT INTO events (title, summary, category, region_name, precision_level, confidence_score, time_start, time_end, location, source_id, source_url, title_zh, summary_zh, region_name_zh, image_url, image_attribution, wikipedia_url) VALUES
+('Invention of Hangul', 'King Sejong the Great promulgated Hangul, a scientifically designed alphabet intended to increase literacy among common Koreans.', 'culture', 'Korea', 'year', 0.95, 1443, NULL, ST_SetSRID(ST_MakePoint(126.98, 37.57), 4326), 1, 'https://www.wikidata.org/wiki/Q8208', '韓文字（訓民正音）發明', '朝鮮世宗大王頒布訓民正音（韓文字），這套科學設計的字母系統旨在提高平民識字率。', '朝鮮半島', NULL, NULL, 'https://en.wikipedia.org/wiki/Hangul');
+
+INSERT INTO events (title, summary, category, region_name, precision_level, confidence_score, time_start, time_end, location, source_id, source_url, title_zh, summary_zh, region_name_zh, image_url, image_attribution, wikipedia_url) VALUES
+('Korean War', 'North Korea invaded South Korea, sparking a three-year war involving UN and Chinese forces that ended in armistice and cemented the peninsula''s division.', 'war', 'Korea', 'year', 0.97, 1950, 1953, ST_SetSRID(ST_MakePoint(126.98, 37.57), 4326), 1, 'https://www.wikidata.org/wiki/Q8663', '韓戰', '北韓入侵南韓，引發長達三年、涉及聯合國軍與中國軍隊的戰爭，以停戰協定告終，鞏固了半島的分裂。', '朝鮮半島', NULL, NULL, 'https://en.wikipedia.org/wiki/Korean_War');
+
+-- ── Southeast Asia ───────────────────────────────────────────
+
+INSERT INTO events (title, summary, category, region_name, precision_level, confidence_score, time_start, time_end, location, source_id, source_url, title_zh, summary_zh, region_name_zh, image_url, image_attribution, wikipedia_url) VALUES
+('Srivijaya Maritime Empire', 'The Srivijaya thalassocracy dominated maritime Southeast Asia for centuries, controlling the strategic Strait of Malacca and spreading Buddhism across the region.', 'civilization', 'Southeast Asia', 'century', 0.8, 683, 1025, ST_SetSRID(ST_MakePoint(104.75, -2.95), 4326), 1, 'https://www.wikidata.org/wiki/Q219339', '三佛齊海洋帝國', '三佛齊海洋帝國主宰東南亞海域數百年，控制戰略要地麻六甲海峽，並將佛教傳播至整個地區。', '東南亞', NULL, NULL, 'https://en.wikipedia.org/wiki/Srivijaya');
+
+INSERT INTO events (title, summary, category, region_name, precision_level, confidence_score, time_start, time_end, location, source_id, source_url, title_zh, summary_zh, region_name_zh, image_url, image_attribution, wikipedia_url) VALUES
+('Majapahit Empire', 'The Majapahit Empire was the last major Hindu-Buddhist empire in Southeast Asia, ruling much of the Indonesian archipelago at its peak.', 'civilization', 'Southeast Asia', 'decade', 0.85, 1293, 1527, ST_SetSRID(ST_MakePoint(112.10, -7.57), 4326), 1, 'https://www.wikidata.org/wiki/Q188709', '滿者伯夷帝國', '滿者伯夷帝國是東南亞最後一個重要的印度教—佛教帝國，鼎盛時期統治印尼群島大部分地區。', '東南亞', NULL, NULL, 'https://en.wikipedia.org/wiki/Majapahit');
+
+INSERT INTO events (title, summary, category, region_name, precision_level, confidence_score, time_start, time_end, location, source_id, source_url, title_zh, summary_zh, region_name_zh, image_url, image_attribution, wikipedia_url) VALUES
+('Fall of Saigon — End of the Vietnam War', 'North Vietnamese forces captured Saigon, ending the Vietnam War and reunifying Vietnam under communist rule after decades of conflict.', 'war', 'Southeast Asia', 'year', 0.97, 1975, NULL, ST_SetSRID(ST_MakePoint(106.70, 10.78), 4326), 1, 'https://www.wikidata.org/wiki/Q193521', '西貢淪陷——越戰結束', '北越軍隊攻陷西貢，結束越戰，經過數十年衝突後越南在共產黨統治下重新統一。', '東南亞', NULL, NULL, 'https://en.wikipedia.org/wiki/Fall_of_Saigon');
+
+-- ── Islamic World / Middle East ──────────────────────────────
+
+INSERT INTO events (title, summary, category, region_name, precision_level, confidence_score, time_start, time_end, location, source_id, source_url, title_zh, summary_zh, region_name_zh, image_url, image_attribution, wikipedia_url) VALUES
+('Achaemenid Persian Empire Founded', 'Cyrus the Great established the Achaemenid Empire, the first true superpower, known for its tolerance of diverse cultures and the earliest declaration of human rights.', 'politics', 'Middle East', 'decade', 0.9, -550, NULL, ST_SetSRID(ST_MakePoint(52.89, 29.93), 4326), 1, 'https://www.wikidata.org/wiki/Q389688', '阿契美尼德波斯帝國建立', '居魯士大帝建立阿契美尼德帝國，為人類歷史上第一個真正的超級大國，以包容多元文化和最早的人權宣言聞名。', '中東', NULL, NULL, 'https://en.wikipedia.org/wiki/Achaemenid_Empire');
+
+INSERT INTO events (title, summary, category, region_name, precision_level, confidence_score, time_start, time_end, location, source_id, source_url, title_zh, summary_zh, region_name_zh, image_url, image_attribution, wikipedia_url) VALUES
+('Abbasid Caliphate and the Islamic Golden Age', 'The Abbasid Caliphate''s House of Wisdom in Baghdad became the world''s intellectual center, advancing mathematics, astronomy, medicine, and philosophy.', 'civilization', 'Middle East', 'century', 0.9, 750, 1258, ST_SetSRID(ST_MakePoint(44.37, 33.31), 4326), 1, 'https://www.wikidata.org/wiki/Q12490', '阿拔斯王朝與伊斯蘭黃金時代', '阿拔斯王朝在巴格達建立的智慧宮成為世界知識中心，推動了數學、天文、醫學和哲學的重大進展。', '中東', NULL, NULL, 'https://en.wikipedia.org/wiki/Islamic_Golden_Age');
+
+INSERT INTO events (title, summary, category, region_name, precision_level, confidence_score, time_start, time_end, location, source_id, source_url, title_zh, summary_zh, region_name_zh, image_url, image_attribution, wikipedia_url) VALUES
+('Founding of the Ottoman Empire', 'Osman I founded the Ottoman state in Anatolia, which grew into a multi-continental empire lasting over six centuries and bridging East and West.', 'politics', 'Anatolia', 'decade', 0.88, 1299, NULL, ST_SetSRID(ST_MakePoint(29.06, 40.18), 4326), 1, 'https://www.wikidata.org/wiki/Q12560', '鄂圖曼帝國建立', '奧斯曼一世在安納托利亞建立鄂圖曼國家，發展為橫跨多洲、延續六百餘年的龐大帝國。', '安納托利亞', NULL, NULL, 'https://en.wikipedia.org/wiki/Ottoman_Empire');
+
+-- ── Africa ───────────────────────────────────────────────────
+
+INSERT INTO events (title, summary, category, region_name, precision_level, confidence_score, time_start, time_end, location, source_id, source_url, title_zh, summary_zh, region_name_zh, image_url, image_attribution, wikipedia_url) VALUES
+('Mali Empire and Mansa Musa', 'The Mali Empire flourished under Mansa Musa, possibly the wealthiest person in history, whose lavish pilgrimage to Mecca put West Africa on the world map.', 'civilization', 'West Africa', 'decade', 0.85, 1312, 1337, ST_SetSRID(ST_MakePoint(-8.00, 12.65), 4326), 1, 'https://www.wikidata.org/wiki/Q483611', '馬利帝國與曼薩穆薩', '馬利帝國在曼薩穆薩統治下繁榮鼎盛，他可能是史上最富有的人，其奢華的麥加朝聖之旅讓西非聞名於世。', '西非', NULL, NULL, 'https://en.wikipedia.org/wiki/Mansa_Musa');
+
+INSERT INTO events (title, summary, category, region_name, precision_level, confidence_score, time_start, time_end, location, source_id, source_url, title_zh, summary_zh, region_name_zh, image_url, image_attribution, wikipedia_url) VALUES
+('Kingdom of Kongo', 'The Kingdom of Kongo was a powerful Central African state with sophisticated governance that engaged in early diplomacy with Portugal before the devastation of the slave trade.', 'civilization', 'Africa', 'century', 0.82, 1390, 1914, ST_SetSRID(ST_MakePoint(14.27, -6.27), 4326), 1, 'https://www.wikidata.org/wiki/Q170404', '剛果王國', '剛果王國是一個擁有精密政治制度的中非強國，在奴隸貿易的浩劫之前曾與葡萄牙展開早期外交。', '非洲', NULL, NULL, 'https://en.wikipedia.org/wiki/Kingdom_of_Kongo');
+
+INSERT INTO events (title, summary, category, region_name, precision_level, confidence_score, time_start, time_end, location, source_id, source_url, title_zh, summary_zh, region_name_zh, image_url, image_attribution, wikipedia_url) VALUES
+('Rwandan Genocide', 'In approximately 100 days, Hutu extremists systematically murdered an estimated 800,000 Tutsi and moderate Hutu, one of the fastest genocides in history.', 'war', 'Africa', 'year', 0.97, 1994, NULL, ST_SetSRID(ST_MakePoint(29.87, -1.94), 4326), 1, 'https://www.wikidata.org/wiki/Q43453', '盧安達大屠殺', '約一百天內，胡圖族極端分子系統性屠殺約八十萬圖西族及溫和派胡圖族人，為史上最迅速的種族滅絕之一。', '非洲', NULL, NULL, 'https://en.wikipedia.org/wiki/Rwandan_genocide');
+
+-- ── Russia / Eastern Europe ──────────────────────────────────
+
+INSERT INTO events (title, summary, category, region_name, precision_level, confidence_score, time_start, time_end, location, source_id, source_url, title_zh, summary_zh, region_name_zh, image_url, image_attribution, wikipedia_url) VALUES
+('Byzantine Empire under Justinian I', 'Emperor Justinian I reconquered former Roman territories, codified Roman law in the Corpus Juris Civilis, and built the Hagia Sophia — achievements that shaped European civilization.', 'civilization', 'Anatolia', 'decade', 0.92, 527, 565, ST_SetSRID(ST_MakePoint(28.98, 41.01), 4326), 1, 'https://www.wikidata.org/wiki/Q48422', '查士丁尼一世治下的拜占庭帝國', '查士丁尼一世收復前羅馬領土、編纂《民法大全》並修建聖索菲亞大教堂，深刻影響了歐洲文明。', '安納托利亞', NULL, NULL, 'https://en.wikipedia.org/wiki/Justinian_I');
+
+INSERT INTO events (title, summary, category, region_name, precision_level, confidence_score, time_start, time_end, location, source_id, source_url, title_zh, summary_zh, region_name_zh, image_url, image_attribution, wikipedia_url) VALUES
+('Founding of Kievan Rus''', 'The Varangian prince Oleg united Slavic tribes under Kievan Rus'', creating the cultural and political precursor of Russia, Ukraine, and Belarus.', 'politics', 'Russia', 'decade', 0.8, 882, NULL, ST_SetSRID(ST_MakePoint(30.52, 50.45), 4326), 1, 'https://www.wikidata.org/wiki/Q170174', '基輔羅斯建立', '瓦良格王公奧列格統一斯拉夫部落建立基輔羅斯，為俄羅斯、烏克蘭和白俄羅斯的文化與政治先驅。', '俄羅斯', NULL, NULL, 'https://en.wikipedia.org/wiki/Kievan_Rus%27');
+
+INSERT INTO events (title, summary, category, region_name, precision_level, confidence_score, time_start, time_end, location, source_id, source_url, title_zh, summary_zh, region_name_zh, image_url, image_attribution, wikipedia_url) VALUES
+('Dissolution of the Soviet Union', 'The Soviet Union formally dissolved into 15 independent republics, ending the Cold War and reshaping the global geopolitical order.', 'politics', 'Russia', 'year', 0.99, 1991, NULL, ST_SetSRID(ST_MakePoint(37.62, 55.75), 4326), 1, 'https://www.wikidata.org/wiki/Q83618', '蘇聯解體', '蘇聯正式解體為十五個獨立共和國，結束了冷戰並重塑全球地緣政治格局。', '俄羅斯', NULL, NULL, 'https://en.wikipedia.org/wiki/Dissolution_of_the_Soviet_Union');
+
+-- ── Americas ─────────────────────────────────────────────────
+
+INSERT INTO events (title, summary, category, region_name, precision_level, confidence_score, time_start, time_end, location, source_id, source_url, title_zh, summary_zh, region_name_zh, image_url, image_attribution, wikipedia_url) VALUES
+('Norte Chico (Caral) Civilization', 'The Norte Chico civilization in Peru is the oldest known civilization in the Americas, with monumental architecture and no evidence of warfare.', 'civilization', 'South America', 'century', 0.8, -3000, -1800, ST_SetSRID(ST_MakePoint(-77.52, -10.89), 4326), 1, 'https://www.wikidata.org/wiki/Q828861', '小北（卡拉爾）文明', '秘魯的小北文明是美洲已知最古老的文明，擁有宏偉建築且未發現戰爭痕跡。', '南美洲', NULL, NULL, 'https://en.wikipedia.org/wiki/Caral');
+
+INSERT INTO events (title, summary, category, region_name, precision_level, confidence_score, time_start, time_end, location, source_id, source_url, title_zh, summary_zh, region_name_zh, image_url, image_attribution, wikipedia_url) VALUES
+('Teotihuacan at Its Peak', 'Teotihuacan became one of the largest cities in the ancient world with over 100,000 inhabitants, home to the iconic Pyramids of the Sun and Moon.', 'civilization', 'Mesoamerica', 'century', 0.85, 100, 550, ST_SetSRID(ST_MakePoint(-98.84, 19.69), 4326), 1, 'https://www.wikidata.org/wiki/Q178698', '特奧蒂瓦坎鼎盛時期', '特奧蒂瓦坎成為古代世界最大城市之一，擁有超過十萬居民，以標誌性的太陽金字塔和月亮金字塔聞名。', '中美洲', NULL, NULL, 'https://en.wikipedia.org/wiki/Teotihuacan');
+
+INSERT INTO events (title, summary, category, region_name, precision_level, confidence_score, time_start, time_end, location, source_id, source_url, title_zh, summary_zh, region_name_zh, image_url, image_attribution, wikipedia_url) VALUES
+('Mexican Revolution', 'A major armed struggle that transformed Mexican politics, resulted in the 1917 Constitution, and established land reform and workers'' rights.', 'war', 'North America', 'decade', 0.95, 1910, 1920, ST_SetSRID(ST_MakePoint(-99.13, 19.43), 4326), 1, 'https://www.wikidata.org/wiki/Q192764', '墨西哥革命', '一場改變墨西哥政治格局的重大武裝鬥爭，促成1917年憲法的制定，確立了土地改革與勞工權利。', '北美洲', NULL, NULL, 'https://en.wikipedia.org/wiki/Mexican_Revolution');
+
+-- ── Science & Technology ─────────────────────────────────────
+
+INSERT INTO events (title, summary, category, region_name, precision_level, confidence_score, time_start, time_end, location, source_id, source_url, title_zh, summary_zh, region_name_zh, image_url, image_attribution, wikipedia_url) VALUES
+('Invention of Papermaking by Cai Lun', 'Cai Lun refined the process of papermaking using bark, hemp, and rags, creating an affordable writing material that revolutionized the spread of knowledge.', 'technology', 'China', 'year', 0.88, 105, NULL, ST_SetSRID(ST_MakePoint(108.94, 34.26), 4326), 1, 'https://www.wikidata.org/wiki/Q177463', '蔡倫改良造紙術', '蔡倫以樹皮、麻頭和破布改良造紙術，創造出廉價書寫材料，徹底革新了知識的傳播。', '中國', NULL, NULL, 'https://en.wikipedia.org/wiki/Cai_Lun');
+
+INSERT INTO events (title, summary, category, region_name, precision_level, confidence_score, time_start, time_end, location, source_id, source_url, title_zh, summary_zh, region_name_zh, image_url, image_attribution, wikipedia_url) VALUES
+('Discovery of Penicillin', 'Alexander Fleming discovered penicillin, the first true antibiotic, which would go on to save hundreds of millions of lives and transform modern medicine.', 'science', 'England', 'year', 0.97, 1928, NULL, ST_SetSRID(ST_MakePoint(-0.17, 51.50), 4326), 1, 'https://www.wikidata.org/wiki/Q12570', '青黴素的發現', '亞歷山大·弗萊明發現了青黴素——第一種真正的抗生素，拯救了數億人的生命並徹底改變了現代醫學。', '英格蘭', NULL, NULL, 'https://en.wikipedia.org/wiki/Penicillin');
+
+INSERT INTO events (title, summary, category, region_name, precision_level, confidence_score, time_start, time_end, location, source_id, source_url, title_zh, summary_zh, region_name_zh, image_url, image_attribution, wikipedia_url) VALUES
+('Discovery of DNA Double Helix', 'James Watson and Francis Crick, building on Rosalind Franklin''s X-ray data, determined the double-helix structure of DNA, unlocking the molecular basis of heredity.', 'science', 'England', 'year', 0.97, 1953, NULL, ST_SetSRID(ST_MakePoint(0.12, 52.20), 4326), 1, 'https://www.wikidata.org/wiki/Q18048', 'DNA 雙螺旋結構發現', '詹姆斯·華生與弗朗西斯·克里克在羅莎琳·富蘭克林的 X 光數據基礎上，確定了 DNA 的雙螺旋結構，揭開了遺傳的分子基礎。', '英格蘭', NULL, NULL, 'https://en.wikipedia.org/wiki/Molecular_Structure_of_Nucleic_Acids');
+
+INSERT INTO events (title, summary, category, region_name, precision_level, confidence_score, time_start, time_end, location, source_id, source_url, title_zh, summary_zh, region_name_zh, image_url, image_attribution, wikipedia_url) VALUES
+('Sputnik — First Artificial Satellite', 'The Soviet Union launched Sputnik 1, the first artificial satellite to orbit Earth, igniting the Space Race and the modern space age.', 'technology', 'Russia', 'year', 0.99, 1957, NULL, ST_SetSRID(ST_MakePoint(63.34, 45.92), 4326), 1, 'https://www.wikidata.org/wiki/Q165029', '史普尼克——第一顆人造衛星', '蘇聯發射了史上第一顆人造衛星史普尼克一號，引發太空競賽並開啟現代太空時代。', '俄羅斯', NULL, NULL, 'https://en.wikipedia.org/wiki/Sputnik_1');
+
+INSERT INTO events (title, summary, category, region_name, precision_level, confidence_score, time_start, time_end, location, source_id, source_url, title_zh, summary_zh, region_name_zh, image_url, image_attribution, wikipedia_url) VALUES
+('CRISPR Gene Editing Breakthrough', 'Jennifer Doudna and Emmanuelle Charpentier published their landmark paper demonstrating CRISPR-Cas9 as a programmable gene-editing tool, revolutionizing biotechnology.', 'science', 'Global', 'year', 0.97, 2012, NULL, ST_SetSRID(ST_MakePoint(-122.26, 37.87), 4326), 1, 'https://www.wikidata.org/wiki/Q913404', 'CRISPR 基因編輯技術突破', '珍妮佛·乍得納與艾曼紐·乍乓蒂耶發表劃時代論文，展示 CRISPR-Cas9 作為可程式化基因編輯工具，徹底革新生物科技。', '全球', NULL, NULL, 'https://en.wikipedia.org/wiki/CRISPR_gene_editing');
+
+-- ── Culture & Thought ────────────────────────────────────────
+
+INSERT INTO events (title, summary, category, region_name, precision_level, confidence_score, time_start, time_end, location, source_id, source_url, title_zh, summary_zh, region_name_zh, image_url, image_attribution, wikipedia_url) VALUES
+('Construction of Borobudur', 'The Sailendra dynasty built Borobudur in Java, the world''s largest Buddhist temple and a masterpiece of ancient architecture and religious art.', 'religion', 'Southeast Asia', 'century', 0.85, 800, NULL, ST_SetSRID(ST_MakePoint(110.20, -7.61), 4326), 1, 'https://www.wikidata.org/wiki/Q42834', '婆羅浮屠建造', '夏連特拉王朝在爪哇島建造了婆羅浮屠——世界最大的佛教寺廟，古代建築與宗教藝術的傑作。', '東南亞', NULL, NULL, 'https://en.wikipedia.org/wiki/Borobudur');
+
+INSERT INTO events (title, summary, category, region_name, precision_level, confidence_score, time_start, time_end, location, source_id, source_url, title_zh, summary_zh, region_name_zh, image_url, image_attribution, wikipedia_url) VALUES
+('Dante''s Divine Comedy', 'Dante Alighieri completed the Divine Comedy, a masterpiece of world literature that defined the Italian language and profoundly influenced Western art and thought.', 'culture', 'Italy', 'decade', 0.92, 1320, NULL, ST_SetSRID(ST_MakePoint(11.25, 43.77), 4326), 1, 'https://www.wikidata.org/wiki/Q40185', '但丁《神曲》', '但丁·阿利吉耶里完成《神曲》，這部世界文學傑作奠定了義大利語言，並深刻影響西方藝術與思想。', '義大利', NULL, NULL, 'https://en.wikipedia.org/wiki/Divine_Comedy');
+
+INSERT INTO events (title, summary, category, region_name, precision_level, confidence_score, time_start, time_end, location, source_id, source_url, title_zh, summary_zh, region_name_zh, image_url, image_attribution, wikipedia_url) VALUES
+('Beethoven''s Ninth Symphony', 'Ludwig van Beethoven premiered his Ninth Symphony, including the ''Ode to Joy,'' a universal anthem of human brotherhood composed while he was almost completely deaf.', 'culture', 'Germany', 'year', 0.95, 1824, NULL, ST_SetSRID(ST_MakePoint(16.37, 48.20), 4326), 1, 'https://www.wikidata.org/wiki/Q11989', '貝多芬第九號交響曲', '貝多芬首演第九號交響曲，其中包含《歡樂頌》——一首人類友愛的普世頌歌，在幾乎完全失聰的狀態下創作。', '德國', NULL, NULL, 'https://en.wikipedia.org/wiki/Symphony_No._9_(Beethoven)');
+
+INSERT INTO events (title, summary, category, region_name, precision_level, confidence_score, time_start, time_end, location, source_id, source_url, title_zh, summary_zh, region_name_zh, image_url, image_attribution, wikipedia_url) VALUES
+('Universal Declaration of Human Rights', 'The United Nations General Assembly adopted the UDHR, a milestone document proclaiming the inalienable rights of every human being regardless of nationality, race, or religion.', 'politics', 'Global', 'year', 0.99, 1948, NULL, ST_SetSRID(ST_MakePoint(2.29, 48.86), 4326), 1, 'https://www.wikidata.org/wiki/Q7813', '世界人權宣言', '聯合國大會通過《世界人權宣言》，這份里程碑文件宣示每個人不分國籍、種族或宗教都享有不可剝奪的權利。', '全球', NULL, NULL, 'https://en.wikipedia.org/wiki/Universal_Declaration_of_Human_Rights');
+
+-- ── Additional World Events ──────────────────────────────────
+
+INSERT INTO events (title, summary, category, region_name, precision_level, confidence_score, time_start, time_end, location, source_id, source_url, title_zh, summary_zh, region_name_zh, image_url, image_attribution, wikipedia_url) VALUES
+('Treaty of Westphalia', 'The Peace of Westphalia ended the Thirty Years'' War and established the principle of state sovereignty, forming the foundation of the modern international system.', 'politics', 'Germany', 'year', 0.95, 1648, NULL, ST_SetSRID(ST_MakePoint(7.63, 52.03), 4326), 1, 'https://www.wikidata.org/wiki/Q150828', '西發里亞和約', '西發里亞和約結束三十年戰爭，確立國家主權原則，奠定了現代國際體系的基礎。', '德國', NULL, NULL, 'https://en.wikipedia.org/wiki/Peace_of_Westphalia');
+
+INSERT INTO events (title, summary, category, region_name, precision_level, confidence_score, time_start, time_end, location, source_id, source_url, title_zh, summary_zh, region_name_zh, image_url, image_attribution, wikipedia_url) VALUES
+('Cuban Missile Crisis', 'A 13-day confrontation between the US and Soviet Union over nuclear missiles in Cuba brought the world to the brink of nuclear war before a diplomatic resolution.', 'politics', 'Caribbean', 'year', 0.99, 1962, NULL, ST_SetSRID(ST_MakePoint(-81.52, 23.00), 4326), 1, 'https://www.wikidata.org/wiki/Q193418', '古巴飛彈危機', '美蘇兩國因古巴核飛彈問題對峙十三天，將世界推向核戰邊緣，最終透過外交途徑化解。', '加勒比海', NULL, NULL, 'https://en.wikipedia.org/wiki/Cuban_Missile_Crisis');
+
+INSERT INTO events (title, summary, category, region_name, precision_level, confidence_score, time_start, time_end, location, source_id, source_url, title_zh, summary_zh, region_name_zh, image_url, image_attribution, wikipedia_url) VALUES
+('Chernobyl Nuclear Disaster', 'The Chernobyl nuclear power plant suffered a catastrophic meltdown, the worst nuclear disaster in history, contaminating vast areas of Europe and contributing to the fall of the Soviet Union.', 'technology', 'Russia', 'year', 0.99, 1986, NULL, ST_SetSRID(ST_MakePoint(30.10, 51.39), 4326), 1, 'https://www.wikidata.org/wiki/Q129677', '車諾比核災', '車諾比核電廠發生災難性熔毀，為史上最嚴重核災，污染歐洲大片地區，加速了蘇聯的瓦解。', '俄羅斯', NULL, NULL, 'https://en.wikipedia.org/wiki/Chernobyl_disaster');
+
+INSERT INTO events (title, summary, category, region_name, precision_level, confidence_score, time_start, time_end, location, source_id, source_url, title_zh, summary_zh, region_name_zh, image_url, image_attribution, wikipedia_url) VALUES
+('Bantu Migration', 'Over millennia, Bantu-speaking peoples migrated across sub-Saharan Africa, spreading agriculture, ironworking, and languages that shaped the continent''s cultural landscape.', 'civilization', 'Africa', 'century', 0.7, -1000, 500, ST_SetSRID(ST_MakePoint(9.70, 4.05), 4326), 1, 'https://www.wikidata.org/wiki/Q208408', '班圖人大遷徙', '班圖語族人歷經數千年橫跨撒哈拉以南非洲大遷徙，傳播農業、鐵器技術和語言，塑造了非洲的文化面貌。', '非洲', NULL, NULL, 'https://en.wikipedia.org/wiki/Bantu_expansion');
+
+
 -- Reset events sequence
 SELECT setval('events_id_seq', (SELECT MAX(id) FROM events));
 
