@@ -13,10 +13,6 @@
   box-sizing: border-box;
 }
 
-* {
-  box-sizing: border-box;
-}
-
 body {
   margin: 0;
   overflow: hidden;
@@ -48,25 +44,40 @@ body {
   background: transparent;
 }
 
-/* ===== Floating Overlay: Top Bar (Year Switcher + Filters) ===== */
-.overlay-top {
+/* ===== Glassmorphic card (desktop) ===== */
+.overlay-timeline,
+.overlay-filters-desktop,
+.overlay-events {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(214, 228, 255, 0.6);
+  box-shadow: 0 8px 32px rgba(24, 48, 84, 0.12);
+}
+
+/* ===== Mobile popups: semi-transparent ===== */
+.mobile-popup {
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(214, 228, 255, 0.5);
+  box-shadow: 0 8px 32px rgba(24, 48, 84, 0.18);
+}
+
+/* ===== Floating Overlay: Timeline ===== */
+.overlay-timeline {
   position: absolute;
   top: calc(16px + var(--safe-top));
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(214, 228, 255, 0.6);
   border-radius: 16px;
   padding: 16px 24px;
-  box-shadow: 0 8px 32px rgba(24, 48, 84, 0.12);
   width: min(720px, calc(100vw - 32px));
 }
 
 .timeline-track {
-  margin-bottom: 12px;
+  margin-bottom: 0;
 }
 
 .timeline-track label {
@@ -90,9 +101,16 @@ body {
   height: 24px;
 }
 
-/* Filters toggle (mobile only by default hidden on desktop) */
-.filter-toggle {
-  display: none;
+/* ===== Floating Overlay: Desktop Filters ===== */
+.overlay-filters-desktop {
+  position: absolute;
+  top: calc(100px + var(--safe-top));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  border-radius: 14px;
+  padding: 14px 20px;
+  width: min(720px, calc(100vw - 32px));
 }
 
 .filter-row {
@@ -153,7 +171,7 @@ body {
   border-color: #2455c4;
 }
 
-/* ===== Floating Overlay: Event Panel (Left Sidebar) ===== */
+/* ===== Floating Overlay: Event Panel (Desktop Sidebar) ===== */
 .overlay-events {
   position: absolute;
   top: calc(16px + var(--safe-top));
@@ -162,12 +180,7 @@ body {
   z-index: 10;
   width: 320px;
   max-width: calc(100vw - 32px);
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(214, 228, 255, 0.6);
   border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(24, 48, 84, 0.12);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -197,11 +210,6 @@ body {
   margin: 0;
   color: #48618d;
   font-size: 13px;
-}
-
-/* Close button inside sidebar header (visible on mobile) */
-.sidebar-close {
-  display: none;
 }
 
 .event-list {
@@ -279,7 +287,7 @@ body {
   text-transform: capitalize;
 }
 
-/* ===== Toggle button for sidebar ===== */
+/* ===== Desktop: Toggle button for sidebar ===== */
 .sidebar-toggle {
   position: absolute;
   top: 50%;
@@ -350,128 +358,135 @@ body {
   font-size: 13px;
 }
 
+/* ===== Mobile FAB + Popup (hidden on desktop) ===== */
+.mobile-fab,
+.mobile-backdrop,
+.mobile-popup {
+  display: none;
+}
+
 /* ===== Mobile: <= 768px ===== */
 @media (max-width: 768px) {
-  /* Timeline moves to bottom as a compact bar */
-  .overlay-top {
+  /* Timeline: bottom center, compact */
+  .overlay-timeline {
     top: auto;
     bottom: calc(8px + var(--safe-bottom));
-    left: 8px;
-    right: 8px;
+    left: 72px;
+    right: 72px;
     transform: none;
     width: auto;
-    padding: 12px 16px;
+    padding: 10px 16px;
     border-radius: 14px;
   }
 
-  .timeline-track {
-    margin-bottom: 0;
-  }
-
   .timeline-track label {
-    font-size: 15px;
-  }
-
-  /* Show the filter toggle button on mobile */
-  .filter-toggle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    margin-top: 8px;
-    padding: 8px;
-    width: 100%;
-    border: 1px solid #c6d5f4;
-    border-radius: 8px;
-    background: #f6f9ff;
-    color: #3857a8;
     font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    min-height: 40px;
   }
 
-  .filter-toggle .chevron {
-    transition: transform 0.2s;
-    font-size: 10px;
-  }
-
-  .filter-toggle .chevron.expanded {
-    transform: rotate(180deg);
-  }
-
-  /* Hide filters by default on mobile, show when expanded */
-  .filter-row {
-    flex-direction: column;
-    gap: 8px;
-    overflow: hidden;
-    max-height: 0;
-    opacity: 0;
-    transition: max-height 0.3s ease, opacity 0.2s ease, margin 0.3s ease;
-    margin-top: 0;
-  }
-
-  .filter-row.expanded {
-    max-height: 300px;
-    opacity: 1;
-    margin-top: 10px;
-  }
-
-  .filter-row .control {
-    min-width: 0;
-    flex: none;
-  }
-
-  .filter-row .control select,
-  .filter-row .control input {
-    font-size: 16px;
-    padding: 10px 12px;
-    min-height: 48px;
-  }
-
-  /* Mode switch: top-right, smaller */
+  /* Mode switch: top-right */
   .overlay-mode-switch {
     top: calc(8px + var(--safe-top));
     right: calc(8px + var(--safe-right));
   }
 
-  /* Events panel: bottom sheet style */
-  .overlay-events {
-    top: auto;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: auto;
-    max-width: none;
-    max-height: 55vh;
-    border-radius: 20px 20px 0 0;
-    padding-bottom: var(--safe-bottom);
-    transition: transform 0.35s ease;
-  }
-
-  .overlay-events.collapsed {
-    transform: translateY(calc(100% - 56px - var(--safe-bottom)));
-  }
-
-  .overlay-events-header {
-    padding: 12px 16px;
+  /* ===== Mobile FAB icons ===== */
+  .mobile-fab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: calc(12px + var(--safe-bottom));
+    z-index: 12;
+    width: 52px;
+    height: 52px;
+    border-radius: 999px;
+    border: 1px solid rgba(214, 228, 255, 0.6);
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 16px rgba(24, 48, 84, 0.15);
     cursor: pointer;
+    font-size: 22px;
+    color: #2455c4;
+    -webkit-tap-highlight-color: transparent;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .mobile-fab.active {
+    background: #2455c4;
+    color: #ffffff;
+    border-color: #2455c4;
+  }
+
+  .mobile-fab-events {
+    left: calc(12px + var(--safe-left));
+  }
+
+  .mobile-fab-filters {
+    right: calc(12px + var(--safe-right));
+  }
+
+  /* ===== Mobile backdrop ===== */
+  .mobile-backdrop {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 14;
+    background: rgba(0, 0, 0, 0.25);
     -webkit-tap-highlight-color: transparent;
   }
 
-  /* Drag handle indicator */
-  .overlay-events-header::before {
-    content: "";
-    display: block;
-    width: 36px;
-    height: 4px;
-    background: #c6d5f4;
-    border-radius: 2px;
-    margin: 0 auto 10px;
+  /* ===== Mobile popup (shared) ===== */
+  .mobile-popup {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    z-index: 15;
+    border-radius: 16px;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
   }
 
-  /* Show close button in sidebar header on mobile */
-  .sidebar-close {
+  .mobile-popup.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  /* Events popup: bottom-left, grows upward */
+  .mobile-popup-events {
+    left: calc(12px + var(--safe-left));
+    bottom: calc(76px + var(--safe-bottom));
+    width: calc(100vw - 24px - var(--safe-left) - var(--safe-right));
+    max-height: 60vh;
+  }
+
+  /* Filters popup: bottom-right, grows upward */
+  .mobile-popup-filters {
+    right: calc(12px + var(--safe-right));
+    bottom: calc(76px + var(--safe-bottom));
+    width: calc(100vw - 24px - var(--safe-left) - var(--safe-right));
+    max-height: 50vh;
+  }
+
+  .mobile-popup-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(214, 228, 255, 0.4);
+    flex-shrink: 0;
+  }
+
+  .mobile-popup-header h2 {
+    margin: 0;
+    font-size: 16px;
+  }
+
+  .mobile-popup-header button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -483,48 +498,115 @@ body {
     font-size: 18px;
     color: #48618d;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mobile-popup .event-count {
+    padding: 0 16px 8px;
+  }
+
+  /* ===== Mobile card carousel ===== */
+  .mobile-card-carousel {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .carousel-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex-shrink: 0;
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  /* Hide desktop sidebar toggle on mobile */
-  .sidebar-toggle {
-    display: none;
-  }
-
-  /* Mobile-only open button when sheet is collapsed */
-  .mobile-events-toggle {
-    position: absolute;
-    bottom: calc(72px + var(--safe-bottom));
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 9;
-    background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(214, 228, 255, 0.6);
-    border-radius: 999px;
-    padding: 8px 16px;
-    font-size: 13px;
-    font-weight: 500;
+    width: 40px;
+    border: none;
+    background: transparent;
     color: #2455c4;
+    font-size: 32px;
     cursor: pointer;
-    box-shadow: 0 4px 16px rgba(24, 48, 84, 0.12);
-    min-height: 40px;
-    white-space: nowrap;
     -webkit-tap-highlight-color: transparent;
+    transition: background 0.15s;
   }
 
-  .event-list button {
-    padding: 12px;
+  .carousel-arrow:active {
+    background: rgba(36, 85, 196, 0.08);
+  }
+
+  .carousel-arrow:disabled {
+    color: #c6d5f4;
+    cursor: default;
+  }
+
+  .carousel-arrow-left {
+    border-right: 1px solid rgba(214, 228, 255, 0.3);
+  }
+
+  .carousel-arrow-right {
+    border-left: 1px solid rgba(214, 228, 255, 0.3);
+  }
+
+  .mobile-event-card {
+    flex: 1;
+    padding: 16px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .mobile-event-card h3 {
+    margin: 6px 0 4px;
+    font-size: 16px;
+  }
+
+  .mobile-card-time {
+    margin: 0 0 8px;
+    font-size: 13px;
+    color: #4d638b;
+  }
+
+  .mobile-event-card ul {
+    padding-left: 16px;
+    font-size: 13px;
+    margin: 8px 0;
+  }
+
+  .mobile-event-card a {
+    display: inline-block;
+    margin-top: 4px;
+    color: #2455c4;
+    font-size: 13px;
+  }
+
+  /* Mobile filter controls */
+  .mobile-filter-controls {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .mobile-filter-controls .control {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 13px;
+  }
+
+  .mobile-filter-controls .control select,
+  .mobile-filter-controls .control input {
+    border: 1px solid #c6d5f4;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font: inherit;
+    font-size: 16px;
+    background: #ffffff;
+    color: #1c2431;
     min-height: 48px;
   }
 
-  .event-detail {
-    max-height: 50%;
-  }
-
-  .status button {
+  .mobile-popup .status button {
     min-height: 40px;
     padding: 8px 16px;
   }
@@ -532,15 +614,24 @@ body {
 
 /* ===== Extra small phones: <= 380px ===== */
 @media (max-width: 380px) {
-  .overlay-top {
-    padding: 10px 12px;
+  .overlay-timeline {
+    left: 64px;
+    right: 64px;
+    padding: 8px 12px;
   }
 
   .timeline-track label {
-    font-size: 14px;
+    font-size: 12px;
   }
 
-  .overlay-events {
-    max-height: 50vh;
+  .mobile-fab {
+    width: 46px;
+    height: 46px;
+    font-size: 20px;
+  }
+
+  .mobile-popup-events,
+  .mobile-popup-filters {
+    max-height: 55vh;
   }
 }
