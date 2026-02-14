@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { MapViewport } from "./map/MapViewport";
 import { MapMode } from "./map/types";
 
@@ -26,6 +26,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "/api";
 const TIMELINE_MIN_YEAR = -3500;
 const TIMELINE_MAX_YEAR = 2026;
 const WINDOW_SIZE = 50;
+const MOBILE_BREAKPOINT = 768;
 
 const formatYear = (value: number) => {
   if (value < 0) {
@@ -45,7 +46,24 @@ const fetchJson = async <T,>(path: string, signal?: AbortSignal): Promise<T> => 
   return (await response.json()) as T;
 };
 
+const useIsMobile = () => {
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== "undefined" ? window.innerWidth <= MOBILE_BREAKPOINT : false
+  );
+
+  useEffect(() => {
+    const mql = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mql.addEventListener("change", handler);
+    setIsMobile(mql.matches);
+    return () => mql.removeEventListener("change", handler);
+  }, []);
+
+  return isMobile;
+};
+
 export const App = () => {
+  const isMobile = useIsMobile();
   const [mode, setMode] = useState<MapMode>("maplibre");
   const [activeYear, setActiveYear] = useState(1450);
   const [events, setEvents] = useState<EventRecord[]>([]);
@@ -60,7 +78,13 @@ export const App = () => {
   const [eventsError, setEventsError] = useState<string | null>(null);
   const [regionsError, setRegionsError] = useState<string | null>(null);
   const [reloadToken, setReloadToken] = useState(0);
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(!isMobile);
+  const [filtersExpanded, setFiltersExpanded] = useState(false);
+
+  // Close sidebar when switching to mobile, open when switching to desktop
+  useEffect(() => {
+    setSidebarOpen(!isMobile);
+  }, [isMobile]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -173,6 +197,19 @@ export const App = () => {
   const hasRegionError = Boolean(regionsError);
   const isAnyLoading = isLoadingEvents || isLoadingRegions;
 
+  const handleEventSelect = useCallback((eventId: number) => {
+    setSelectedEventId(eventId);
+    if (isMobile) {
+      setSidebarOpen(true);
+    }
+  }, [isMobile]);
+
+  const handleMobileHeaderClick = useCallback(() => {
+    if (isMobile) {
+      setSidebarOpen((v) => !v);
+    }
+  }, [isMobile]);
+
   return (
     <div className="app-root">
       {/* Fullscreen map layer */}
@@ -189,7 +226,7 @@ export const App = () => {
             timeEnd: e.timeEnd
           }))}
           selectedEventId={selectedEventId}
-          onEventSelect={setSelectedEventId}
+          onEventSelect={handleEventSelect}
           flyToLocation={flyToLocation}
         />
       </div>
@@ -212,7 +249,7 @@ export const App = () => {
         </button>
       </div>
 
-      {/* Timeline + Filters overlay — top center */}
+      {/* Timeline + Filters overlay */}
       <div className="overlay-top">
         <div className="timeline-track">
           <label htmlFor="active-year">
@@ -228,7 +265,18 @@ export const App = () => {
             value={activeYear}
           />
         </div>
-        <div className="filter-row">
+
+        {/* Mobile: toggle button for filters */}
+        <button
+          className="filter-toggle"
+          onClick={() => setFiltersExpanded((v) => !v)}
+          type="button"
+        >
+          Filters
+          <span className={`chevron ${filtersExpanded ? "expanded" : ""}`}>{"\u25BC"}</span>
+        </button>
+
+        <div className={`filter-row ${filtersExpanded ? "expanded" : ""}`}>
           <label className="control">
             Category
             <select
@@ -267,7 +315,7 @@ export const App = () => {
         {hasRegionError && <p className="status error">Region error: {regionsError}</p>}
       </div>
 
-      {/* Sidebar toggle button */}
+      {/* Desktop: sidebar toggle button */}
       <button
         className={`sidebar-toggle ${sidebarOpen ? "open" : ""}`}
         onClick={() => setSidebarOpen((v) => !v)}
@@ -277,11 +325,30 @@ export const App = () => {
         {sidebarOpen ? "\u25C0" : "\u25B6"}
       </button>
 
-      {/* Events sidebar — left side */}
+      {/* Events panel — sidebar on desktop, bottom sheet on mobile */}
       <aside className={`overlay-events ${sidebarOpen ? "" : "collapsed"}`}>
-        <div className="overlay-events-header">
-          <h2>Events</h2>
-          <p className="event-count">{filteredEvents.length} events in view</p>
+        <div
+          className="overlay-events-header"
+          onClick={handleMobileHeaderClick}
+          role={isMobile ? "button" : undefined}
+          tabIndex={isMobile ? 0 : undefined}
+          onKeyDown={isMobile ? (e) => { if (e.key === "Enter" || e.key === " ") handleMobileHeaderClick(); } : undefined}
+        >
+          <div className="overlay-events-header-text">
+            <h2>Events</h2>
+            <p className="event-count">{filteredEvents.length} events in view</p>
+          </div>
+          <button
+            className="sidebar-close"
+            onClick={(e) => {
+              e.stopPropagation();
+              setSidebarOpen(false);
+            }}
+            type="button"
+            aria-label="Close event panel"
+          >
+            {"\u2715"}
+          </button>
         </div>
 
         {isAnyLoading && <p className="status loading">Loading...</p>}
