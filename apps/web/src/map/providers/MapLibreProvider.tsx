@@ -28,20 +28,23 @@ const CATEGORY_ICONS: Record<string, string> = {
   religion: "M7 1v3H4v2h3v8h2V6h3V4H9V1H7z"
 };
 
+let markerIdCounter = 0;
+
 const createMarkerSvg = (category: string, isSelected: boolean): string => {
   const color = CATEGORY_COLORS[category] ?? DEFAULT_COLOR;
   const iconPath = CATEGORY_ICONS[category] ?? CATEGORY_ICONS.civilization;
   const size = isSelected ? 40 : 32;
   const pinHeight = isSelected ? 48 : 40;
   const r = size / 2;
+  const filterId = `ms${markerIdCounter++}`;
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${pinHeight}" viewBox="0 0 ${size} ${pinHeight}">
     <defs>
-      <filter id="s" x="-20%" y="-10%" width="140%" height="140%">
+      <filter id="${filterId}" x="-20%" y="-10%" width="140%" height="140%">
         <feDropShadow dx="0" dy="1" stdDeviation="${isSelected ? 3 : 2}" flood-opacity="${isSelected ? 0.4 : 0.25}"/>
       </filter>
     </defs>
-    <g filter="url(#s)">
+    <g filter="url(#${filterId})">
       <path d="M${r} ${pinHeight - 2} L${r - 6} ${size - 4} A${r - 2} ${r - 2} 0 1 1 ${r + 6} ${size - 4} Z" fill="${color}" stroke="#fff" stroke-width="${isSelected ? 2.5 : 1.5}"/>
       <g transform="translate(${(size - 16) / 2}, ${(size - 16) / 2 - 2})">
         <path d="${iconPath}" fill="#fff" fill-opacity="0.95"/>
