@@ -86,6 +86,8 @@ export const App = () => {
   const [sidebarOpen, setSidebarOpen] = useState(!isMobile);
   const [mobileEventsOpen, setMobileEventsOpen] = useState(false);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [showNoEventsToast, setShowNoEventsToast] = useState(false);
+  const noEventsTimerRef = useRef<ReturnType<typeof setTimeout>>(null);
 
   // Close panels when switching between mobile/desktop
   useEffect(() => {
@@ -187,6 +189,18 @@ export const App = () => {
       .sort((a, b) => a.timeStart - b.timeStart);
   }, [events, keyword, regionFilter]);
 
+  // Show a centered map toast when no events are found
+  useEffect(() => {
+    if (noEventsTimerRef.current) clearTimeout(noEventsTimerRef.current);
+    if (!isLoadingEvents && !eventsError && filteredEvents.length === 0) {
+      setShowNoEventsToast(true);
+      noEventsTimerRef.current = setTimeout(() => setShowNoEventsToast(false), 3000);
+    } else {
+      setShowNoEventsToast(false);
+    }
+    return () => { if (noEventsTimerRef.current) clearTimeout(noEventsTimerRef.current); };
+  }, [isLoadingEvents, eventsError, filteredEvents.length]);
+
   useEffect(() => {
     if (filteredEvents.length === 0) {
       setSelectedEventId(null);
@@ -276,6 +290,13 @@ export const App = () => {
         <div className="map-loading-overlay">
           <div className="map-loading-spinner" />
           <span>{t("loading")}</span>
+        </div>
+      )}
+
+      {/* No-events toast */}
+      {showNoEventsToast && (
+        <div className="map-toast-no-events">
+          {t("noEvents")}
         </div>
       )}
 
