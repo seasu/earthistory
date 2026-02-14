@@ -67,9 +67,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q28525",
     lat: 31.32,
     lng: 45.64,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Ur-Nassiriyah.jpg/320px-Ur-Nassiriyah.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Sumer"
   },
   {
     id: 2,
@@ -88,9 +88,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q21578",
     lat: 26.56,
     lng: 31.69,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Narmer_Palette.jpg/220px-Narmer_Palette.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Narmer"
   },
   {
     id: 3,
@@ -109,9 +109,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q37200",
     lat: 29.98,
     lng: 31.13,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Kheops-Pyramid.jpg/320px-Kheops-Pyramid.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Great_Pyramid_of_Giza"
   },
   {
     id: 4,
@@ -130,9 +130,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q48435",
     lat: 27.33,
     lng: 68.14,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Dholavira1.jpg/320px-Dholavira1.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Indus_Valley_Civilisation"
   },
   {
     id: 5,
@@ -151,9 +151,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q93100",
     lat: 32.54,
     lng: 44.42,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/P1050763_Louvre_code_Hammurabi_face_rwk.JPG/220px-P1050763_Louvre_code_Hammurabi_face_rwk.JPG",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Code_of_Hammurabi"
   },
   {
     id: 6,
@@ -172,9 +172,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q135364",
     lat: 17.98,
     lng: -95.35,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Olmec_Head_from_San_Lorenzo%2C_Veracruz.jpg/220px-Olmec_Head_from_San_Lorenzo%2C_Veracruz.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Olmecs"
   },
   {
     id: 7,
@@ -193,9 +193,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q190903",
     lat: 28.61,
     lng: 77.21,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Rigveda_MS2097.jpg/320px-Rigveda_MS2097.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Vedic_period"
   },
   {
     id: 8,
@@ -214,9 +214,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q60032",
     lat: 36.12,
     lng: 114.35,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Shang_dynasty_inscribed_tortoise_plastron.jpg/220px-Shang_dynasty_inscribed_tortoise_plastron.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Oracle_bone"
   },
   {
     id: 9,
@@ -235,9 +235,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q82064",
     lat: 39.96,
     lng: 26.24,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Procession_trojan_horse_BM_GR1899.12-28.1.jpg/320px-Procession_trojan_horse_BM_GR1899.12-28.1.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Trojan_War"
   },
   {
     id: 10,
@@ -256,9 +256,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q858810",
     lat: 37.97,
     lng: 23.72,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Hattusa.liongate.jpg/320px-Hattusa.liongate.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Late_Bronze_Age_collapse"
   },
   {
     id: 11,
@@ -277,9 +277,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q187943",
     lat: 18.55,
     lng: 31.82,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Nubian_pyramids_2.jpg/320px-Nubian_pyramids_2.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Kingdom_of_Kush"
   },
   {
     id: 12,
@@ -298,9 +298,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q184588",
     lat: 33.89,
     lng: 35.50,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Ph%C3%B6nizisch-5765.svg/220px-Ph%C3%B6nizisch-5765.svg.png",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Phoenician_alphabet"
   },
   {
     id: 13,
@@ -319,9 +319,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q36785",
     lat: 34.26,
     lng: 108.94,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Zhougongdanbig.jpg/220px-Zhougongdanbig.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Zhou_dynasty"
   },
   {
     id: 14,
@@ -340,9 +340,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q41137",
     lat: 36.36,
     lng: 43.16,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Human_headed_winged_bull_facing.jpg/263px-Human_headed_winged_bull_facing.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Neo-Assyrian_Empire"
   },
   {
     id: 15,
@@ -361,9 +361,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q220",
     lat: 41.90,
     lng: 12.50,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/She-wolf_suckles_Romulus_and_Remus.jpg/320px-She-wolf_suckles_Romulus_and_Remus.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Founding_of_Rome"
   },
 
   // ===== Classical (500 BCE – 500 CE) =====
@@ -384,9 +384,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q17167",
     lat: 41.90,
     lng: 12.50,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Roman_SPQR_banner.svg/220px-Roman_SPQR_banner.svg.png",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Roman_Republic"
   },
   {
     id: 17,
@@ -405,9 +405,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q9441",
     lat: 27.48,
     lng: 83.28,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Buddha_in_Sarnath_Museum_%28Dhammajak_Mutra%29.jpg/220px-Buddha_in_Sarnath_Museum_%28Dhammajak_Mutra%29.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Gautama_Buddha"
   },
   {
     id: 18,
@@ -426,9 +426,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q4604",
     lat: 35.60,
     lng: 116.99,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Konfuzius-1770.jpg/220px-Konfuzius-1770.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Confucius"
   },
   {
     id: 19,
@@ -447,9 +447,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q152568",
     lat: 38.11,
     lng: 23.97,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Battle_of_Marathon_Initial_Situation.png/320px-Battle_of_Marathon_Initial_Situation.png",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Battle_of_Marathon"
   },
   {
     id: 20,
@@ -468,9 +468,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q8487",
     lat: 37.97,
     lng: 23.73,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/The_Parthenon_in_Athens.jpg/320px-The_Parthenon_in_Athens.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Classical_Athens"
   },
   {
     id: 21,
@@ -489,9 +489,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q8409",
     lat: 40.52,
     lng: 22.97,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Alexander_the_Great_mosaic.jpg/220px-Alexander_the_Great_mosaic.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Alexander_the_Great"
   },
   {
     id: 22,
@@ -510,9 +510,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q9580",
     lat: 25.61,
     lng: 85.14,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Ashoka_Chakra.svg/220px-Ashoka_Chakra.svg.png",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Ashoka"
   },
   {
     id: 23,
@@ -531,9 +531,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q12501",
     lat: 40.43,
     lng: 116.57,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/The_Great_Wall_of_China_at_Jinshanling-edit.jpg/320px-The_Great_Wall_of_China_at_Jinshanling-edit.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Great_Wall_of_China"
   },
   {
     id: 24,
@@ -552,9 +552,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q7183",
     lat: 34.26,
     lng: 108.94,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Terracotta_Army%2C_View_of_Pit_1.jpg/320px-Terracotta_Army%2C_View_of_Pit_1.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Qin_dynasty"
   },
   {
     id: 25,
@@ -573,9 +573,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q7209",
     lat: 34.26,
     lng: 108.94,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Jade_burial_suit.jpg/320px-Jade_burial_suit.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Han_dynasty"
   },
   {
     id: 26,
@@ -594,9 +594,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q7781",
     lat: 40.0,
     lng: 65.0,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Silk_Road_in_the_I_century_AD_-_en.svg/320px-Silk_Road_in_the_I_century_AD_-_en.svg.png",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Silk_Road"
   },
   {
     id: 27,
@@ -615,9 +615,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q1048",
     lat: 41.90,
     lng: 12.50,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Vincenzo_Camuccini_-_La_morte_di_Cesare.jpg/320px-Vincenzo_Camuccini_-_La_morte_di_Cesare.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Assassination_of_Julius_Caesar"
   },
   {
     id: 28,
@@ -636,9 +636,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q302",
     lat: 31.70,
     lng: 35.21,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Spas_vsederzhitel_sinay.jpg/220px-Spas_vsederzhitel_sinay.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Jesus"
   },
   {
     id: 29,
@@ -657,9 +657,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q2256",
     lat: 40.75,
     lng: 14.49,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Pompeii-Forum.jpg/320px-Pompeii-Forum.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Pompeii"
   },
   {
     id: 30,
@@ -678,9 +678,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q183689",
     lat: 14.13,
     lng: 38.73,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Stela_aksum.jpg/220px-Stela_aksum.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Kingdom_of_Aksum"
   },
   {
     id: 31,
@@ -699,9 +699,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q28567",
     lat: 17.22,
     lng: -89.62,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Chichen_Itza_3.jpg/320px-Chichen_Itza_3.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Maya_civilization"
   },
   {
     id: 32,
@@ -720,9 +720,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q83341",
     lat: 45.46,
     lng: 9.19,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Constantine_the_Great_mosaic.jpg/220px-Constantine_the_Great_mosaic.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Edict_of_Milan"
   },
   {
     id: 33,
@@ -741,9 +741,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q240231",
     lat: 25.32,
     lng: 83.01,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Gupta_Empire_320_-_550_ad.png/320px-Gupta_Empire_320_-_550_ad.png",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Gupta_Empire"
   },
   {
     id: 34,
@@ -762,9 +762,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q42834",
     lat: 41.90,
     lng: 12.50,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Invasions_of_the_Roman_Empire_1.png/320px-Invasions_of_the_Roman_Empire_1.png",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Fall_of_the_Western_Roman_Empire"
   },
 
   // ===== Medieval (500 CE – 1500 CE) =====
@@ -785,9 +785,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q9683",
     lat: 34.26,
     lng: 108.94,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Tang_dynasty1.PNG/320px-Tang_dynasty1.PNG",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Tang_dynasty"
   },
   {
     id: 36,
@@ -806,9 +806,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q28856",
     lat: 24.47,
     lng: 39.61,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Al-Masjid_AL-Nabawi_in_Madinah_-_Saudi_Arabia.jpg/320px-Al-Masjid_AL-Nabawi_in_Madinah_-_Saudi_Arabia.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Hegira"
   },
   {
     id: 37,
@@ -827,9 +827,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q181862",
     lat: 55.65,
     lng: -1.67,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Gokstadskipet1.jpg/320px-Gokstadskipet1.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Viking_Age"
   },
   {
     id: 38,
@@ -848,9 +848,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q7462",
     lat: 34.75,
     lng: 114.35,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Song_Dynasty_Porcelain_Bottle.jpg/220px-Song_Dynasty_Porcelain_Bottle.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Song_dynasty"
   },
   {
     id: 39,
@@ -869,9 +869,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q175117",
     lat: 50.91,
     lng: 0.49,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Bayeux_Tapestry_scene57_Harold_death.jpg/320px-Bayeux_Tapestry_scene57_Harold_death.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Norman_Conquest"
   },
   {
     id: 40,
@@ -890,9 +890,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q34917",
     lat: 31.77,
     lng: 35.23,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Counquest_of_Jeusalem_%281099%29.jpg/320px-Counquest_of_Jeusalem_%281099%29.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Siege_of_Jerusalem_(1099)"
   },
   {
     id: 41,
@@ -911,9 +911,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q134817",
     lat: -20.27,
     lng: 30.93,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Great-Zimbabwe.jpg/320px-Great-Zimbabwe.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Great_Zimbabwe"
   },
   {
     id: 42,
@@ -932,9 +932,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q43473",
     lat: 13.41,
     lng: 103.87,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Angkor_Wat.jpg/320px-Angkor_Wat.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Angkor_Wat"
   },
   {
     id: 43,
@@ -953,9 +953,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q720",
     lat: 47.92,
     lng: 106.91,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/YuanEmperorAlbumGenghisPortrait.jpg/220px-YuanEmperorAlbumGenghisPortrait.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Genghis_Khan"
   },
   {
     id: 44,
@@ -974,9 +974,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q107679",
     lat: 51.51,
     lng: -0.13,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Magna_Carta_%28British_Library_Cotton_MS_Augustus_II.106%29.jpg/220px-Magna_Carta_%28British_Library_Cotton_MS_Augustus_II.106%29.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Magna_Carta"
   },
   {
     id: 45,
@@ -995,9 +995,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q13695",
     lat: 19.43,
     lng: -99.13,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/The_Conquest_of_Tenochtitlan.jpg/320px-The_Conquest_of_Tenochtitlan.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Tenochtitlan"
   },
   {
     id: 46,
@@ -1016,9 +1016,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q42005",
     lat: 45.44,
     lng: 12.34,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Plague_in_Ashod.jpg/320px-Plague_in_Ashod.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Black_Death"
   },
   {
     id: 47,
@@ -1037,9 +1037,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q28573",
     lat: -13.52,
     lng: -71.97,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Machu_Picchu%2C_Peru.jpg/320px-Machu_Picchu%2C_Peru.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Inca_Empire"
   },
   {
     id: 48,
@@ -1058,9 +1058,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.geonames.org/",
     lat: 49.99,
     lng: 8.27,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Printing3_Walk_of_Ideas_Berlin.JPG/220px-Printing3_Walk_of_Ideas_Berlin.JPG",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Printing_press"
   },
   {
     id: 49,
@@ -1079,9 +1079,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q131244",
     lat: 41.01,
     lng: 28.98,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/MohamedIIentry.jpg/320px-MohamedIIentry.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Fall_of_Constantinople"
   },
   {
     id: 50,
@@ -1100,9 +1100,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q211381",
     lat: 16.77,
     lng: -3.01,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/SONGHAI_empire_map.PNG/320px-SONGHAI_empire_map.PNG",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Songhai_Empire"
   },
 
   // ===== Early Modern (1500 – 1800) =====
@@ -1123,9 +1123,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q7316",
     lat: 24.06,
     lng: -74.53,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/PuertodelaNavidad.jpg/320px-PuertodelaNavidad.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Christopher_Columbus"
   },
   {
     id: 52,
@@ -1144,9 +1144,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q12674",
     lat: 51.86,
     lng: 11.70,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Lucas_Cranach_d.%C3%84._-_Martin_Luther%2C_1528_%28Veste_Coburg%29.jpg/220px-Lucas_Cranach_d.%C3%84._-_Martin_Luther%2C_1528_%28Veste_Coburg%29.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Reformation"
   },
   {
     id: 53,
@@ -1165,9 +1165,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q8383",
     lat: -33.44,
     lng: -70.65,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Magellan_Elcano_Circumnavigation-en.svg/320px-Magellan_Elcano_Circumnavigation-en.svg.png",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Magellan_expedition"
   },
   {
     id: 54,
@@ -1186,9 +1186,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q33296",
     lat: 27.18,
     lng: 78.04,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Taj_Mahal_%28Edited%29.jpeg/320px-Taj_Mahal_%28Edited%29.jpeg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Mughal_Empire"
   },
   {
     id: 55,
@@ -1207,9 +1207,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q46624",
     lat: 35.68,
     lng: 139.69,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Tokugawa_Ieyasu2.JPG/220px-Tokugawa_Ieyasu2.JPG",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Tokugawa_shogunate"
   },
   {
     id: 56,
@@ -1228,9 +1228,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q307",
     lat: 43.77,
     lng: 11.25,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Justus_Sustermans_-_Portrait_of_Galileo_Galilei%2C_1636.jpg/220px-Justus_Sustermans_-_Portrait_of_Galileo_Galilei%2C_1636.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Galileo_Galilei"
   },
   {
     id: 57,
@@ -1249,9 +1249,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q83152",
     lat: 51.51,
     lng: -0.13,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/The_Battle_of_Marston_Moor%2C_1644.jpg/320px-The_Battle_of_Marston_Moor%2C_1644.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/English_Civil_War"
   },
   {
     id: 58,
@@ -1270,9 +1270,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q428",
     lat: 52.21,
     lng: 0.12,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/GodfreyKneller-IsaacNewton-1689.jpg/220px-GodfreyKneller-IsaacNewton-1689.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Isaac_Newton"
   },
   {
     id: 59,
@@ -1291,9 +1291,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q81647",
     lat: 6.50,
     lng: 3.39,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Slaveshipposter_%28cropped%29.jpg/220px-Slaveshipposter_%28cropped%29.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Atlantic_slave_trade"
   },
   {
     id: 60,
@@ -1312,9 +1312,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q2269",
     lat: 53.48,
     lng: -2.24,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Spinning_jenny.jpg/320px-Spinning_jenny.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Industrial_Revolution"
   },
   {
     id: 61,
@@ -1333,9 +1333,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q127989",
     lat: 39.95,
     lng: -75.15,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/United_States_Declaration_of_Independence.jpg/220px-United_States_Declaration_of_Independence.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/United_States_Declaration_of_Independence"
   },
   {
     id: 62,
@@ -1354,9 +1354,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q6534",
     lat: 48.86,
     lng: 2.35,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Eug%C3%A8ne_Delacroix_-_La_libert%C3%A9_guidant_le_peuple.jpg/320px-Eug%C3%A8ne_Delacroix_-_La_libert%C3%A9_guidant_le_peuple.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/French_Revolution"
   },
 
   // ===== Modern (1800 – 2026) =====
@@ -1377,9 +1377,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q46740",
     lat: 18.97,
     lng: -72.28,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Haitian_Revolution.jpg/320px-Haitian_Revolution.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Haitian_Revolution"
   },
   {
     id: 64,
@@ -1398,9 +1398,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q78994",
     lat: 48.86,
     lng: 2.35,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Jacques-Louis_David_-_The_Emperor_Napoleon_in_His_Study_at_the_Tuileries_-_Google_Art_Project.jpg/220px-Jacques-Louis_David_-_The_Emperor_Napoleon_in_His_Study_at_the_Tuileries_-_Google_Art_Project.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Napoleon"
   },
   {
     id: 65,
@@ -1419,9 +1419,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q2929380",
     lat: 51.51,
     lng: -0.13,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Official_medallion_of_the_British_Anti-Slavery_Society_%281795%29.jpg/220px-Official_medallion_of_the_British_Anti-Slavery_Society_%281795%29.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Slavery_Abolition_Act_1833"
   },
   {
     id: 66,
@@ -1440,9 +1440,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q1345",
     lat: 51.51,
     lng: -0.13,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Charles_Darwin_seated_crop.jpg/220px-Charles_Darwin_seated_crop.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Charles_Darwin"
   },
   {
     id: 67,
@@ -1461,9 +1461,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q8676",
     lat: 38.91,
     lng: -77.04,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Battle_of_Gettysburg%2C_by_Currier_and_Ives.png/320px-Battle_of_Gettysburg%2C_by_Currier_and_Ives.png",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/American_Civil_War"
   },
   {
     id: 68,
@@ -1482,9 +1482,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q193292",
     lat: 35.68,
     lng: 139.69,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Meiji_Emperor.jpg/220px-Meiji_Emperor.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Meiji_Restoration"
   },
   {
     id: 69,
@@ -1503,9 +1503,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q154764",
     lat: 52.52,
     lng: 13.41,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Afrikakonferenz.jpg/320px-Afrikakonferenz.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Scramble_for_Africa"
   },
   {
     id: 70,
@@ -1524,9 +1524,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q361",
     lat: 50.85,
     lng: 4.35,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/WWImontage.jpg/280px-WWImontage.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/World_War_I"
   },
   {
     id: 71,
@@ -1545,9 +1545,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q8729",
     lat: 59.93,
     lng: 30.32,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Stormningen_av_vinterpalatset.jpg/320px-Stormningen_av_vinterpalatset.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Russian_Revolution"
   },
   {
     id: 72,
@@ -1566,9 +1566,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q362",
     lat: 52.52,
     lng: 13.41,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Infobox_collance_for_WWII.PNG/280px-Infobox_collance_for_WWII.PNG",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/World_War_II"
   },
   {
     id: 73,
@@ -1587,9 +1587,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q129286",
     lat: 28.61,
     lng: 77.21,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Mahatma-Gandhi%2C_studio%2C_1931.jpg/220px-Mahatma-Gandhi%2C_studio%2C_1931.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Indian_independence_movement"
   },
   {
     id: 74,
@@ -1608,9 +1608,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q148",
     lat: 39.91,
     lng: 116.40,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Mao_Zedong_in_1959_%28cropped%29.jpg/220px-Mao_Zedong_in_1959_%28cropped%29.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Chinese_Communist_Revolution"
   },
   {
     id: 75,
@@ -1629,9 +1629,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q43653",
     lat: 28.57,
     lng: -80.65,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Aldrin_Apollo_11_original.jpg/220px-Aldrin_Apollo_11_original.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Apollo_11"
   },
   {
     id: 76,
@@ -1650,9 +1650,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q11639",
     lat: 52.52,
     lng: 13.41,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Thefalloftheberlinwall1989.JPG/320px-Thefalloftheberlinwall1989.JPG",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Fall_of_the_Berlin_Wall"
   },
   {
     id: 77,
@@ -1671,9 +1671,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q466",
     lat: 46.23,
     lng: 6.05,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/WWW_logo_by_Robert_Cailliau.svg/220px-WWW_logo_by_Robert_Cailliau.svg.png",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/World_Wide_Web"
   },
   {
     id: 78,
@@ -1692,9 +1692,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q37531",
     lat: -33.93,
     lng: 18.42,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Nelson_Mandela_1994.jpg/220px-Nelson_Mandela_1994.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Nelson_Mandela"
   },
   {
     id: 79,
@@ -1713,9 +1713,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q20124",
     lat: 38.99,
     lng: -77.10,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/DNA_Overview2.png/220px-DNA_Overview2.png",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Human_Genome_Project"
   },
   {
     id: 80,
@@ -1734,9 +1734,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q174698",
     lat: 36.80,
     lng: 10.18,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Tahrir_Square_on_February11.png/320px-Tahrir_Square_on_February11.png",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Arab_Spring"
   },
   {
     id: 81,
@@ -1755,9 +1755,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q2977",
     lat: 48.45,
     lng: 1.49,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Chartres_Cathedral.jpg/320px-Chartres_Cathedral.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Chartres_Cathedral"
   },
   {
     id: 82,
@@ -1776,9 +1776,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q664609",
     lat: -41.29,
     lng: 174.78,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Polynesian_Migration.svg/320px-Polynesian_Migration.svg.png",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Polynesian_navigation"
   },
   {
     id: 83,
@@ -1797,9 +1797,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q36028",
     lat: 31.40,
     lng: 45.97,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Sumerian_26th_c_Adab.jpg/220px-Sumerian_26th_c_Adab.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Cuneiform"
   },
   {
     id: 84,
@@ -1818,9 +1818,9 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q8752",
     lat: 22.54,
     lng: 114.06,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Shenzhen_CBD_2021.jpg/320px-Shenzhen_CBD_2021.jpg",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Chinese_economic_reform"
   },
   {
     id: 85,
@@ -1839,8 +1839,8 @@ export const events: EventRecord[] = [
     sourceUrl: "https://www.wikidata.org/wiki/Q81068910",
     lat: 30.59,
     lng: 114.31,
-    imageUrl: null,
-    imageAttribution: null,
-    wikipediaUrl: null
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/SARS-CoV-2_without_background.png/220px-SARS-CoV-2_without_background.png",
+    imageAttribution: "Wikimedia Commons",
+    wikipediaUrl: "https://en.wikipedia.org/wiki/COVID-19_pandemic"
   }
 ];
