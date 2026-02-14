@@ -259,6 +259,14 @@ export const App = () => {
         />
       </div>
 
+      {/* Map loading indicator */}
+      {isLoadingEvents && (
+        <div className="map-loading-overlay">
+          <div className="map-loading-spinner" />
+          <span>{t("loading")}</span>
+        </div>
+      )}
+
       {/* Top-right controls: mode switch + language */}
       <div className="overlay-mode-switch">
         <button
