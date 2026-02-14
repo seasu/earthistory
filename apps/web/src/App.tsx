@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { MapViewport } from "./map/MapViewport";
 import { MapMode } from "./map/types";
 import { useLocale } from "./i18n";
@@ -62,7 +62,15 @@ export const App = () => {
   const isMobile = useIsMobile();
   const { locale, setLocale, t, formatYear, tCategory, tPrecision } = useLocale();
   const [mode, setMode] = useState<MapMode>("maplibre");
+  const [sliderYear, setSliderYear] = useState(1450);
   const [activeYear, setActiveYear] = useState(1450);
+  const debounceRef = useRef<ReturnType<typeof setTimeout>>(null);
+
+  useEffect(() => {
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => setActiveYear(sliderYear), 300);
+    return () => { if (debounceRef.current) clearTimeout(debounceRef.current); };
+  }, [sliderYear]);
   const [events, setEvents] = useState<EventRecord[]>([]);
   const [regions, setRegions] = useState<string[]>([]);
   const [knownCategories, setKnownCategories] = useState<string[]>([]);
@@ -297,16 +305,16 @@ export const App = () => {
       <div className="overlay-timeline">
         <div className="timeline-track">
           <label htmlFor="active-year">
-            <strong>{formatYear(activeYear)}</strong>
+            <strong>{formatYear(sliderYear)}</strong>
             <span className="window-hint">{t("windowHint")}</span>
           </label>
           <input
             id="active-year"
             max={TIMELINE_MAX_YEAR}
             min={TIMELINE_MIN_YEAR}
-            onChange={(event) => setActiveYear(Number(event.target.value))}
+            onChange={(event) => setSliderYear(Number(event.target.value))}
             type="range"
-            value={activeYear}
+            value={sliderYear}
           />
         </div>
       </div>

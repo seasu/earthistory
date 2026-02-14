@@ -130,12 +130,6 @@ const queryEventsFromDb = async (
   const whereClause = conditions.length > 0 ? `WHERE ${conditions.join(" AND ")}` : "";
   const isZh = params.locale === "zh-TW";
 
-  const countResult = await pool.query(
-    `SELECT COUNT(*)::int AS total FROM events ${whereClause}`,
-    values
-  );
-  const total = countResult.rows[0]?.total ?? 0;
-
   const dataResult = await pool.query(
     `SELECT
       id,
@@ -178,7 +172,7 @@ const queryEventsFromDb = async (
     wikipediaUrl: row.wikipedia_url ?? null
   }));
 
-  return { total, items };
+  return { total: items.length, items };
 };
 
 const queryRegionsFromDb = async (
