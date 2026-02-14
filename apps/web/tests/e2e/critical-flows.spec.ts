@@ -13,6 +13,9 @@ type EventItem = {
   sourceUrl: string;
   lat: number;
   lng: number;
+  imageUrl: string | null;
+  imageAttribution: string | null;
+  wikipediaUrl: string | null;
 };
 
 const allEvents: EventItem[] = [
@@ -28,7 +31,10 @@ const allEvents: EventItem[] = [
     timeEnd: null,
     sourceUrl: "https://example.org/flood",
     lat: 31.32,
-    lng: 45.64
+    lng: 45.64,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 2,
@@ -42,7 +48,10 @@ const allEvents: EventItem[] = [
     timeEnd: null,
     sourceUrl: "https://example.org/constantinople",
     lat: 41.01,
-    lng: 28.98
+    lng: 28.98,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 3,
@@ -56,7 +65,10 @@ const allEvents: EventItem[] = [
     timeEnd: null,
     sourceUrl: "https://example.org/columbus",
     lat: 24.06,
-    lng: -74.53
+    lng: -74.53,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   }
 ];
 

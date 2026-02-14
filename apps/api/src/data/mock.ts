@@ -24,6 +24,9 @@ export type EventRecord = {
   sourceUrl: string;
   lat: number;
   lng: number;
+  imageUrl: string | null;
+  imageAttribution: string | null;
+  wikipediaUrl: string | null;
 };
 
 export const sources: SourceRecord[] = [
@@ -63,7 +66,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q28525",
     lat: 31.32,
-    lng: 45.64
+    lng: 45.64,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 2,
@@ -81,7 +87,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q21578",
     lat: 26.56,
-    lng: 31.69
+    lng: 31.69,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 3,
@@ -99,7 +108,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q37200",
     lat: 29.98,
-    lng: 31.13
+    lng: 31.13,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 4,
@@ -117,7 +129,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q48435",
     lat: 27.33,
-    lng: 68.14
+    lng: 68.14,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 5,
@@ -135,7 +150,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q93100",
     lat: 32.54,
-    lng: 44.42
+    lng: 44.42,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 6,
@@ -153,7 +171,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q135364",
     lat: 17.98,
-    lng: -95.35
+    lng: -95.35,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 7,
@@ -171,7 +192,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q190903",
     lat: 28.61,
-    lng: 77.21
+    lng: 77.21,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 8,
@@ -189,7 +213,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q60032",
     lat: 36.12,
-    lng: 114.35
+    lng: 114.35,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 9,
@@ -207,7 +234,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q82064",
     lat: 39.96,
-    lng: 26.24
+    lng: 26.24,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 10,
@@ -225,7 +255,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q858810",
     lat: 37.97,
-    lng: 23.72
+    lng: 23.72,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 11,
@@ -243,7 +276,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q187943",
     lat: 18.55,
-    lng: 31.82
+    lng: 31.82,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 12,
@@ -261,7 +297,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q184588",
     lat: 33.89,
-    lng: 35.50
+    lng: 35.50,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 13,
@@ -279,7 +318,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q36785",
     lat: 34.26,
-    lng: 108.94
+    lng: 108.94,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 14,
@@ -297,7 +339,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q41137",
     lat: 36.36,
-    lng: 43.16
+    lng: 43.16,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 15,
@@ -315,7 +360,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q220",
     lat: 41.90,
-    lng: 12.50
+    lng: 12.50,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
 
   // ===== Classical (500 BCE – 500 CE) =====
@@ -335,7 +383,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q17167",
     lat: 41.90,
-    lng: 12.50
+    lng: 12.50,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 17,
@@ -353,7 +404,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q9441",
     lat: 27.48,
-    lng: 83.28
+    lng: 83.28,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 18,
@@ -371,7 +425,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q4604",
     lat: 35.60,
-    lng: 116.99
+    lng: 116.99,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 19,
@@ -389,7 +446,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q152568",
     lat: 38.11,
-    lng: 23.97
+    lng: 23.97,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 20,
@@ -407,7 +467,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q8487",
     lat: 37.97,
-    lng: 23.73
+    lng: 23.73,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 21,
@@ -425,7 +488,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q8409",
     lat: 40.52,
-    lng: 22.97
+    lng: 22.97,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 22,
@@ -443,7 +509,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q9580",
     lat: 25.61,
-    lng: 85.14
+    lng: 85.14,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 23,
@@ -461,7 +530,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q12501",
     lat: 40.43,
-    lng: 116.57
+    lng: 116.57,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 24,
@@ -479,7 +551,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q7183",
     lat: 34.26,
-    lng: 108.94
+    lng: 108.94,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 25,
@@ -497,7 +572,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q7209",
     lat: 34.26,
-    lng: 108.94
+    lng: 108.94,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 26,
@@ -515,7 +593,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q7781",
     lat: 40.0,
-    lng: 65.0
+    lng: 65.0,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 27,
@@ -533,7 +614,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q1048",
     lat: 41.90,
-    lng: 12.50
+    lng: 12.50,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 28,
@@ -551,7 +635,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q302",
     lat: 31.70,
-    lng: 35.21
+    lng: 35.21,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 29,
@@ -569,7 +656,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q2256",
     lat: 40.75,
-    lng: 14.49
+    lng: 14.49,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 30,
@@ -587,7 +677,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q183689",
     lat: 14.13,
-    lng: 38.73
+    lng: 38.73,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 31,
@@ -605,7 +698,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q28567",
     lat: 17.22,
-    lng: -89.62
+    lng: -89.62,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 32,
@@ -623,7 +719,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q83341",
     lat: 45.46,
-    lng: 9.19
+    lng: 9.19,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 33,
@@ -641,7 +740,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q240231",
     lat: 25.32,
-    lng: 83.01
+    lng: 83.01,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 34,
@@ -659,7 +761,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q42834",
     lat: 41.90,
-    lng: 12.50
+    lng: 12.50,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
 
   // ===== Medieval (500 CE – 1500 CE) =====
@@ -679,7 +784,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q9683",
     lat: 34.26,
-    lng: 108.94
+    lng: 108.94,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 36,
@@ -697,7 +805,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q28856",
     lat: 24.47,
-    lng: 39.61
+    lng: 39.61,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 37,
@@ -715,7 +826,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q181862",
     lat: 55.65,
-    lng: -1.67
+    lng: -1.67,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 38,
@@ -733,7 +847,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q7462",
     lat: 34.75,
-    lng: 114.35
+    lng: 114.35,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 39,
@@ -751,7 +868,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q175117",
     lat: 50.91,
-    lng: 0.49
+    lng: 0.49,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 40,
@@ -769,7 +889,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q34917",
     lat: 31.77,
-    lng: 35.23
+    lng: 35.23,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 41,
@@ -787,7 +910,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q134817",
     lat: -20.27,
-    lng: 30.93
+    lng: 30.93,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 42,
@@ -805,7 +931,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q43473",
     lat: 13.41,
-    lng: 103.87
+    lng: 103.87,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 43,
@@ -823,7 +952,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q720",
     lat: 47.92,
-    lng: 106.91
+    lng: 106.91,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 44,
@@ -841,7 +973,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q107679",
     lat: 51.51,
-    lng: -0.13
+    lng: -0.13,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 45,
@@ -859,7 +994,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q13695",
     lat: 19.43,
-    lng: -99.13
+    lng: -99.13,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 46,
@@ -877,7 +1015,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q42005",
     lat: 45.44,
-    lng: 12.34
+    lng: 12.34,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 47,
@@ -895,7 +1036,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q28573",
     lat: -13.52,
-    lng: -71.97
+    lng: -71.97,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 48,
@@ -913,7 +1057,10 @@ export const events: EventRecord[] = [
     sourceId: 2,
     sourceUrl: "https://www.geonames.org/",
     lat: 49.99,
-    lng: 8.27
+    lng: 8.27,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 49,
@@ -931,7 +1078,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q131244",
     lat: 41.01,
-    lng: 28.98
+    lng: 28.98,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 50,
@@ -949,7 +1099,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q211381",
     lat: 16.77,
-    lng: -3.01
+    lng: -3.01,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
 
   // ===== Early Modern (1500 – 1800) =====
@@ -969,7 +1122,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q7316",
     lat: 24.06,
-    lng: -74.53
+    lng: -74.53,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 52,
@@ -987,7 +1143,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q12674",
     lat: 51.86,
-    lng: 11.70
+    lng: 11.70,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 53,
@@ -1005,7 +1164,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q8383",
     lat: -33.44,
-    lng: -70.65
+    lng: -70.65,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 54,
@@ -1023,7 +1185,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q33296",
     lat: 27.18,
-    lng: 78.04
+    lng: 78.04,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 55,
@@ -1041,7 +1206,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q46624",
     lat: 35.68,
-    lng: 139.69
+    lng: 139.69,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 56,
@@ -1059,7 +1227,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q307",
     lat: 43.77,
-    lng: 11.25
+    lng: 11.25,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 57,
@@ -1077,7 +1248,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q83152",
     lat: 51.51,
-    lng: -0.13
+    lng: -0.13,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 58,
@@ -1095,7 +1269,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q428",
     lat: 52.21,
-    lng: 0.12
+    lng: 0.12,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 59,
@@ -1113,7 +1290,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q81647",
     lat: 6.50,
-    lng: 3.39
+    lng: 3.39,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 60,
@@ -1131,7 +1311,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q2269",
     lat: 53.48,
-    lng: -2.24
+    lng: -2.24,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 61,
@@ -1149,7 +1332,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q127989",
     lat: 39.95,
-    lng: -75.15
+    lng: -75.15,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 62,
@@ -1167,7 +1353,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q6534",
     lat: 48.86,
-    lng: 2.35
+    lng: 2.35,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
 
   // ===== Modern (1800 – 2026) =====
@@ -1187,7 +1376,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q46740",
     lat: 18.97,
-    lng: -72.28
+    lng: -72.28,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 64,
@@ -1205,7 +1397,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q78994",
     lat: 48.86,
-    lng: 2.35
+    lng: 2.35,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 65,
@@ -1223,7 +1418,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q2929380",
     lat: 51.51,
-    lng: -0.13
+    lng: -0.13,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 66,
@@ -1241,7 +1439,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q1345",
     lat: 51.51,
-    lng: -0.13
+    lng: -0.13,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 67,
@@ -1259,7 +1460,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q8676",
     lat: 38.91,
-    lng: -77.04
+    lng: -77.04,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 68,
@@ -1277,7 +1481,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q193292",
     lat: 35.68,
-    lng: 139.69
+    lng: 139.69,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 69,
@@ -1295,7 +1502,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q154764",
     lat: 52.52,
-    lng: 13.41
+    lng: 13.41,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 70,
@@ -1313,7 +1523,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q361",
     lat: 50.85,
-    lng: 4.35
+    lng: 4.35,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 71,
@@ -1331,7 +1544,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q8729",
     lat: 59.93,
-    lng: 30.32
+    lng: 30.32,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 72,
@@ -1349,7 +1565,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q362",
     lat: 52.52,
-    lng: 13.41
+    lng: 13.41,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 73,
@@ -1367,7 +1586,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q129286",
     lat: 28.61,
-    lng: 77.21
+    lng: 77.21,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 74,
@@ -1385,7 +1607,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q148",
     lat: 39.91,
-    lng: 116.40
+    lng: 116.40,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 75,
@@ -1403,7 +1628,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q43653",
     lat: 28.57,
-    lng: -80.65
+    lng: -80.65,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 76,
@@ -1421,7 +1649,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q11639",
     lat: 52.52,
-    lng: 13.41
+    lng: 13.41,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 77,
@@ -1439,7 +1670,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q466",
     lat: 46.23,
-    lng: 6.05
+    lng: 6.05,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 78,
@@ -1457,7 +1691,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q37531",
     lat: -33.93,
-    lng: 18.42
+    lng: 18.42,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 79,
@@ -1475,7 +1712,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q20124",
     lat: 38.99,
-    lng: -77.10
+    lng: -77.10,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 80,
@@ -1493,7 +1733,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q174698",
     lat: 36.80,
-    lng: 10.18
+    lng: 10.18,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 81,
@@ -1511,7 +1754,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q2977",
     lat: 48.45,
-    lng: 1.49
+    lng: 1.49,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 82,
@@ -1529,7 +1775,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q664609",
     lat: -41.29,
-    lng: 174.78
+    lng: 174.78,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 83,
@@ -1547,7 +1796,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q36028",
     lat: 31.40,
-    lng: 45.97
+    lng: 45.97,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 84,
@@ -1565,7 +1817,10 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q8752",
     lat: 22.54,
-    lng: 114.06
+    lng: 114.06,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   },
   {
     id: 85,
@@ -1583,6 +1838,9 @@ export const events: EventRecord[] = [
     sourceId: 1,
     sourceUrl: "https://www.wikidata.org/wiki/Q81068910",
     lat: 30.59,
-    lng: 114.31
+    lng: 114.31,
+    imageUrl: null,
+    imageAttribution: null,
+    wikipediaUrl: null
   }
 ];
