@@ -3,6 +3,14 @@
   color-scheme: light;
   font-family: "Segoe UI", "Noto Sans TC", sans-serif;
   line-height: 1.5;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+}
+
+* {
+  box-sizing: border-box;
 }
 
 * {
@@ -13,6 +21,7 @@ body {
   margin: 0;
   overflow: hidden;
   color: #1c2431;
+  -webkit-text-size-adjust: 100%;
 }
 
 /* ===== Fullscreen Map Container ===== */
@@ -20,6 +29,7 @@ body {
   position: relative;
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
   overflow: hidden;
 }
 
@@ -41,7 +51,7 @@ body {
 /* ===== Floating Overlay: Top Bar (Year Switcher + Filters) ===== */
 .overlay-top {
   position: absolute;
-  top: 16px;
+  top: calc(16px + var(--safe-top));
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
@@ -77,6 +87,12 @@ body {
 .timeline-track input[type="range"] {
   width: 100%;
   accent-color: #2455c4;
+  height: 24px;
+}
+
+/* Filters toggle (mobile only by default hidden on desktop) */
+.filter-toggle {
+  display: none;
 }
 
 .filter-row {
@@ -99,18 +115,19 @@ body {
 .filter-row .control input {
   border: 1px solid #c6d5f4;
   border-radius: 8px;
-  padding: 6px 8px;
+  padding: 8px 10px;
   font: inherit;
-  font-size: 13px;
+  font-size: 16px;
   background: #ffffff;
   color: #1c2431;
+  min-height: 44px;
 }
 
 /* ===== Floating Overlay: Map Mode Toggle ===== */
 .overlay-mode-switch {
   position: absolute;
-  top: 16px;
-  right: 16px;
+  top: calc(16px + var(--safe-top));
+  right: calc(16px + var(--safe-right));
   z-index: 10;
   display: flex;
   gap: 6px;
@@ -125,6 +142,8 @@ body {
   padding: 6px 12px;
   cursor: pointer;
   font-size: 13px;
+  min-height: 40px;
+  min-width: 40px;
   transition: all 0.15s;
 }
 
@@ -137,9 +156,9 @@ body {
 /* ===== Floating Overlay: Event Panel (Left Sidebar) ===== */
 .overlay-events {
   position: absolute;
-  top: 16px;
-  left: 16px;
-  bottom: 16px;
+  top: calc(16px + var(--safe-top));
+  left: calc(16px + var(--safe-left));
+  bottom: calc(16px + var(--safe-bottom));
   z-index: 10;
   width: 320px;
   max-width: calc(100vw - 32px);
@@ -163,10 +182,14 @@ body {
   padding: 16px;
   border-bottom: 1px solid rgba(214, 228, 255, 0.4);
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
 }
 
-.overlay-events-header h2 {
-  margin: 0 0 4px;
+.overlay-events-header-text h2 {
+  margin: 0 0 2px;
   font-size: 16px;
 }
 
@@ -176,6 +199,11 @@ body {
   font-size: 13px;
 }
 
+/* Close button inside sidebar header (visible on mobile) */
+.sidebar-close {
+  display: none;
+}
+
 .event-list {
   flex: 1;
   overflow-y: auto;
@@ -183,6 +211,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  -webkit-overflow-scrolling: touch;
 }
 
 .event-list button {
@@ -190,13 +219,14 @@ body {
   background: #f8fbff;
   border-radius: 10px;
   text-align: left;
-  padding: 8px 10px;
+  padding: 10px 12px;
   display: flex;
   flex-direction: column;
   gap: 2px;
   cursor: pointer;
   color: #223149;
   font-size: 13px;
+  min-height: 44px;
   transition: background 0.15s;
 }
 
@@ -220,6 +250,7 @@ body {
   max-height: 40%;
   overflow-y: auto;
   flex-shrink: 0;
+  -webkit-overflow-scrolling: touch;
 }
 
 .event-detail h3 {
@@ -252,7 +283,7 @@ body {
 .sidebar-toggle {
   position: absolute;
   top: 50%;
-  left: 348px;
+  left: calc(348px + var(--safe-left));
   transform: translateY(-50%);
   z-index: 11;
   background: rgba(255, 255, 255, 0.9);
@@ -260,8 +291,8 @@ body {
   -webkit-backdrop-filter: blur(8px);
   border: 1px solid #d6e4ff;
   border-radius: 999px;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
   font-size: 18px;
   display: flex;
@@ -272,7 +303,7 @@ body {
 }
 
 .sidebar-toggle:not(.open) {
-  left: 16px;
+  left: calc(16px + var(--safe-left));
 }
 
 /* ===== Status messages ===== */
@@ -304,9 +335,10 @@ body {
   background: #ffffff;
   color: #7a2525;
   border-radius: 999px;
-  padding: 4px 10px;
+  padding: 6px 14px;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 13px;
+  min-height: 36px;
 }
 
 .empty {
@@ -318,30 +350,197 @@ body {
   font-size: 13px;
 }
 
-/* ===== Responsive ===== */
+/* ===== Mobile: <= 768px ===== */
 @media (max-width: 768px) {
+  /* Timeline moves to bottom as a compact bar */
   .overlay-top {
     top: auto;
-    bottom: 16px;
+    bottom: calc(8px + var(--safe-bottom));
+    left: 8px;
+    right: 8px;
+    transform: none;
+    width: auto;
     padding: 12px 16px;
+    border-radius: 14px;
+  }
+
+  .timeline-track {
+    margin-bottom: 0;
+  }
+
+  .timeline-track label {
+    font-size: 15px;
+  }
+
+  /* Show the filter toggle button on mobile */
+  .filter-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    margin-top: 8px;
+    padding: 8px;
+    width: 100%;
+    border: 1px solid #c6d5f4;
+    border-radius: 8px;
+    background: #f6f9ff;
+    color: #3857a8;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    min-height: 40px;
+  }
+
+  .filter-toggle .chevron {
+    transition: transform 0.2s;
+    font-size: 10px;
+  }
+
+  .filter-toggle .chevron.expanded {
+    transform: rotate(180deg);
+  }
+
+  /* Hide filters by default on mobile, show when expanded */
+  .filter-row {
+    flex-direction: column;
+    gap: 8px;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.2s ease, margin 0.3s ease;
+    margin-top: 0;
+  }
+
+  .filter-row.expanded {
+    max-height: 300px;
+    opacity: 1;
+    margin-top: 10px;
+  }
+
+  .filter-row .control {
+    min-width: 0;
+    flex: none;
+  }
+
+  .filter-row .control select,
+  .filter-row .control input {
+    font-size: 16px;
+    padding: 10px 12px;
+    min-height: 48px;
+  }
+
+  /* Mode switch: top-right, smaller */
+  .overlay-mode-switch {
+    top: calc(8px + var(--safe-top));
+    right: calc(8px + var(--safe-right));
+  }
+
+  /* Events panel: bottom sheet style */
+  .overlay-events {
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    max-width: none;
+    max-height: 55vh;
+    border-radius: 20px 20px 0 0;
+    padding-bottom: var(--safe-bottom);
+    transition: transform 0.35s ease;
+  }
+
+  .overlay-events.collapsed {
+    transform: translateY(calc(100% - 56px - var(--safe-bottom)));
+  }
+
+  .overlay-events-header {
+    padding: 12px 16px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Drag handle indicator */
+  .overlay-events-header::before {
+    content: "";
+    display: block;
+    width: 36px;
+    height: 4px;
+    background: #c6d5f4;
+    border-radius: 2px;
+    margin: 0 auto 10px;
+  }
+
+  /* Show close button in sidebar header on mobile */
+  .sidebar-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid #d6e4ff;
+    background: #f6f9ff;
+    border-radius: 999px;
+    font-size: 18px;
+    color: #48618d;
+    cursor: pointer;
+    flex-shrink: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Hide desktop sidebar toggle on mobile */
+  .sidebar-toggle {
+    display: none;
+  }
+
+  /* Mobile-only open button when sheet is collapsed */
+  .mobile-events-toggle {
+    position: absolute;
+    bottom: calc(72px + var(--safe-bottom));
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(214, 228, 255, 0.6);
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #2455c4;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(24, 48, 84, 0.12);
+    min-height: 40px;
+    white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .event-list button {
+    padding: 12px;
+    min-height: 48px;
+  }
+
+  .event-detail {
+    max-height: 50%;
+  }
+
+  .status button {
+    min-height: 40px;
+    padding: 8px 16px;
+  }
+}
+
+/* ===== Extra small phones: <= 380px ===== */
+@media (max-width: 380px) {
+  .overlay-top {
+    padding: 10px 12px;
+  }
+
+  .timeline-track label {
+    font-size: 14px;
   }
 
   .overlay-events {
-    top: auto;
-    bottom: 80px;
-    left: 8px;
-    right: 8px;
-    width: auto;
     max-height: 50vh;
-    border-radius: 12px;
-  }
-
-  .overlay-mode-switch {
-    top: 8px;
-    right: 8px;
-  }
-
-  .sidebar-toggle {
-    display: none;
   }
 }
