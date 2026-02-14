@@ -209,20 +209,22 @@ export const App = () => {
   const selectedEvent =
     filteredEvents.find((event) => event.id === selectedEventId) ?? filteredEvents[0] ?? null;
 
-  const flyToLocation = selectedEvent
-    ? { lat: selectedEvent.lat, lng: selectedEvent.lng }
-    : null;
+  const [flyToLocation, setFlyToLocation] = useState<{ lat: number; lng: number } | null>(null);
 
   const goToPrevEvent = useCallback(() => {
     if (filteredEvents.length === 0) return;
     const prevIdx = selectedEventIndex > 0 ? selectedEventIndex - 1 : filteredEvents.length - 1;
-    setSelectedEventId(filteredEvents[prevIdx].id);
+    const ev = filteredEvents[prevIdx];
+    setSelectedEventId(ev.id);
+    setFlyToLocation({ lat: ev.lat, lng: ev.lng });
   }, [filteredEvents, selectedEventIndex]);
 
   const goToNextEvent = useCallback(() => {
     if (filteredEvents.length === 0) return;
     const nextIdx = selectedEventIndex < filteredEvents.length - 1 ? selectedEventIndex + 1 : 0;
-    setSelectedEventId(filteredEvents[nextIdx].id);
+    const ev = filteredEvents[nextIdx];
+    setSelectedEventId(ev.id);
+    setFlyToLocation({ lat: ev.lat, lng: ev.lng });
   }, [filteredEvents, selectedEventIndex]);
 
   const hasEventError = Boolean(eventsError);
@@ -231,10 +233,12 @@ export const App = () => {
 
   const handleEventSelect = useCallback((eventId: number) => {
     setSelectedEventId(eventId);
+    const ev = filteredEvents.find((e) => e.id === eventId);
+    if (ev) setFlyToLocation({ lat: ev.lat, lng: ev.lng });
     if (isMobile) {
       setMobileEventsOpen(true);
     }
-  }, [isMobile]);
+  }, [isMobile, filteredEvents]);
 
   const toggleMobileEvents = useCallback(() => {
     setMobileEventsOpen((v) => !v);
