@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { MapViewport } from "./map/MapViewport";
 import { MapMode } from "./map/types";
+import { useLocale } from "./i18n";
 
 type EventRecord = {
   id: number;
@@ -27,14 +28,6 @@ const TIMELINE_MIN_YEAR = -3500;
 const TIMELINE_MAX_YEAR = 2026;
 const WINDOW_SIZE = 50;
 const MOBILE_BREAKPOINT = 768;
-
-const formatYear = (value: number) => {
-  if (value < 0) {
-    return `${Math.abs(value)} BCE`;
-  }
-
-  return `${value} CE`;
-};
 
 const fetchJson = async <T,>(path: string, signal?: AbortSignal): Promise<T> => {
   const response = await fetch(`${API_BASE_URL}${path}`, { signal });
@@ -64,6 +57,7 @@ const useIsMobile = () => {
 
 export const App = () => {
   const isMobile = useIsMobile();
+  const { locale, setLocale, t, formatYear, tCategory, tPrecision } = useLocale();
   const [mode, setMode] = useState<MapMode>("maplibre");
   const [activeYear, setActiveYear] = useState(1450);
   const [events, setEvents] = useState<EventRecord[]>([]);
@@ -79,12 +73,20 @@ export const App = () => {
   const [regionsError, setRegionsError] = useState<string | null>(null);
   const [reloadToken, setReloadToken] = useState(0);
   const [sidebarOpen, setSidebarOpen] = useState(!isMobile);
-  const [filtersExpanded, setFiltersExpanded] = useState(false);
+  const [mobileEventsOpen, setMobileEventsOpen] = useState(false);
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
-  // Close sidebar when switching to mobile, open when switching to desktop
+  // Close panels when switching between mobile/desktop
   useEffect(() => {
     setSidebarOpen(!isMobile);
+    setMobileEventsOpen(false);
+    setMobileFiltersOpen(false);
   }, [isMobile]);
+
+  // Reset filters when locale changes (region names differ per locale)
+  useEffect(() => {
+    setRegionFilter("all");
+  }, [locale]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -92,7 +94,7 @@ export const App = () => {
       setIsLoadingRegions(true);
       setRegionsError(null);
       try {
-        const data = await fetchJson<ListResponse<string>>("/regions", controller.signal);
+        const data = await fetchJson<ListResponse<string>>(`/regions?locale=${locale}`, controller.signal);
         setRegions(data.items);
       } catch (error) {
         if (!controller.signal.aborted) {
@@ -108,7 +110,7 @@ export const App = () => {
 
     void loadRegions();
     return () => controller.abort();
-  }, [reloadToken]);
+  }, [reloadToken, locale]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -119,7 +121,8 @@ export const App = () => {
       const params = new URLSearchParams({
         from: String(activeYear - WINDOW_SIZE),
         to: String(activeYear + WINDOW_SIZE),
-        limit: "200"
+        limit: "200",
+        locale
       });
 
       if (categoryFilter !== "all") {
@@ -148,7 +151,7 @@ export const App = () => {
 
     void loadEvents();
     return () => controller.abort();
-  }, [activeYear, categoryFilter, reloadToken]);
+  }, [activeYear, categoryFilter, reloadToken, locale]);
 
   const categories = useMemo(() => knownCategories, [knownCategories]);
 
@@ -186,12 +189,30 @@ export const App = () => {
     }
   }, [filteredEvents, selectedEventId]);
 
+  const selectedEventIndex = useMemo(() => {
+    if (selectedEventId === null) return 0;
+    const idx = filteredEvents.findIndex((e) => e.id === selectedEventId);
+    return idx >= 0 ? idx : 0;
+  }, [filteredEvents, selectedEventId]);
+
   const selectedEvent =
     filteredEvents.find((event) => event.id === selectedEventId) ?? filteredEvents[0] ?? null;
 
   const flyToLocation = selectedEvent
     ? { lat: selectedEvent.lat, lng: selectedEvent.lng }
     : null;
+
+  const goToPrevEvent = useCallback(() => {
+    if (filteredEvents.length === 0) return;
+    const prevIdx = selectedEventIndex > 0 ? selectedEventIndex - 1 : filteredEvents.length - 1;
+    setSelectedEventId(filteredEvents[prevIdx].id);
+  }, [filteredEvents, selectedEventIndex]);
+
+  const goToNextEvent = useCallback(() => {
+    if (filteredEvents.length === 0) return;
+    const nextIdx = selectedEventIndex < filteredEvents.length - 1 ? selectedEventIndex + 1 : 0;
+    setSelectedEventId(filteredEvents[nextIdx].id);
+  }, [filteredEvents, selectedEventIndex]);
 
   const hasEventError = Boolean(eventsError);
   const hasRegionError = Boolean(regionsError);
@@ -200,15 +221,19 @@ export const App = () => {
   const handleEventSelect = useCallback((eventId: number) => {
     setSelectedEventId(eventId);
     if (isMobile) {
-      setSidebarOpen(true);
+      setMobileEventsOpen(true);
     }
   }, [isMobile]);
 
-  const handleMobileHeaderClick = useCallback(() => {
-    if (isMobile) {
-      setSidebarOpen((v) => !v);
-    }
-  }, [isMobile]);
+  const toggleMobileEvents = useCallback(() => {
+    setMobileEventsOpen((v) => !v);
+    setMobileFiltersOpen(false);
+  }, []);
+
+  const toggleMobileFilters = useCallback(() => {
+    setMobileFiltersOpen((v) => !v);
+    setMobileEventsOpen(false);
+  }, []);
 
   return (
     <div className="app-root">
@@ -231,8 +256,16 @@ export const App = () => {
         />
       </div>
 
-      {/* Map mode toggle — top right */}
+      {/* Top-right controls: mode switch + language */}
       <div className="overlay-mode-switch">
+        <button
+          className="locale-switch"
+          onClick={() => setLocale(locale === "en" ? "zh-TW" : "en")}
+          type="button"
+          aria-label="Switch language"
+        >
+          {locale === "en" ? "\u4e2d" : "EN"}
+        </button>
         <button
           className={mode === "cesium" ? "active" : ""}
           onClick={() => setMode("cesium")}
@@ -249,12 +282,12 @@ export const App = () => {
         </button>
       </div>
 
-      {/* Timeline + Filters overlay */}
-      <div className="overlay-top">
+      {/* Timeline */}
+      <div className="overlay-timeline">
         <div className="timeline-track">
           <label htmlFor="active-year">
             <strong>{formatYear(activeYear)}</strong>
-            <span className="window-hint">{"\u00B1"}50 years</span>
+            <span className="window-hint">{t("windowHint")}</span>
           </label>
           <input
             id="active-year"
@@ -265,142 +298,276 @@ export const App = () => {
             value={activeYear}
           />
         </div>
-
-        {/* Mobile: toggle button for filters */}
-        <button
-          className="filter-toggle"
-          onClick={() => setFiltersExpanded((v) => !v)}
-          type="button"
-        >
-          Filters
-          <span className={`chevron ${filtersExpanded ? "expanded" : ""}`}>{"\u25BC"}</span>
-        </button>
-
-        <div className={`filter-row ${filtersExpanded ? "expanded" : ""}`}>
-          <label className="control">
-            Category
-            <select
-              onChange={(event) => setCategoryFilter(event.target.value)}
-              value={categoryFilter}
-            >
-              <option value="all">All categories</option>
-              {categories.map((category) => (
-                <option key={category} value={category}>
-                  {category}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className="control">
-            Region
-            <select onChange={(event) => setRegionFilter(event.target.value)} value={regionFilter}>
-              <option value="all">All regions</option>
-              {regions.map((region) => (
-                <option key={region} value={region}>
-                  {region}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className="control">
-            Keyword
-            <input
-              onChange={(event) => setKeyword(event.target.value)}
-              placeholder="Search..."
-              type="text"
-              value={keyword}
-            />
-          </label>
-        </div>
-        {hasRegionError && <p className="status error">Region error: {regionsError}</p>}
       </div>
 
+      {/* Desktop: Filters overlay */}
+      {!isMobile && (
+        <div className="overlay-filters-desktop">
+          <div className="filter-row">
+            <label className="control">
+              {t("category")}
+              <select
+                onChange={(event) => setCategoryFilter(event.target.value)}
+                value={categoryFilter}
+              >
+                <option value="all">{t("allCategories")}</option>
+                {categories.map((category) => (
+                  <option key={category} value={category}>
+                    {tCategory(category)}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="control">
+              {t("region")}
+              <select onChange={(event) => setRegionFilter(event.target.value)} value={regionFilter}>
+                <option value="all">{t("allRegions")}</option>
+                {regions.map((region) => (
+                  <option key={region} value={region}>
+                    {region}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="control">
+              {t("keyword")}
+              <input
+                onChange={(event) => setKeyword(event.target.value)}
+                placeholder={t("searchPlaceholder")}
+                type="text"
+                value={keyword}
+              />
+            </label>
+          </div>
+          {hasRegionError && <p className="status error">{t("regionError")}{regionsError}</p>}
+        </div>
+      )}
+
       {/* Desktop: sidebar toggle button */}
-      <button
-        className={`sidebar-toggle ${sidebarOpen ? "open" : ""}`}
-        onClick={() => setSidebarOpen((v) => !v)}
-        type="button"
-        aria-label={sidebarOpen ? "Collapse event panel" : "Expand event panel"}
-      >
-        {sidebarOpen ? "\u25C0" : "\u25B6"}
-      </button>
-
-      {/* Events panel — sidebar on desktop, bottom sheet on mobile */}
-      <aside className={`overlay-events ${sidebarOpen ? "" : "collapsed"}`}>
-        <div
-          className="overlay-events-header"
-          onClick={handleMobileHeaderClick}
-          role={isMobile ? "button" : undefined}
-          tabIndex={isMobile ? 0 : undefined}
-          onKeyDown={isMobile ? (e) => { if (e.key === "Enter" || e.key === " ") handleMobileHeaderClick(); } : undefined}
+      {!isMobile && (
+        <button
+          className={`sidebar-toggle ${sidebarOpen ? "open" : ""}`}
+          onClick={() => setSidebarOpen((v) => !v)}
+          type="button"
+          aria-label={sidebarOpen ? t("collapse") : t("expand")}
         >
-          <div className="overlay-events-header-text">
-            <h2>Events</h2>
-            <p className="event-count">{filteredEvents.length} events in view</p>
-          </div>
-          <button
-            className="sidebar-close"
-            onClick={(e) => {
-              e.stopPropagation();
-              setSidebarOpen(false);
-            }}
-            type="button"
-            aria-label="Close event panel"
-          >
-            {"\u2715"}
-          </button>
-        </div>
+          {sidebarOpen ? "\u25C0" : "\u25B6"}
+        </button>
+      )}
 
-        {isAnyLoading && <p className="status loading">Loading...</p>}
-        {hasEventError && (
-          <div className="status error">
-            <p>Event load error: {eventsError}</p>
-            <button onClick={() => setReloadToken((value) => value + 1)} type="button">
-              Retry
-            </button>
+      {/* Desktop: Events sidebar */}
+      {!isMobile && (
+        <aside className={`overlay-events ${sidebarOpen ? "" : "collapsed"}`}>
+          <div className="overlay-events-header">
+            <div className="overlay-events-header-text">
+              <h2>{t("events")}</h2>
+              <p className="event-count">{t("eventsInView", { count: filteredEvents.length })}</p>
+            </div>
           </div>
-        )}
 
-        <div className="event-list" aria-label="Filtered events">
-          {!isLoadingEvents && !hasEventError && filteredEvents.length === 0 && (
-            <p className="empty">No events in this time window.</p>
+          {isAnyLoading && <p className="status loading">{t("loading")}</p>}
+          {hasEventError && (
+            <div className="status error">
+              <p>{t("eventError")}{eventsError}</p>
+              <button onClick={() => setReloadToken((value) => value + 1)} type="button">
+                {t("retry")}
+              </button>
+            </div>
           )}
-          {filteredEvents.map((event) => (
-            <button
-              className={event.id === selectedEvent?.id ? "active" : ""}
-              key={event.id}
-              onClick={() => setSelectedEventId(event.id)}
-              type="button"
-            >
-              <strong>{event.title}</strong>
-              <span>
-                {formatYear(event.timeStart)}
-                {event.timeEnd ? ` \u2013 ${formatYear(event.timeEnd)}` : ""}
-              </span>
-            </button>
-          ))}
-        </div>
 
-        {selectedEvent && (
-          <article className="event-detail" aria-live="polite">
-            <p className="pill">{selectedEvent.category}</p>
-            <h3>{selectedEvent.title}</h3>
-            <p className="event-summary">{selectedEvent.summary}</p>
-            <ul>
-              <li>Region: {selectedEvent.regionName}</li>
-              <li>
-                Time: {formatYear(selectedEvent.timeStart)}
-                {selectedEvent.timeEnd ? ` \u2013 ${formatYear(selectedEvent.timeEnd)}` : ""}
-              </li>
-              <li>Precision: {selectedEvent.precisionLevel}</li>
-              <li>Confidence: {(selectedEvent.confidenceScore * 100).toFixed(0)}%</li>
-            </ul>
-            <a href={selectedEvent.sourceUrl} rel="noreferrer" target="_blank">
-              Source
-            </a>
-          </article>
-        )}
-      </aside>
+          <div className="event-list" aria-label="Filtered events">
+            {!isLoadingEvents && !hasEventError && filteredEvents.length === 0 && (
+              <p className="empty">{t("noEvents")}</p>
+            )}
+            {filteredEvents.map((event) => (
+              <button
+                className={event.id === selectedEvent?.id ? "active" : ""}
+                key={event.id}
+                onClick={() => setSelectedEventId(event.id)}
+                type="button"
+              >
+                <strong>{event.title}</strong>
+                <span>
+                  {formatYear(event.timeStart)}
+                  {event.timeEnd ? ` \u2013 ${formatYear(event.timeEnd)}` : ""}
+                </span>
+              </button>
+            ))}
+          </div>
+
+          {selectedEvent && (
+            <article className="event-detail" aria-live="polite">
+              <p className="pill">{tCategory(selectedEvent.category)}</p>
+              <h3>{selectedEvent.title}</h3>
+              <p className="event-summary">{selectedEvent.summary}</p>
+              <ul>
+                <li>{t("regionLabel")}{selectedEvent.regionName}</li>
+                <li>
+                  {t("timeLabel")}{formatYear(selectedEvent.timeStart)}
+                  {selectedEvent.timeEnd ? ` \u2013 ${formatYear(selectedEvent.timeEnd)}` : ""}
+                </li>
+                <li>{t("precisionLabel")}{tPrecision(selectedEvent.precisionLevel)}</li>
+                <li>{t("confidenceLabel")}{(selectedEvent.confidenceScore * 100).toFixed(0)}%</li>
+              </ul>
+              <a href={selectedEvent.sourceUrl} rel="noreferrer" target="_blank">
+                {t("source")}
+              </a>
+            </article>
+          )}
+        </aside>
+      )}
+
+      {/* Mobile: FAB icons at bottom corners */}
+      {isMobile && (
+        <>
+          <button
+            className={`mobile-fab mobile-fab-events ${mobileEventsOpen ? "active" : ""}`}
+            onClick={toggleMobileEvents}
+            type="button"
+            aria-label={t("toggleEvents")}
+          >
+            {"\u2630"}
+          </button>
+
+          <button
+            className={`mobile-fab mobile-fab-filters ${mobileFiltersOpen ? "active" : ""}`}
+            onClick={toggleMobileFilters}
+            type="button"
+            aria-label={t("toggleFilters")}
+          >
+            {"\u2699"}
+          </button>
+
+          {(mobileEventsOpen || mobileFiltersOpen) && (
+            <div
+              className="mobile-backdrop"
+              onClick={() => { setMobileEventsOpen(false); setMobileFiltersOpen(false); }}
+            />
+          )}
+
+          {/* Mobile: Events card popup */}
+          <aside className={`mobile-popup mobile-popup-events ${mobileEventsOpen ? "open" : ""}`}>
+            <div className="mobile-popup-header">
+              <h2>{t("events")}</h2>
+              <span className="event-count">{selectedEventIndex + 1} / {filteredEvents.length}</span>
+              <button
+                onClick={() => setMobileEventsOpen(false)}
+                type="button"
+                aria-label={t("closeEvents")}
+              >
+                {"\u2715"}
+              </button>
+            </div>
+
+            {isAnyLoading && <p className="status loading">{t("loading")}</p>}
+            {hasEventError && (
+              <div className="status error">
+                <p>{t("eventError")}{eventsError}</p>
+                <button onClick={() => setReloadToken((value) => value + 1)} type="button">
+                  {t("retry")}
+                </button>
+              </div>
+            )}
+
+            {!isLoadingEvents && !hasEventError && filteredEvents.length === 0 && (
+              <p className="empty" style={{ margin: 16 }}>{t("noEvents")}</p>
+            )}
+
+            {selectedEvent && (
+              <div className="mobile-card-carousel">
+                <button
+                  className="carousel-arrow carousel-arrow-left"
+                  onClick={goToPrevEvent}
+                  type="button"
+                  aria-label={t("prevEvent")}
+                  disabled={filteredEvents.length <= 1}
+                >
+                  {"\u2039"}
+                </button>
+
+                <article className="mobile-event-card" aria-live="polite">
+                  <p className="pill">{tCategory(selectedEvent.category)}</p>
+                  <h3>{selectedEvent.title}</h3>
+                  <p className="mobile-card-time">
+                    {formatYear(selectedEvent.timeStart)}
+                    {selectedEvent.timeEnd ? ` \u2013 ${formatYear(selectedEvent.timeEnd)}` : ""}
+                  </p>
+                  <p className="event-summary">{selectedEvent.summary}</p>
+                  <ul>
+                    <li>{t("regionLabel")}{selectedEvent.regionName}</li>
+                    <li>{t("precisionLabel")}{tPrecision(selectedEvent.precisionLevel)}</li>
+                    <li>{t("confidenceLabel")}{(selectedEvent.confidenceScore * 100).toFixed(0)}%</li>
+                  </ul>
+                  <a href={selectedEvent.sourceUrl} rel="noreferrer" target="_blank">
+                    {t("source")}
+                  </a>
+                </article>
+
+                <button
+                  className="carousel-arrow carousel-arrow-right"
+                  onClick={goToNextEvent}
+                  type="button"
+                  aria-label={t("nextEvent")}
+                  disabled={filteredEvents.length <= 1}
+                >
+                  {"\u203A"}
+                </button>
+              </div>
+            )}
+          </aside>
+
+          {/* Mobile: Filters popup */}
+          <div className={`mobile-popup mobile-popup-filters ${mobileFiltersOpen ? "open" : ""}`}>
+            <div className="mobile-popup-header">
+              <h2>{t("filters")}</h2>
+              <button
+                onClick={() => setMobileFiltersOpen(false)}
+                type="button"
+                aria-label={t("closeFilters")}
+              >
+                {"\u2715"}
+              </button>
+            </div>
+            <div className="mobile-filter-controls">
+              <label className="control">
+                {t("category")}
+                <select
+                  onChange={(event) => setCategoryFilter(event.target.value)}
+                  value={categoryFilter}
+                >
+                  <option value="all">{t("allCategories")}</option>
+                  {categories.map((category) => (
+                    <option key={category} value={category}>
+                      {tCategory(category)}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="control">
+                {t("region")}
+                <select onChange={(event) => setRegionFilter(event.target.value)} value={regionFilter}>
+                  <option value="all">{t("allRegions")}</option>
+                  {regions.map((region) => (
+                    <option key={region} value={region}>
+                      {region}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="control">
+                {t("keyword")}
+                <input
+                  onChange={(event) => setKeyword(event.target.value)}
+                  placeholder={t("searchPlaceholder")}
+                  type="text"
+                  value={keyword}
+                />
+              </label>
+            </div>
+            {hasRegionError && <p className="status error">{t("regionError")}{regionsError}</p>}
+          </div>
+        </>
+      )}
     </div>
   );
 };

@@ -6,6 +6,23 @@ type EventsQuery = {
   from?: number | string;
   to?: number | string;
   limit?: number | string;
+  locale?: string;
+};
+
+type RegionsQuery = {
+  locale?: string;
+};
+
+const localizeEvent = (event: typeof events[number], locale: string | undefined) => {
+  if (locale === "zh-TW") {
+    return {
+      ...event,
+      title: event.title_zh,
+      summary: event.summary_zh,
+      regionName: event.regionName_zh,
+    };
+  }
+  return event;
 };
 
 export const queryPlugin: FastifyPluginAsync = async (app) => {
@@ -14,7 +31,7 @@ export const queryPlugin: FastifyPluginAsync = async (app) => {
   });
 
   app.get<{ Querystring: EventsQuery }>("/events", async (request) => {
-    const { category, from, to, limit = 50 } = request.query;
+    const { category, from, to, limit = 50, locale } = request.query;
     const parsedFrom =
       typeof from === "number" ? from : typeof from === "string" ? Number(from) : undefined;
     const parsedTo = typeof to === "number" ? to : typeof to === "string" ? Number(to) : undefined;
@@ -38,14 +55,18 @@ export const queryPlugin: FastifyPluginAsync = async (app) => {
       return true;
     });
 
+    const items = filtered.slice(0, Math.max(1, Math.min(safeLimit, 200)));
+
     return {
       total: filtered.length,
-      items: filtered.slice(0, Math.max(1, Math.min(safeLimit, 200)))
+      items: items.map((e) => localizeEvent(e, locale))
     };
   });
 
-  app.get("/regions", async () => {
-    const regions = [...new Set(events.map((event) => event.regionName))].sort((a, b) =>
+  app.get<{ Querystring: RegionsQuery }>("/regions", async (request) => {
+    const { locale } = request.query;
+    const field = locale === "zh-TW" ? "regionName_zh" : "regionName";
+    const regions = [...new Set(events.map((event) => event[field]))].sort((a, b) =>
       a.localeCompare(b)
     );
 
