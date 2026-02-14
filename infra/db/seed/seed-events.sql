@@ -961,6 +961,7 @@ INSERT INTO events (title, summary, category, region_name, precision_level, conf
 ('Paris Climate Agreement', '196 nations adopted the Paris Agreement to limit global warming to well below 2°C, the most significant international climate accord in history.', 'politics', 'Global', 'year', 0.99, 2015, NULL, ST_SetSRID(ST_MakePoint(2.35, 48.86), 4326), 1, 'https://www.wikidata.org/wiki/Q21904756', '巴黎氣候協定', '196個國家通過巴黎協定，承諾將全球暖化控制在遠低於2°C，為史上最重要的國際氣候協議。', '全球', NULL, NULL, 'https://en.wikipedia.org/wiki/Paris_Agreement');
 
 
+
 -- Reset events sequence
 SELECT setval('events_id_seq', (SELECT MAX(id) FROM events));
 
