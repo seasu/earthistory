@@ -254,6 +254,8 @@ export const App = () => {
     if (ev) setFlyToLocation({ lat: ev.lat, lng: ev.lng });
     if (isMobile) {
       setMobileEventsOpen(true);
+    } else {
+      setSidebarOpen(true);
     }
   }, [isMobile, filteredEvents]);
 
@@ -350,16 +352,38 @@ export const App = () => {
         </button>
       </div>
 
-      {/* Timeline: year dial trigger + popup */}
-      <div className="overlay-timeline">
-        <YearCarousel
-          value={sliderYear}
-          min={TIMELINE_MIN_YEAR}
-          max={TIMELINE_MAX_YEAR}
-          onChange={setSliderYear}
-          formatYear={formatYear}
-          windowHint={t("windowHint")}
-        />
+      {/* Top-center: panel icons flanking timeline */}
+      <div className="overlay-top-bar">
+        {!isMobile && (
+          <button
+            className={`panel-toggle ${sidebarOpen ? "active" : ""}`}
+            onClick={() => setSidebarOpen((v) => !v)}
+            type="button"
+            aria-label={sidebarOpen ? t("collapse") : t("expand")}
+          >
+            {"\u2630"}
+          </button>
+        )}
+        <div className="overlay-timeline">
+          <YearCarousel
+            value={sliderYear}
+            min={TIMELINE_MIN_YEAR}
+            max={TIMELINE_MAX_YEAR}
+            onChange={setSliderYear}
+            formatYear={formatYear}
+            windowHint={t("windowHint")}
+          />
+        </div>
+        {!isMobile && (
+          <button
+            className={`panel-toggle ${filtersOpen ? "active" : ""}`}
+            onClick={() => setFiltersOpen((v) => !v)}
+            type="button"
+            aria-label={t("toggleFilters")}
+          >
+            {"\u{1F50D}"}
+          </button>
+        )}
       </div>
 
       {/* Desktop: Filters overlay (toggled via icon) */}
