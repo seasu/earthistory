@@ -305,8 +305,29 @@ export const App = () => {
         </div>
       )}
 
-      {/* Top-right controls: mode switch + language */}
+      {/* Top-right controls: panel toggles + mode switch + language */}
       <div className="overlay-mode-switch">
+        {!isMobile && (
+          <>
+            <button
+              className={`panel-toggle ${sidebarOpen ? "active" : ""}`}
+              onClick={() => setSidebarOpen((v) => !v)}
+              type="button"
+              aria-label={sidebarOpen ? t("collapse") : t("expand")}
+            >
+              {"\u2630"}
+            </button>
+            <button
+              className={`panel-toggle ${filtersOpen ? "active" : ""}`}
+              onClick={() => setFiltersOpen((v) => !v)}
+              type="button"
+              aria-label={t("toggleFilters")}
+            >
+              {"\u2699"}
+            </button>
+            <span className="mode-switch-divider" />
+          </>
+        )}
         <button
           className="locale-switch"
           onClick={() => setLocale(locale === "en" ? "zh-TW" : "en")}
