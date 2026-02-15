@@ -41,6 +41,11 @@ const strings: Record<string, Record<Locale, string>> = {
   year: { en: "year", "zh-TW": "\u5e74" },
   decade: { en: "decade", "zh-TW": "\u5341\u5e74" },
   century: { en: "century", "zh-TW": "\u4e16\u7d00" },
+  ingestTopic: { en: "Ingest Topic", "zh-TW": "\u4e3b\u984c\u64f4\u5145" },
+  ingestPlaceholder: { en: "Enter topic (e.g. WWII)", "zh-TW": "\u8fe0\u5165\u4e3b\u984c (\u4f8b\uff1a\u4e8c\u6230)" },
+  ingesting: { en: "Finding events...", "zh-TW": "\u6b63\u5728\u641c\u5c0b\u4e8b\u4ef6..." },
+  ingestSuccess: { en: "Ingested {count} events!", "zh-TW": "\u6210\u529f\u532f\u5165 {count} \u500b\u4e8b\u4ef6\uff01" },
+  ingestError: { en: "Ingestion failed: ", "zh-TW": "\u532f\u5165\u5931\u6557\uff1a" },
 };
 
 const categoryMap: Record<string, Record<Locale, string>> = {

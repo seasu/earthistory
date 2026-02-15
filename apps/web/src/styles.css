@@ -179,6 +179,7 @@ body {
     opacity: 0;
     transform: translateX(-50%) translateY(-8px) scaleY(0.6);
   }
+
   to {
     opacity: 1;
     transform: translateX(-50%) translateY(0) scaleY(1);
@@ -398,6 +399,7 @@ body {
     opacity: 0;
     transform: translateX(-50%) translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
@@ -602,12 +604,19 @@ body {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .map-toast-no-events {
@@ -626,10 +635,25 @@ body {
 }
 
 @keyframes toastFadeInOut {
-  0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.92); }
-  10%  { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-  80%  { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-  100% { opacity: 0; transform: translate(-50%, -50%) scale(0.96); }
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.92);
+  }
+
+  10% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  80% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.96);
+  }
 }
 
 /* ===== Status messages ===== */
@@ -644,6 +668,70 @@ body {
   background: #f4f8ff;
   border: 1px solid #ccdaf5;
   color: #355286;
+}
+
+/* Topic Ingest */
+.topic-ingest-container {
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  margin-top: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.topic-ingest-container h3 {
+  margin: 0 0 8px 0;
+  font-size: 0.9rem;
+  opacity: 0.8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ingest-input-group {
+  display: flex;
+  gap: 8px;
+}
+
+.ingest-input-group input {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 8px;
+  border-radius: 4px;
+  color: white;
+  font-size: 0.9rem;
+}
+
+.ingest-input-group button {
+  padding: 8px 12px;
+  background: var(--primary-color, #4a90e2);
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.ingest-input-group button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ingest-status {
+  margin: 8px 0 0 0;
+  font-size: 0.85rem;
+}
+
+.ingest-status.loading {
+  color: #aaa;
+}
+
+.ingest-status.success {
+  color: #4caf50;
+}
+
+.ingest-status.error {
+  color: #f44336;
 }
 
 .status.error {
@@ -685,6 +773,7 @@ body {
 
 /* ===== Mobile: <= 768px ===== */
 @media (max-width: 768px) {
+
   /* Top bar: bottom center on mobile, match FAB height & position */
   .overlay-top-bar {
     top: auto;
@@ -730,6 +819,7 @@ body {
       opacity: 0;
       transform: translateX(-50%) translateY(8px) scaleY(0.6);
     }
+
     to {
       opacity: 1;
       transform: translateX(-50%) translateY(0) scaleY(1);
