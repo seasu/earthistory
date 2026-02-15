@@ -1,6 +1,33 @@
 
 // apps/api/src/services/wikidata.service.ts
 
+/**
+ * Rate limiter for API calls
+ */
+class RateLimiter {
+  private requests: number[] = [];
+  private maxRequests: number;
+  private windowMs: number;
+
+  constructor(maxRequests: number, windowMs: number) {
+    this.maxRequests = maxRequests;
+    this.windowMs = windowMs;
+  }
+
+  async waitIfNeeded(): Promise<void> {
+    const now = Date.now();
+    this.requests = this.requests.filter(time => now - time < this.windowMs);
+
+    if (this.requests.length >= this.maxRequests) {
+      const oldestRequest = this.requests[0];
+      const waitTime = this.windowMs - (now - oldestRequest) + 100; // +100ms buffer
+      await new Promise(resolve => setTimeout(resolve, waitTime));
+    }
+
+    this.requests.push(Date.now());
+  }
+}
+
 type WikidataEvent = {
     title: string;
     summary: string;
@@ -15,6 +42,9 @@ type WikidataEvent = {
     lng: number;
     imageUrl: string | null;
     wikipediaUrl: string | null;
+    license: "CC0";  // Wikidata content is always CC0
+    dataSource: "wikidata";
+    wikidataQid: string;  // Keep QID for traceability
 };
 
 // Mapping from Wikidata "instance of" (P31) labels to our App's categories
@@ -65,14 +95,17 @@ const CATEGORY_MAPPING: Record<string, string> = {
 export class WikidataService {
     private static readonly USER_AGENT = "Earthistory/1.0 (seasu@example.com)";
 
+    // Rate limiting: 5 requests per second (conservative for SPARQL endpoint)
+    private static rateLimiter = new RateLimiter(5, 1000);
+
     // Search for a topic to get its QID (e.g., "Chinese Culture" -> "Q1190554")
     static async searchTopic(query: string): Promise<{ id: string; label: string; description: string } | null> {
+        await this.rateLimiter.waitIfNeeded();
+
         const url = `https://www.wikidata.org/w/api.php?action=wbsearchentities&search=${encodeURIComponent(query)}&language=en&format=json&limit=1`;
 
         try {
-            const response = await fetch(url, {
-                headers: { "User-Agent": this.USER_AGENT }
-            });
+            const response = await this.fetchWithRetry(url);
 
             const data = await response.json();
             if (!data.search || data.search.length === 0) return null;
@@ -90,6 +123,8 @@ export class WikidataService {
 
     // Fetch events related to a QID (instance of or part of)
     static async fetchRelatedEvents(qid: string, limit = 500): Promise<WikidataEvent[]> {
+        await this.rateLimiter.waitIfNeeded();
+
         // Use UNION to search across multiple relationship types:
         // - P31/P279*: instance of / subclass of (for concrete types like "battle")
         // - P921: main subject (for events about this topic)
@@ -114,11 +149,11 @@ export class WikidataService {
           # Events at this location
           ?event wdt:P276 wd:${qid}.
         }
-        
+
         # Require coordinates and date
         ?event wdt:P625 ?coord;
                wdt:P585 ?date.
-        
+
         OPTIONAL { ?event wdt:P31 ?type. }
         OPTIONAL { ?article schema:about ?event; schema:isPartOf <https://en.wikipedia.org/>. }
         OPTIONAL { ?event wdt:P18 ?image. }
@@ -130,14 +165,9 @@ export class WikidataService {
         const url = `https://query.wikidata.org/sparql?query=${encodeURIComponent(sparqlQuery)}&format=json`;
 
         try {
-            const response = await fetch(url, {
-                headers: {
-                    "User-Agent": this.USER_AGENT,
-                    "Accept": "application/json"
-                }
-            });
+            const response = await this.fetchWithRetry(url);
 
-            if (!response.ok) throw new Error(`SPARQL request failed: ${response.statusText}`);
+            if (!response.ok) throw new Error(`SPARQL request failed: ${response.status} ${response.statusText}`);
 
             const data = await response.json();
             const bindings = data.results.bindings;
@@ -182,8 +212,11 @@ export class WikidataService {
                     lat,
                     lng,
                     imageUrl: item.image?.value || null,
-                    wikipediaUrl: item.article?.value || null
-                };
+                    wikipediaUrl: item.article?.value || null,
+                    license: "CC0",
+                    dataSource: "wikidata",
+                    wikidataQid: qid
+                } as WikidataEvent;
             });
 
         } catch (error) {
@@ -194,6 +227,8 @@ export class WikidataService {
 
     // Fetch members of a Wikipedia category (subcategories and pages)
     static async fetchCategoryMembers(topic: string, lang: string = "en"): Promise<string[]> {
+        await this.rateLimiter.waitIfNeeded();
+
         // Ensure topic has "Category:" prefix if not present
         const categoryTitle = topic.startsWith("Category:") || topic.startsWith("category:")
             ? topic
@@ -202,9 +237,7 @@ export class WikidataService {
         const url = `https://${lang}.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=${encodeURIComponent(categoryTitle)}&cmlimit=10&format=json&origin=*`;
 
         try {
-            const response = await fetch(url, {
-                headers: { "User-Agent": this.USER_AGENT }
-            });
+            const response = await this.fetchWithRetry(url);
 
             if (!response.ok) return [];
 
@@ -225,12 +258,12 @@ export class WikidataService {
 
     // Fetch parent categories of a Wikipedia page (reverse lookup)
     static async fetchPageCategories(topic: string, lang: string = "en"): Promise<string[]> {
+        await this.rateLimiter.waitIfNeeded();
+
         const url = `https://${lang}.wikipedia.org/w/api.php?action=query&prop=categories&titles=${encodeURIComponent(topic)}&cllimit=10&format=json&origin=*`;
 
         try {
-            const response = await fetch(url, {
-                headers: { "User-Agent": this.USER_AGENT }
-            });
+            const response = await this.fetchWithRetry(url);
 
             if (!response.ok) return [];
 
@@ -259,5 +292,46 @@ export class WikidataService {
             console.error(`Wikipedia page categories fetch error (${lang}):`, error);
             return [];
         }
+    }
+
+    /**
+     * Fetch with retry logic (handles 429 rate limits and 5xx errors)
+     */
+    private static async fetchWithRetry(
+        url: string,
+        maxRetries: number = 3,
+        backoffMs: number = 1000
+    ): Promise<Response> {
+        for (let i = 0; i < maxRetries; i++) {
+            try {
+                const response = await fetch(url, {
+                    headers: {
+                        "User-Agent": this.USER_AGENT,
+                        "Accept": "application/json"
+                    }
+                });
+
+                // Success
+                if (response.ok) return response;
+
+                // Retry on 429 (rate limit) or 5xx errors
+                if (response.status === 429 || response.status >= 500) {
+                    const waitTime = backoffMs * Math.pow(2, i);
+                    console.warn(`Request failed with ${response.status}, retrying in ${waitTime}ms...`);
+                    await new Promise(resolve => setTimeout(resolve, waitTime));
+                    continue;
+                }
+
+                // Don't retry on other errors (404, 400, etc)
+                return response;
+            } catch (error) {
+                if (i === maxRetries - 1) throw error;
+                const waitTime = backoffMs * Math.pow(2, i);
+                console.warn(`Request error, retrying in ${waitTime}ms...`, error);
+                await new Promise(resolve => setTimeout(resolve, waitTime));
+            }
+        }
+
+        throw new Error(`Max retries (${maxRetries}) exceeded for ${url}`);
     }
 }
