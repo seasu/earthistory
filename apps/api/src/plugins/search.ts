@@ -72,7 +72,8 @@ const searchEventsFromDb = async (
       ST_Y(location::geometry) AS lat,
       ST_X(location::geometry) AS lng,
       image_url,
-      wikipedia_url
+      wikipedia_url,
+      youtube_video_id
     FROM events
     WHERE title ILIKE $1
       OR summary ILIKE $1
@@ -98,7 +99,8 @@ const searchEventsFromDb = async (
     lat: row.lat,
     lng: row.lng,
     imageUrl: row.image_url ?? null,
-    wikipediaUrl: row.wikipedia_url ?? null
+    wikipediaUrl: row.wikipedia_url ?? null,
+    youtubeVideoId: row.youtube_video_id ?? null
   }));
 
   return { total: items.length, items };
