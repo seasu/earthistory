@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { MapViewport } from "./map/MapViewport";
 import { MapMode } from "./map/types";
 import { useLocale } from "./i18n";
+import { YearCarousel } from "./YearCarousel";
 
 type EventRecord = {
   id: number;
@@ -329,17 +330,16 @@ export const App = () => {
       {/* Timeline */}
       <div className="overlay-timeline">
         <div className="timeline-track">
-          <label htmlFor="active-year">
+          <label>
             <strong>{formatYear(sliderYear)}</strong>
             <span className="window-hint">{t("windowHint")}</span>
           </label>
-          <input
-            id="active-year"
-            max={TIMELINE_MAX_YEAR}
-            min={TIMELINE_MIN_YEAR}
-            onChange={(event) => setSliderYear(Number(event.target.value))}
-            type="range"
+          <YearCarousel
             value={sliderYear}
+            min={TIMELINE_MIN_YEAR}
+            max={TIMELINE_MAX_YEAR}
+            onChange={setSliderYear}
+            formatYear={formatYear}
           />
         </div>
       </div>
