@@ -16,6 +16,7 @@ type EventItem = {
   imageUrl: string | null;
   imageAttribution: string | null;
   wikipediaUrl: string | null;
+  youtubeVideoId: string | null;
 };
 
 const allEvents: EventItem[] = [
@@ -34,7 +35,8 @@ const allEvents: EventItem[] = [
     lng: 45.64,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: null
+    wikipediaUrl: null,
+    youtubeVideoId: null
   },
   {
     id: 2,
@@ -51,7 +53,8 @@ const allEvents: EventItem[] = [
     lng: 28.98,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: null
+    wikipediaUrl: null,
+    youtubeVideoId: "abc123"
   },
   {
     id: 3,
@@ -68,7 +71,8 @@ const allEvents: EventItem[] = [
     lng: -74.53,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: null
+    wikipediaUrl: null,
+    youtubeVideoId: null
   }
 ];
 
@@ -88,12 +92,19 @@ const installHealthyRoutes = async (page: Page) => {
     const from = Number(url.searchParams.get("from"));
     const to = Number(url.searchParams.get("to"));
     const category = url.searchParams.get("category");
+    const hasYouTube = url.searchParams.get("hasYouTube");
 
     const filtered = allEvents.filter((event) => {
       if (event.timeStart < from || event.timeStart > to) {
         return false;
       }
       if (category && category !== "all" && event.category !== category) {
+        return false;
+      }
+      if (hasYouTube === "true" && !event.youtubeVideoId) {
+        return false;
+      }
+      if (hasYouTube === "false" && event.youtubeVideoId) {
         return false;
       }
       return true;
@@ -138,6 +149,7 @@ test("critical flow supports timeline, map mode, and filters", async ({ page }) 
   await expect(page.getByRole("button", { name: /Fall of Constantinople/ })).toHaveCount(0);
 
   // Apply filters
+  await page.getByLabel("YouTube").selectOption("without");
   await page.getByLabel("Category").selectOption("civilization");
   await page.getByLabel("Region").selectOption("Mesopotamia");
   await page.getByLabel("Keyword").fill("flood");
@@ -185,11 +197,4 @@ test("event API error state is recoverable with retry", async ({ page }) => {
 
   await page.goto("/");
 
-  await expect(page.getByText("Event load error: Request failed with status 500")).toBeVisible();
-  await expect(page.getByRole("button", { name: "Retry" })).toBeVisible();
-
-  await page.getByRole("button", { name: "Retry" }).click();
-
-  await expect(page.getByText("Event load error: Request failed with status 500")).toHaveCount(0);
-  await expect(page.getByRole("button", { name: /Fall of Constantinople/ })).toBeVisible();
-});
+  await expect(pa

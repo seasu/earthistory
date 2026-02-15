@@ -12,6 +12,7 @@ export const openApiSpec = {
           { name: "category", in: "query", schema: { type: "string" } },
           { name: "from", in: "query", schema: { type: "integer" } },
           { name: "to", in: "query", schema: { type: "integer" } },
+          { name: "hasYouTube", in: "query", schema: { type: "boolean" } },
           { name: "limit", in: "query", schema: { type: "integer" } }
         ]
       }
@@ -28,9 +29,4 @@ export const openApiSpec = {
       }
     },
     "/sources": {
-      get: {
-        summary: "List source metadata"
-      }
-    }
-  }
-} as const;
+      g
