@@ -191,4 +191,36 @@ export class WikidataService {
             return [];
         }
     }
+
+    // Fetch members of a Wikipedia category (subcategories and pages)
+    static async fetchCategoryMembers(topic: string, lang: string = "en"): Promise<string[]> {
+        // Ensure topic has "Category:" prefix if not present
+        const categoryTitle = topic.startsWith("Category:") || topic.startsWith("category:")
+            ? topic
+            : `Category:${topic}`;
+
+        const url = `https://${lang}.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=${encodeURIComponent(categoryTitle)}&cmlimit=10&format=json&origin=*`;
+
+        try {
+            const response = await fetch(url, {
+                headers: { "User-Agent": this.USER_AGENT }
+            });
+
+            if (!response.ok) return [];
+
+            const data = await response.json();
+            if (!data.query || !data.query.categorymembers) return [];
+
+            // Filter and map results
+            // ns 14 = Category, ns 0 = Page
+            return data.query.categorymembers
+                .map((member: any) => member.title.replace(/^Category:/, "")) // Remove "Category:" prefix for display
+                .filter((title: string) => !title.includes("Template") && !title.includes("User")); // Basic filtering
+
+        } catch (error) {
+            console.error(`Wikipedia category fetch error (${lang}):`, error);
+            return [];
+        }
+    }
 }
+

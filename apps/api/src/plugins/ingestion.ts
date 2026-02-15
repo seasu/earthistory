@@ -4,26 +4,42 @@ import { WikidataService } from "../services/wikidata.service.js";
 import { getPool } from "../db.js";
 
 // Helper function to suggest better topics when 0 events found
-function getTopicSuggestions(topic: string): string[] {
+async function getTopicSuggestions(topic: string): Promise<string[]> {
   const lowerTopic = topic.toLowerCase();
+  let manualSuggestions: string[] = [];
+  let lang = "en";
 
+  // 1. Determine language and manual suggestions
   // Chinese/中華/中國 related
   if (lowerTopic.includes('chinese') || lowerTopic.includes('中華') || lowerTopic.includes('中国') || lowerTopic.includes('中國')) {
-    return ['Tang Dynasty', 'Ming Dynasty', 'Qing Dynasty', 'Han Dynasty', 'Song Dynasty'];
+    manualSuggestions = ['Tang Dynasty', 'Ming Dynasty', 'Qing Dynasty', 'Han Dynasty', 'Song Dynasty'];
+    lang = "zh";
   }
-
   // Generic culture
-  if (lowerTopic.includes('culture') || lowerTopic.includes('文化')) {
-    return ['Try a specific dynasty or time period', 'Try a specific historical event', 'Try a specific war or empire'];
+  else if (lowerTopic.includes('culture') || lowerTopic.includes('文化')) {
+    manualSuggestions = ['Try a specific dynasty or time period', 'Try a specific historical event', 'Try a specific war or empire'];
   }
-
   // European
-  if (lowerTopic.includes('european') || lowerTopic.includes('europe')) {
-    return ['Roman Empire', 'Ancient Rome', 'Ancient Greece', 'Renaissance', 'French Revolution'];
+  else if (lowerTopic.includes('european') || lowerTopic.includes('europe')) {
+    manualSuggestions = ['Roman Empire', 'Ancient Rome', 'Ancient Greece', 'Renaissance', 'French Revolution'];
+  }
+  else {
+    manualSuggestions = ['Try a more specific topic', 'Try a historical event name', 'Try a dynasty, empire, or time period'];
   }
 
-  // Default suggestions
-  return ['Try a more specific topic', 'Try a historical event name', 'Try a dynasty, empire, or time period'];
+  // 2. Try fetching from Wikipedia Category
+  try {
+    const wikiSuggestions = await WikidataService.fetchCategoryMembers(topic, lang);
+    if (wikiSuggestions.length > 0) {
+      // Return top 5 wiki suggestions, mixed with some manual ones if wiki list is short
+      return wikiSuggestions.slice(0, 5);
+    }
+  } catch (err) {
+    console.error("Failed to fetch Wikipedia suggestions:", err);
+  }
+
+  // 3. Fallback to manual suggestions
+  return manualSuggestions;
 }
 
 type IngestTopicBody = {
@@ -60,7 +76,7 @@ export const ingestionPlugin: FastifyPluginAsync = async (app) => {
     app.log.info(`Fetched ${events.length} events for topic ${searchResult.label}`);
 
     if (events.length === 0) {
-      const suggestions = getTopicSuggestions(topic);
+      const suggestions = await getTopicSuggestions(topic);
       return reply.send({
         message: `No events found for topic: ${searchResult.label}`,
         qid: searchResult.id,
