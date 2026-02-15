@@ -305,29 +305,8 @@ export const App = () => {
         </div>
       )}
 
-      {/* Top-right controls: panel toggles + mode switch + language */}
+      {/* Top-right controls: mode switch + language */}
       <div className="overlay-mode-switch">
-        {!isMobile && (
-          <>
-            <button
-              className={`panel-toggle ${sidebarOpen ? "active" : ""}`}
-              onClick={() => setSidebarOpen((v) => !v)}
-              type="button"
-              aria-label={sidebarOpen ? t("collapse") : t("expand")}
-            >
-              {"\u2630"}
-            </button>
-            <button
-              className={`panel-toggle ${filtersOpen ? "active" : ""}`}
-              onClick={() => setFiltersOpen((v) => !v)}
-              type="button"
-              aria-label={t("toggleFilters")}
-            >
-              {"\u2699"}
-            </button>
-            <span className="mode-switch-divider" />
-          </>
-        )}
         <button
           className="locale-switch"
           onClick={() => setLocale(locale === "en" ? "zh-TW" : "en")}
@@ -479,49 +458,50 @@ export const App = () => {
               </button>
             ))}
           </div>
-
-          {selectedEvent && (
-            <article className="event-detail" aria-live="polite">
-              {selectedEvent.imageUrl && (
-                <div className="event-detail-hero">
-                  <img
-                    src={selectedEvent.imageUrl}
-                    alt={selectedEvent.title}
-                    loading="lazy"
-                    onError={(e) => { (e.target as HTMLImageElement).parentElement!.style.display = "none"; }}
-                  />
-                  {selectedEvent.imageAttribution && (
-                    <span className="image-attribution">{selectedEvent.imageAttribution}</span>
-                  )}
-                </div>
-              )}
-              <div className="event-detail-body">
-                <p className="pill">{tCategory(selectedEvent.category)}</p>
-                <h3>{selectedEvent.title}</h3>
-                <p className="event-summary">{selectedEvent.summary}</p>
-                <ul>
-                  <li>{t("regionLabel")}{selectedEvent.regionName}</li>
-                  <li>
-                    {t("timeLabel")}{formatYear(selectedEvent.timeStart)}
-                    {selectedEvent.timeEnd ? ` \u2013 ${formatYear(selectedEvent.timeEnd)}` : ""}
-                  </li>
-                  <li>{t("precisionLabel")}{tPrecision(selectedEvent.precisionLevel)}</li>
-                  <li>{t("confidenceLabel")}{(selectedEvent.confidenceScore * 100).toFixed(0)}%</li>
-                </ul>
-                <div className="event-detail-links">
-                  <a href={selectedEvent.sourceUrl} rel="noreferrer" target="_blank">
-                    {t("source")}
-                  </a>
-                  {selectedEvent.wikipediaUrl && (
-                    <a href={selectedEvent.wikipediaUrl} rel="noreferrer" target="_blank">
-                      Wikipedia
-                    </a>
-                  )}
-                </div>
-              </div>
-            </article>
-          )}
         </aside>
+      )}
+
+      {/* Desktop: Event detail panel (separate from list) */}
+      {!isMobile && sidebarOpen && selectedEvent && (
+        <article className="overlay-event-detail" aria-live="polite">
+          {selectedEvent.imageUrl && (
+            <div className="event-detail-hero">
+              <img
+                src={selectedEvent.imageUrl}
+                alt={selectedEvent.title}
+                loading="lazy"
+                onError={(e) => { (e.target as HTMLImageElement).parentElement!.style.display = "none"; }}
+              />
+              {selectedEvent.imageAttribution && (
+                <span className="image-attribution">{selectedEvent.imageAttribution}</span>
+              )}
+            </div>
+          )}
+          <div className="event-detail-body">
+            <p className="pill">{tCategory(selectedEvent.category)}</p>
+            <h3>{selectedEvent.title}</h3>
+            <p className="event-summary">{selectedEvent.summary}</p>
+            <ul>
+              <li>{t("regionLabel")}{selectedEvent.regionName}</li>
+              <li>
+                {t("timeLabel")}{formatYear(selectedEvent.timeStart)}
+                {selectedEvent.timeEnd ? ` \u2013 ${formatYear(selectedEvent.timeEnd)}` : ""}
+              </li>
+              <li>{t("precisionLabel")}{tPrecision(selectedEvent.precisionLevel)}</li>
+              <li>{t("confidenceLabel")}{(selectedEvent.confidenceScore * 100).toFixed(0)}%</li>
+            </ul>
+            <div className="event-detail-links">
+              <a href={selectedEvent.sourceUrl} rel="noreferrer" target="_blank">
+                {t("source")}
+              </a>
+              {selectedEvent.wikipediaUrl && (
+                <a href={selectedEvent.wikipediaUrl} rel="noreferrer" target="_blank">
+                  Wikipedia
+                </a>
+              )}
+            </div>
+          </div>
+        </article>
       )}
 
       {/* Mobile: FAB icons at bottom corners */}
