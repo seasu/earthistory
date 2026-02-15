@@ -15,5 +15,6 @@ export type MapProviderProps = {
   events?: MapEvent[];
   selectedEventId?: number | null;
   onEventSelect?: (eventId: number) => void;
+  onBoundsChange?: (bbox: string) => void;
   flyToLocation?: { lat: number; lng: number } | null;
 };

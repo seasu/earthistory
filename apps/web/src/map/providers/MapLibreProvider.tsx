@@ -58,8 +58,6 @@ export const MapLibreProvider = ({
   events = [],
   selectedEventId,
   onEventSelect,
-  selectedEventId,
-  onEventSelect,
   onBoundsChange,
   flyToLocation
 }: MapProviderProps) => {
