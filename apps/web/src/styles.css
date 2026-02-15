@@ -70,7 +70,7 @@ body {
   top: calc(16px + var(--safe-top));
   left: 50%;
   transform: translateX(-50%);
-  z-index: 10;
+  z-index: 12;
   border-radius: 16px;
   padding: 0;
   width: auto;
@@ -646,21 +646,24 @@ body {
 
 /* ===== Mobile: <= 768px ===== */
 @media (max-width: 768px) {
-  /* Timeline: bottom center, compact */
+  /* Timeline: bottom center, match FAB height & position */
   .overlay-timeline {
     top: auto;
-    bottom: calc(8px + var(--safe-bottom));
+    bottom: calc(12px + var(--safe-bottom));
     left: 72px;
     right: 72px;
     transform: none;
     width: auto;
     padding: 0;
-    border-radius: 14px;
+    border-radius: 999px;
   }
 
   .year-dial-trigger {
-    padding: 8px 16px;
+    padding: 0 20px;
     gap: 6px;
+    height: 52px;
+    border-radius: 999px;
+    justify-content: center;
   }
 
   .year-dial-trigger-year {
@@ -944,17 +947,18 @@ body {
 /* ===== Extra small phones: <= 380px ===== */
 @media (max-width: 380px) {
   .overlay-timeline {
-    left: 64px;
-    right: 64px;
+    left: 56px;
+    right: 56px;
     padding: 0;
   }
 
   .year-dial-trigger {
-    padding: 6px 12px;
+    padding: 0 14px;
+    height: 46px;
   }
 
   .year-dial-trigger-year {
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .mobile-fab {
