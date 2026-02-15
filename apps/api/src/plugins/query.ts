@@ -7,6 +7,7 @@ type EventsQuery = {
   from?: number | string;
   to?: number | string;
   limit?: number | string;
+  hasYouTube?: string;
   locale?: string;
 };
 
@@ -33,18 +34,27 @@ export const queryPlugin: FastifyPluginAsync = async (app) => {
   });
 
   app.get<{ Querystring: EventsQuery }>("/events", async (request) => {
-    const { category, from, to, limit = 50, locale } = request.query;
+    const { category, from, to, limit = 50, hasYouTube, locale } = request.query;
     const parsedFrom =
       typeof from === "number" ? from : typeof from === "string" ? Number(from) : undefined;
     const parsedTo = typeof to === "number" ? to : typeof to === "string" ? Number(to) : undefined;
     const parsedLimit =
       typeof limit === "number" ? limit : typeof limit === "string" ? Number(limit) : 50;
+    const parsedHasYouTube =
+      hasYouTube === "true" ? true : hasYouTube === "false" ? false : undefined;
     const safeLimit = Number.isFinite(parsedLimit) ? parsedLimit : 50;
     const clampedLimit = Math.max(1, Math.min(safeLimit, 200));
 
     const pool = getPool();
     if (pool) {
-      return queryEventsFromDb(pool, { category, parsedFrom, parsedTo, clampedLimit, locale });
+      return queryEventsFromDb(pool, {
+        category,
+        parsedFrom,
+        parsedTo,
+        parsedHasYouTube,
+        clampedLimit,
+        locale
+      });
     }
 
     // Fallback to mock data
@@ -52,6 +62,8 @@ export const queryPlugin: FastifyPluginAsync = async (app) => {
       if (category && event.category !== category) return false;
       if (Number.isFinite(parsedFrom) && event.timeStart < (parsedFrom as number)) return false;
       if (Number.isFinite(parsedTo) && event.timeStart > (parsedTo as number)) return false;
+      if (parsedHasYouTube === true && !event.youtubeVideoId) return false;
+      if (parsedHasYouTube === false && event.youtubeVideoId) return false;
       return true;
     });
 
@@ -102,6 +114,7 @@ type EventsParams = {
   category?: string;
   parsedFrom?: number;
   parsedTo?: number;
+  parsedHasYouTube?: boolean;
   clampedLimit: number;
   locale?: string;
 };
@@ -125,6 +138,12 @@ const queryEventsFromDb = async (
   if (Number.isFinite(params.parsedTo)) {
     conditions.push(`time_start <= $${idx++}`);
     values.push(params.parsedTo as number);
+  }
+  if (params.parsedHasYouTube === true) {
+    conditions.push("youtube_video_id IS NOT NULL");
+  }
+  if (params.parsedHasYouTube === false) {
+    conditions.push("youtube_video_id IS NULL");
   }
 
   const whereClause = conditions.length > 0 ? `WHERE ${conditions.join(" AND ")}` : "";
@@ -189,23 +208,4 @@ const queryRegionsFromDb = async (
     `SELECT DISTINCT ${field} AS region FROM events WHERE ${field} IS NOT NULL ORDER BY region`
   );
 
-  const items = result.rows.map((r) => r.region as string);
-  return { total: items.length, items };
-};
-
-const querySourcesFromDb = async (pool: import("pg").Pool) => {
-  const result = await pool.query(
-    `SELECT id, source_name, source_url, license, attribution_text, retrieved_at FROM sources ORDER BY id`
-  );
-
-  const items = result.rows.map((row) => ({
-    id: row.id,
-    sourceName: row.source_name,
-    sourceUrl: row.source_url,
-    license: row.license,
-    attributionText: row.attribution_text,
-    retrievedAt: row.retrieved_at
-  }));
-
-  return { total: items.length, items };
-};
+  

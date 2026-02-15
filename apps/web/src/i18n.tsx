@@ -13,9 +13,13 @@ const strings: Record<string, Record<Locale, string>> = {
   filters: { en: "Filters", "zh-TW": "\u7be9\u9078" },
   category: { en: "Category", "zh-TW": "\u5206\u985e" },
   region: { en: "Region", "zh-TW": "\u5730\u5340" },
+  youtube: { en: "YouTube", "zh-TW": "YouTube \u5f71\u7247" },
   keyword: { en: "Keyword", "zh-TW": "\u95dc\u9375\u5b57" },
   allCategories: { en: "All categories", "zh-TW": "\u6240\u6709\u5206\u985e" },
   allRegions: { en: "All regions", "zh-TW": "\u6240\u6709\u5730\u5340" },
+  allYoutube: { en: "All videos", "zh-TW": "\u6240\u6709\u5f71\u7247" },
+  withYoutube: { en: "With YouTube", "zh-TW": "\u6709 YouTube" },
+  withoutYoutube: { en: "Without YouTube", "zh-TW": "\u7121 YouTube" },
   searchPlaceholder: { en: "Search...", "zh-TW": "\u641c\u5c0b\u2026" },
   regionLabel: { en: "Region: ", "zh-TW": "\u5730\u5340\uff1a" },
   timeLabel: { en: "Time: ", "zh-TW": "\u6642\u9593\uff1a" },
@@ -111,14 +115,4 @@ export const LocaleProvider = ({ children }: { children: ReactNode }) => {
   }, [locale]);
 
   return (
-    <LocaleContext.Provider value={{ locale, setLocale, t, formatYear, tCategory, tPrecision }}>
-      {children}
-    </LocaleContext.Provider>
-  );
-};
-
-export const useLocale = (): LocaleContextValue => {
-  const ctx = useContext(LocaleContext);
-  if (!ctx) throw new Error("useLocale must be used within LocaleProvider");
-  return ctx;
-};
+    <LocaleContext.Provider value={{ locale, setLocale, t, formatYe

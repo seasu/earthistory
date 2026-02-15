@@ -78,6 +78,7 @@ export const App = () => {
   const [knownCategories, setKnownCategories] = useState<string[]>([]);
   const [categoryFilter, setCategoryFilter] = useState("all");
   const [regionFilter, setRegionFilter] = useState("all");
+  const [youtubeFilter, setYoutubeFilter] = useState<"all" | "with" | "without">("all");
   const [keyword, setKeyword] = useState("");
   const [selectedEventId, setSelectedEventId] = useState<number | null>(null);
   const [isLoadingEvents, setIsLoadingEvents] = useState(false);
@@ -145,6 +146,11 @@ export const App = () => {
       if (categoryFilter !== "all") {
         params.set("category", categoryFilter);
       }
+      if (youtubeFilter === "with") {
+        params.set("hasYouTube", "true");
+      } else if (youtubeFilter === "without") {
+        params.set("hasYouTube", "false");
+      }
 
       try {
         const data = await fetchJson<ListResponse<EventRecord>>(`/events?${params.toString()}`, controller.signal);
@@ -168,7 +174,7 @@ export const App = () => {
 
     void loadEvents();
     return () => controller.abort();
-  }, [activeYear, categoryFilter, reloadToken, locale]);
+  }, [activeYear, categoryFilter, youtubeFilter, reloadToken, locale]);
 
   const categories = useMemo(() => knownCategories, [knownCategories]);
 
@@ -178,6 +184,12 @@ export const App = () => {
     return events
       .filter((event) => {
         if (regionFilter !== "all" && event.regionName !== regionFilter) {
+          return false;
+        }
+        if (youtubeFilter === "with" && !event.youtubeVideoId) {
+          return false;
+        }
+        if (youtubeFilter === "without" && event.youtubeVideoId) {
           return false;
         }
 
@@ -191,7 +203,7 @@ export const App = () => {
         );
       })
       .sort((a, b) => a.timeStart - b.timeStart);
-  }, [events, keyword, regionFilter]);
+  }, [events, keyword, regionFilter, youtubeFilter]);
 
   // Show a centered map toast when no events are found
   useEffect(() => {
@@ -393,6 +405,17 @@ export const App = () => {
                     {region}
                   </option>
                 ))}
+              </select>
+            </label>
+            <label className="control">
+              {t("youtube")}
+              <select
+                onChange={(event) => setYoutubeFilter(event.target.value as "all" | "with" | "without")}
+                value={youtubeFilter}
+              >
+                <option value="all">{t("allYoutube")}</option>
+                <option value="with">{t("withYoutube")}</option>
+                <option value="without">{t("withoutYoutube")}</option>
               </select>
             </label>
             <label className="control">
@@ -658,32 +681,4 @@ export const App = () => {
                     </option>
                   ))}
                 </select>
-              </label>
-              <label className="control">
-                {t("region")}
-                <select onChange={(event) => setRegionFilter(event.target.value)} value={regionFilter}>
-                  <option value="all">{t("allRegions")}</option>
-                  {regions.map((region) => (
-                    <option key={region} value={region}>
-                      {region}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              <label className="control">
-                {t("keyword")}
-                <input
-                  onChange={(event) => setKeyword(event.target.value)}
-                  placeholder={t("searchPlaceholder")}
-                  type="text"
-                  value={keyword}
-                />
-              </label>
-            </div>
-            {hasRegionError && <p className="status error">{t("regionError")}{regionsError}</p>}
-          </div>
-        </>
-      )}
-    </div>
-  );
-};
+       
