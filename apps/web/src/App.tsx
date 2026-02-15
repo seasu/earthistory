@@ -681,4 +681,43 @@ export const App = () => {
                     </option>
                   ))}
                 </select>
-       
+              </label>
+              <label className="control">
+                {t("region")}
+                <select onChange={(event) => setRegionFilter(event.target.value)} value={regionFilter}>
+                  <option value="all">{t("allRegions")}</option>
+                  {regions.map((region) => (
+                    <option key={region} value={region}>
+                      {region}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="control">
+                {t("youtube")}
+                <select
+                  onChange={(event) => setYoutubeFilter(event.target.value as "all" | "with" | "without")}
+                  value={youtubeFilter}
+                >
+                  <option value="all">{t("allYoutube")}</option>
+                  <option value="with">{t("withYoutube")}</option>
+                  <option value="without">{t("withoutYoutube")}</option>
+                </select>
+              </label>
+              <label className="control">
+                {t("keyword")}
+                <input
+                  onChange={(event) => setKeyword(event.target.value)}
+                  placeholder={t("searchPlaceholder")}
+                  type="text"
+                  value={keyword}
+                />
+              </label>
+            </div>
+            {hasRegionError && <p className="status error">{t("regionError")}{regionsError}</p>}
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
