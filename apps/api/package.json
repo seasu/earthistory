@@ -8,6 +8,7 @@
     "ingest:seed": "node scripts/ingest-seed.mjs",
     "build": "tsc -p tsconfig.json",
     "start": "node dist/server.js",
+    "db:migrate": "node scripts/migrate.js",
     "lint": "echo \"api lint TODO\"",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "echo \"api test TODO\""
