@@ -64,13 +64,51 @@ body {
   box-shadow: 0 8px 32px rgba(24, 48, 84, 0.18);
 }
 
-/* ===== Floating Overlay: Timeline ===== */
-.overlay-timeline {
+/* ===== Top-center bar: panel icons + timeline ===== */
+.overlay-top-bar {
   position: absolute;
   top: calc(16px + var(--safe-top));
   left: 50%;
   transform: translateX(-50%);
   z-index: 12;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ===== Desktop: Panel toggle icon buttons ===== */
+.panel-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(190, 208, 245, 0.8);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 18px;
+  color: #1c2431;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+
+.panel-toggle:hover {
+  background: rgba(230, 240, 255, 0.95);
+}
+
+.panel-toggle.active {
+  background: #2455c4;
+  color: #ffffff;
+  border-color: #2455c4;
+}
+
+/* ===== Floating Overlay: Timeline ===== */
+.overlay-timeline {
+  position: relative;
   border-radius: 16px;
   padding: 0;
   width: auto;
@@ -509,19 +547,6 @@ body {
   text-transform: capitalize;
 }
 
-/* ===== Desktop: Panel toggle icons in mode-switch bar ===== */
-.overlay-mode-switch .panel-toggle {
-  font-size: 18px;
-}
-
-.mode-switch-divider {
-  width: 1px;
-  height: 24px;
-  background: rgba(190, 208, 245, 0.6);
-  align-self: center;
-  flex-shrink: 0;
-}
-
 /* Fade-in for desktop filters when toggled open */
 .overlay-filters-desktop {
   animation: fadeIn 0.2s ease;
@@ -639,14 +664,17 @@ body {
 
 /* ===== Mobile: <= 768px ===== */
 @media (max-width: 768px) {
-  /* Timeline: bottom center, match FAB height & position */
-  .overlay-timeline {
+  /* Top bar: bottom center on mobile, match FAB height & position */
+  .overlay-top-bar {
     top: auto;
     bottom: calc(12px + var(--safe-bottom));
     left: 72px;
     right: 72px;
     transform: none;
-    width: auto;
+  }
+
+  .overlay-timeline {
+    width: 100%;
     padding: 0;
     border-radius: 999px;
   }
@@ -939,10 +967,9 @@ body {
 
 /* ===== Extra small phones: <= 380px ===== */
 @media (max-width: 380px) {
-  .overlay-timeline {
+  .overlay-top-bar {
     left: 56px;
     right: 56px;
-    padding: 0;
   }
 
   .year-dial-trigger {
