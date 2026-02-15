@@ -16,8 +16,10 @@ export const ingestionPlugin: FastifyPluginAsync = async (app) => {
     }
 
     const pool = getPool();
-    if (!pool) {
-      return reply.code(503).send({ error: "Database not available" });
+    const isDevMode = !pool;
+
+    if (isDevMode) {
+      app.log.warn("Database not available - running in development mode (events will not be persisted)");
     }
 
     app.log.info(`Ingesting topic: ${topic}`);
@@ -38,8 +40,21 @@ export const ingestionPlugin: FastifyPluginAsync = async (app) => {
       return reply.send({ message: "No events found for this topic", count: 0 });
     }
 
-    // 3. Insert into DB (bulk insert with conflict handling)
+    // 3. Insert into DB (bulk insert with conflict handling) - skip in dev mode
     let insertedCount = 0;
+
+    if (isDevMode) {
+      // Development mode: return events without database insertion
+      app.log.info(`Dev mode: returning ${events.length} events without database insertion`);
+      return reply.send({
+        message: `[DEV MODE] Found ${events.length} events for topic: ${searchResult.label} (not persisted to database)`,
+        qid: searchResult.id,
+        scanned: events.length,
+        inserted: 0,
+        devMode: true,
+        events: events.slice(0, 5).map(e => ({ title: e.title, timeStart: e.timeStart })) // Preview first 5
+      });
+    }
 
     for (const event of events) {
       try {

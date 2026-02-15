@@ -42,7 +42,7 @@ export const TopicIngest: React.FC = () => {
 
         } catch (err) {
             setStatus("error");
-            setMessage(t("ingestError") + (err instanceof Error ? err.message : String(err)));
+            setMessage(t("ingestError") + ": " + (err instanceof Error ? err.message : String(err)));
         }
     };
 
