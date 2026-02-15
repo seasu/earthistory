@@ -1,6 +1,7 @@
 
 import { FastifyPluginAsync } from "fastify";
 import { WikidataService } from "../services/wikidata.service.js";
+import { TopicService } from "../services/topic.service.js";
 import { getPool } from "../db.js";
 
 // Helper function to suggest better topics when 0 events found
@@ -31,6 +32,10 @@ async function getTopicSuggestions(topic: string): Promise<string[]> {
   try {
     const wikiSuggestions = await WikidataService.fetchCategoryMembers(topic, lang);
     if (wikiSuggestions.length > 0) {
+      // Save to DB for future use
+      // Fire and forget to not block response
+      TopicService.saveTopicHierarchy(topic, wikiSuggestions, lang).catch(console.error);
+
       // Return top 5 wiki suggestions, mixed with some manual ones if wiki list is short
       return wikiSuggestions.slice(0, 5);
     }
