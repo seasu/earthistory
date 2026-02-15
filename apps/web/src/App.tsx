@@ -80,6 +80,7 @@ export const App = () => {
   const [regionFilter, setRegionFilter] = useState("all");
   const [youtubeFilter, setYoutubeFilter] = useState<"all" | "with" | "without">("all");
   const [keyword, setKeyword] = useState("");
+  const [bbox, setBbox] = useState<string | null>(null);
   const [selectedEventId, setSelectedEventId] = useState<number | null>(null);
   const [isLoadingEvents, setIsLoadingEvents] = useState(false);
   const [isLoadingRegions, setIsLoadingRegions] = useState(false);
@@ -151,6 +152,9 @@ export const App = () => {
       } else if (youtubeFilter === "without") {
         params.set("hasYouTube", "false");
       }
+      if (bbox) {
+        params.set("bbox", bbox);
+      }
 
       try {
         const data = await fetchJson<ListResponse<EventRecord>>(`/events?${params.toString()}`, controller.signal);
@@ -174,7 +178,7 @@ export const App = () => {
 
     void loadEvents();
     return () => controller.abort();
-  }, [activeYear, categoryFilter, youtubeFilter, reloadToken, locale]);
+  }, [activeYear, categoryFilter, youtubeFilter, bbox, reloadToken, locale]);
 
   const categories = useMemo(() => knownCategories, [knownCategories]);
 
@@ -299,6 +303,7 @@ export const App = () => {
           }))}
           selectedEventId={selectedEventId}
           onEventSelect={handleEventSelect}
+          onBoundsChange={setBbox}
           flyToLocation={flyToLocation}
         />
       </div>
