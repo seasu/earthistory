@@ -1,3 +1,4 @@
+
 import { FastifyPluginAsync } from "fastify";
 import { getPool } from "../db.js";
 import { events as mockEvents, sources as mockSources } from "../data/mock.js";
@@ -219,10 +220,11 @@ const queryRegionsFromDb = async (
     ? "COALESCE(region_name_zh, region_name)"
     : "region_name";
 
-  `SELECT DISTINCT ${field} AS region FROM events WHERE ${field} IS NOT NULL ORDER BY region`
+  const result = await pool.query(
+    `SELECT DISTINCT ${field} AS region FROM events WHERE ${field} IS NOT NULL ORDER BY region`
   );
 
-return result.rows.map((row) => row.region);
+  return result.rows.map((row) => row.region);
 };
 
 const querySourcesFromDb = async (pool: import("pg").Pool) => {
@@ -252,4 +254,3 @@ const querySourcesFromDb = async (pool: import("pg").Pool) => {
 };
 
 export default queryPlugin;
-
