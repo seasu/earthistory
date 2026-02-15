@@ -47,6 +47,8 @@ const strings: Record<string, Record<Locale, string>> = {
   ingestSuccess: { en: "Ingested {count} events!", "zh-TW": "\u6210\u529f\u532f\u5165 {count} \u500b\u4e8b\u4ef6\uff01" },
   ingestSuccessDev: { en: "[DEV] Found {count} events (not saved)", "zh-TW": "[\u958b\u767c\u6a21\u5f0f] \u627e\u5230 {count} \u500b\u4e8b\u4ef6\uff08\u672a\u5132\u5b58\uff09" },
   ingestError: { en: "Ingestion failed: ", "zh-TW": "\u532f\u5165\u5931\u6557\uff1a" },
+  noEventsFound: { en: "No events found for this topic.", "zh-TW": "\u627e\u4e0d\u5230\u6b64\u4e3b\u984c\u7684\u4e8b\u4ef6\u3002" },
+  trySuggestions: { en: "Try these instead:", "zh-TW": "\u8a66\u8a66\u9019\u4e9b\u4e3b\u984c\uff1a" },
 };
 
 const categoryMap: Record<string, Record<Locale, string>> = {

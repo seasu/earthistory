@@ -3,6 +3,29 @@ import { FastifyPluginAsync } from "fastify";
 import { WikidataService } from "../services/wikidata.service.js";
 import { getPool } from "../db.js";
 
+// Helper function to suggest better topics when 0 events found
+function getTopicSuggestions(topic: string): string[] {
+  const lowerTopic = topic.toLowerCase();
+
+  // Chinese/中華/中國 related
+  if (lowerTopic.includes('chinese') || lowerTopic.includes('中華') || lowerTopic.includes('中国') || lowerTopic.includes('中國')) {
+    return ['Tang Dynasty', 'Ming Dynasty', 'Qing Dynasty', 'Han Dynasty', 'Song Dynasty'];
+  }
+
+  // Generic culture
+  if (lowerTopic.includes('culture') || lowerTopic.includes('文化')) {
+    return ['Try a specific dynasty or time period', 'Try a specific historical event', 'Try a specific war or empire'];
+  }
+
+  // European
+  if (lowerTopic.includes('european') || lowerTopic.includes('europe')) {
+    return ['Roman Empire', 'Ancient Rome', 'Ancient Greece', 'Renaissance', 'French Revolution'];
+  }
+
+  // Default suggestions
+  return ['Try a more specific topic', 'Try a historical event name', 'Try a dynasty, empire, or time period'];
+}
+
 type IngestTopicBody = {
   topic: string;
 };
@@ -37,7 +60,14 @@ export const ingestionPlugin: FastifyPluginAsync = async (app) => {
     app.log.info(`Fetched ${events.length} events for topic ${searchResult.label}`);
 
     if (events.length === 0) {
-      return reply.send({ message: "No events found for this topic", count: 0 });
+      const suggestions = getTopicSuggestions(topic);
+      return reply.send({
+        message: `No events found for topic: ${searchResult.label}`,
+        qid: searchResult.id,
+        scanned: 0,
+        inserted: 0,
+        suggestions
+      });
     }
 
     // 3. Insert into DB (bulk insert with conflict handling) - skip in dev mode

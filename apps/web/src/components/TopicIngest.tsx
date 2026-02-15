@@ -9,6 +9,7 @@ export const TopicIngest: React.FC = () => {
     const [topic, setTopic] = useState("");
     const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
     const [message, setMessage] = useState("");
+    const [suggestions, setSuggestions] = useState<string[]>([]);
 
     const handleIngest = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -16,6 +17,7 @@ export const TopicIngest: React.FC = () => {
 
         setStatus("loading");
         setMessage("");
+        setSuggestions([]);
 
         try {
             const res = await fetch(`${API_BASE_URL}/ingestion/topic`, {
@@ -30,6 +32,14 @@ export const TopicIngest: React.FC = () => {
                 throw new Error(data.error || "Unknown error");
             }
 
+            // Handle zero results with suggestions
+            if (data.scanned === 0 && data.suggestions) {
+                setStatus("error");
+                setMessage(t("noEventsFound"));
+                setSuggestions(data.suggestions);
+                return;
+            }
+
             setStatus("success");
             // In dev mode, show scanned count; in production, show inserted count
             const count = data.devMode ? data.scanned : data.inserted;
@@ -37,7 +47,7 @@ export const TopicIngest: React.FC = () => {
             setMessage(t(messageKey, { count }));
             setTopic("");
 
-            // Clear success message after 3 seconds
+            // Clear success message after 5 seconds
             setTimeout(() => {
                 setStatus("idle");
                 setMessage("");
@@ -47,6 +57,13 @@ export const TopicIngest: React.FC = () => {
             setStatus("error");
             setMessage(t("ingestError") + ": " + (err instanceof Error ? err.message : String(err)));
         }
+    };
+
+    const handleSuggestionClick = (suggestion: string) => {
+        setTopic(suggestion);
+        setSuggestions([]);
+        setStatus("idle");
+        setMessage("");
     };
 
     return (
@@ -70,6 +87,23 @@ export const TopicIngest: React.FC = () => {
             {status === "loading" && <p className="ingest-status loading">{t("ingesting")}</p>}
             {status === "success" && <p className="ingest-status success">{message}</p>}
             {status === "error" && <p className="ingest-status error">{message}</p>}
+
+            {suggestions.length > 0 && (
+                <div className="suggestions">
+                    <p className="suggestions-label">{t("trySuggestions")}</p>
+                    <div className="suggestions-list">
+                        {suggestions.map((suggestion, idx) => (
+                            <button
+                                key={idx}
+                                className="suggestion-chip"
+                                onClick={() => handleSuggestionClick(suggestion)}
+                            >
+                                {suggestion}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
