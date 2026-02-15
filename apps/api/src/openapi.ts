@@ -29,4 +29,9 @@ export const openApiSpec = {
       }
     },
     "/sources": {
-      g
+      get: {
+        summary: "List data sources"
+      }
+    }
+  }
+};
