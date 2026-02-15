@@ -115,4 +115,14 @@ export const LocaleProvider = ({ children }: { children: ReactNode }) => {
   }, [locale]);
 
   return (
-    <LocaleContext.Provider value={{ locale, setLocale, t, formatYe
+    <LocaleContext.Provider value={{ locale, setLocale, t, formatYear, tCategory, tPrecision }}>
+      {children}
+    </LocaleContext.Provider>
+  );
+};
+
+export const useLocale = () => {
+  const context = useContext(LocaleContext);
+  if (!context) throw new Error("useLocale must be used within LocaleProvider");
+  return context;
+};
