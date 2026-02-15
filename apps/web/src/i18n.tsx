@@ -45,6 +45,7 @@ const strings: Record<string, Record<Locale, string>> = {
   ingestPlaceholder: { en: "Enter topic (e.g. WWII)", "zh-TW": "\u8fe0\u5165\u4e3b\u984c (\u4f8b\uff1a\u4e8c\u6230)" },
   ingesting: { en: "Finding events...", "zh-TW": "\u6b63\u5728\u641c\u5c0b\u4e8b\u4ef6..." },
   ingestSuccess: { en: "Ingested {count} events!", "zh-TW": "\u6210\u529f\u532f\u5165 {count} \u500b\u4e8b\u4ef6\uff01" },
+  ingestSuccessDev: { en: "[DEV] Found {count} events (not saved)", "zh-TW": "[\u958b\u767c\u6a21\u5f0f] \u627e\u5230 {count} \u500b\u4e8b\u4ef6\uff08\u672a\u5132\u5b58\uff09" },
   ingestError: { en: "Ingestion failed: ", "zh-TW": "\u532f\u5165\u5931\u6557\uff1a" },
 };
 

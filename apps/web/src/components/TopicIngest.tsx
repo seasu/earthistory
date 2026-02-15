@@ -31,7 +31,10 @@ export const TopicIngest: React.FC = () => {
             }
 
             setStatus("success");
-            setMessage(t("ingestSuccess", { count: data.inserted }));
+            // In dev mode, show scanned count; in production, show inserted count
+            const count = data.devMode ? data.scanned : data.inserted;
+            const messageKey = data.devMode ? "ingestSuccessDev" : "ingestSuccess";
+            setMessage(t(messageKey, { count }));
             setTopic("");
 
             // Clear success message after 3 seconds
