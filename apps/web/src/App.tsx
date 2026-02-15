@@ -20,6 +20,7 @@ type EventRecord = {
   imageUrl: string | null;
   imageAttribution: string | null;
   wikipediaUrl: string | null;
+  youtubeVideoId: string | null;
 };
 
 type ListResponse<T> = {
@@ -426,7 +427,16 @@ export const App = () => {
             </button>
 
             <div className="desktop-card-content">
-              {selectedEvent.imageUrl && (
+              {selectedEvent.youtubeVideoId ? (
+                <div className="event-detail-hero event-detail-hero-video">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${selectedEvent.youtubeVideoId}`}
+                    title={selectedEvent.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+              ) : selectedEvent.imageUrl ? (
                 <div className="event-detail-hero">
                   <img
                     src={selectedEvent.imageUrl}
@@ -438,7 +448,7 @@ export const App = () => {
                     <span className="image-attribution">{selectedEvent.imageAttribution}</span>
                   )}
                 </div>
-              )}
+              ) : null}
               <div className="event-detail-body">
                 <p className="pill">{tCategory(selectedEvent.category)}</p>
                 <h3>{selectedEvent.title}</h3>
@@ -561,7 +571,16 @@ export const App = () => {
                 </button>
 
                 <article className="mobile-event-card" aria-live="polite">
-                  {selectedEvent.imageUrl && (
+                  {selectedEvent.youtubeVideoId ? (
+                    <div className="mobile-card-hero mobile-card-hero-video">
+                      <iframe
+                        src={`https://www.youtube.com/embed/${selectedEvent.youtubeVideoId}`}
+                        title={selectedEvent.title}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    </div>
+                  ) : selectedEvent.imageUrl ? (
                     <div className="mobile-card-hero">
                       <img
                         src={selectedEvent.imageUrl}
@@ -573,7 +592,7 @@ export const App = () => {
                         <span className="image-attribution">{selectedEvent.imageAttribution}</span>
                       )}
                     </div>
-                  )}
+                  ) : null}
                   <div className="mobile-card-body">
                     <p className="pill">{tCategory(selectedEvent.category)}</p>
                     <h3>{selectedEvent.title}</h3>

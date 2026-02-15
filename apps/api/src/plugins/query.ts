@@ -146,7 +146,8 @@ const queryEventsFromDb = async (
       ST_X(location::geometry) AS lng,
       image_url,
       image_attribution,
-      wikipedia_url
+      wikipedia_url,
+      youtube_video_id
     FROM events
     ${whereClause}
     ORDER BY time_start
@@ -169,7 +170,8 @@ const queryEventsFromDb = async (
     lng: row.lng,
     imageUrl: row.image_url ?? null,
     imageAttribution: row.image_attribution ?? null,
-    wikipediaUrl: row.wikipedia_url ?? null
+    wikipediaUrl: row.wikipedia_url ?? null,
+    youtubeVideoId: row.youtube_video_id ?? null
   }));
 
   return { total: items.length, items };

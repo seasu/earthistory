@@ -27,6 +27,7 @@ export type EventRecord = {
   imageUrl: string | null;
   imageAttribution: string | null;
   wikipediaUrl: string | null;
+  youtubeVideoId: string | null;
 };
 
 export const sources: SourceRecord[] = [
@@ -69,7 +70,8 @@ export const events: EventRecord[] = [
     lng: 45.64,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Ur-Nassiriyah.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Sumer"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Sumer",
+    youtubeVideoId: "XBk9KywTIgk"
   },
   {
     id: 2,
@@ -90,7 +92,8 @@ export const events: EventRecord[] = [
     lng: 31.69,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Narmer_Palette.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Narmer"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Narmer",
+    youtubeVideoId: null
   },
   {
     id: 3,
@@ -111,7 +114,8 @@ export const events: EventRecord[] = [
     lng: 31.13,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Kheops-Pyramid.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Great_Pyramid_of_Giza"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Great_Pyramid_of_Giza",
+    youtubeVideoId: "lotbZQ55SgU"
   },
   {
     id: 4,
@@ -132,7 +136,8 @@ export const events: EventRecord[] = [
     lng: 68.14,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Dholavira1.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Indus_Valley_Civilisation"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Indus_Valley_Civilisation",
+    youtubeVideoId: null
   },
   {
     id: 5,
@@ -153,7 +158,8 @@ export const events: EventRecord[] = [
     lng: 44.42,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=P1050763_Louvre_code_Hammurabi_face_rwk.JPG&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Code_of_Hammurabi"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Code_of_Hammurabi",
+    youtubeVideoId: null
   },
   {
     id: 6,
@@ -174,7 +180,8 @@ export const events: EventRecord[] = [
     lng: -95.35,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Olmec_Head_from_San_Lorenzo%2C_Veracruz.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Olmecs"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Olmecs",
+    youtubeVideoId: null
   },
   {
     id: 7,
@@ -195,7 +202,8 @@ export const events: EventRecord[] = [
     lng: 77.21,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Rigveda_MS2097.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Vedic_period"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Vedic_period",
+    youtubeVideoId: null
   },
   {
     id: 8,
@@ -216,7 +224,8 @@ export const events: EventRecord[] = [
     lng: 114.35,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Shang_dynasty_inscribed_tortoise_plastron.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Oracle_bone"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Oracle_bone",
+    youtubeVideoId: null
   },
   {
     id: 9,
@@ -237,7 +246,8 @@ export const events: EventRecord[] = [
     lng: 26.24,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Procession_trojan_horse_BM_GR1899.12-28.1.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Trojan_War"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Trojan_War",
+    youtubeVideoId: "gQbZX9JEQsQ"
   },
   {
     id: 10,
@@ -258,7 +268,8 @@ export const events: EventRecord[] = [
     lng: 23.72,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Hattusa.liongate.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Late_Bronze_Age_collapse"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Late_Bronze_Age_collapse",
+    youtubeVideoId: null
   },
   {
     id: 11,
@@ -279,7 +290,8 @@ export const events: EventRecord[] = [
     lng: 31.82,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Nubian_pyramids_2.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Kingdom_of_Kush"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Kingdom_of_Kush",
+    youtubeVideoId: null
   },
   {
     id: 12,
@@ -300,7 +312,8 @@ export const events: EventRecord[] = [
     lng: 35.50,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Ph%C3%B6nizisch-5765.svg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Phoenician_alphabet"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Phoenician_alphabet",
+    youtubeVideoId: null
   },
   {
     id: 13,
@@ -321,7 +334,8 @@ export const events: EventRecord[] = [
     lng: 108.94,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Zhougongdanbig.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Zhou_dynasty"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Zhou_dynasty",
+    youtubeVideoId: null
   },
   {
     id: 14,
@@ -342,7 +356,8 @@ export const events: EventRecord[] = [
     lng: 43.16,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Human_headed_winged_bull_facing.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Neo-Assyrian_Empire"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Neo-Assyrian_Empire",
+    youtubeVideoId: null
   },
   {
     id: 15,
@@ -363,7 +378,8 @@ export const events: EventRecord[] = [
     lng: 12.50,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=She-wolf_suckles_Romulus_and_Remus.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Founding_of_Rome"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Founding_of_Rome",
+    youtubeVideoId: "sPzE8-2fWEo"
   },
 
   // ===== Classical (500 BCE – 500 CE) =====
@@ -386,7 +402,8 @@ export const events: EventRecord[] = [
     lng: 12.50,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Roman_SPQR_banner.svg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Roman_Republic"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Roman_Republic",
+    youtubeVideoId: null
   },
   {
     id: 17,
@@ -407,7 +424,8 @@ export const events: EventRecord[] = [
     lng: 83.28,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Buddha_in_Sarnath_Museum_(Dhammajak_Mutra).jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Gautama_Buddha"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Gautama_Buddha",
+    youtubeVideoId: null
   },
   {
     id: 18,
@@ -428,7 +446,8 @@ export const events: EventRecord[] = [
     lng: 116.99,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Konfuzius-1770.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Confucius"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Confucius",
+    youtubeVideoId: null
   },
   {
     id: 19,
@@ -449,7 +468,8 @@ export const events: EventRecord[] = [
     lng: 23.97,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Battle_of_Marathon_Initial_Situation.png&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Battle_of_Marathon"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Battle_of_Marathon",
+    youtubeVideoId: null
   },
   {
     id: 20,
@@ -470,7 +490,8 @@ export const events: EventRecord[] = [
     lng: 23.73,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=The_Parthenon_in_Athens.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Classical_Athens"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Classical_Athens",
+    youtubeVideoId: null
   },
   {
     id: 21,
@@ -491,7 +512,8 @@ export const events: EventRecord[] = [
     lng: 22.97,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Alexander_the_Great_mosaic.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Alexander_the_Great"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Alexander_the_Great",
+    youtubeVideoId: "K7lb6KWBanI"
   },
   {
     id: 22,
@@ -512,7 +534,8 @@ export const events: EventRecord[] = [
     lng: 85.14,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Ashoka_Chakra.svg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Ashoka"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Ashoka",
+    youtubeVideoId: null
   },
   {
     id: 23,
@@ -533,7 +556,8 @@ export const events: EventRecord[] = [
     lng: 116.57,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=The_Great_Wall_of_China_at_Jinshanling-edit.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Great_Wall_of_China"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Great_Wall_of_China",
+    youtubeVideoId: null
   },
   {
     id: 24,
@@ -554,7 +578,8 @@ export const events: EventRecord[] = [
     lng: 108.94,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Terracotta_Army%2C_View_of_Pit_1.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Qin_dynasty"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Qin_dynasty",
+    youtubeVideoId: "xeBm0gANgPo"
   },
   {
     id: 25,
@@ -575,7 +600,8 @@ export const events: EventRecord[] = [
     lng: 108.94,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Jade_burial_suit.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Han_dynasty"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Han_dynasty",
+    youtubeVideoId: null
   },
   {
     id: 26,
@@ -596,7 +622,8 @@ export const events: EventRecord[] = [
     lng: 65.0,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Silk_Road_in_the_I_century_AD_-_en.svg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Silk_Road"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Silk_Road",
+    youtubeVideoId: "vn3e37VWc0k"
   },
   {
     id: 27,
@@ -617,7 +644,8 @@ export const events: EventRecord[] = [
     lng: 12.50,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Vincenzo_Camuccini_-_La_morte_di_Cesare.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Assassination_of_Julius_Caesar"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Assassination_of_Julius_Caesar",
+    youtubeVideoId: "wgPymD-NBQU"
   },
   {
     id: 28,
@@ -638,7 +666,8 @@ export const events: EventRecord[] = [
     lng: 35.21,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Spas_vsederzhitel_sinay.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Jesus"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Jesus",
+    youtubeVideoId: null
   },
   {
     id: 29,
@@ -659,7 +688,8 @@ export const events: EventRecord[] = [
     lng: 14.49,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Pompeii-Forum.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Pompeii"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Pompeii",
+    youtubeVideoId: null
   },
   {
     id: 30,
@@ -680,7 +710,8 @@ export const events: EventRecord[] = [
     lng: 38.73,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Stela_aksum.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Kingdom_of_Aksum"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Kingdom_of_Aksum",
+    youtubeVideoId: null
   },
   {
     id: 31,
@@ -701,7 +732,8 @@ export const events: EventRecord[] = [
     lng: -89.62,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Chichen_Itza_3.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Maya_civilization"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Maya_civilization",
+    youtubeVideoId: null
   },
   {
     id: 32,
@@ -722,7 +754,8 @@ export const events: EventRecord[] = [
     lng: 9.19,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Constantine_the_Great_mosaic.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Edict_of_Milan"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Edict_of_Milan",
+    youtubeVideoId: null
   },
   {
     id: 33,
@@ -743,7 +776,8 @@ export const events: EventRecord[] = [
     lng: 83.01,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Gupta_Empire_320_-_550_ad.png&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Gupta_Empire"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Gupta_Empire",
+    youtubeVideoId: null
   },
   {
     id: 34,
@@ -764,7 +798,8 @@ export const events: EventRecord[] = [
     lng: 12.50,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Invasions_of_the_Roman_Empire_1.png&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Fall_of_the_Western_Roman_Empire"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Fall_of_the_Western_Roman_Empire",
+    youtubeVideoId: "3PszVWZNWVA"
   },
 
   // ===== Medieval (500 CE – 1500 CE) =====
@@ -787,7 +822,8 @@ export const events: EventRecord[] = [
     lng: 108.94,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Tang_dynasty1.PNG&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Tang_dynasty"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Tang_dynasty",
+    youtubeVideoId: null
   },
   {
     id: 36,
@@ -808,7 +844,8 @@ export const events: EventRecord[] = [
     lng: 39.61,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Al-Masjid_AL-Nabawi_in_Madinah_-_Saudi_Arabia.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Hegira"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Hegira",
+    youtubeVideoId: "TpcbfxtdoI8"
   },
   {
     id: 37,
@@ -829,7 +866,8 @@ export const events: EventRecord[] = [
     lng: -1.67,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Gokstadskipet1.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Viking_Age"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Viking_Age",
+    youtubeVideoId: null
   },
   {
     id: 38,
@@ -850,7 +888,8 @@ export const events: EventRecord[] = [
     lng: 114.35,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Song_Dynasty_Porcelain_Bottle.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Song_dynasty"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Song_dynasty",
+    youtubeVideoId: null
   },
   {
     id: 39,
@@ -871,7 +910,8 @@ export const events: EventRecord[] = [
     lng: 0.49,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Bayeux_Tapestry_scene57_Harold_death.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Norman_Conquest"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Norman_Conquest",
+    youtubeVideoId: "Wc5Iu6gSo0k"
   },
   {
     id: 40,
@@ -892,7 +932,8 @@ export const events: EventRecord[] = [
     lng: 35.23,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Counquest_of_Jeusalem_(1099).jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Siege_of_Jerusalem_(1099)"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Siege_of_Jerusalem_(1099)",
+    youtubeVideoId: null
   },
   {
     id: 41,
@@ -913,7 +954,8 @@ export const events: EventRecord[] = [
     lng: 30.93,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Great-Zimbabwe.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Great_Zimbabwe"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Great_Zimbabwe",
+    youtubeVideoId: null
   },
   {
     id: 42,
@@ -934,7 +976,8 @@ export const events: EventRecord[] = [
     lng: 103.87,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Angkor_Wat.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Angkor_Wat"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Angkor_Wat",
+    youtubeVideoId: null
   },
   {
     id: 43,
@@ -955,7 +998,8 @@ export const events: EventRecord[] = [
     lng: 106.91,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=YuanEmperorAlbumGenghisPortrait.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Genghis_Khan"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Genghis_Khan",
+    youtubeVideoId: "wUVvTqvjUaM"
   },
   {
     id: 44,
@@ -976,7 +1020,8 @@ export const events: EventRecord[] = [
     lng: -0.13,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Magna_Carta_(British_Library_Cotton_MS_Augustus_II.106).jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Magna_Carta"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Magna_Carta",
+    youtubeVideoId: null
   },
   {
     id: 45,
@@ -997,7 +1042,8 @@ export const events: EventRecord[] = [
     lng: -99.13,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=The_Conquest_of_Tenochtitlan.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Tenochtitlan"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Tenochtitlan",
+    youtubeVideoId: null
   },
   {
     id: 46,
@@ -1018,7 +1064,8 @@ export const events: EventRecord[] = [
     lng: 12.34,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Plague_in_Ashod.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Black_Death"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Black_Death",
+    youtubeVideoId: "rZy6XilXDZQ"
   },
   {
     id: 47,
@@ -1039,7 +1086,8 @@ export const events: EventRecord[] = [
     lng: -71.97,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Machu_Picchu%2C_Peru.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Inca_Empire"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Inca_Empire",
+    youtubeVideoId: null
   },
   {
     id: 48,
@@ -1060,7 +1108,8 @@ export const events: EventRecord[] = [
     lng: 8.27,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Printing3_Walk_of_Ideas_Berlin.JPG&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Printing_press"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Printing_press",
+    youtubeVideoId: null
   },
   {
     id: 49,
@@ -1081,7 +1130,8 @@ export const events: EventRecord[] = [
     lng: 28.98,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=MohamedIIentry.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Fall_of_Constantinople"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Fall_of_Constantinople",
+    youtubeVideoId: "SuVp-kgMx4k"
   },
   {
     id: 50,
@@ -1102,7 +1152,8 @@ export const events: EventRecord[] = [
     lng: -3.01,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=SONGHAI_empire_map.PNG&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Songhai_Empire"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Songhai_Empire",
+    youtubeVideoId: null
   },
 
   // ===== Early Modern (1500 – 1800) =====
@@ -1125,7 +1176,8 @@ export const events: EventRecord[] = [
     lng: -74.53,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=PuertodelaNavidad.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Christopher_Columbus"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Christopher_Columbus",
+    youtubeVideoId: "GD3dgiDreGc"
   },
   {
     id: 52,
@@ -1146,7 +1198,8 @@ export const events: EventRecord[] = [
     lng: 11.70,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Lucas_Cranach_d.%C3%84._-_Martin_Luther%2C_1528_(Veste_Coburg).jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Reformation"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Reformation",
+    youtubeVideoId: null
   },
   {
     id: 53,
@@ -1167,7 +1220,8 @@ export const events: EventRecord[] = [
     lng: -70.65,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Magellan_Elcano_Circumnavigation-en.svg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Magellan_expedition"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Magellan_expedition",
+    youtubeVideoId: null
   },
   {
     id: 54,
@@ -1188,7 +1242,8 @@ export const events: EventRecord[] = [
     lng: 78.04,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Taj_Mahal_(Edited).jpeg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Mughal_Empire"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Mughal_Empire",
+    youtubeVideoId: "cGBEDILJl1Q"
   },
   {
     id: 55,
@@ -1209,7 +1264,8 @@ export const events: EventRecord[] = [
     lng: 139.69,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Tokugawa_Ieyasu2.JPG&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Tokugawa_shogunate"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Tokugawa_shogunate",
+    youtubeVideoId: null
   },
   {
     id: 56,
@@ -1230,7 +1286,8 @@ export const events: EventRecord[] = [
     lng: 11.25,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Justus_Sustermans_-_Portrait_of_Galileo_Galilei%2C_1636.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Galileo_Galilei"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Galileo_Galilei",
+    youtubeVideoId: null
   },
   {
     id: 57,
@@ -1251,7 +1308,8 @@ export const events: EventRecord[] = [
     lng: -0.13,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=The_Battle_of_Marston_Moor%2C_1644.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/English_Civil_War"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/English_Civil_War",
+    youtubeVideoId: null
   },
   {
     id: 58,
@@ -1272,7 +1330,8 @@ export const events: EventRecord[] = [
     lng: 0.12,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=GodfreyKneller-IsaacNewton-1689.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Isaac_Newton"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Isaac_Newton",
+    youtubeVideoId: null
   },
   {
     id: 59,
@@ -1293,7 +1352,8 @@ export const events: EventRecord[] = [
     lng: 3.39,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Slaveshipposter_(cropped).jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Atlantic_slave_trade"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Atlantic_slave_trade",
+    youtubeVideoId: null
   },
   {
     id: 60,
@@ -1314,7 +1374,8 @@ export const events: EventRecord[] = [
     lng: -2.24,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Spinning_jenny.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Industrial_Revolution"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Industrial_Revolution",
+    youtubeVideoId: null
   },
   {
     id: 61,
@@ -1335,7 +1396,8 @@ export const events: EventRecord[] = [
     lng: -75.15,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=United_States_Declaration_of_Independence.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/United_States_Declaration_of_Independence"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/United_States_Declaration_of_Independence",
+    youtubeVideoId: null
   },
   {
     id: 62,
@@ -1356,7 +1418,8 @@ export const events: EventRecord[] = [
     lng: 2.35,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Eug%C3%A8ne_Delacroix_-_La_libert%C3%A9_guidant_le_peuple.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/French_Revolution"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/French_Revolution",
+    youtubeVideoId: "8qRZcXIODNU"
   },
 
   // ===== Modern (1800 – 2026) =====
@@ -1379,7 +1442,8 @@ export const events: EventRecord[] = [
     lng: -72.28,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Haitian_Revolution.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Haitian_Revolution"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Haitian_Revolution",
+    youtubeVideoId: null
   },
   {
     id: 64,
@@ -1400,7 +1464,8 @@ export const events: EventRecord[] = [
     lng: 2.35,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Jacques-Louis_David_-_The_Emperor_Napoleon_in_His_Study_at_the_Tuileries_-_Google_Art_Project.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Napoleon"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Napoleon",
+    youtubeVideoId: "zqllxbPWKNI"
   },
   {
     id: 65,
@@ -1421,7 +1486,8 @@ export const events: EventRecord[] = [
     lng: -0.13,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Official_medallion_of_the_British_Anti-Slavery_Society_(1795).jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Slavery_Abolition_Act_1833"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Slavery_Abolition_Act_1833",
+    youtubeVideoId: null
   },
   {
     id: 66,
@@ -1442,7 +1508,8 @@ export const events: EventRecord[] = [
     lng: -0.13,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Charles_Darwin_seated_crop.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Charles_Darwin"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Charles_Darwin",
+    youtubeVideoId: null
   },
   {
     id: 67,
@@ -1463,7 +1530,8 @@ export const events: EventRecord[] = [
     lng: -77.04,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Battle_of_Gettysburg%2C_by_Currier_and_Ives.png&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/American_Civil_War"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/American_Civil_War",
+    youtubeVideoId: null
   },
   {
     id: 68,
@@ -1484,7 +1552,8 @@ export const events: EventRecord[] = [
     lng: 139.69,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Meiji_Emperor.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Meiji_Restoration"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Meiji_Restoration",
+    youtubeVideoId: null
   },
   {
     id: 69,
@@ -1505,7 +1574,8 @@ export const events: EventRecord[] = [
     lng: 13.41,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Afrikakonferenz.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Scramble_for_Africa"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Scramble_for_Africa",
+    youtubeVideoId: null
   },
   {
     id: 70,
@@ -1526,7 +1596,8 @@ export const events: EventRecord[] = [
     lng: 4.35,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=WWImontage.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/World_War_I"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/World_War_I",
+    youtubeVideoId: "dHSQAEam2yc"
   },
   {
     id: 71,
@@ -1547,7 +1618,8 @@ export const events: EventRecord[] = [
     lng: 30.32,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Stormningen_av_vinterpalatset.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Russian_Revolution"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Russian_Revolution",
+    youtubeVideoId: "EcQHavxccJQ"
   },
   {
     id: 72,
@@ -1568,7 +1640,8 @@ export const events: EventRecord[] = [
     lng: 13.41,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Infobox_collance_for_WWII.PNG&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/World_War_II"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/World_War_II",
+    youtubeVideoId: "_uk_6vfqwTA"
   },
   {
     id: 73,
@@ -1589,7 +1662,8 @@ export const events: EventRecord[] = [
     lng: 77.21,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Mahatma-Gandhi%2C_studio%2C_1931.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Indian_independence_movement"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Indian_independence_movement",
+    youtubeVideoId: null
   },
   {
     id: 74,
@@ -1610,7 +1684,8 @@ export const events: EventRecord[] = [
     lng: 116.40,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Mao_Zedong_in_1959_(cropped).jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Chinese_Communist_Revolution"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Chinese_Communist_Revolution",
+    youtubeVideoId: null
   },
   {
     id: 75,
@@ -1631,7 +1706,8 @@ export const events: EventRecord[] = [
     lng: -80.65,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Aldrin_Apollo_11_original.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Apollo_11"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Apollo_11",
+    youtubeVideoId: "cwZb2mqId0A"
   },
   {
     id: 76,
@@ -1652,7 +1728,8 @@ export const events: EventRecord[] = [
     lng: 13.41,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Thefalloftheberlinwall1989.JPG&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Fall_of_the_Berlin_Wall"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Fall_of_the_Berlin_Wall",
+    youtubeVideoId: "A9fQPzZ1-hg"
   },
   {
     id: 77,
@@ -1673,7 +1750,8 @@ export const events: EventRecord[] = [
     lng: 6.05,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=WWW_logo_by_Robert_Cailliau.svg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/World_Wide_Web"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/World_Wide_Web",
+    youtubeVideoId: "J9LK6EtxzgM"
   },
   {
     id: 78,
@@ -1694,7 +1772,8 @@ export const events: EventRecord[] = [
     lng: 18.42,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Nelson_Mandela_1994.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Nelson_Mandela"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Nelson_Mandela",
+    youtubeVideoId: null
   },
   {
     id: 79,
@@ -1715,7 +1794,8 @@ export const events: EventRecord[] = [
     lng: -77.10,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=DNA_Overview2.png&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Human_Genome_Project"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Human_Genome_Project",
+    youtubeVideoId: null
   },
   {
     id: 80,
@@ -1736,7 +1816,8 @@ export const events: EventRecord[] = [
     lng: 10.18,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Tahrir_Square_on_February11.png&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Arab_Spring"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Arab_Spring",
+    youtubeVideoId: null
   },
   {
     id: 81,
@@ -1757,7 +1838,8 @@ export const events: EventRecord[] = [
     lng: 1.49,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Chartres_Cathedral.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Chartres_Cathedral"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Chartres_Cathedral",
+    youtubeVideoId: null
   },
   {
     id: 82,
@@ -1778,7 +1860,8 @@ export const events: EventRecord[] = [
     lng: 174.78,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Polynesian_Migration.svg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Polynesian_navigation"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Polynesian_navigation",
+    youtubeVideoId: null
   },
   {
     id: 83,
@@ -1799,7 +1882,8 @@ export const events: EventRecord[] = [
     lng: 45.97,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Sumerian_26th_c_Adab.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Cuneiform"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Cuneiform",
+    youtubeVideoId: null
   },
   {
     id: 84,
@@ -1820,7 +1904,8 @@ export const events: EventRecord[] = [
     lng: 114.06,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Shenzhen_CBD_2021.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Chinese_economic_reform"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Chinese_economic_reform",
+    youtubeVideoId: null
   },
   {
     id: 85,
@@ -1841,7 +1926,8 @@ export const events: EventRecord[] = [
     lng: 114.31,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=SARS-CoV-2_without_background.png&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/COVID-19_pandemic"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/COVID-19_pandemic",
+    youtubeVideoId: "BtN-goy9VOY"
   },
   // ── Taiwan: Last ~100 Years ──────────────────────────────────
   {
@@ -1863,7 +1949,8 @@ export const events: EventRecord[] = [
     lng: 121.51,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Taiwanese_Cultural_Association"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Taiwanese_Cultural_Association",
+    youtubeVideoId: null
   },
   {
     id: 87,
@@ -1884,7 +1971,8 @@ export const events: EventRecord[] = [
     lng: 121.14,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Mona_Rudao.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Wushe_incident"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Wushe_incident",
+    youtubeVideoId: null
   },
   {
     id: 88,
@@ -1905,7 +1993,8 @@ export const events: EventRecord[] = [
     lng: 121.51,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Retrocession_Day"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Retrocession_Day",
+    youtubeVideoId: null
   },
   {
     id: 89,
@@ -1926,7 +2015,8 @@ export const events: EventRecord[] = [
     lng: 121.51,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=228_Incident_h.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/February_28_incident"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/February_28_incident",
+    youtubeVideoId: "qlEoJjmhEGE"
   },
   {
     id: 90,
@@ -1947,7 +2037,8 @@ export const events: EventRecord[] = [
     lng: 121.51,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Republic_of_China_retreat_to_Taiwan"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Republic_of_China_retreat_to_Taiwan",
+    youtubeVideoId: null
   },
   {
     id: 91,
@@ -1968,7 +2059,8 @@ export const events: EventRecord[] = [
     lng: 121.51,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Land_reform_in_Taiwan"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Land_reform_in_Taiwan",
+    youtubeVideoId: null
   },
   {
     id: 92,
@@ -1989,7 +2081,8 @@ export const events: EventRecord[] = [
     lng: 118.38,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Second_Taiwan_Strait_Crisis"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Second_Taiwan_Strait_Crisis",
+    youtubeVideoId: null
   },
   {
     id: 93,
@@ -2010,7 +2103,8 @@ export const events: EventRecord[] = [
     lng: 120.30,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Export_processing_zone"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Export_processing_zone",
+    youtubeVideoId: null
   },
   {
     id: 94,
@@ -2031,7 +2125,8 @@ export const events: EventRecord[] = [
     lng: -73.97,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/United_Nations_General_Assembly_Resolution_2758"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/United_Nations_General_Assembly_Resolution_2758",
+    youtubeVideoId: null
   },
   {
     id: 95,
@@ -2052,7 +2147,8 @@ export const events: EventRecord[] = [
     lng: 121.51,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Ten_Major_Construction_Projects"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Ten_Major_Construction_Projects",
+    youtubeVideoId: null
   },
   {
     id: 96,
@@ -2073,7 +2169,8 @@ export const events: EventRecord[] = [
     lng: 120.30,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Kaohsiung_incident"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Kaohsiung_incident",
+    youtubeVideoId: null
   },
   {
     id: 97,
@@ -2094,7 +2191,8 @@ export const events: EventRecord[] = [
     lng: 121.53,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Democratic_Progressive_Party"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Democratic_Progressive_Party",
+    youtubeVideoId: null
   },
   {
     id: 98,
@@ -2115,7 +2213,8 @@ export const events: EventRecord[] = [
     lng: 121.51,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Martial_law_in_Taiwan"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Martial_law_in_Taiwan",
+    youtubeVideoId: null
   },
   {
     id: 99,
@@ -2136,7 +2235,8 @@ export const events: EventRecord[] = [
     lng: 121.51,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/1996_Taiwanese_presidential_election"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/1996_Taiwanese_presidential_election",
+    youtubeVideoId: null
   },
   {
     id: 100,
@@ -2157,7 +2257,8 @@ export const events: EventRecord[] = [
     lng: 120.82,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Damaged_building_in_921_earthquake.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/1999_Jiji_earthquake"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/1999_Jiji_earthquake",
+    youtubeVideoId: null
   },
   {
     id: 101,
@@ -2178,7 +2279,8 @@ export const events: EventRecord[] = [
     lng: 121.51,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/2000_Taiwanese_presidential_election"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/2000_Taiwanese_presidential_election",
+    youtubeVideoId: null
   },
   {
     id: 102,
@@ -2199,7 +2301,8 @@ export const events: EventRecord[] = [
     lng: 121.51,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=THSR_700T_at_Taichung.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Taiwan_High_Speed_Rail"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Taiwan_High_Speed_Rail",
+    youtubeVideoId: null
   },
   {
     id: 103,
@@ -2220,7 +2323,8 @@ export const events: EventRecord[] = [
     lng: 121.52,
     imageUrl: "https://commons.wikimedia.org/w/thumb.php?f=Sunflower_Movement_2014.jpg&w=320",
     imageAttribution: "Wikimedia Commons",
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Sunflower_Student_Movement"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Sunflower_Student_Movement",
+    youtubeVideoId: null
   },
   {
     id: 104,
@@ -2241,7 +2345,8 @@ export const events: EventRecord[] = [
     lng: 121.51,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Same-sex_marriage_in_Taiwan"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Same-sex_marriage_in_Taiwan",
+    youtubeVideoId: null
   },
   {
     id: 105,
@@ -2262,7 +2367,8 @@ export const events: EventRecord[] = [
     lng: 121.01,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/TSMC"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/TSMC",
+    youtubeVideoId: null
   },
   // ── China: 5 000 Years of History ────────────────────────────
   {
@@ -2284,7 +2390,8 @@ export const events: EventRecord[] = [
     lng: 108.94,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Yellow_Emperor"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Yellow_Emperor",
+    youtubeVideoId: null
   },
   {
     id: 107,
@@ -2305,7 +2412,8 @@ export const events: EventRecord[] = [
     lng: 112.47,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Xia_dynasty"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Xia_dynasty",
+    youtubeVideoId: null
   },
   {
     id: 108,
@@ -2326,7 +2434,8 @@ export const events: EventRecord[] = [
     lng: 114.35,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Shang_dynasty"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Shang_dynasty",
+    youtubeVideoId: null
   },
   {
     id: 109,
@@ -2347,7 +2456,8 @@ export const events: EventRecord[] = [
     lng: 113.65,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Spring_and_Autumn_period"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Spring_and_Autumn_period",
+    youtubeVideoId: null
   },
   {
     id: 110,
@@ -2368,7 +2478,8 @@ export const events: EventRecord[] = [
     lng: 108.94,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Warring_States_period"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Warring_States_period",
+    youtubeVideoId: null
   },
   {
     id: 111,
@@ -2389,7 +2500,8 @@ export const events: EventRecord[] = [
     lng: 108.94,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Three_Kingdoms"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Three_Kingdoms",
+    youtubeVideoId: null
   },
   {
     id: 112,
@@ -2410,7 +2522,8 @@ export const events: EventRecord[] = [
     lng: 108.94,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Sui_dynasty"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Sui_dynasty",
+    youtubeVideoId: null
   },
   {
     id: 113,
@@ -2431,7 +2544,8 @@ export const events: EventRecord[] = [
     lng: 108.94,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Xuanzang"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Xuanzang",
+    youtubeVideoId: "Rpp3vLGkoiY"
   },
   {
     id: 114,
@@ -2452,7 +2566,8 @@ export const events: EventRecord[] = [
     lng: 108.94,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/An_Lushan_Rebellion"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/An_Lushan_Rebellion",
+    youtubeVideoId: null
   },
   {
     id: 115,
@@ -2473,7 +2588,8 @@ export const events: EventRecord[] = [
     lng: 114.31,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Song_dynasty"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Song_dynasty",
+    youtubeVideoId: null
   },
   {
     id: 116,
@@ -2494,7 +2610,8 @@ export const events: EventRecord[] = [
     lng: 116.39,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Yuan_dynasty"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Yuan_dynasty",
+    youtubeVideoId: "NHMgz5k5jHs"
   },
   {
     id: 117,
@@ -2515,7 +2632,8 @@ export const events: EventRecord[] = [
     lng: 118.80,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Ming_dynasty"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Ming_dynasty",
+    youtubeVideoId: null
   },
   {
     id: 118,
@@ -2536,7 +2654,8 @@ export const events: EventRecord[] = [
     lng: 118.80,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Zheng_He"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Zheng_He",
+    youtubeVideoId: "Ha81pOj_UKI"
   },
   {
     id: 119,
@@ -2557,7 +2676,8 @@ export const events: EventRecord[] = [
     lng: 116.39,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Qing_dynasty"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Qing_dynasty",
+    youtubeVideoId: null
   },
   {
     id: 120,
@@ -2578,7 +2698,8 @@ export const events: EventRecord[] = [
     lng: 113.26,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/First_Opium_War"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/First_Opium_War",
+    youtubeVideoId: null
   },
   {
     id: 121,
@@ -2599,7 +2720,8 @@ export const events: EventRecord[] = [
     lng: 118.80,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Taiping_Rebellion"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Taiping_Rebellion",
+    youtubeVideoId: null
   },
   {
     id: 122,
@@ -2620,7 +2742,8 @@ export const events: EventRecord[] = [
     lng: 122.12,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/First_Sino-Japanese_War"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/First_Sino-Japanese_War",
+    youtubeVideoId: null
   },
   {
     id: 123,
@@ -2641,7 +2764,8 @@ export const events: EventRecord[] = [
     lng: 114.27,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Xinhai_Revolution"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Xinhai_Revolution",
+    youtubeVideoId: "XwISj23bOSM"
   },
   {
     id: 124,
@@ -2662,7 +2786,8 @@ export const events: EventRecord[] = [
     lng: 116.39,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/May_Fourth_Movement"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/May_Fourth_Movement",
+    youtubeVideoId: null
   },
   {
     id: 125,
@@ -2683,7 +2808,8 @@ export const events: EventRecord[] = [
     lng: 121.47,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/1st_National_Congress_of_the_Chinese_Communist_Party"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/1st_National_Congress_of_the_Chinese_Communist_Party",
+    youtubeVideoId: null
   },
   {
     id: 126,
@@ -2704,7 +2830,8 @@ export const events: EventRecord[] = [
     lng: 104.07,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Long_March"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Long_March",
+    youtubeVideoId: null
   },
   {
     id: 127,
@@ -2725,7 +2852,8 @@ export const events: EventRecord[] = [
     lng: 118.80,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Second_Sino-Japanese_War"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Second_Sino-Japanese_War",
+    youtubeVideoId: "hIH1aCDRvOo"
   },
   {
     id: 128,
@@ -2746,7 +2874,8 @@ export const events: EventRecord[] = [
     lng: 116.39,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Cultural_Revolution"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Cultural_Revolution",
+    youtubeVideoId: null
   },
   {
     id: 129,
@@ -2767,7 +2896,8 @@ export const events: EventRecord[] = [
     lng: 116.39,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Chinese_economic_reform"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Chinese_economic_reform",
+    youtubeVideoId: null
   },
   {
     id: 130,
@@ -2788,7 +2918,8 @@ export const events: EventRecord[] = [
     lng: 116.40,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/1989_Tiananmen_Square_protests"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/1989_Tiananmen_Square_protests",
+    youtubeVideoId: "YHU_KLYhibI"
   },
   // ── Japan ────────────────────────────────────────────────────
   {
@@ -2810,7 +2941,8 @@ export const events: EventRecord[] = [
     lng: 135.77,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Heian_period"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Heian_period",
+    youtubeVideoId: null
   },
   {
     id: 132,
@@ -2831,7 +2963,8 @@ export const events: EventRecord[] = [
     lng: 139.55,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Kamakura_shogunate"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Kamakura_shogunate",
+    youtubeVideoId: null
   },
   {
     id: 133,
@@ -2852,7 +2985,8 @@ export const events: EventRecord[] = [
     lng: 132.45,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Atomic_bombings_of_Hiroshima_and_Nagasaki"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Atomic_bombings_of_Hiroshima_and_Nagasaki",
+    youtubeVideoId: "NF4LQaWJRDg"
   },
   // ── Korea ────────────────────────────────────────────────────
   {
@@ -2874,7 +3008,8 @@ export const events: EventRecord[] = [
     lng: 126.98,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Three_Kingdoms_of_Korea"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Three_Kingdoms_of_Korea",
+    youtubeVideoId: null
   },
   {
     id: 135,
@@ -2895,7 +3030,8 @@ export const events: EventRecord[] = [
     lng: 126.56,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Goryeo"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Goryeo",
+    youtubeVideoId: null
   },
   {
     id: 136,
@@ -2916,7 +3052,8 @@ export const events: EventRecord[] = [
     lng: 126.98,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Hangul"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Hangul",
+    youtubeVideoId: null
   },
   {
     id: 137,
@@ -2937,7 +3074,8 @@ export const events: EventRecord[] = [
     lng: 126.98,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Korean_War"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Korean_War",
+    youtubeVideoId: "wL3stNFRuIg"
   },
   // ── Southeast Asia ───────────────────────────────────────────
   {
@@ -2959,7 +3097,8 @@ export const events: EventRecord[] = [
     lng: 104.75,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Srivijaya"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Srivijaya",
+    youtubeVideoId: null
   },
   {
     id: 139,
@@ -2980,7 +3119,8 @@ export const events: EventRecord[] = [
     lng: 112.10,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Majapahit"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Majapahit",
+    youtubeVideoId: null
   },
   {
     id: 140,
@@ -3001,7 +3141,8 @@ export const events: EventRecord[] = [
     lng: 106.70,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Fall_of_Saigon"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Fall_of_Saigon",
+    youtubeVideoId: null
   },
   // ── Islamic World / Middle East ──────────────────────────────
   {
@@ -3023,7 +3164,8 @@ export const events: EventRecord[] = [
     lng: 52.89,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Achaemenid_Empire"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Achaemenid_Empire",
+    youtubeVideoId: null
   },
   {
     id: 142,
@@ -3044,7 +3186,8 @@ export const events: EventRecord[] = [
     lng: 44.37,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Islamic_Golden_Age"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Islamic_Golden_Age",
+    youtubeVideoId: null
   },
   {
     id: 143,
@@ -3065,7 +3208,8 @@ export const events: EventRecord[] = [
     lng: 29.06,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Ottoman_Empire"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Ottoman_Empire",
+    youtubeVideoId: null
   },
   // ── Africa ───────────────────────────────────────────────────
   {
@@ -3087,7 +3231,8 @@ export const events: EventRecord[] = [
     lng: -8.00,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Mansa_Musa"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Mansa_Musa",
+    youtubeVideoId: null
   },
   {
     id: 145,
@@ -3108,7 +3253,8 @@ export const events: EventRecord[] = [
     lng: 14.27,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Kingdom_of_Kongo"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Kingdom_of_Kongo",
+    youtubeVideoId: null
   },
   {
     id: 146,
@@ -3129,7 +3275,8 @@ export const events: EventRecord[] = [
     lng: 29.87,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Rwandan_genocide"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Rwandan_genocide",
+    youtubeVideoId: "PJVhMLRV2RI"
   },
   // ── Russia / Eastern Europe ──────────────────────────────────
   {
@@ -3151,7 +3298,8 @@ export const events: EventRecord[] = [
     lng: 28.98,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Justinian_I"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Justinian_I",
+    youtubeVideoId: null
   },
   {
     id: 148,
@@ -3172,7 +3320,8 @@ export const events: EventRecord[] = [
     lng: 30.52,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Kievan_Rus%27"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Kievan_Rus%27",
+    youtubeVideoId: null
   },
   {
     id: 149,
@@ -3193,7 +3342,8 @@ export const events: EventRecord[] = [
     lng: 37.62,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Dissolution_of_the_Soviet_Union"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Dissolution_of_the_Soviet_Union",
+    youtubeVideoId: "lk3kHbyDAiI"
   },
   // ── Americas ─────────────────────────────────────────────────
   {
@@ -3215,7 +3365,8 @@ export const events: EventRecord[] = [
     lng: -77.52,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Caral"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Caral",
+    youtubeVideoId: null
   },
   {
     id: 151,
@@ -3236,7 +3387,8 @@ export const events: EventRecord[] = [
     lng: -98.84,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Teotihuacan"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Teotihuacan",
+    youtubeVideoId: null
   },
   {
     id: 152,
@@ -3257,7 +3409,8 @@ export const events: EventRecord[] = [
     lng: -99.13,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Mexican_Revolution"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Mexican_Revolution",
+    youtubeVideoId: null
   },
   // ── Science & Technology ─────────────────────────────────────
   {
@@ -3279,7 +3432,8 @@ export const events: EventRecord[] = [
     lng: 108.94,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Cai_Lun"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Cai_Lun",
+    youtubeVideoId: null
   },
   {
     id: 154,
@@ -3300,7 +3454,8 @@ export const events: EventRecord[] = [
     lng: -0.17,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Penicillin"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Penicillin",
+    youtubeVideoId: null
   },
   {
     id: 155,
@@ -3321,7 +3476,8 @@ export const events: EventRecord[] = [
     lng: 0.12,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Molecular_Structure_of_Nucleic_Acids"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Molecular_Structure_of_Nucleic_Acids",
+    youtubeVideoId: null
   },
   {
     id: 156,
@@ -3342,7 +3498,8 @@ export const events: EventRecord[] = [
     lng: 63.34,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Sputnik_1"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Sputnik_1",
+    youtubeVideoId: null
   },
   {
     id: 157,
@@ -3363,7 +3520,8 @@ export const events: EventRecord[] = [
     lng: -122.26,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/CRISPR_gene_editing"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/CRISPR_gene_editing",
+    youtubeVideoId: null
   },
   // ── Culture & Thought ────────────────────────────────────────
   {
@@ -3385,7 +3543,8 @@ export const events: EventRecord[] = [
     lng: 110.20,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Borobudur"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Borobudur",
+    youtubeVideoId: null
   },
   {
     id: 159,
@@ -3406,7 +3565,8 @@ export const events: EventRecord[] = [
     lng: 11.25,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Divine_Comedy"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Divine_Comedy",
+    youtubeVideoId: null
   },
   {
     id: 160,
@@ -3427,7 +3587,8 @@ export const events: EventRecord[] = [
     lng: 16.37,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Symphony_No._9_(Beethoven)"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Symphony_No._9_(Beethoven)",
+    youtubeVideoId: null
   },
   {
     id: 161,
@@ -3448,7 +3609,8 @@ export const events: EventRecord[] = [
     lng: 2.29,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Universal_Declaration_of_Human_Rights"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Universal_Declaration_of_Human_Rights",
+    youtubeVideoId: null
   },
   // ── Additional World Events ──────────────────────────────────
   {
@@ -3470,7 +3632,8 @@ export const events: EventRecord[] = [
     lng: 7.63,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Peace_of_Westphalia"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Peace_of_Westphalia",
+    youtubeVideoId: null
   },
   {
     id: 163,
@@ -3491,7 +3654,8 @@ export const events: EventRecord[] = [
     lng: -81.52,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Cuban_Missile_Crisis"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Cuban_Missile_Crisis",
+    youtubeVideoId: null
   },
   {
     id: 164,
@@ -3512,7 +3676,8 @@ export const events: EventRecord[] = [
     lng: 30.10,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Chernobyl_disaster"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Chernobyl_disaster",
+    youtubeVideoId: null
   },
   {
     id: 165,
@@ -3533,7 +3698,8 @@ export const events: EventRecord[] = [
     lng: 9.70,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Bantu_expansion"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Bantu_expansion",
+    youtubeVideoId: null
   },
   // ── Filling Timeline Gaps ────────────────────────────────────
   {
@@ -3555,7 +3721,8 @@ export const events: EventRecord[] = [
     lng: 24.90,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Minoan_civilization"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Minoan_civilization",
+    youtubeVideoId: null
   },
   {
     id: 169,
@@ -3576,7 +3743,8 @@ export const events: EventRecord[] = [
     lng: 23.97,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Battle_of_Marathon"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Battle_of_Marathon",
+    youtubeVideoId: null
   },
   {
     id: 170,
@@ -3597,7 +3765,8 @@ export const events: EventRecord[] = [
     lng: 22.56,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Battle_of_Thermopylae"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Battle_of_Thermopylae",
+    youtubeVideoId: null
   },
   {
     id: 171,
@@ -3618,7 +3787,8 @@ export const events: EventRecord[] = [
     lng: 29.92,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Library_of_Alexandria"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Library_of_Alexandria",
+    youtubeVideoId: null
   },
   {
     id: 172,
@@ -3639,7 +3809,8 @@ export const events: EventRecord[] = [
     lng: 6.86,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Hannibal"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Hannibal",
+    youtubeVideoId: "EbBHk_zLTmY"
   },
   {
     id: 173,
@@ -3660,7 +3831,8 @@ export const events: EventRecord[] = [
     lng: 35.24,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Siege_of_Jerusalem_(70_CE)"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Siege_of_Jerusalem_(70_CE)",
+    youtubeVideoId: null
   },
   {
     id: 174,
@@ -3681,7 +3853,8 @@ export const events: EventRecord[] = [
     lng: 38.72,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Ezana_of_Axum"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Ezana_of_Axum",
+    youtubeVideoId: null
   },
   {
     id: 175,
@@ -3702,7 +3875,8 @@ export const events: EventRecord[] = [
     lng: 12.50,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Fall_of_the_Western_Roman_Empire"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Fall_of_the_Western_Roman_Empire",
+    youtubeVideoId: null
   },
   {
     id: 176,
@@ -3723,7 +3897,8 @@ export const events: EventRecord[] = [
     lng: 135.50,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Buddhism_in_Japan"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Buddhism_in_Japan",
+    youtubeVideoId: null
   },
   {
     id: 177,
@@ -3744,7 +3919,8 @@ export const events: EventRecord[] = [
     lng: 12.50,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Charlemagne"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Charlemagne",
+    youtubeVideoId: "hwL_qFNDa7g"
   },
   {
     id: 178,
@@ -3765,7 +3941,8 @@ export const events: EventRecord[] = [
     lng: 79.14,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Chola_dynasty"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Chola_dynasty",
+    youtubeVideoId: null
   },
   {
     id: 179,
@@ -3786,7 +3963,8 @@ export const events: EventRecord[] = [
     lng: 12.34,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Marco_Polo"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Marco_Polo",
+    youtubeVideoId: null
   },
   {
     id: 180,
@@ -3807,7 +3985,8 @@ export const events: EventRecord[] = [
     lng: -3.01,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Timbuktu"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Timbuktu",
+    youtubeVideoId: null
   },
   {
     id: 181,
@@ -3828,7 +4007,8 @@ export const events: EventRecord[] = [
     lng: -5.40,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Treaty_of_Tordesillas"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Treaty_of_Tordesillas",
+    youtubeVideoId: null
   },
   {
     id: 182,
@@ -3849,7 +4029,8 @@ export const events: EventRecord[] = [
     lng: 75.77,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Vasco_da_Gama"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Vasco_da_Gama",
+    youtubeVideoId: null
   },
   {
     id: 183,
@@ -3870,7 +4051,8 @@ export const events: EventRecord[] = [
     lng: -99.13,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Spanish_conquest_of_the_Aztec_Empire"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Spanish_conquest_of_the_Aztec_Empire",
+    youtubeVideoId: "nXuOAm2MC_o"
   },
   {
     id: 184,
@@ -3891,7 +4073,8 @@ export const events: EventRecord[] = [
     lng: 20.50,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Copernican_Revolution"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Copernican_Revolution",
+    youtubeVideoId: null
   },
   {
     id: 185,
@@ -3912,7 +4095,8 @@ export const events: EventRecord[] = [
     lng: -4.14,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Spanish_Armada"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Spanish_Armada",
+    youtubeVideoId: null
   },
   {
     id: 186,
@@ -3933,7 +4117,8 @@ export const events: EventRecord[] = [
     lng: -0.12,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Royal_Society"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Royal_Society",
+    youtubeVideoId: null
   },
   {
     id: 187,
@@ -3954,7 +4139,8 @@ export const events: EventRecord[] = [
     lng: 16.37,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Congress_of_Vienna"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Congress_of_Vienna",
+    youtubeVideoId: null
   },
   {
     id: 188,
@@ -3975,7 +4161,8 @@ export const events: EventRecord[] = [
     lng: -0.12,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/The_Communist_Manifesto"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/The_Communist_Manifesto",
+    youtubeVideoId: null
   },
   {
     id: 189,
@@ -3996,7 +4183,8 @@ export const events: EventRecord[] = [
     lng: 12.50,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Italian_unification"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Italian_unification",
+    youtubeVideoId: null
   },
   {
     id: 190,
@@ -4017,7 +4205,8 @@ export const events: EventRecord[] = [
     lng: 32.34,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Suez_Canal"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Suez_Canal",
+    youtubeVideoId: null
   },
   {
     id: 191,
@@ -4038,7 +4227,8 @@ export const events: EventRecord[] = [
     lng: 11.07,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Unification_of_Germany"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Unification_of_Germany",
+    youtubeVideoId: null
   },
   {
     id: 192,
@@ -4059,7 +4249,8 @@ export const events: EventRecord[] = [
     lng: 116.39,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Boxer_Rebellion"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Boxer_Rebellion",
+    youtubeVideoId: null
   },
   {
     id: 193,
@@ -4080,7 +4271,8 @@ export const events: EventRecord[] = [
     lng: -75.67,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Wright_brothers"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Wright_brothers",
+    youtubeVideoId: null
   },
   {
     id: 194,
@@ -4101,7 +4293,8 @@ export const events: EventRecord[] = [
     lng: 121.60,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Russo-Japanese_War"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Russo-Japanese_War",
+    youtubeVideoId: null
   },
   {
     id: 195,
@@ -4122,7 +4315,8 @@ export const events: EventRecord[] = [
     lng: 2.12,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Treaty_of_Versailles"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Treaty_of_Versailles",
+    youtubeVideoId: null
   },
   {
     id: 196,
@@ -4143,7 +4337,8 @@ export const events: EventRecord[] = [
     lng: -74.01,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Great_Depression"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Great_Depression",
+    youtubeVideoId: null
   },
   {
     id: 197,
@@ -4164,7 +4359,8 @@ export const events: EventRecord[] = [
     lng: -0.88,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Normandy_landings"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Normandy_landings",
+    youtubeVideoId: "YJRqB1xtIIg"
   },
   {
     id: 198,
@@ -4185,7 +4381,8 @@ export const events: EventRecord[] = [
     lng: -73.97,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/United_Nations"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/United_Nations",
+    youtubeVideoId: null
   },
   {
     id: 199,
@@ -4206,7 +4403,8 @@ export const events: EventRecord[] = [
     lng: 77.21,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Partition_of_India"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Partition_of_India",
+    youtubeVideoId: null
   },
   {
     id: 200,
@@ -4227,7 +4425,8 @@ export const events: EventRecord[] = [
     lng: 34.78,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Israeli_Declaration_of_Independence"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Israeli_Declaration_of_Independence",
+    youtubeVideoId: null
   },
   {
     id: 201,
@@ -4248,7 +4447,8 @@ export const events: EventRecord[] = [
     lng: -82.37,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Cuban_Revolution"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Cuban_Revolution",
+    youtubeVideoId: null
   },
   {
     id: 202,
@@ -4269,7 +4469,8 @@ export const events: EventRecord[] = [
     lng: -77.01,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Civil_Rights_Act_of_1964"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Civil_Rights_Act_of_1964",
+    youtubeVideoId: "lBFBKDhYNzE"
   },
   {
     id: 203,
@@ -4290,7 +4491,8 @@ export const events: EventRecord[] = [
     lng: 51.39,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Iranian_Revolution"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Iranian_Revolution",
+    youtubeVideoId: null
   },
   {
     id: 204,
@@ -4311,7 +4513,8 @@ export const events: EventRecord[] = [
     lng: 5.69,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Maastricht_Treaty"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Maastricht_Treaty",
+    youtubeVideoId: null
   },
   {
     id: 205,
@@ -4332,7 +4535,8 @@ export const events: EventRecord[] = [
     lng: -74.01,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/September_11_attacks"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/September_11_attacks",
+    youtubeVideoId: null
   },
   {
     id: 206,
@@ -4353,7 +4557,8 @@ export const events: EventRecord[] = [
     lng: -74.01,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Financial_crisis_of_2007%E2%80%932008"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Financial_crisis_of_2007%E2%80%932008",
+    youtubeVideoId: null
   },
   {
     id: 207,
@@ -4374,6 +4579,7 @@ export const events: EventRecord[] = [
     lng: 2.35,
     imageUrl: null,
     imageAttribution: null,
-    wikipediaUrl: "https://en.wikipedia.org/wiki/Paris_Agreement"
+    wikipediaUrl: "https://en.wikipedia.org/wiki/Paris_Agreement",
+    youtubeVideoId: null
   }
 ];
