@@ -509,31 +509,22 @@ body {
   text-transform: capitalize;
 }
 
-/* ===== Desktop: Toggle button for sidebar ===== */
-.sidebar-toggle {
-  position: absolute;
-  top: 50%;
-  left: calc(348px + var(--safe-left));
-  transform: translateY(-50%);
-  z-index: 11;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid #d6e4ff;
-  border-radius: 999px;
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
+/* ===== Desktop: Panel toggle icons in mode-switch bar ===== */
+.overlay-mode-switch .panel-toggle {
   font-size: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: left 0.3s ease;
 }
 
-.sidebar-toggle:not(.open) {
-  left: calc(16px + var(--safe-left));
+.mode-switch-divider {
+  width: 1px;
+  height: 24px;
+  background: rgba(190, 208, 245, 0.6);
+  align-self: center;
+  flex-shrink: 0;
+}
+
+/* Fade-in for desktop filters when toggled open */
+.overlay-filters-desktop {
+  animation: fadeIn 0.2s ease;
 }
 
 /* ===== Map loading overlay ===== */

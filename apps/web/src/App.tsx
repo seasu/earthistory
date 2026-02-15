@@ -84,7 +84,8 @@ export const App = () => {
   const [eventsError, setEventsError] = useState<string | null>(null);
   const [regionsError, setRegionsError] = useState<string | null>(null);
   const [reloadToken, setReloadToken] = useState(0);
-  const [sidebarOpen, setSidebarOpen] = useState(!isMobile);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [filtersOpen, setFiltersOpen] = useState(false);
   const [mobileEventsOpen, setMobileEventsOpen] = useState(false);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [showNoEventsToast, setShowNoEventsToast] = useState(false);
@@ -92,7 +93,8 @@ export const App = () => {
 
   // Close panels when switching between mobile/desktop
   useEffect(() => {
-    setSidebarOpen(!isMobile);
+    setSidebarOpen(false);
+    setFiltersOpen(false);
     setMobileEventsOpen(false);
     setMobileFiltersOpen(false);
   }, [isMobile]);
@@ -301,8 +303,29 @@ export const App = () => {
         </div>
       )}
 
-      {/* Top-right controls: mode switch + language */}
+      {/* Top-right controls: panel toggles + mode switch + language */}
       <div className="overlay-mode-switch">
+        {!isMobile && (
+          <>
+            <button
+              className={`panel-toggle ${sidebarOpen ? "active" : ""}`}
+              onClick={() => setSidebarOpen((v) => !v)}
+              type="button"
+              aria-label={sidebarOpen ? t("collapse") : t("expand")}
+            >
+              {"\u2630"}
+            </button>
+            <button
+              className={`panel-toggle ${filtersOpen ? "active" : ""}`}
+              onClick={() => setFiltersOpen((v) => !v)}
+              type="button"
+              aria-label={t("toggleFilters")}
+            >
+              {"\u2699"}
+            </button>
+            <span className="mode-switch-divider" />
+          </>
+        )}
         <button
           className="locale-switch"
           onClick={() => setLocale(locale === "en" ? "zh-TW" : "en")}
@@ -339,8 +362,8 @@ export const App = () => {
         />
       </div>
 
-      {/* Desktop: Filters overlay */}
-      {!isMobile && (
+      {/* Desktop: Filters overlay (toggled via icon) */}
+      {!isMobile && filtersOpen && (
         <div className="overlay-filters-desktop">
           <div className="filter-row">
             <label className="control">
@@ -382,19 +405,7 @@ export const App = () => {
         </div>
       )}
 
-      {/* Desktop: sidebar toggle button */}
-      {!isMobile && (
-        <button
-          className={`sidebar-toggle ${sidebarOpen ? "open" : ""}`}
-          onClick={() => setSidebarOpen((v) => !v)}
-          type="button"
-          aria-label={sidebarOpen ? t("collapse") : t("expand")}
-        >
-          {sidebarOpen ? "\u25C0" : "\u25B6"}
-        </button>
-      )}
-
-      {/* Desktop: Events sidebar */}
+      {/* Desktop: Events sidebar (toggled via icon) */}
       {!isMobile && (
         <aside className={`overlay-events ${sidebarOpen ? "" : "collapsed"}`}>
           <div className="overlay-events-header">
