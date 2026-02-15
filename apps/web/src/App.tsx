@@ -327,21 +327,16 @@ export const App = () => {
         </button>
       </div>
 
-      {/* Timeline */}
+      {/* Timeline: year dial trigger + popup */}
       <div className="overlay-timeline">
-        <div className="timeline-track">
-          <label>
-            <strong>{formatYear(sliderYear)}</strong>
-            <span className="window-hint">{t("windowHint")}</span>
-          </label>
-          <YearCarousel
-            value={sliderYear}
-            min={TIMELINE_MIN_YEAR}
-            max={TIMELINE_MAX_YEAR}
-            onChange={setSliderYear}
-            formatYear={formatYear}
-          />
-        </div>
+        <YearCarousel
+          value={sliderYear}
+          min={TIMELINE_MIN_YEAR}
+          max={TIMELINE_MAX_YEAR}
+          onChange={setSliderYear}
+          formatYear={formatYear}
+          windowHint={t("windowHint")}
+        />
       </div>
 
       {/* Desktop: Filters overlay */}

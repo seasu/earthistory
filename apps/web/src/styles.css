@@ -72,33 +72,183 @@ body {
   transform: translateX(-50%);
   z-index: 10;
   border-radius: 16px;
-  padding: 16px 24px;
-  width: min(720px, calc(100vw - 32px));
-}
-
-.timeline-track {
-  margin-bottom: 0;
-}
-
-.timeline-track label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 6px;
-  font-size: 14px;
-  font-weight: 600;
+  padding: 0;
+  width: auto;
 }
 
 .window-hint {
-  font-size: 12px;
+  font-size: 11px;
   color: #6b7280;
   font-weight: normal;
 }
 
-.timeline-track input[type="range"] {
-  width: 100%;
-  accent-color: #2455c4;
+/* ===== Year Dial Trigger Button ===== */
+.year-dial-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  color: #1c2431;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.15s;
+  border-radius: 16px;
+}
+
+.year-dial-trigger:hover {
+  background: rgba(36, 85, 196, 0.06);
+}
+
+.year-dial-trigger.active {
+  background: rgba(36, 85, 196, 0.1);
+}
+
+.year-dial-trigger-year {
+  font-size: 18px;
+  font-weight: 700;
+  color: #2455c4;
+}
+
+/* ===== Year Dial Popup ===== */
+.year-dial-popup {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 8px;
+  width: min(520px, calc(100vw - 32px));
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(214, 228, 255, 0.6);
+  box-shadow: 0 12px 48px rgba(24, 48, 84, 0.18);
+  border-radius: 0 0 50% 50% / 0 0 40% 40%;
+  overflow: hidden;
+  animation: dialSlideIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 20;
+  padding-bottom: 18px;
+}
+
+@keyframes dialSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-8px) scaleY(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scaleY(1);
+  }
+}
+
+.year-dial-value {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  color: #2455c4;
+  padding: 14px 0 8px;
+  pointer-events: none;
+}
+
+/* ===== Dial Track (swipeable area) ===== */
+.year-dial-track {
+  position: relative;
+  height: 72px;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  overflow: hidden;
+}
+
+.year-dial-track:active {
+  cursor: grabbing;
+}
+
+.year-dial-ticks {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* ===== Tick marks ===== */
+.year-dial-tick {
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translateX(-50%);
+}
+
+.year-dial-tick .tick-line {
+  width: 1px;
+  background: #b0c4e8;
+  transition: height 0.1s;
+}
+
+.year-dial-tick.tiny .tick-line {
+  height: 14px;
+  background: #d0ddf0;
+}
+
+.year-dial-tick.minor .tick-line {
   height: 24px;
+  background: #94b0da;
+}
+
+.year-dial-tick.medium .tick-line {
+  height: 34px;
+  width: 1.5px;
+  background: #6891c4;
+}
+
+.year-dial-tick.major .tick-line {
+  height: 40px;
+  width: 2px;
+  background: #2455c4;
+}
+
+.year-dial-tick .tick-label {
+  margin-top: 4px;
+  font-size: 10px;
+  color: #5a7399;
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+.year-dial-tick.major .tick-label {
+  font-size: 11px;
+  color: #2455c4;
+  font-weight: 700;
+}
+
+/* ===== Center needle indicator ===== */
+.year-dial-needle {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(to bottom, #2455c4, rgba(36, 85, 196, 0.3));
+  border-radius: 2px;
+  pointer-events: none;
+  box-shadow: 0 0 6px rgba(36, 85, 196, 0.3);
+}
+
+.year-dial-needle::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 7px solid #2455c4;
 }
 
 /* ===== Year Carousel ===== */
@@ -568,12 +718,48 @@ body {
     right: 72px;
     transform: none;
     width: auto;
-    padding: 10px 16px;
+    padding: 0;
     border-radius: 14px;
   }
 
-  .timeline-track label {
-    font-size: 13px;
+  .year-dial-trigger {
+    padding: 8px 16px;
+    gap: 6px;
+  }
+
+  .year-dial-trigger-year {
+    font-size: 15px;
+  }
+
+  .year-dial-popup {
+    top: auto;
+    bottom: 100%;
+    margin-top: 0;
+    margin-bottom: 8px;
+    width: calc(100vw - 24px);
+    border-radius: 50% 50% 0 0 / 40% 40% 0 0;
+    padding-bottom: 12px;
+    animation-name: dialSlideInMobile;
+  }
+
+  @keyframes dialSlideInMobile {
+    from {
+      opacity: 0;
+      transform: translateX(-50%) translateY(8px) scaleY(0.6);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0) scaleY(1);
+    }
+  }
+
+  .year-dial-value {
+    font-size: 18px;
+    padding: 10px 0 6px;
+  }
+
+  .year-dial-track {
+    height: 60px;
   }
 
   .year-carousel-container {
@@ -837,11 +1023,15 @@ body {
   .overlay-timeline {
     left: 64px;
     right: 64px;
-    padding: 8px 12px;
+    padding: 0;
   }
 
-  .timeline-track label {
-    font-size: 12px;
+  .year-dial-trigger {
+    padding: 6px 12px;
+  }
+
+  .year-dial-trigger-year {
+    font-size: 14px;
   }
 
   .mobile-fab {
