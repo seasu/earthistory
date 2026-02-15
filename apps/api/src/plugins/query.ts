@@ -8,6 +8,7 @@ type EventsQuery = {
   to?: number | string;
   limit?: number | string;
   hasYouTube?: string;
+  bbox?: string;
   locale?: string;
 };
 
@@ -52,6 +53,7 @@ export const queryPlugin: FastifyPluginAsync = async (app) => {
         parsedFrom,
         parsedTo,
         parsedHasYouTube,
+        bbox: request.query.bbox,
         clampedLimit,
         locale
       });
@@ -115,6 +117,7 @@ type EventsParams = {
   parsedFrom?: number;
   parsedTo?: number;
   parsedHasYouTube?: boolean;
+  bbox?: string;
   clampedLimit: number;
   locale?: string;
 };
@@ -144,6 +147,18 @@ const queryEventsFromDb = async (
   }
   if (params.parsedHasYouTube === false) {
     conditions.push("youtube_video_id IS NULL");
+  }
+
+  if (params.bbox) {
+    const [minLng, minLat, maxLng, maxLat] = params.bbox.split(",").map(Number);
+    if (
+      [minLng, minLat, maxLng, maxLat].every((n) => Number.isFinite(n))
+    ) {
+      conditions.push(
+        `location && ST_MakeEnvelope($${idx++}, $${idx++}, $${idx++}, $${idx++}, 4326)`
+      );
+      values.push(minLng, minLat, maxLng, maxLat);
+    }
   }
 
   const whereClause = conditions.length > 0 ? `WHERE ${conditions.join(" AND ")}` : "";
@@ -208,4 +223,3 @@ const queryRegionsFromDb = async (
     `SELECT DISTINCT ${field} AS region FROM events WHERE ${field} IS NOT NULL ORDER BY region`
   );
 
-  

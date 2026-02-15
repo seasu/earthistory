@@ -58,13 +58,18 @@ export const MapLibreProvider = ({
   events = [],
   selectedEventId,
   onEventSelect,
+  selectedEventId,
+  onEventSelect,
+  onBoundsChange,
   flyToLocation
 }: MapProviderProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   const markersRef = useRef<maplibregl.Marker[]>([]);
   const onEventSelectRef = useRef(onEventSelect);
+  const onBoundsChangeRef = useRef(onBoundsChange);
   onEventSelectRef.current = onEventSelect;
+  onBoundsChangeRef.current = onBoundsChange;
 
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
@@ -78,6 +83,21 @@ export const MapLibreProvider = ({
 
     map.addControl(new maplibregl.NavigationControl(), "top-right");
     mapRef.current = map;
+
+    const updateBounds = () => {
+      const bounds = map.getBounds();
+      const bbox = [
+        bounds.getWest(),
+        bounds.getSouth(),
+        bounds.getEast(),
+        bounds.getNorth(),
+      ].join(",");
+      onBoundsChangeRef.current?.(bbox);
+    };
+
+    map.on("moveend", updateBounds);
+    // Initial bounds
+    map.once("load", updateBounds);
 
     return () => {
       map.remove();

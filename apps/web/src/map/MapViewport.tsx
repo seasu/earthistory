@@ -17,13 +17,21 @@ type MapViewportProps = Omit<MapProviderProps, "className"> & {
   mode: MapMode;
 };
 
-export const MapViewport = ({ mode, ...mapProps }: MapViewportProps) => {
+export const MapViewport = ({ mode, onBoundsChange, ...mapProps }: MapViewportProps) => {
   return (
     <Suspense fallback={<div className="map-loading-placeholder" />}>
       {mode === "cesium" ? (
-        <CesiumProvider className="map-provider" {...mapProps} />
+        <CesiumProvider
+          className="map-provider"
+          {...mapProps}
+          onBoundsChange={onBoundsChange}
+        />
       ) : (
-        <MapLibreProvider className="map-provider" {...mapProps} />
+        <MapLibreProvider
+          className="map-provider"
+          {...mapProps}
+          onBoundsChange={onBoundsChange}
+        />
       )}
     </Suspense>
   );
