@@ -29,9 +29,4 @@ export const openApiSpec = {
       }
     },
     "/sources": {
-      get: {
-        summary: "List source metadata"
-      }
-    }
-  }
-} as const;
+      g

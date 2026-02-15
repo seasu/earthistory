@@ -197,11 +197,4 @@ test("event API error state is recoverable with retry", async ({ page }) => {
 
   await page.goto("/");
 
-  await expect(page.getByText("Event load error: Request failed with status 500")).toBeVisible();
-  await expect(page.getByRole("button", { name: "Retry" })).toBeVisible();
-
-  await page.getByRole("button", { name: "Retry" }).click();
-
-  await expect(page.getByText("Event load error: Request failed with status 500")).toHaveCount(0);
-  await expect(page.getByRole("button", { name: /Fall of Constantinople/ })).toBeVisible();
-});
+  await expect(pa
