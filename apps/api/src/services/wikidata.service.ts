@@ -90,12 +90,35 @@ export class WikidataService {
 
     // Fetch events related to a QID (instance of or part of)
     static async fetchRelatedEvents(qid: string, limit = 500): Promise<WikidataEvent[]> {
-        // Added ?typeLabel to query the "instance of" label
+        // Use UNION to search across multiple relationship types:
+        // - P31/P279*: instance of / subclass of (for concrete types like "battle")
+        // - P921: main subject (for events about this topic)
+        // - P361: part of (for events that are part of this)
+        // - P17: country (for geographical topics like "China")
+        // - P276: location (for events at this location)
         const sparqlQuery = `
-      SELECT ?event ?eventLabel ?eventDescription ?date ?coord ?article ?image ?typeLabel WHERE {
-        ?event wdt:P31/wdt:P279* wd:${qid};
-               wdt:P625 ?coord;
+      SELECT DISTINCT ?event ?eventLabel ?eventDescription ?date ?coord ?article ?image ?typeLabel WHERE {
+        {
+          # Events that are instances/subclasses of this type
+          ?event wdt:P31/wdt:P279* wd:${qid}.
+        } UNION {
+          # Events with this as main subject
+          ?event wdt:P921 wd:${qid}.
+        } UNION {
+          # Events that are part of this
+          ?event wdt:P361 wd:${qid}.
+        } UNION {
+          # Events in this country (for geographical topics)
+          ?event wdt:P17 wd:${qid}.
+        } UNION {
+          # Events at this location
+          ?event wdt:P276 wd:${qid}.
+        }
+        
+        # Require coordinates and date
+        ?event wdt:P625 ?coord;
                wdt:P585 ?date.
+        
         OPTIONAL { ?event wdt:P31 ?type. }
         OPTIONAL { ?article schema:about ?event; schema:isPartOf <https://en.wikipedia.org/>. }
         OPTIONAL { ?event wdt:P18 ?image. }
