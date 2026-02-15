@@ -44,6 +44,11 @@ body {
   background: transparent;
 }
 
+/* Push MapLibre zoom controls below the mode-switch overlay */
+.map-container .maplibregl-ctrl-top-right {
+  top: calc(52px + var(--safe-top));
+}
+
 /* ===== Glassmorphic card (desktop) ===== */
 .overlay-timeline,
 .overlay-filters-desktop {
