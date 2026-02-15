@@ -219,7 +219,37 @@ const queryRegionsFromDb = async (
     ? "COALESCE(region_name_zh, region_name)"
     : "region_name";
 
-  const result = await pool.query(
-    `SELECT DISTINCT ${field} AS region FROM events WHERE ${field} IS NOT NULL ORDER BY region`
+  `SELECT DISTINCT ${field} AS region FROM events WHERE ${field} IS NOT NULL ORDER BY region`
   );
+
+return result.rows.map((row) => row.region);
+};
+
+const querySourcesFromDb = async (pool: import("pg").Pool) => {
+  const result = await pool.query(
+    `SELECT
+      id,
+      source_name,
+      source_url,
+      license,
+      attribution_text,
+      retrieved_at
+    FROM sources
+    ORDER BY source_name`
+  );
+
+  return {
+    total: result.rowCount,
+    items: result.rows.map((row) => ({
+      id: row.id,
+      sourceName: row.source_name,
+      sourceUrl: row.source_url,
+      license: row.license,
+      attributionText: row.attribution_text,
+      retrievedAt: row.retrieved_at
+    }))
+  };
+};
+
+export default queryPlugin;
 
