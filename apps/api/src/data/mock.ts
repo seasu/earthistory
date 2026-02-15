@@ -2919,7 +2919,7 @@ export const events: EventRecord[] = [
     imageUrl: null,
     imageAttribution: null,
     wikipediaUrl: "https://en.wikipedia.org/wiki/1989_Tiananmen_Square_protests",
-    youtubeVideoId: "YHU_KLYhibI"
+    youtubeVideoId: "vG5d-b08J7s"
   },
   // ── Japan ────────────────────────────────────────────────────
   {

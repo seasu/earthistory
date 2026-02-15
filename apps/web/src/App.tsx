@@ -4,6 +4,9 @@ import { MapMode } from "./map/types";
 import { useLocale } from "./i18n";
 import { YearCarousel } from "./YearCarousel";
 
+import { EventDetail } from "./components/EventDetail";
+import { TopicIngest } from "./components/TopicIngest";
+
 type EventRecord = {
   id: number;
   title: string;
@@ -434,6 +437,8 @@ export const App = () => {
             </label>
           </div>
           {hasRegionError && <p className="status error">{t("regionError")}{regionsError}</p>}
+
+          <TopicIngest />
         </div>
       )}
 
@@ -455,52 +460,7 @@ export const App = () => {
             </button>
 
             <div className="desktop-card-content">
-              {selectedEvent.youtubeVideoId ? (
-                <div className="event-detail-hero event-detail-hero-video">
-                  <iframe
-                    src={`https://www.youtube.com/embed/${selectedEvent.youtubeVideoId}`}
-                    title={selectedEvent.title}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                </div>
-              ) : selectedEvent.imageUrl ? (
-                <div className="event-detail-hero">
-                  <img
-                    src={selectedEvent.imageUrl}
-                    alt={selectedEvent.title}
-                    loading="lazy"
-                    onError={(e) => { (e.target as HTMLImageElement).parentElement!.style.display = "none"; }}
-                  />
-                  {selectedEvent.imageAttribution && (
-                    <span className="image-attribution">{selectedEvent.imageAttribution}</span>
-                  )}
-                </div>
-              ) : null}
-              <div className="event-detail-body">
-                <p className="pill">{tCategory(selectedEvent.category)}</p>
-                <h3>{selectedEvent.title}</h3>
-                <p className="event-summary">{selectedEvent.summary}</p>
-                <ul>
-                  <li>{t("regionLabel")}{selectedEvent.regionName}</li>
-                  <li>
-                    {t("timeLabel")}{formatYear(selectedEvent.timeStart)}
-                    {selectedEvent.timeEnd ? ` \u2013 ${formatYear(selectedEvent.timeEnd)}` : ""}
-                  </li>
-                  <li>{t("precisionLabel")}{tPrecision(selectedEvent.precisionLevel)}</li>
-                  <li>{t("confidenceLabel")}{(selectedEvent.confidenceScore * 100).toFixed(0)}%</li>
-                </ul>
-                <div className="event-detail-links">
-                  <a href={selectedEvent.sourceUrl} rel="noreferrer" target="_blank">
-                    {t("source")}
-                  </a>
-                  {selectedEvent.wikipediaUrl && (
-                    <a href={selectedEvent.wikipediaUrl} rel="noreferrer" target="_blank">
-                      Wikipedia
-                    </a>
-                  )}
-                </div>
-              </div>
+              <EventDetail event={selectedEvent} isMobile={false} />
             </div>
 
             <div className="desktop-card-footer">
@@ -599,52 +559,7 @@ export const App = () => {
                 </button>
 
                 <article className="mobile-event-card" aria-live="polite">
-                  {selectedEvent.youtubeVideoId ? (
-                    <div className="mobile-card-hero mobile-card-hero-video">
-                      <iframe
-                        src={`https://www.youtube.com/embed/${selectedEvent.youtubeVideoId}`}
-                        title={selectedEvent.title}
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      />
-                    </div>
-                  ) : selectedEvent.imageUrl ? (
-                    <div className="mobile-card-hero">
-                      <img
-                        src={selectedEvent.imageUrl}
-                        alt={selectedEvent.title}
-                        loading="lazy"
-                        onError={(e) => { (e.target as HTMLImageElement).parentElement!.style.display = "none"; }}
-                      />
-                      {selectedEvent.imageAttribution && (
-                        <span className="image-attribution">{selectedEvent.imageAttribution}</span>
-                      )}
-                    </div>
-                  ) : null}
-                  <div className="mobile-card-body">
-                    <p className="pill">{tCategory(selectedEvent.category)}</p>
-                    <h3>{selectedEvent.title}</h3>
-                    <p className="mobile-card-time">
-                      {formatYear(selectedEvent.timeStart)}
-                      {selectedEvent.timeEnd ? ` \u2013 ${formatYear(selectedEvent.timeEnd)}` : ""}
-                    </p>
-                    <p className="event-summary">{selectedEvent.summary}</p>
-                    <ul>
-                      <li>{t("regionLabel")}{selectedEvent.regionName}</li>
-                      <li>{t("precisionLabel")}{tPrecision(selectedEvent.precisionLevel)}</li>
-                      <li>{t("confidenceLabel")}{(selectedEvent.confidenceScore * 100).toFixed(0)}%</li>
-                    </ul>
-                    <div className="event-detail-links">
-                      <a href={selectedEvent.sourceUrl} rel="noreferrer" target="_blank">
-                        {t("source")}
-                      </a>
-                      {selectedEvent.wikipediaUrl && (
-                        <a href={selectedEvent.wikipediaUrl} rel="noreferrer" target="_blank">
-                          Wikipedia
-                        </a>
-                      )}
-                    </div>
-                  </div>
+                  <EventDetail event={selectedEvent} isMobile={true} />
                 </article>
 
                 <button
@@ -720,6 +635,8 @@ export const App = () => {
               </label>
             </div>
             {hasRegionError && <p className="status error">{t("regionError")}{regionsError}</p>}
+
+            <TopicIngest />
           </div>
         </>
       )}
