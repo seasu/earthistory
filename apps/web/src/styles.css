@@ -70,7 +70,7 @@ body {
   top: calc(16px + var(--safe-top));
   left: 50%;
   transform: translateX(-50%);
-  z-index: 10;
+  z-index: 12;
   border-radius: 16px;
   padding: 0;
   width: auto;
@@ -251,70 +251,6 @@ body {
   border-top: 7px solid #2455c4;
 }
 
-/* ===== Year Carousel ===== */
-.year-carousel-container {
-  position: relative;
-  width: 100%;
-  height: 80px;
-  overflow: hidden;
-  cursor: grab;
-  user-select: none;
-  -webkit-user-select: none;
-  outline: none;
-}
-
-.year-carousel-container:active {
-  cursor: grabbing;
-}
-
-.year-carousel-track {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  height: 100%;
-  transition: transform 0.1s ease-out;
-}
-
-.year-carousel-item {
-  flex-shrink: 0;
-  background: transparent;
-  border: none;
-  color: #48618d;
-  font-size: 16px;
-  font-weight: 500;
-  padding: 8px 12px;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  white-space: nowrap;
-  -webkit-tap-highlight-color: transparent;
-  border-radius: 8px;
-}
-
-.year-carousel-item.centered {
-  color: #2455c4;
-  font-weight: 700;
-  background: rgba(36, 85, 196, 0.08);
-  font-size: 18px;
-}
-
-.year-carousel-item:hover:not(.centered) {
-  color: #2455c4;
-  background: rgba(36, 85, 196, 0.05);
-}
-
-.year-carousel-indicator {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 2px;
-  height: 60%;
-  background: linear-gradient(to bottom, transparent, #2455c4, transparent);
-  pointer-events: none;
-  opacity: 0.3;
-}
-
 /* ===== Floating Overlay: Desktop Filters ===== */
 .overlay-filters-desktop {
   position: absolute;
@@ -444,11 +380,12 @@ body {
   padding: 0;
   display: flex;
   flex-direction: row;
+  align-items: stretch;
   gap: 0;
   cursor: pointer;
   color: #223149;
   font-size: 13px;
-  min-height: 44px;
+  min-height: 56px;
   transition: background 0.15s;
   overflow: hidden;
 }
@@ -472,6 +409,7 @@ body {
 .event-list-text {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 2px;
   padding: 8px 10px;
   min-width: 0;
@@ -710,21 +648,24 @@ body {
 
 /* ===== Mobile: <= 768px ===== */
 @media (max-width: 768px) {
-  /* Timeline: bottom center, compact */
+  /* Timeline: bottom center, match FAB height & position */
   .overlay-timeline {
     top: auto;
-    bottom: calc(8px + var(--safe-bottom));
+    bottom: calc(12px + var(--safe-bottom));
     left: 72px;
     right: 72px;
     transform: none;
     width: auto;
     padding: 0;
-    border-radius: 14px;
+    border-radius: 999px;
   }
 
   .year-dial-trigger {
-    padding: 8px 16px;
+    padding: 0 20px;
     gap: 6px;
+    height: 52px;
+    border-radius: 999px;
+    justify-content: center;
   }
 
   .year-dial-trigger-year {
@@ -760,19 +701,6 @@ body {
 
   .year-dial-track {
     height: 60px;
-  }
-
-  .year-carousel-container {
-    height: 70px;
-  }
-
-  .year-carousel-item {
-    font-size: 14px;
-    padding: 6px 10px;
-  }
-
-  .year-carousel-item.centered {
-    font-size: 16px;
   }
 
   /* Mode switch: top-right */
@@ -1021,17 +949,18 @@ body {
 /* ===== Extra small phones: <= 380px ===== */
 @media (max-width: 380px) {
   .overlay-timeline {
-    left: 64px;
-    right: 64px;
+    left: 56px;
+    right: 56px;
     padding: 0;
   }
 
   .year-dial-trigger {
-    padding: 6px 12px;
+    padding: 0 14px;
+    height: 46px;
   }
 
   .year-dial-trigger-year {
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .mobile-fab {
