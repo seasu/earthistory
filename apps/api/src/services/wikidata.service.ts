@@ -222,5 +222,42 @@ export class WikidataService {
             return [];
         }
     }
-}
 
+    // Fetch parent categories of a Wikipedia page (reverse lookup)
+    static async fetchPageCategories(topic: string, lang: string = "en"): Promise<string[]> {
+        const url = `https://${lang}.wikipedia.org/w/api.php?action=query&prop=categories&titles=${encodeURIComponent(topic)}&cllimit=10&format=json&origin=*`;
+
+        try {
+            const response = await fetch(url, {
+                headers: { "User-Agent": this.USER_AGENT }
+            });
+
+            if (!response.ok) return [];
+
+            const data = await response.json();
+            if (!data.query || !data.query.pages) return [];
+
+            const pages = data.query.pages;
+            const pageId = Object.keys(pages)[0];
+            const categories = pages[pageId].categories;
+
+            if (!categories) return [];
+
+            return categories
+                .map((cat: any) => cat.title.replace(/^Category:/, ""))
+                .filter((title: string) =>
+                    !title.includes("Template") &&
+                    !title.includes("User") &&
+                    !title.includes("Wikipedia") &&
+                    !title.includes("維基百科") &&
+                    !title.includes("條目") &&
+                    !title.includes("頁面") &&
+                    !title.includes("使用") &&
+                    !title.includes("CS1")
+                );
+        } catch (error) {
+            console.error(`Wikipedia page categories fetch error (${lang}):`, error);
+            return [];
+        }
+    }
+}

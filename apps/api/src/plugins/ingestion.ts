@@ -28,15 +28,21 @@ async function getTopicSuggestions(topic: string): Promise<string[]> {
     manualSuggestions = ['Try a more specific topic', 'Try a historical event name', 'Try a dynasty, empire, or time period'];
   }
 
-  // 2. Try fetching from Wikipedia Category
+  // 2. Try fetching from Wikipedia
   try {
-    const wikiSuggestions = await WikidataService.fetchCategoryMembers(topic, lang);
+    // A. Try getting sub-categories (if topic is a category)
+    let wikiSuggestions = await WikidataService.fetchCategoryMembers(topic, lang);
+
+    // B. If no results, try getting parent categories (if topic is a page)
+    if (wikiSuggestions.length === 0) {
+      wikiSuggestions = await WikidataService.fetchPageCategories(topic, lang);
+    }
+
     if (wikiSuggestions.length > 0) {
       // Save to DB for future use
-      // Fire and forget to not block response
       TopicService.saveTopicHierarchy(topic, wikiSuggestions, lang).catch(console.error);
 
-      // Return top 5 wiki suggestions, mixed with some manual ones if wiki list is short
+      // Return top 5 wiki suggestions
       return wikiSuggestions.slice(0, 5);
     }
   } catch (err) {
