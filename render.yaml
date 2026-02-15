@@ -8,6 +8,7 @@ services:
     startCommand: corepack pnpm --filter @earthistory/api start
     healthCheckPath: /health
     autoDeploy: true
+    # Deployment trigger: 2026-02-16 - SPARQL improvements, dev mode, count fix
     envVars:
       - key: NODE_VERSION
         value: 20
