@@ -408,100 +408,88 @@ export const App = () => {
         </div>
       )}
 
-      {/* Desktop: Events sidebar (toggled via icon) */}
-      {!isMobile && (
-        <aside className={`overlay-events ${sidebarOpen ? "" : "collapsed"}`}>
-          <div className="overlay-events-header">
-            <div className="overlay-events-header-text">
-              <h2>{t("events")}</h2>
-              <p className="event-count">{t("eventsInView", { count: filteredEvents.length })}</p>
-            </div>
-          </div>
-
-          {isAnyLoading && <p className="status loading">{t("loading")}</p>}
-          {hasEventError && (
-            <div className="status error">
-              <p>{t("eventError")}{eventsError}</p>
-              <button onClick={() => setReloadToken((value) => value + 1)} type="button">
-                {t("retry")}
-              </button>
-            </div>
-          )}
-
-          <div className="event-list" aria-label="Filtered events">
-            {!isLoadingEvents && !hasEventError && filteredEvents.length === 0 && (
-              <p className="empty">{t("noEvents")}</p>
-            )}
-            {filteredEvents.map((event) => (
-              <button
-                className={`event-list-item ${event.id === selectedEvent?.id ? "active" : ""}`}
-                key={event.id}
-                onClick={() => setSelectedEventId(event.id)}
-                type="button"
-              >
-                {event.imageUrl && (
-                  <img
-                    className="event-list-thumb"
-                    src={event.imageUrl}
-                    alt=""
-                    loading="lazy"
-                    onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
-                  />
-                )}
-                <div className="event-list-text">
-                  <strong>{event.title}</strong>
-                  <span>
-                    {formatYear(event.timeStart)}
-                    {event.timeEnd ? ` \u2013 ${formatYear(event.timeEnd)}` : ""}
-                  </span>
-                </div>
-              </button>
-            ))}
-          </div>
-        </aside>
-      )}
-
-      {/* Desktop: Event detail panel (separate from list) */}
+      {/* Desktop: Event card panel */}
       {!isMobile && sidebarOpen && selectedEvent && (
-        <article className="overlay-event-detail" aria-live="polite">
-          {selectedEvent.imageUrl && (
-            <div className="event-detail-hero">
-              <img
-                src={selectedEvent.imageUrl}
-                alt={selectedEvent.title}
-                loading="lazy"
-                onError={(e) => { (e.target as HTMLImageElement).parentElement!.style.display = "none"; }}
-              />
-              {selectedEvent.imageAttribution && (
-                <span className="image-attribution">{selectedEvent.imageAttribution}</span>
+        <>
+          <div
+            className="desktop-backdrop"
+            onMouseDown={() => setSidebarOpen(false)}
+          />
+          <div className="desktop-event-panel">
+            <button
+              className="desktop-panel-close"
+              onClick={() => setSidebarOpen(false)}
+              type="button"
+              aria-label={t("collapse")}
+            >
+              {"\u2715"}
+            </button>
+
+            <div className="desktop-card-content">
+              {selectedEvent.imageUrl && (
+                <div className="event-detail-hero">
+                  <img
+                    src={selectedEvent.imageUrl}
+                    alt={selectedEvent.title}
+                    loading="lazy"
+                    onError={(e) => { (e.target as HTMLImageElement).parentElement!.style.display = "none"; }}
+                  />
+                  {selectedEvent.imageAttribution && (
+                    <span className="image-attribution">{selectedEvent.imageAttribution}</span>
+                  )}
+                </div>
               )}
+              <div className="event-detail-body">
+                <p className="pill">{tCategory(selectedEvent.category)}</p>
+                <h3>{selectedEvent.title}</h3>
+                <p className="event-summary">{selectedEvent.summary}</p>
+                <ul>
+                  <li>{t("regionLabel")}{selectedEvent.regionName}</li>
+                  <li>
+                    {t("timeLabel")}{formatYear(selectedEvent.timeStart)}
+                    {selectedEvent.timeEnd ? ` \u2013 ${formatYear(selectedEvent.timeEnd)}` : ""}
+                  </li>
+                  <li>{t("precisionLabel")}{tPrecision(selectedEvent.precisionLevel)}</li>
+                  <li>{t("confidenceLabel")}{(selectedEvent.confidenceScore * 100).toFixed(0)}%</li>
+                </ul>
+                <div className="event-detail-links">
+                  <a href={selectedEvent.sourceUrl} rel="noreferrer" target="_blank">
+                    {t("source")}
+                  </a>
+                  {selectedEvent.wikipediaUrl && (
+                    <a href={selectedEvent.wikipediaUrl} rel="noreferrer" target="_blank">
+                      Wikipedia
+                    </a>
+                  )}
+                </div>
+              </div>
             </div>
-          )}
-          <div className="event-detail-body">
-            <p className="pill">{tCategory(selectedEvent.category)}</p>
-            <h3>{selectedEvent.title}</h3>
-            <p className="event-summary">{selectedEvent.summary}</p>
-            <ul>
-              <li>{t("regionLabel")}{selectedEvent.regionName}</li>
-              <li>
-                {t("timeLabel")}{formatYear(selectedEvent.timeStart)}
-                {selectedEvent.timeEnd ? ` \u2013 ${formatYear(selectedEvent.timeEnd)}` : ""}
-              </li>
-              <li>{t("precisionLabel")}{tPrecision(selectedEvent.precisionLevel)}</li>
-              <li>{t("confidenceLabel")}{(selectedEvent.confidenceScore * 100).toFixed(0)}%</li>
-            </ul>
-            <div className="event-detail-links">
-              <a href={selectedEvent.sourceUrl} rel="noreferrer" target="_blank">
-                {t("source")}
-              </a>
-              {selectedEvent.wikipediaUrl && (
-                <a href={selectedEvent.wikipediaUrl} rel="noreferrer" target="_blank">
-                  Wikipedia
-                </a>
-              )}
+
+            <div className="desktop-card-footer">
+              <button
+                className="desktop-carousel-arrow"
+                onClick={goToPrevEvent}
+                type="button"
+                aria-label={t("prevEvent")}
+                disabled={filteredEvents.length <= 1}
+              >
+                {"\u2039"}
+              </button>
+              <span className="desktop-card-counter">
+                {selectedEventIndex + 1} / {filteredEvents.length} {t("events")}
+              </span>
+              <button
+                className="desktop-carousel-arrow"
+                onClick={goToNextEvent}
+                type="button"
+                aria-label={t("nextEvent")}
+                disabled={filteredEvents.length <= 1}
+              >
+                {"\u203A"}
+              </button>
             </div>
           </div>
-        </article>
+        </>
       )}
 
       {/* Mobile: FAB icons at bottom corners */}
