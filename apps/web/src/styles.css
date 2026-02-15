@@ -251,70 +251,6 @@ body {
   border-top: 7px solid #2455c4;
 }
 
-/* ===== Year Carousel ===== */
-.year-carousel-container {
-  position: relative;
-  width: 100%;
-  height: 80px;
-  overflow: hidden;
-  cursor: grab;
-  user-select: none;
-  -webkit-user-select: none;
-  outline: none;
-}
-
-.year-carousel-container:active {
-  cursor: grabbing;
-}
-
-.year-carousel-track {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  height: 100%;
-  transition: transform 0.1s ease-out;
-}
-
-.year-carousel-item {
-  flex-shrink: 0;
-  background: transparent;
-  border: none;
-  color: #48618d;
-  font-size: 16px;
-  font-weight: 500;
-  padding: 8px 12px;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  white-space: nowrap;
-  -webkit-tap-highlight-color: transparent;
-  border-radius: 8px;
-}
-
-.year-carousel-item.centered {
-  color: #2455c4;
-  font-weight: 700;
-  background: rgba(36, 85, 196, 0.08);
-  font-size: 18px;
-}
-
-.year-carousel-item:hover:not(.centered) {
-  color: #2455c4;
-  background: rgba(36, 85, 196, 0.05);
-}
-
-.year-carousel-indicator {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 2px;
-  height: 60%;
-  background: linear-gradient(to bottom, transparent, #2455c4, transparent);
-  pointer-events: none;
-  opacity: 0.3;
-}
-
 /* ===== Floating Overlay: Desktop Filters ===== */
 .overlay-filters-desktop {
   position: absolute;
@@ -760,19 +696,6 @@ body {
 
   .year-dial-track {
     height: 60px;
-  }
-
-  .year-carousel-container {
-    height: 70px;
-  }
-
-  .year-carousel-item {
-    font-size: 14px;
-    padding: 6px 10px;
-  }
-
-  .year-carousel-item.centered {
-    font-size: 16px;
   }
 
   /* Mode switch: top-right */
