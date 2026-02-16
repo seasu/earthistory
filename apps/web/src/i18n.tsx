@@ -49,6 +49,14 @@ const strings: Record<string, Record<Locale, string>> = {
   ingestError: { en: "Ingestion failed: ", "zh-TW": "\u532f\u5165\u5931\u6557\uff1a" },
   noEventsFound: { en: "No events found for this topic.", "zh-TW": "\u627e\u4e0d\u5230\u6b64\u4e3b\u984c\u7684\u4e8b\u4ef6\u3002" },
   trySuggestions: { en: "Try these instead:", "zh-TW": "\u8a66\u8a66\u9019\u4e9b\u4e3b\u984c\uff1a" },
+  readMore: { en: "Read full article on Wikipedia", "zh-TW": "\u5728 Wikipedia \u95b1\u8b80\u5b8c\u6574\u6587\u7ae0" },
+  dataFrom: { en: "Data from", "zh-TW": "\u8cc7\u6599\u4f86\u6e90\uff1a" },
+  search: { en: "Search", "zh-TW": "\u641c\u5c0b" },
+  confirmingIngest: { en: "Adding to database...", "zh-TW": "\u6b63\u5728\u52a0\u5165\u8cc7\u6599\u5eab..." },
+  confirming: { en: "Confirming...", "zh-TW": "\u78ba\u8a8d\u4e2d..." },
+  confirm: { en: "Confirm & Add", "zh-TW": "\u78ba\u8a8d\u4e26\u52a0\u5165" },
+  back: { en: "Back", "zh-TW": "\u8fd4\u56de" },
+  andMoreEvents: { en: "...and {count} more events", "zh-TW": "...\u4ee5\u53ca\u53e6\u5916 {count} \u500b\u4e8b\u4ef6" },
 };
 
 const categoryMap: Record<string, Record<Locale, string>> = {
