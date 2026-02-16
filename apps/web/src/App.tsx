@@ -95,6 +95,7 @@ export const App = () => {
   const [mobileEventsOpen, setMobileEventsOpen] = useState(false);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [showNoEventsToast, setShowNoEventsToast] = useState(false);
+  const [topicIngestOpen, setTopicIngestOpen] = useState(false);
   const noEventsTimerRef = useRef<ReturnType<typeof setTimeout>>(null);
 
   // Close panels when switching between mobile/desktop
@@ -326,8 +327,17 @@ export const App = () => {
         </div>
       )}
 
-      {/* Top-right controls: mode switch + language */}
+      {/* Top-right controls: mode switch + language + topic ingest */}
       <div className="overlay-mode-switch">
+        <button
+          className="topic-ingest-btn"
+          onClick={() => setTopicIngestOpen(true)}
+          type="button"
+          aria-label={t("ingestTopic")}
+          title={t("ingestTopic")}
+        >
+          ➕
+        </button>
         <button
           className="locale-switch"
           onClick={() => setLocale(locale === "en" ? "zh-TW" : "en")}
@@ -360,6 +370,8 @@ export const App = () => {
             onClick={() => {
               setSidebarOpen((v) => !v);
               setFiltersOpen(false);
+              setMobileEventsOpen(false);
+              setMobileFiltersOpen(false);
             }}
             type="button"
             aria-label={sidebarOpen ? t("collapse") : t("expand")}
@@ -374,8 +386,11 @@ export const App = () => {
             max={TIMELINE_MAX_YEAR}
             onChange={(year) => {
               setSliderYear(year);
+              // Close all panels (both desktop and mobile)
               setSidebarOpen(false);
               setFiltersOpen(false);
+              setMobileEventsOpen(false);
+              setMobileFiltersOpen(false);
             }}
             formatYear={formatYear}
             windowHint={t("windowHint")}
@@ -387,6 +402,8 @@ export const App = () => {
             onClick={() => {
               setFiltersOpen((v) => !v);
               setSidebarOpen(false);
+              setMobileEventsOpen(false);
+              setMobileFiltersOpen(false);
             }}
             type="button"
             aria-label={t("toggleFilters")}
@@ -447,8 +464,6 @@ export const App = () => {
             </label>
           </div>
           {hasRegionError && <p className="status error">{t("regionError")}{regionsError}</p>}
-
-          <TopicIngest />
         </div>
       )}
 
@@ -645,11 +660,19 @@ export const App = () => {
               </label>
             </div>
             {hasRegionError && <p className="status error">{t("regionError")}{regionsError}</p>}
-
-            <TopicIngest />
           </div>
         </>
       )}
+
+      {/* Topic Ingest Dialog */}
+      <TopicIngest
+        isOpen={topicIngestOpen}
+        onClose={() => setTopicIngestOpen(false)}
+        onConfirm={() => {
+          // Reload events after confirmation
+          setReloadToken((v) => v + 1);
+        }}
+      />
     </div>
   );
 };
