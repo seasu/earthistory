@@ -1230,18 +1230,33 @@ body {
   color: white;
   border: none;
   border-radius: 8px;
-  padding: 0 14px;
-  height: 42px;
-  font-size: 20px;
+  padding: 8px 16px;
+  height: auto;
+  font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.topic-ingest-icon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.topic-ingest-label {
+  font-size: 13px;
+  font-weight: 500;
 }
 
 .topic-ingest-btn:hover {
   transform: translateY(-1px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
 }
 
 .topic-ingest-btn:active {
@@ -1588,6 +1603,19 @@ body {
 
 /* Mobile responsive for topic ingest */
 @media (max-width: 768px) {
+  .topic-ingest-btn {
+    padding: 8px 12px;
+    min-width: 40px;
+  }
+
+  .topic-ingest-label {
+    display: none;
+  }
+
+  .topic-ingest-icon {
+    font-size: 20px;
+  }
+
   .topic-ingest-dialog {
     width: 95vw;
     max-height: 90vh;

@@ -336,7 +336,8 @@ export const App = () => {
           aria-label={t("ingestTopic")}
           title={t("ingestTopic")}
         >
-          ➕
+          <span className="topic-ingest-icon">📚</span>
+          <span className="topic-ingest-label">{t("ingestTopic")}</span>
         </button>
         <button
           className="locale-switch"
