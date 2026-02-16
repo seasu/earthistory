@@ -190,7 +190,7 @@ export const TopicIngest: React.FC<TopicIngestProps> = ({ isOpen, onClose, onCon
           )}
 
           {/* Preview results */}
-          {status === "preview" && previewEvents.length > 0 && (
+          {(status === "preview" || status === "confirming") && previewEvents.length > 0 && (
             <div className="topic-preview">
               <div className="topic-preview-header">
                 <h3>{topicLabel}</h3>
