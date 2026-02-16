@@ -94,12 +94,11 @@ export const EventDetail: React.FC<EventDetailProps> = ({
                 <p className="pill">{tCategory(event.category)}</p>
                 <h3>{event.title}</h3>
 
-                {isMobile && (
-                    <p className="mobile-card-time">
-                        {formatYear(event.timeStart)}
-                        {event.timeEnd ? ` \u2013 ${formatYear(event.timeEnd)}` : ""}
-                    </p>
-                )}
+                {/* Time displayed prominently below title */}
+                <p className={isMobile ? "mobile-card-time" : "event-detail-time"}>
+                    {formatYear(event.timeStart)}
+                    {event.timeEnd ? ` \u2013 ${formatYear(event.timeEnd)}` : ""}
+                </p>
 
                 <div className="event-summary-container">
                     {isWikiLoading && <p className="status loading">{t("loading")}...</p>}
@@ -111,12 +110,6 @@ export const EventDetail: React.FC<EventDetailProps> = ({
 
                 <ul>
                     <li>{t("regionLabel")}{event.regionName}</li>
-                    {!isMobile && (
-                        <li>
-                            {t("timeLabel")}{formatYear(event.timeStart)}
-                            {event.timeEnd ? ` \u2013 ${formatYear(event.timeEnd)}` : ""}
-                        </li>
-                    )}
                     <li>{t("precisionLabel")}{tPrecision(event.precisionLevel)}</li>
                     <li>{t("confidenceLabel")}{(event.confidenceScore * 100).toFixed(0)}%</li>
                 </ul>
@@ -127,10 +120,63 @@ export const EventDetail: React.FC<EventDetailProps> = ({
                     </a>
                     {/* If we have a wiki link (either from DB or resolved), show it */}
                     {(event.wikipediaUrl || wikiData?.contentUrl) && (
-                        <a href={displaySourceUrl} rel="noreferrer" target="_blank">
-                            Wikipedia
+                        <a
+                            href={displaySourceUrl}
+                            rel="noreferrer"
+                            target="_blank"
+                            className="wikipedia-link"
+                        >
+                            {t("readMore")} →
                         </a>
                     )}
+                </div>
+
+                {/* License Attribution */}
+                <div className="event-detail-attribution">
+                    <p className="attribution-text">
+                        📚 {t("dataFrom")}{" "}
+                        <a
+                            href="https://www.wikidata.org"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="attribution-link"
+                        >
+                            Wikidata
+                        </a>{" "}
+                        (
+                        <a
+                            href="https://creativecommons.org/publicdomain/zero/1.0/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="attribution-link"
+                        >
+                            CC0
+                        </a>
+                        )
+                        {(event.wikipediaUrl || wikiData) && (
+                            <>
+                                {" "}&{" "}
+                                <a
+                                    href="https://www.wikipedia.org"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="attribution-link"
+                                >
+                                    Wikipedia
+                                </a>{" "}
+                                (
+                                <a
+                                    href="https://creativecommons.org/licenses/by-sa/4.0/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="attribution-link"
+                                >
+                                    CC BY-SA 4.0
+                                </a>
+                                )
+                            </>
+                        )}
+                    </p>
                 </div>
             </div>
         </>
