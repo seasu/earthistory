@@ -360,6 +360,8 @@ export const App = () => {
             onClick={() => {
               setSidebarOpen((v) => !v);
               setFiltersOpen(false);
+              setMobileEventsOpen(false);
+              setMobileFiltersOpen(false);
             }}
             type="button"
             aria-label={sidebarOpen ? t("collapse") : t("expand")}
@@ -374,8 +376,11 @@ export const App = () => {
             max={TIMELINE_MAX_YEAR}
             onChange={(year) => {
               setSliderYear(year);
+              // Close all panels (both desktop and mobile)
               setSidebarOpen(false);
               setFiltersOpen(false);
+              setMobileEventsOpen(false);
+              setMobileFiltersOpen(false);
             }}
             formatYear={formatYear}
             windowHint={t("windowHint")}
@@ -387,6 +392,8 @@ export const App = () => {
             onClick={() => {
               setFiltersOpen((v) => !v);
               setSidebarOpen(false);
+              setMobileEventsOpen(false);
+              setMobileFiltersOpen(false);
             }}
             type="button"
             aria-label={t("toggleFilters")}
