@@ -372,7 +372,11 @@ export const App = () => {
             value={sliderYear}
             min={TIMELINE_MIN_YEAR}
             max={TIMELINE_MAX_YEAR}
-            onChange={setSliderYear}
+            onChange={(year) => {
+              setSliderYear(year);
+              setSidebarOpen(false);
+              setFiltersOpen(false);
+            }}
             formatYear={formatYear}
             windowHint={t("windowHint")}
           />
