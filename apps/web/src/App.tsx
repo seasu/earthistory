@@ -357,7 +357,10 @@ export const App = () => {
         {!isMobile && (
           <button
             className={`panel-toggle ${sidebarOpen ? "active" : ""}`}
-            onClick={() => setSidebarOpen((v) => !v)}
+            onClick={() => {
+              setSidebarOpen((v) => !v);
+              setFiltersOpen(false);
+            }}
             type="button"
             aria-label={sidebarOpen ? t("collapse") : t("expand")}
           >
@@ -377,7 +380,10 @@ export const App = () => {
         {!isMobile && (
           <button
             className={`panel-toggle ${filtersOpen ? "active" : ""}`}
-            onClick={() => setFiltersOpen((v) => !v)}
+            onClick={() => {
+              setFiltersOpen((v) => !v);
+              setSidebarOpen(false);
+            }}
             type="button"
             aria-label={t("toggleFilters")}
           >
