@@ -102,23 +102,33 @@ export class WikidataService {
     static async searchTopic(query: string): Promise<{ id: string; label: string; description: string } | null> {
         await this.rateLimiter.waitIfNeeded();
 
-        const url = `https://www.wikidata.org/w/api.php?action=wbsearchentities&search=${encodeURIComponent(query)}&language=en&format=json&limit=1`;
+        // Detect language based on query characters
+        const hasChinese = /[\u4e00-\u9fff]/.test(query);
+        const languages = hasChinese ? ['zh', 'zh-tw', 'zh-cn', 'en'] : ['en', 'zh'];
 
-        try {
-            const response = await this.fetchWithRetry(url);
+        // Try multiple languages in order
+        for (const lang of languages) {
+            try {
+                const url = `https://www.wikidata.org/w/api.php?action=wbsearchentities&search=${encodeURIComponent(query)}&language=${lang}&format=json&limit=1`;
+                const response = await this.fetchWithRetry(url);
+                const data = await response.json();
 
-            const data = await response.json();
-            if (!data.search || data.search.length === 0) return null;
-
-            return {
-                id: data.search[0].id,
-                label: data.search[0].label,
-                description: data.search[0].description
-            };
-        } catch (error) {
-            console.error("Wikidata search error:", error);
-            return null;
+                if (data.search && data.search.length > 0) {
+                    console.log(`Found topic in ${lang}: ${data.search[0].label}`);
+                    return {
+                        id: data.search[0].id,
+                        label: data.search[0].label,
+                        description: data.search[0].description || ""
+                    };
+                }
+            } catch (error) {
+                console.error(`Wikidata search error (${lang}):`, error);
+                // Continue to next language
+            }
         }
+
+        // No results found in any language
+        return null;
     }
 
     // Fetch events related to a QID (instance of or part of)
