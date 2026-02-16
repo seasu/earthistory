@@ -94,12 +94,11 @@ export const EventDetail: React.FC<EventDetailProps> = ({
                 <p className="pill">{tCategory(event.category)}</p>
                 <h3>{event.title}</h3>
 
-                {isMobile && (
-                    <p className="mobile-card-time">
-                        {formatYear(event.timeStart)}
-                        {event.timeEnd ? ` \u2013 ${formatYear(event.timeEnd)}` : ""}
-                    </p>
-                )}
+                {/* Time displayed prominently below title */}
+                <p className={isMobile ? "mobile-card-time" : "event-detail-time"}>
+                    {formatYear(event.timeStart)}
+                    {event.timeEnd ? ` \u2013 ${formatYear(event.timeEnd)}` : ""}
+                </p>
 
                 <div className="event-summary-container">
                     {isWikiLoading && <p className="status loading">{t("loading")}...</p>}
@@ -111,12 +110,6 @@ export const EventDetail: React.FC<EventDetailProps> = ({
 
                 <ul>
                     <li>{t("regionLabel")}{event.regionName}</li>
-                    {!isMobile && (
-                        <li>
-                            {t("timeLabel")}{formatYear(event.timeStart)}
-                            {event.timeEnd ? ` \u2013 ${formatYear(event.timeEnd)}` : ""}
-                        </li>
-                    )}
                     <li>{t("precisionLabel")}{tPrecision(event.precisionLevel)}</li>
                     <li>{t("confidenceLabel")}{(event.confidenceScore * 100).toFixed(0)}%</li>
                 </ul>

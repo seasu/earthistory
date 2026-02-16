@@ -533,6 +533,13 @@ body {
   font-size: 17px;
 }
 
+.event-detail-time {
+  margin: 0 0 12px;
+  font-size: 14px;
+  color: #4d638b;
+  font-weight: 500;
+}
+
 .event-detail-body ul {
   padding-left: 16px;
   font-size: 13px;
