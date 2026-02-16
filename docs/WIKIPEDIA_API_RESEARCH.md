@@ -1,8 +1,38 @@
 # Wikipedia API 整合研究報告
 
 **專案**: Earthistory
-**日期**: 2026-02-15
+**日期**: 2026-02-16
 **目的**: 研究如何最佳化使用 Wikipedia/Wikimedia 資料來源
+
+---
+
+## 🎯 架構決策：索引模式 (Index-Only Approach)
+
+**決定**: 本專案採用「**把 Wikipedia 當資料庫，只做索引**」的策略。
+
+### 核心原則
+- ❌ **不下載** Wikipedia 文章內容
+- ❌ **不儲存** Wikipedia 文字、圖片
+- ✅ **只儲存** 索引資訊：標題、連結、座標、時間
+- ✅ **即時連結** 到 Wikipedia 取得完整內容
+
+### 架構優勢
+1. **避免授權複雜度** - 不儲存 CC BY-SA 內容，避免 Share-Alike 義務
+2. **節省儲存成本** - 只儲存元數據，不儲存全文
+3. **內容永遠最新** - 直接連結 Wikipedia，無需同步更新
+4. **符合專案定位** - 「歷史地圖索引」而非「線上百科全書」
+5. **雲端成本為零** - 不佔用大量儲存空間
+
+### 資料流程
+```
+使用者搜尋 → Wikidata SPARQL 查詢 → 取得事件索引
+                    ↓
+            events 表 (只儲存索引)
+                    ↓
+            顯示地圖上的事件點
+                    ↓
+        使用者點擊事件 → 開啟 Wikipedia 頁面
+```
 
 ---
 
@@ -677,25 +707,36 @@ const worker = new Worker("event-enrichment", async (job) => {
 
 ---
 
-## 8. 實作優先順序建議
+## 8. 實作優先順序建議（基於索引模式）
 
-### Phase 1: 立即改進 (本週)
-- [ ] 新增 `WikipediaService` 與 REST API 整合
-- [ ] 新增 `event_content` 資料表 (migration 0009)
-- [ ] 改進 `WikidataService` 的錯誤處理與 rate limiting
-- [ ] 新增 `/enrich-event/:id` 端點
+### ✅ 已完成
+- [x] 改進 `WikidataService` 的錯誤處理與 rate limiting
+- [x] 新增 license 和 wikidataQid 欄位到 WikidataEvent 型別
+- [x] 新增 retry logic 處理 API 失敗
 
-### Phase 2: 資料品質提升 (下週)
-- [ ] 實作 Reverse Geocoding (Nominatim)
-- [ ] 實作圖片授權查詢
-- [ ] 批次豐富化既有事件
-- [ ] 新增 Cache 層
+### Phase 1: 核心索引功能強化（本週）
+- [ ] 確保所有事件都有 `wikipedia_url` (目前已支援)
+- [ ] 前端：事件詳情面板加上「查看更多 → Wikipedia」按鈕
+- [ ] 前端：顯示 Wikidata 來源標示（CC0）
+- [ ] 測試 Wikidata SPARQL 查詢的覆蓋率
 
-### Phase 3: 生產化準備 (2 週後)
-- [ ] 新增背景工作佇列 (BullMQ)
-- [ ] 前端 Attribution UI
-- [ ] Sources 管理頁面
-- [ ] 授權稽核工具
+### Phase 2: 使用者體驗優化（下週）
+- [ ] （可選）前端即時呼叫 Wikipedia REST API 顯示摘要預覽
+- [ ] 實作 Reverse Geocoding (Nominatim) - 補充 `region_name`
+- [ ] 前端：Wikipedia 連結的 hover 預覽卡片
+- [ ] 改進主題搜尋建議（使用 Wikipedia 分類）
+
+### Phase 3: 資料品質與合規（2 週後）
+- [ ] 建立 `/sources` 頁面列出所有資料來源
+- [ ] 確保每個事件的授權資訊完整
+- [ ] 實作 Wikidata 資料定期更新機制
+- [ ] 前端：顯示清楚的授權標示
+
+### 🚫 不實作（索引模式下不需要）
+- ~~新增 `event_content` 資料表~~ - 不儲存內容
+- ~~新增 `/enrich-event/:id` 端點~~ - 不下載內容
+- ~~批次豐富化既有事件~~ - 不儲存摘要
+- ~~背景工作佇列儲存內容~~ - 不需要
 
 ---
 
@@ -742,11 +783,10 @@ const regionName = await WikidataService.reverseGeocode(
 - ⚠️ **資料不一致**: Wikipedia 內容可能被編輯 → 保留 `retrieved_at`
 - ⚠️ **授權變更**: 圖片授權可能改變 → 定期重新驗證
 
-### 10.2 授權風險
-- ⚠️ **CC BY-SA Share-Alike 義務**: 若使用 Wikipedia 內容，整個資料集需 CC BY-SA
-  - **解決方案**: 分層儲存 (核心資料 CC0，Wikipedia 內容分開)
-- ⚠️ **圖片授權混雜**: Wikimedia Commons 有各種授權
-  - **解決方案**: 只使用 CC0/CC BY 圖片，拒絕 NC/ND
+### 10.2 授權風險（索引模式已解決）
+- ✅ **CC BY-SA Share-Alike 義務**: 採用索引模式，不儲存 Wikipedia 內容，完全避免此問題
+- ✅ **圖片授權混雜**: 只儲存圖片 URL，不下載檔案，由 Wikipedia/Wikimedia 處理授權
+- ✅ **授權變更**: 內容在 Wikipedia 上，授權變更由 Wikimedia 管理
 
 ### 10.3 效能風險
 - ⚠️ **SPARQL 查詢慢**: 複雜查詢可能 > 10s
@@ -774,27 +814,38 @@ const regionName = await WikidataService.reverseGeocode(
 
 ## 12. 總結
 
-### ✅ 你的專案已經做得很好
-- Wikidata SPARQL 整合完整
-- 資料模型支援完整授權追蹤
-- 多語言支援
+### ✅ 架構決策：索引模式 (Index-Only)
+**核心理念**: **把 Wikipedia 當資料庫，我們只做索引**
 
-### 🚀 建議優先改進
-1. **新增 Wikipedia REST API** - 取得更好的摘要與圖片
-2. **分層儲存授權** - 避免 CC BY-SA 義務擴散
-3. **Rate Limiting + Cache** - 提升效能與穩定性
-4. **背景豐富化** - 不阻塞使用者請求
+本專案採用索引模式，具有以下優勢：
+- ✅ **零授權風險** - 不儲存 Wikipedia 內容，避免 CC BY-SA 義務
+- ✅ **零儲存成本** - 只儲存元數據（標題、連結、座標、時間）
+- ✅ **內容永遠最新** - 直接連結到 Wikipedia，無需同步
+- ✅ **符合專案定位** - 「歷史地圖索引」而非「線上百科全書」
+- ✅ **擴展性高** - 可輕鬆索引百萬級事件
 
-### 📋 下一步行動
-建議開票到 `docs/TICKET_BACKLOG.md`:
-- `[T-WIKI-1]` 新增 WikipediaService 與 REST API 整合
-- `[T-WIKI-2]` 新增 event_content 資料表 migration
-- `[T-WIKI-3]` 實作圖片授權查詢與 thumbnail
-- `[T-WIKI-4]` 新增 Rate Limiter 與 Cache 機制
-- `[T-WIKI-5]` 前端 Attribution UI 元件
+### 🎯 已完成改進
+1. **WikidataService 強化** - 新增 Rate Limiting 與 Retry Logic
+2. **License 追蹤** - WikidataEvent 新增 `license: "CC0"` 欄位
+3. **可追溯性** - 新增 `wikidataQid` 欄位保留資料來源
+
+### 📋 建議後續行動
+優先順序從高到低：
+1. **前端 UI** - 加上「查看更多 → Wikipedia」按鈕
+2. **授權展示** - 顯示 Wikidata (CC0) 來源標示
+3. **（可選）預覽功能** - 前端即時呼叫 Wikipedia API 顯示摘要
+4. **Reverse Geocoding** - 補充 `region_name` 欄位
+5. **Sources 頁面** - 列出所有資料來源與授權
+
+### 🚫 不需要實作
+- ~~儲存 Wikipedia 內容~~ - 違反索引模式原則
+- ~~event_content 資料表~~ - 不儲存內容
+- ~~背景豐富化工作~~ - 不需要下載內容
+- ~~內容快取機制~~ - 連結即可，無需快取
 
 ---
 
 **作者**: Claude (Earthistory AI Dev)
-**審閱**: 待人工審閱
-**狀態**: Draft v1.0
+**架構決策日期**: 2026-02-16
+**模式**: Index-Only (索引模式)
+**狀態**: v2.0 - 基於索引模式更新
