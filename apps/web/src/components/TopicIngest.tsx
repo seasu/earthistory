@@ -3,6 +3,16 @@ import React, { useState } from "react";
 import { useLocale } from "../i18n";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "/api";
+const INGEST_ENDPOINTS = [`${API_BASE_URL}/ingestion/topic`, `${API_BASE_URL}/topic`] as const;
+
+type IngestResponse = {
+    error?: string;
+    message?: string;
+    scanned?: number;
+    inserted?: number;
+    devMode?: boolean;
+    suggestions?: string[];
+};
 
 export const TopicIngest: React.FC = () => {
     const { t } = useLocale();
@@ -10,6 +20,23 @@ export const TopicIngest: React.FC = () => {
     const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
     const [message, setMessage] = useState("");
     const [suggestions, setSuggestions] = useState<string[]>([]);
+
+    const postTopic = async (url: string, value: string) => {
+        const response = await fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ topic: value }),
+        });
+
+        let data: IngestResponse = {};
+        try {
+            data = (await response.json()) as IngestResponse;
+        } catch {
+            // Keep empty object for non-JSON error responses.
+        }
+
+        return { response, data };
+    };
 
     const handleIngest = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -20,16 +47,25 @@ export const TopicIngest: React.FC = () => {
         setSuggestions([]);
 
         try {
-            const res = await fetch(`${API_BASE_URL}/ingestion/topic`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ topic }),
-            });
+            let lastResponse: Response | null = null;
+            let data: IngestResponse = {};
 
-            const data = await res.json();
+            for (const endpoint of INGEST_ENDPOINTS) {
+                const result = await postTopic(endpoint, topic);
+                lastResponse = result.response;
+                data = result.data;
 
-            if (!res.ok) {
-                throw new Error(data.error || "Unknown error");
+                if (result.response.ok || result.response.status !== 404) {
+                    break;
+                }
+            }
+
+            if (!lastResponse) {
+                throw new Error("Request failed");
+            }
+
+            if (!lastResponse.ok) {
+                throw new Error(data.error || data.message || `Request failed with status ${lastResponse.status}`);
             }
 
             // Handle zero results with suggestions
@@ -42,7 +78,7 @@ export const TopicIngest: React.FC = () => {
 
             setStatus("success");
             // In dev mode, show scanned count; in production, show inserted count
-            const count = data.devMode ? data.scanned : data.inserted;
+            const count = data.devMode ? (data.scanned ?? 0) : (data.inserted ?? 0);
             const messageKey = data.devMode ? "ingestSuccessDev" : "ingestSuccess";
             setMessage(t(messageKey, { count }));
             setTopic("");

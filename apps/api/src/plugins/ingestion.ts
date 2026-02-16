@@ -57,7 +57,68 @@ type IngestTopicBody = {
   topic: string;
 };
 
+type TopicSearchResult = {
+  id: string;
+  label: string;
+  description: string;
+};
+
+type TopicEventPreview = {
+  title: string;
+  timeStart: number;
+};
+
+const toPreview = (events: Array<{ title: string; timeStart: number }>): TopicEventPreview[] =>
+  events.slice(0, 5).map((event) => ({ title: event.title, timeStart: event.timeStart }));
+
 export const ingestionPlugin: FastifyPluginAsync = async (app) => {
+  const resolveTopic = async (topic: string): Promise<{ searchResult: TopicSearchResult; events: Awaited<ReturnType<typeof WikidataService.fetchRelatedEvents>> } | null> => {
+    const searchResult = await WikidataService.searchTopic(topic);
+    if (!searchResult) {
+      return null;
+    }
+
+    const events = await WikidataService.fetchRelatedEvents(searchResult.id);
+    return { searchResult, events };
+  };
+
+  app.post<{ Body: IngestTopicBody }>("/preview", async (request, reply) => {
+    const { topic } = request.body;
+
+    if (!topic) {
+      return reply.code(400).send({ error: "Topic is required" });
+    }
+
+    app.log.info(`Previewing topic: ${topic}`);
+    const resolved = await resolveTopic(topic);
+    if (!resolved) {
+      return reply.code(404).send({ error: "Topic not found on Wikidata" });
+    }
+
+    const { searchResult, events } = resolved;
+    app.log.info(`Preview fetched ${events.length} events for topic ${searchResult.label}`);
+
+    if (events.length === 0) {
+      const suggestions = await getTopicSuggestions(topic);
+      return reply.send({
+        message: `No events found for topic: ${searchResult.label}`,
+        qid: searchResult.id,
+        scanned: 0,
+        inserted: 0,
+        suggestions,
+        events: []
+      });
+    }
+
+    return reply.send({
+      message: `Preview generated for topic: ${searchResult.label}`,
+      qid: searchResult.id,
+      scanned: events.length,
+      inserted: 0,
+      events: toPreview(events)
+    });
+  });
+
   app.post<{ Body: IngestTopicBody }>("/topic", async (request, reply) => {
     const { topic } = request.body;
 
@@ -74,16 +135,16 @@ export const ingestionPlugin: FastifyPluginAsync = async (app) => {
 
     app.log.info(`Ingesting topic: ${topic}`);
 
-    // 1. Search for the topic QID
-    const searchResult = await WikidataService.searchTopic(topic);
-    if (!searchResult) {
+    // 1. Search for topic + fetch related events
+    const resolved = await resolveTopic(topic);
+    if (!resolved) {
       return reply.code(404).send({ error: "Topic not found on Wikidata" });
     }
+    const { searchResult, events } = resolved;
 
     app.log.info(`Found topic: ${searchResult.label} (${searchResult.id})`);
 
-    // 2. Fetch related events
-    const events = await WikidataService.fetchRelatedEvents(searchResult.id);
+    // 2. Related events already fetched above
     app.log.info(`Fetched ${events.length} events for topic ${searchResult.label}`);
 
     if (events.length === 0) {
@@ -109,7 +170,7 @@ export const ingestionPlugin: FastifyPluginAsync = async (app) => {
         scanned: events.length,
         inserted: 0,
         devMode: true,
-        events: events.slice(0, 5).map(e => ({ title: e.title, timeStart: e.timeStart })) // Preview first 5
+        events: toPreview(events)
       });
     }
 
