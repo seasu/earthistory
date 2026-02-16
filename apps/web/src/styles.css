@@ -554,6 +554,42 @@ body {
   text-decoration: underline;
 }
 
+.event-detail-links a.wikipedia-link {
+  background: #3366cc;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.event-detail-links a.wikipedia-link:hover {
+  background: #2952a8;
+  text-decoration: none;
+}
+
+.event-detail-attribution {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(214, 228, 255, 0.5);
+}
+
+.attribution-text {
+  font-size: 11px;
+  color: #5c6c84;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.attribution-link {
+  color: #3366cc;
+  text-decoration: none;
+}
+
+.attribution-link:hover {
+  text-decoration: underline;
+}
+
 .event-summary {
   font-size: 13px;
   margin: 0 0 8px;
@@ -1056,6 +1092,15 @@ body {
 
   .mobile-card-body .event-detail-links {
     margin-top: 8px;
+  }
+
+  .mobile-card-body .event-detail-attribution {
+    margin-top: 12px;
+    padding-top: 10px;
+  }
+
+  .mobile-card-body .attribution-text {
+    font-size: 10px;
   }
 
   /* Mobile filter controls */

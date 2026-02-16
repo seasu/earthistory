@@ -127,10 +127,63 @@ export const EventDetail: React.FC<EventDetailProps> = ({
                     </a>
                     {/* If we have a wiki link (either from DB or resolved), show it */}
                     {(event.wikipediaUrl || wikiData?.contentUrl) && (
-                        <a href={displaySourceUrl} rel="noreferrer" target="_blank">
-                            Wikipedia
+                        <a
+                            href={displaySourceUrl}
+                            rel="noreferrer"
+                            target="_blank"
+                            className="wikipedia-link"
+                        >
+                            {t("readMore")} →
                         </a>
                     )}
+                </div>
+
+                {/* License Attribution */}
+                <div className="event-detail-attribution">
+                    <p className="attribution-text">
+                        📚 {t("dataFrom")}{" "}
+                        <a
+                            href="https://www.wikidata.org"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="attribution-link"
+                        >
+                            Wikidata
+                        </a>{" "}
+                        (
+                        <a
+                            href="https://creativecommons.org/publicdomain/zero/1.0/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="attribution-link"
+                        >
+                            CC0
+                        </a>
+                        )
+                        {(event.wikipediaUrl || wikiData) && (
+                            <>
+                                {" "}&{" "}
+                                <a
+                                    href="https://www.wikipedia.org"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="attribution-link"
+                                >
+                                    Wikipedia
+                                </a>{" "}
+                                (
+                                <a
+                                    href="https://creativecommons.org/licenses/by-sa/4.0/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="attribution-link"
+                                >
+                                    CC BY-SA 4.0
+                                </a>
+                                )
+                            </>
+                        )}
+                    </p>
                 </div>
             </div>
         </>
