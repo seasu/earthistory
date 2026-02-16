@@ -985,3 +985,6 @@ BEGIN
 END $$;
 
 COMMIT;
+
+-- Fix Tiananmen Square YouTube video
+UPDATE events SET youtube_video_id = 'vG5d-b08J7s' WHERE title = 'Tiananmen Square Protests';
