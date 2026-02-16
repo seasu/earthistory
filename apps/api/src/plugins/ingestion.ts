@@ -57,7 +57,135 @@ type IngestTopicBody = {
   topic: string;
 };
 
+type PreviewTopicBody = {
+  topic: string;
+};
+
+type ConfirmIngestBody = {
+  topic: string;
+  qid: string;
+};
+
 export const ingestionPlugin: FastifyPluginAsync = async (app) => {
+  // New endpoint: Preview events without inserting
+  app.post<{ Body: PreviewTopicBody }>("/preview", async (request, reply) => {
+    const { topic } = request.body;
+
+    if (!topic) {
+      return reply.code(400).send({ error: "Topic is required" });
+    }
+
+    app.log.info(`Previewing topic: ${topic}`);
+
+    // 1. Search for the topic QID
+    const searchResult = await WikidataService.searchTopic(topic);
+    if (!searchResult) {
+      return reply.code(404).send({ error: "Topic not found on Wikidata" });
+    }
+
+    app.log.info(`Found topic: ${searchResult.label} (${searchResult.id})`);
+
+    // 2. Fetch related events
+    const events = await WikidataService.fetchRelatedEvents(searchResult.id);
+    app.log.info(`Fetched ${events.length} events for topic ${searchResult.label}`);
+
+    if (events.length === 0) {
+      const suggestions = await getTopicSuggestions(topic);
+      return reply.send({
+        message: `No events found for topic: ${searchResult.label}`,
+        qid: searchResult.id,
+        events: [],
+        suggestions
+      });
+    }
+
+    // 3. Return events for preview (formatted for UI display)
+    return reply.send({
+      qid: searchResult.id,
+      topicLabel: searchResult.label,
+      events: events.map(e => ({
+        title: e.title,
+        summary: e.summary,
+        timeStart: e.timeStart,
+        timeEnd: e.timeEnd,
+        category: e.category,
+        regionName: e.regionName,
+        lat: e.lat,
+        lng: e.lng,
+        wikipediaUrl: e.wikipediaUrl,
+        sourceUrl: e.sourceUrl
+      }))
+    });
+  });
+
+  // New endpoint: Confirm and insert events
+  app.post<{ Body: ConfirmIngestBody }>("/confirm", async (request, reply) => {
+    const { topic, qid } = request.body;
+
+    if (!topic || !qid) {
+      return reply.code(400).send({ error: "Topic and QID are required" });
+    }
+
+    const pool = getPool();
+    if (!pool) {
+      return reply.code(503).send({ error: "Database not available" });
+    }
+
+    app.log.info(`Confirming ingestion for topic: ${topic} (${qid})`);
+
+    // Fetch events again (we could optimize by caching, but this ensures freshness)
+    const events = await WikidataService.fetchRelatedEvents(qid);
+
+    if (events.length === 0) {
+      return reply.code(404).send({ error: "No events found" });
+    }
+
+    // Insert into DB
+    let insertedCount = 0;
+    for (const event of events) {
+      try {
+        const res = await pool.query(`
+          INSERT INTO events (
+            title, summary, category, region_name,
+            precision_level, confidence_score, time_start, time_end,
+            source_url, location, image_url, wikipedia_url
+          ) VALUES (
+            $1, $2, $3, $4,
+            $5, $6, $7, $8,
+            $9, ST_SetSRID(ST_MakePoint($10, $11), 4326), $12, $13
+          )
+          ON CONFLICT (source_url) DO NOTHING
+        `, [
+          event.title,
+          event.summary,
+          event.category,
+          event.regionName,
+          event.precisionLevel,
+          event.confidenceScore,
+          event.timeStart,
+          event.timeEnd,
+          event.sourceUrl,
+          event.lng,
+          event.lat,
+          event.imageUrl,
+          event.wikipediaUrl
+        ]);
+
+        insertedCount += res.rowCount || 0;
+      } catch (err) {
+        app.log.warn(`Failed to insert event ${event.title}: ${(err as Error).message}`);
+      }
+    }
+
+    return reply.send({
+      message: `Successfully ingested ${insertedCount} events for topic: ${topic}`,
+      qid,
+      scanned: events.length,
+      inserted: insertedCount
+    });
+  });
+
+  // Original endpoint (kept for backwards compatibility)
   app.post<{ Body: IngestTopicBody }>("/topic", async (request, reply) => {
     const { topic } = request.body;
 
