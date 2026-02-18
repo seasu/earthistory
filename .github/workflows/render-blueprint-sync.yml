@@ -1,0 +1,38 @@
+name: Render Blueprint Sync
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - render.yaml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: render-blueprint-sync
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Render Blueprint sync hook
+        env:
+          RENDER_BLUEPRINT_SYNC_HOOK_URL: ${{ secrets.RENDER_BLUEPRINT_SYNC_HOOK_URL }}
+        run: |
+          if [ -z "$RENDER_BLUEPRINT_SYNC_HOOK_URL" ]; then
+            echo "Missing secret: RENDER_BLUEPRINT_SYNC_HOOK_URL"
+            exit 1
+          fi
+
+          response="$(curl -sS -X POST -w '\nHTTP_STATUS:%{http_code}\n' "$RENDER_BLUEPRINT_SYNC_HOOK_URL")"
+          echo "$response"
+          status="$(printf '%s\n' "$response" | awk -F: '/HTTP_STATUS/ {print $2}')"
+
+          if [ "$status" != "201" ] && [ "$status" != "200" ]; then
+            echo "Sync hook failed with HTTP $status"
+            exit 1
+          fi
