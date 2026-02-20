@@ -294,6 +294,121 @@ body {
   border-top: 7px solid #2455c4;
 }
 
+/* ===== Window size controls ===== */
+.year-dial-window-controls {
+  padding: 4px 16px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.window-presets {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.window-preset-btn {
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px solid rgba(36, 85, 196, 0.25);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.7);
+  color: #5a7399;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+  line-height: 1.4;
+}
+
+.window-preset-btn:hover {
+  background: rgba(36, 85, 196, 0.08);
+  border-color: rgba(36, 85, 196, 0.4);
+}
+
+.window-preset-btn.active {
+  background: #2455c4;
+  color: #fff;
+  border-color: #2455c4;
+}
+
+.window-custom-range {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.range-input {
+  width: 80px;
+  padding: 4px 8px;
+  font-size: 12px;
+  border: 1px solid rgba(36, 85, 196, 0.3);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.8);
+  color: #1c2431;
+  text-align: center;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.range-input:focus {
+  border-color: #2455c4;
+  box-shadow: 0 0 0 2px rgba(36, 85, 196, 0.15);
+}
+
+.range-input::-webkit-inner-spin-button,
+.range-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.range-input {
+  -moz-appearance: textfield;
+}
+
+.range-separator {
+  color: #5a7399;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.range-apply-btn {
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid #2455c4;
+  border-radius: 8px;
+  background: #2455c4;
+  color: #fff;
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity 0.15s;
+}
+
+.range-apply-btn:hover {
+  opacity: 0.85;
+}
+
+/* ===== Density bars on ticks ===== */
+.tick-density {
+  width: 4px;
+  min-height: 2px;
+  background: rgba(255, 152, 56, 0.65);
+  border-radius: 2px 2px 0 0;
+  margin-bottom: 1px;
+  transition: height 0.2s;
+}
+
+.year-dial-tick.major .tick-density,
+.year-dial-tick.medium .tick-density {
+  width: 5px;
+  background: rgba(255, 130, 20, 0.75);
+}
+
 /* ===== Floating Overlay: Desktop Filters ===== */
 .overlay-filters-desktop {
   position: absolute;
@@ -913,6 +1028,30 @@ body {
 
   .year-dial-track {
     height: 60px;
+  }
+
+  .year-dial-window-controls {
+    padding: 2px 10px 6px;
+  }
+
+  .window-preset-btn {
+    padding: 2px 8px;
+    font-size: 10px;
+  }
+
+  .range-input {
+    width: 64px;
+    padding: 3px 6px;
+    font-size: 11px;
+  }
+
+  .range-apply-btn {
+    padding: 3px 10px;
+    font-size: 11px;
+  }
+
+  .tick-density {
+    width: 3px;
   }
 
   /* Mode switch: top-right */
