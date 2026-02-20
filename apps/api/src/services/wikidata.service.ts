@@ -179,35 +179,32 @@ export class WikidataService {
         const allQids = [qid, ...relatedQids];
         console.log(`Searching events for QIDs: ${allQids.join(', ')}`);
 
-        // Build VALUES clause for all QIDs
-        const valuesClause = allQids.map(q => `wd:${q}`).join(' ');
+        // Build VALUES clause for all QIDs (used for simple relationship lookups)
+        const allValuesClause = allQids.map(q => `wd:${q}`).join(' ');
 
-        // Use UNION to search across multiple relationship types:
-        // - P31/P279*: instance of / subclass of (for concrete types like "battle")
-        // - P921: main subject (for events about this topic)
-        // - P361: part of (for events that are part of this)
-        // - P17: country (for geographical topics like "China")
-        // - P276: location (for events at this location)
-        // Also accept P580 (start time) as alternative to P585 (point in time)
-        // and optionally fetch P582 (end time) for date ranges
+        // P31/P279* (transitive closure) is expensive — only use with the
+        // original topic QID to avoid SPARQL timeouts on broad entities like
+        // countries (e.g. Q148 "China" would cause a 60s timeout).
         const sparqlQuery = `
       SELECT DISTINCT ?event ?eventLabel ?eventDescription ?date ?endDate ?coord ?article ?image ?typeLabel WHERE {
-        VALUES ?topic { ${valuesClause} }
         {
-          # Events that are instances/subclasses of this type
-          ?event wdt:P31/wdt:P279* ?topic.
+          # P31/P279* only with original topic QID (avoid expensive traversal on countries)
+          ?event wdt:P31/wdt:P279* wd:${qid}.
         } UNION {
-          # Events with this as main subject
-          ?event wdt:P921 ?topic.
-        } UNION {
-          # Events that are part of this
-          ?event wdt:P361 ?topic.
-        } UNION {
-          # Events in this country (for geographical topics)
-          ?event wdt:P17 ?topic.
-        } UNION {
-          # Events at this location
-          ?event wdt:P276 ?topic.
+          VALUES ?topic { ${allValuesClause} }
+          {
+            # Events with this as main subject
+            ?event wdt:P921 ?topic.
+          } UNION {
+            # Events that are part of this
+            ?event wdt:P361 ?topic.
+          } UNION {
+            # Events in this country
+            ?event wdt:P17 ?topic.
+          } UNION {
+            # Events at this location
+            ?event wdt:P276 ?topic.
+          }
         }
 
         # Require coordinates
@@ -230,10 +227,15 @@ export class WikidataService {
         try {
             const response = await this.fetchWithRetry(url);
 
-            if (!response.ok) throw new Error(`SPARQL request failed: ${response.status} ${response.statusText}`);
+            if (!response.ok) {
+                const body = await response.text().catch(() => "");
+                console.error(`SPARQL request failed: ${response.status} ${response.statusText}`, body.slice(0, 500));
+                throw new Error(`SPARQL request failed: ${response.status} ${response.statusText}`);
+            }
 
             const data = await response.json();
             const bindings = data.results.bindings;
+            console.log(`SPARQL returned ${bindings.length} results for QIDs: ${allQids.join(', ')}`);
 
             return bindings.map((item: any) => {
                 // Parse coordinates "Point(lng lat)"
