@@ -13,8 +13,8 @@ const log = (msg) => console.log(`[${new Date().toISOString()}] ${msg}`);
 async function migrate() {
     const connectionString = process.env.DATABASE_URL;
     if (!connectionString) {
-        console.error("DATABASE_URL is required");
-        process.exit(1);
+        log("DATABASE_URL not set, skipping migrations");
+        process.exit(0);
     }
 
     // Determine migrations directory

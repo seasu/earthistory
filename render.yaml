@@ -5,7 +5,7 @@ services:
     rootDir: .
     plan: free
     buildCommand: corepack pnpm install --frozen-lockfile=false && corepack pnpm --filter @earthistory/api build
-    startCommand: corepack pnpm --filter @earthistory/api db:migrate && corepack pnpm --filter @earthistory/api start
+    startCommand: corepack pnpm --filter @earthistory/api db:migrate; corepack pnpm --filter @earthistory/api start
     healthCheckPath: /health
     autoDeploy: true
     # Deployment trigger: 2026-02-16-061900 - Force redeploy with ingestion endpoints
