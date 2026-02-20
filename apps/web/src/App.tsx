@@ -34,7 +34,8 @@ type ListResponse<T> = {
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "/api";
 const TIMELINE_MIN_YEAR = -3500;
 const TIMELINE_MAX_YEAR = 2026;
-const WINDOW_SIZE = 50;
+const DEFAULT_WINDOW_SIZE = 50;
+const WINDOW_PRESETS = [10, 25, 50, 100, 200, 500] as const;
 const MOBILE_BREAKPOINT = 768;
 
 const fetchJson = async <T,>(path: string, signal?: AbortSignal): Promise<T> => {
@@ -69,6 +70,7 @@ export const App = () => {
   const [mode, setMode] = useState<MapMode>("maplibre");
   const [sliderYear, setSliderYear] = useState(1450);
   const [activeYear, setActiveYear] = useState(1450);
+  const [windowSize, setWindowSize] = useState(DEFAULT_WINDOW_SIZE);
   const debounceRef = useRef<ReturnType<typeof setTimeout>>(null);
 
   useEffect(() => {
@@ -142,8 +144,8 @@ export const App = () => {
       setEventsError(null);
 
       const params = new URLSearchParams({
-        from: String(activeYear - WINDOW_SIZE),
-        to: String(activeYear + WINDOW_SIZE),
+        from: String(activeYear - windowSize),
+        to: String(activeYear + windowSize),
         limit: "200",
         locale
       });
@@ -182,9 +184,19 @@ export const App = () => {
 
     void loadEvents();
     return () => controller.abort();
-  }, [activeYear, categoryFilter, youtubeFilter, bbox, reloadToken, locale]);
+  }, [activeYear, windowSize, categoryFilter, youtubeFilter, bbox, reloadToken, locale]);
 
   const categories = useMemo(() => knownCategories, [knownCategories]);
+
+  // Compute event count per year for density visualization on dial
+  const yearDensity = useMemo(() => {
+    const map: Record<number, number> = {};
+    for (const event of events) {
+      const y = event.timeStart;
+      map[y] = (map[y] ?? 0) + 1;
+    }
+    return map;
+  }, [events]);
 
   const filteredEvents = useMemo(() => {
     const normalizedKeyword = keyword.trim().toLowerCase();
@@ -394,7 +406,11 @@ export const App = () => {
               setMobileFiltersOpen(false);
             }}
             formatYear={formatYear}
-            windowHint={t("windowHint")}
+            windowSize={windowSize}
+            windowPresets={WINDOW_PRESETS as unknown as number[]}
+            onWindowSizeChange={setWindowSize}
+            density={yearDensity}
+            t={t}
           />
         </div>
         {!isMobile && (
