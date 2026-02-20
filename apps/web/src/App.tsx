@@ -98,7 +98,17 @@ export const App = () => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [showNoEventsToast, setShowNoEventsToast] = useState(false);
   const [topicIngestOpen, setTopicIngestOpen] = useState(false);
+  const [totalEvents, setTotalEvents] = useState<number | null>(null);
   const noEventsTimerRef = useRef<ReturnType<typeof setTimeout>>(null);
+
+  // Fetch total event count (refresh after ingest)
+  useEffect(() => {
+    const controller = new AbortController();
+    fetchJson<{ totalEvents: number }>("/stats", controller.signal)
+      .then((data) => setTotalEvents(data.totalEvents))
+      .catch(() => { /* ignore */ });
+    return () => controller.abort();
+  }, [reloadToken]);
 
   // Close panels when switching between mobile/desktop
   useEffect(() => {
@@ -374,6 +384,13 @@ export const App = () => {
           2D
         </button>
       </div>
+
+      {/* Total events badge */}
+      {totalEvents !== null && (
+        <div className="total-events-badge">
+          {t("totalData", { count: totalEvents.toLocaleString() })}
+        </div>
+      )}
 
       {/* Top-center: panel icons flanking timeline */}
       <div className="overlay-top-bar">

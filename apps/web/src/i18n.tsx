@@ -41,6 +41,7 @@ const strings: Record<string, Record<Locale, string>> = {
   fromYear: { en: "From year", "zh-TW": "\u8d77\u59cb\u5e74" },
   toYear: { en: "To year", "zh-TW": "\u7d50\u675f\u5e74" },
   apply: { en: "Apply", "zh-TW": "\u5957\u7528" },
+  totalData: { en: "{count} events", "zh-TW": "\u8cc7\u6599\u7e3d\u6578 {count} \u7b46" },
   eventError: { en: "Event load error: ", "zh-TW": "\u4e8b\u4ef6\u8f09\u5165\u932f\u8aa4\uff1a" },
   regionError: { en: "Region error: ", "zh-TW": "\u5730\u5340\u932f\u8aa4\uff1a" },
   year: { en: "year", "zh-TW": "\u5e74" },
