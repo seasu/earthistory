@@ -49,15 +49,19 @@ export const queryPlugin: FastifyPluginAsync = async (app) => {
 
     const pool = getPool();
     if (pool) {
-      return queryEventsFromDb(pool, {
-        category,
-        parsedFrom,
-        parsedTo,
-        parsedHasYouTube,
-        bbox: request.query.bbox,
-        clampedLimit,
-        locale
-      });
+      try {
+        return await queryEventsFromDb(pool, {
+          category,
+          parsedFrom,
+          parsedTo,
+          parsedHasYouTube,
+          bbox: request.query.bbox,
+          clampedLimit,
+          locale
+        });
+      } catch (err) {
+        request.log.warn(`DB query failed, falling back to mock data: ${(err as Error).message}`);
+      }
     }
 
     // Fallback to mock data
@@ -83,7 +87,11 @@ export const queryPlugin: FastifyPluginAsync = async (app) => {
 
     const pool = getPool();
     if (pool) {
-      return queryRegionsFromDb(pool, locale);
+      try {
+        return await queryRegionsFromDb(pool, locale);
+      } catch (err) {
+        request.log.warn(`DB query failed, falling back to mock data: ${(err as Error).message}`);
+      }
     }
 
     // Fallback to mock data
@@ -98,10 +106,14 @@ export const queryPlugin: FastifyPluginAsync = async (app) => {
     };
   });
 
-  app.get("/sources", async () => {
+  app.get("/sources", async (request) => {
     const pool = getPool();
     if (pool) {
-      return querySourcesFromDb(pool);
+      try {
+        return await querySourcesFromDb(pool);
+      } catch (err) {
+        request.log.warn(`DB query failed, falling back to mock data: ${(err as Error).message}`);
+      }
     }
 
     return {
