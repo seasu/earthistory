@@ -131,9 +131,56 @@ export class WikidataService {
         return null;
     }
 
+    // Resolve related QIDs from a topic entity (e.g. "History of China" -> also search "China")
+    static async resolveRelatedQids(qid: string): Promise<string[]> {
+        await this.rateLimiter.waitIfNeeded();
+
+        const sparqlQuery = `
+      SELECT ?country ?subject ?territory WHERE {
+        OPTIONAL { wd:${qid} wdt:P17 ?country. }
+        OPTIONAL { wd:${qid} wdt:P921 ?subject. }
+        OPTIONAL { wd:${qid} wdt:P131 ?territory. }
+      } LIMIT 10
+    `;
+
+        const url = `https://query.wikidata.org/sparql?query=${encodeURIComponent(sparqlQuery)}&format=json`;
+
+        try {
+            const response = await this.fetchWithRetry(url);
+            if (!response.ok) return [];
+
+            const data = await response.json();
+            const bindings = data.results.bindings;
+            const qids = new Set<string>();
+
+            for (const row of bindings) {
+                for (const prop of ['country', 'subject', 'territory']) {
+                    const val = row[prop]?.value;
+                    if (val) {
+                        const match = val.match(/\/(Q\d+)$/);
+                        if (match) qids.add(match[1]);
+                    }
+                }
+            }
+
+            return Array.from(qids);
+        } catch (error) {
+            console.error("Failed to resolve related QIDs:", error);
+            return [];
+        }
+    }
+
     // Fetch events related to a QID (instance of or part of)
     static async fetchRelatedEvents(qid: string, limit = 500): Promise<WikidataEvent[]> {
         await this.rateLimiter.waitIfNeeded();
+
+        // Resolve related entities (e.g. "History of China" -> also get "China")
+        const relatedQids = await this.resolveRelatedQids(qid);
+        const allQids = [qid, ...relatedQids];
+        console.log(`Searching events for QIDs: ${allQids.join(', ')}`);
+
+        // Build VALUES clause for all QIDs
+        const valuesClause = allQids.map(q => `wd:${q}`).join(' ');
 
         // Use UNION to search across multiple relationship types:
         // - P31/P279*: instance of / subclass of (for concrete types like "battle")
@@ -141,28 +188,31 @@ export class WikidataService {
         // - P361: part of (for events that are part of this)
         // - P17: country (for geographical topics like "China")
         // - P276: location (for events at this location)
+        // Also accept P580 (start time) as alternative to P585 (point in time)
         const sparqlQuery = `
       SELECT DISTINCT ?event ?eventLabel ?eventDescription ?date ?coord ?article ?image ?typeLabel WHERE {
+        VALUES ?topic { ${valuesClause} }
         {
           # Events that are instances/subclasses of this type
-          ?event wdt:P31/wdt:P279* wd:${qid}.
+          ?event wdt:P31/wdt:P279* ?topic.
         } UNION {
           # Events with this as main subject
-          ?event wdt:P921 wd:${qid}.
+          ?event wdt:P921 ?topic.
         } UNION {
           # Events that are part of this
-          ?event wdt:P361 wd:${qid}.
+          ?event wdt:P361 ?topic.
         } UNION {
           # Events in this country (for geographical topics)
-          ?event wdt:P17 wd:${qid}.
+          ?event wdt:P17 ?topic.
         } UNION {
           # Events at this location
-          ?event wdt:P276 wd:${qid}.
+          ?event wdt:P276 ?topic.
         }
 
-        # Require coordinates and date
-        ?event wdt:P625 ?coord;
-               wdt:P585 ?date.
+        # Require coordinates
+        ?event wdt:P625 ?coord.
+        # Accept either point in time (P585) or start time (P580)
+        { ?event wdt:P585 ?date. } UNION { ?event wdt:P580 ?date. }
 
         OPTIONAL { ?event wdt:P31 ?type. }
         OPTIONAL { ?article schema:about ?event; schema:isPartOf <https://en.wikipedia.org/>. }
