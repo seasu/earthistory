@@ -1,3 +1,9 @@
+databases:
+  - name: earthistory-db
+    plan: free
+    databaseName: earthistory
+    postgresMajorVersion: "16"
+
 services:
   - type: web
     name: earthistory-api-staging
@@ -8,9 +14,12 @@ services:
     startCommand: corepack pnpm --filter @earthistory/api db:migrate; corepack pnpm --filter @earthistory/api start
     healthCheckPath: /health
     autoDeploy: true
-    # Deployment trigger: 2026-02-16-061900 - Force redeploy with ingestion endpoints
     envVars:
       - key: NODE_VERSION
         value: 20
       - key: CORS_ORIGINS
         value: https://seasu.github.io,http://localhost:5173
+      - key: DATABASE_URL
+        fromDatabase:
+          name: earthistory-db
+          property: connectionString
