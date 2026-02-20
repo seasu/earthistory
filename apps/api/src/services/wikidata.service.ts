@@ -189,8 +189,9 @@ export class WikidataService {
         // - P17: country (for geographical topics like "China")
         // - P276: location (for events at this location)
         // Also accept P580 (start time) as alternative to P585 (point in time)
+        // and optionally fetch P582 (end time) for date ranges
         const sparqlQuery = `
-      SELECT DISTINCT ?event ?eventLabel ?eventDescription ?date ?coord ?article ?image ?typeLabel WHERE {
+      SELECT DISTINCT ?event ?eventLabel ?eventDescription ?date ?endDate ?coord ?article ?image ?typeLabel WHERE {
         VALUES ?topic { ${valuesClause} }
         {
           # Events that are instances/subclasses of this type
@@ -213,6 +214,8 @@ export class WikidataService {
         ?event wdt:P625 ?coord.
         # Accept either point in time (P585) or start time (P580)
         { ?event wdt:P585 ?date. } UNION { ?event wdt:P580 ?date. }
+        # Optionally fetch end time (P582) for date ranges
+        OPTIONAL { ?event wdt:P582 ?endDate. }
 
         OPTIONAL { ?event wdt:P31 ?type. }
         OPTIONAL { ?article schema:about ?event; schema:isPartOf <https://en.wikipedia.org/>. }
@@ -241,6 +244,8 @@ export class WikidataService {
 
                 const dateStr = item.date.value;
                 const year = new Date(dateStr).getFullYear();
+                const endDateStr = item.endDate?.value;
+                const endYear = endDateStr ? new Date(endDateStr).getFullYear() : null;
 
                 // Smart Categorization
                 const typeLabel = item.typeLabel?.value?.toLowerCase() || "";
@@ -267,7 +272,7 @@ export class WikidataService {
                     precisionLevel: "year",
                     confidenceScore: 1.0,
                     timeStart: year,
-                    timeEnd: null,
+                    timeEnd: endYear,
                     sourceUrl: item.event.value,
                     lat,
                     lng,
