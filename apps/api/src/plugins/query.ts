@@ -80,7 +80,8 @@ export const queryPlugin: FastifyPluginAsync = async (app) => {
     // Fallback to mock data
     const filtered = mockEvents.filter((event) => {
       if (category && event.category !== category) return false;
-      if (Number.isFinite(parsedFrom) && event.timeStart < (parsedFrom as number)) return false;
+      const eventEnd = event.timeEnd ?? event.timeStart;
+      if (Number.isFinite(parsedFrom) && eventEnd < (parsedFrom as number)) return false;
       if (Number.isFinite(parsedTo) && event.timeStart > (parsedTo as number)) return false;
       if (parsedHasYouTube === true && !event.youtubeVideoId) return false;
       if (parsedHasYouTube === false && event.youtubeVideoId) return false;
@@ -161,10 +162,12 @@ const queryEventsFromDb = async (
     values.push(params.category);
   }
   if (Number.isFinite(params.parsedFrom)) {
-    conditions.push(`time_start >= $${idx++}`);
+    // Event overlaps range: event ends at or after the range start
+    conditions.push(`COALESCE(time_end, time_start) >= $${idx++}`);
     values.push(params.parsedFrom as number);
   }
   if (Number.isFinite(params.parsedTo)) {
+    // Event overlaps range: event starts at or before the range end
     conditions.push(`time_start <= $${idx++}`);
     values.push(params.parsedTo as number);
   }
