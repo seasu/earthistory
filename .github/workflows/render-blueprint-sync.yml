@@ -18,6 +18,7 @@ concurrency:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    environment: main - earthistory-api-staging
     steps:
       - name: Trigger Render Blueprint sync hook
         env:
