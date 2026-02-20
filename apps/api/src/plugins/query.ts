@@ -35,6 +35,19 @@ export const queryPlugin: FastifyPluginAsync = async (app) => {
     return { module: "query", ok: true, dataSource: pool ? "postgres" : "mock" };
   });
 
+  app.get("/stats", async (request) => {
+    const pool = getPool();
+    if (pool) {
+      try {
+        const result = await pool.query("SELECT COUNT(*)::int AS total FROM events");
+        return { totalEvents: result.rows[0].total };
+      } catch (err) {
+        request.log.warn(`DB stats query failed, falling back to mock: ${(err as Error).message}`);
+      }
+    }
+    return { totalEvents: mockEvents.length };
+  });
+
   app.get<{ Querystring: EventsQuery }>("/events", async (request) => {
     const { category, from, to, limit = 50, hasYouTube, locale } = request.query;
     const parsedFrom =

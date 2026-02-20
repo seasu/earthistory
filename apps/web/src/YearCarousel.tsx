@@ -303,7 +303,7 @@ export const YearCarousel = ({
             <div className="year-dial-ticks">
               {ticks.map((tick) => {
                 const count = density[tick.year] ?? 0;
-                const barHeight = maxDensity > 0 ? Math.round((count / maxDensity) * 20) : 0;
+                const barHeight = maxDensity > 0 ? Math.round((count / maxDensity) * 30) : 0;
 
                 return (
                   <div
