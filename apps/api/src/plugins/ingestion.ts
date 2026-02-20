@@ -133,6 +133,15 @@ export const ingestionPlugin: FastifyPluginAsync = async (app) => {
 
     app.log.info(`Confirming ingestion for topic: ${topic} (${qid})`);
 
+    // Ensure a Wikidata source entry exists
+    const sourceRes = await pool.query(`
+      INSERT INTO sources (source_name, source_url, license, attribution_text, retrieved_at)
+      VALUES ('Wikidata', 'https://www.wikidata.org', 'CC0', 'Data from Wikidata, licensed under CC0', NOW())
+      ON CONFLICT (source_name, source_url) DO UPDATE SET retrieved_at = NOW()
+      RETURNING id
+    `);
+    const sourceId = sourceRes.rows[0].id;
+
     // Fetch events again (we could optimize by caching, but this ensures freshness)
     const events = await WikidataService.fetchRelatedEvents(qid);
 
@@ -148,11 +157,11 @@ export const ingestionPlugin: FastifyPluginAsync = async (app) => {
           INSERT INTO events (
             title, summary, category, region_name,
             precision_level, confidence_score, time_start, time_end,
-            source_url, location, image_url, wikipedia_url
+            source_id, source_url, location, image_url, wikipedia_url
           ) VALUES (
             $1, $2, $3, $4,
             $5, $6, $7, $8,
-            $9, ST_SetSRID(ST_MakePoint($10, $11), 4326), $12, $13
+            $9, $10, ST_SetSRID(ST_MakePoint($11, $12), 4326), $13, $14
           )
           ON CONFLICT (source_url) DO NOTHING
         `, [
@@ -164,6 +173,7 @@ export const ingestionPlugin: FastifyPluginAsync = async (app) => {
           event.confidenceScore,
           event.timeStart,
           event.timeEnd,
+          sourceId,
           event.sourceUrl,
           event.lng,
           event.lat,
@@ -241,19 +251,26 @@ export const ingestionPlugin: FastifyPluginAsync = async (app) => {
       });
     }
 
+    // Ensure a Wikidata source entry exists
+    const sourceRes = await pool.query(`
+      INSERT INTO sources (source_name, source_url, license, attribution_text, retrieved_at)
+      VALUES ('Wikidata', 'https://www.wikidata.org', 'CC0', 'Data from Wikidata, licensed under CC0', NOW())
+      ON CONFLICT (source_name, source_url) DO UPDATE SET retrieved_at = NOW()
+      RETURNING id
+    `);
+    const sourceId = sourceRes.rows[0].id;
+
     for (const event of events) {
       try {
-        // Note: ON CONFLICT (source_url) requires a unique constraint/index on source_url.
-        // If not present, this will error. We should ensure the migration exists.
         const res = await pool.query(`
           INSERT INTO events (
-            title, summary, category, region_name, 
+            title, summary, category, region_name,
             precision_level, confidence_score, time_start, time_end,
-            source_url, location, image_url, wikipedia_url
+            source_id, source_url, location, image_url, wikipedia_url
           ) VALUES (
-            $1, $2, $3, $4, 
-            $5, $6, $7, $8, 
-            $9, ST_SetSRID(ST_MakePoint($10, $11), 4326), $12, $13
+            $1, $2, $3, $4,
+            $5, $6, $7, $8,
+            $9, $10, ST_SetSRID(ST_MakePoint($11, $12), 4326), $13, $14
           )
           ON CONFLICT (source_url) DO NOTHING
         `, [
@@ -265,6 +282,7 @@ export const ingestionPlugin: FastifyPluginAsync = async (app) => {
           event.confidenceScore,
           event.timeStart,
           event.timeEnd,
+          sourceId,
           event.sourceUrl,
           event.lng,
           event.lat,
