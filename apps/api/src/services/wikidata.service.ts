@@ -47,6 +47,23 @@ type WikidataEvent = {
     wikidataQid: string;  // Keep QID for traceability
 };
 
+/**
+ * Parse a Wikidata ISO 8601 date string into a year number.
+ * Wikidata returns dates like "+1453-05-29T00:00:00Z" or "-0500-01-01T00:00:00Z".
+ * `new Date()` doesn't reliably handle negative years or years with leading +/-.
+ */
+function parseWikidataYear(dateStr: string): number {
+    // Match optional +/- sign followed by digits before the first '-' month separator
+    const m = dateStr.match(/^([+-]?\d+)/);
+    if (m) {
+        const parsed = parseInt(m[1], 10);
+        if (Number.isFinite(parsed)) return parsed;
+    }
+    // Fallback: try Date constructor (works for most CE dates)
+    const fallback = new Date(dateStr).getFullYear();
+    return Number.isFinite(fallback) ? fallback : 0;
+}
+
 // Mapping from Wikidata "instance of" (P31) labels to our App's categories
 const CATEGORY_MAPPING: Record<string, string> = {
     "war": "war",
@@ -92,6 +109,11 @@ const CATEGORY_MAPPING: Record<string, string> = {
     "deity": "religion"
 };
 
+/** Validate that a string is a legitimate Wikidata QID (e.g. "Q42") */
+function isValidQid(qid: string): boolean {
+    return /^Q\d+$/.test(qid);
+}
+
 export class WikidataService {
     private static readonly USER_AGENT = "Earthistory/1.0 (seasu@example.com)";
 
@@ -133,6 +155,7 @@ export class WikidataService {
 
     // Resolve related QIDs from a topic entity (e.g. "History of China" -> also search "China")
     static async resolveRelatedQids(qid: string): Promise<string[]> {
+        if (!isValidQid(qid)) return [];
         await this.rateLimiter.waitIfNeeded();
 
         const sparqlQuery = `
@@ -172,10 +195,11 @@ export class WikidataService {
 
     // Fetch events related to a QID (instance of or part of)
     static async fetchRelatedEvents(qid: string, limit = 500): Promise<WikidataEvent[]> {
+        if (!isValidQid(qid)) return [];
         await this.rateLimiter.waitIfNeeded();
 
         // Resolve related entities (e.g. "History of China" -> also get "China")
-        const relatedQids = await this.resolveRelatedQids(qid);
+        const relatedQids = (await this.resolveRelatedQids(qid)).filter(isValidQid);
         const allQids = [qid, ...relatedQids];
         console.log(`Searching events for QIDs: ${allQids.join(', ')}`);
 
@@ -245,9 +269,9 @@ export class WikidataService {
                 const lat = match ? parseFloat(match[2]) : 0;
 
                 const dateStr = item.date.value;
-                const year = new Date(dateStr).getFullYear();
+                const year = parseWikidataYear(dateStr);
                 const endDateStr = item.endDate?.value;
-                const endYear = endDateStr ? new Date(endDateStr).getFullYear() : null;
+                const endYear = endDateStr ? parseWikidataYear(endDateStr) : null;
 
                 // Smart Categorization
                 const typeLabel = item.typeLabel?.value?.toLowerCase() || "";
