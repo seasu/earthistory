@@ -35,17 +35,13 @@ export class TopicService {
 
             if (!parentId) return;
 
-            // 2. Insert Children with Parent Reference
-            // We can use unnest for bulk insert if array is large, or loop. 
-            // Given limit=10 from Wikipedia, loop is fine but bulk is better.
-            const childrenValues = childrenNames.map(name => `('${name.replace(/'/g, "''")}', '${lang}', 'topic', ${parentId})`).join(",");
-
-            if (childrenNames.length > 0) {
+            // 2. Insert Children with Parent Reference (parameterized to prevent SQL injection)
+            for (const childName of childrenNames) {
                 await pool.query(`
           INSERT INTO topics (name, language, type, parent_id)
-          VALUES ${childrenValues}
+          VALUES ($1, $2, 'topic', $3)
           ON CONFLICT (name, language) DO NOTHING
-        `);
+        `, [childName, lang, parentId]);
             }
 
             console.log(`Saved topic hierarchy: ${parentName} -> ${childrenNames.length} children`);
