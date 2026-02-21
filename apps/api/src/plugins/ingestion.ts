@@ -157,11 +157,13 @@ export const ingestionPlugin: FastifyPluginAsync = async (app) => {
           INSERT INTO events (
             title, summary, category, region_name,
             precision_level, confidence_score, time_start, time_end,
-            source_id, source_url, location, image_url, wikipedia_url
+            source_id, source_url, location, image_url, wikipedia_url,
+            youtube_video_id
           ) VALUES (
             $1, $2, $3, $4,
             $5, $6, $7, $8,
-            $9, $10, ST_SetSRID(ST_MakePoint($11, $12), 4326), $13, $14
+            $9, $10, ST_SetSRID(ST_MakePoint($11, $12), 4326), $13, $14,
+            $15
           )
           ON CONFLICT (source_url) DO NOTHING
         `, [
@@ -178,7 +180,8 @@ export const ingestionPlugin: FastifyPluginAsync = async (app) => {
           event.lng,
           event.lat,
           event.imageUrl,
-          event.wikipediaUrl
+          event.wikipediaUrl,
+          event.youtubeVideoId ?? null,
         ]);
 
         insertedCount += res.rowCount || 0;
@@ -193,6 +196,113 @@ export const ingestionPlugin: FastifyPluginAsync = async (app) => {
       scanned: events.length,
       inserted: insertedCount
     });
+  });
+
+  // Curated list of high-yield topics that return many image-rich events from Wikidata
+  const CURATED_TOPICS = [
+    // Wars & Battles
+    "World War I", "World War II", "Napoleonic Wars", "American Civil War",
+    "Hundred Years' War", "Crusades", "Seven Years' War", "Korean War",
+    "Vietnam War", "Punic Wars", "Thirty Years' War", "War of 1812",
+    // Empires & Civilizations
+    "Roman Empire", "Byzantine Empire", "Ottoman Empire", "Mongol Empire",
+    "British Empire", "Han Dynasty", "Tang Dynasty", "Ming Dynasty",
+    "Qing Dynasty", "Mughal Empire", "Persian Empire", "Inca Empire",
+    "Aztec Empire", "Ancient Egypt", "Ancient Greece",
+    // Exploration & Space
+    "Age of Discovery", "Apollo program", "Space Shuttle program",
+    "International Space Station",
+    // Revolutions & Politics
+    "French Revolution", "Russian Revolution", "American Revolution",
+    "Industrial Revolution", "Chinese Revolution",
+    // Science & Technology
+    "Manhattan Project", "History of computing", "History of aviation",
+    // Culture & Religion
+    "Renaissance", "Protestant Reformation", "Silk Road",
+    // Natural Disasters
+    "2011 Tōhoku earthquake", "1906 San Francisco earthquake",
+    "2004 Indian Ocean earthquake", "Vesuvius",
+  ];
+
+  // Batch ingestion: ingest multiple curated topics at once
+  app.post("/batch", async (request, reply) => {
+    const pool = getPool();
+    if (!pool) {
+      return reply.code(503).send({ error: "Database not available" });
+    }
+
+    const results: { topic: string; events: number; status: string }[] = [];
+    const body = request.body as { topics?: string[] } | undefined;
+    const topics = body?.topics ?? CURATED_TOPICS;
+
+    app.log.info(`Batch ingestion starting for ${topics.length} topics`);
+
+    // Ensure source entry
+    const sourceRes = await pool.query(`
+      INSERT INTO sources (source_name, source_url, license, attribution_text, retrieved_at)
+      VALUES ('Wikidata', 'https://www.wikidata.org', 'CC0', 'Data from Wikidata, licensed under CC0', NOW())
+      ON CONFLICT (source_name, source_url) DO UPDATE SET retrieved_at = NOW()
+      RETURNING id
+    `);
+    const sourceId = sourceRes.rows[0].id;
+
+    for (const topic of topics) {
+      try {
+        app.log.info(`Batch: ingesting "${topic}"...`);
+        const searchResult = await WikidataService.searchTopic(topic);
+        if (!searchResult) {
+          results.push({ topic, events: 0, status: "not_found" });
+          continue;
+        }
+
+        const events = await WikidataService.fetchRelatedEvents(searchResult.id);
+        let inserted = 0;
+
+        for (const event of events) {
+          try {
+            const res = await pool.query(`
+              INSERT INTO events (
+                title, summary, category, region_name,
+                precision_level, confidence_score, time_start, time_end,
+                source_id, source_url, location, image_url, wikipedia_url,
+                youtube_video_id
+              ) VALUES (
+                $1, $2, $3, $4,
+                $5, $6, $7, $8,
+                $9, $10, ST_SetSRID(ST_MakePoint($11, $12), 4326), $13, $14,
+                $15
+              )
+              ON CONFLICT (source_url) DO NOTHING
+            `, [
+              event.title, event.summary, event.category, event.regionName,
+              event.precisionLevel, event.confidenceScore,
+              event.timeStart, event.timeEnd,
+              sourceId, event.sourceUrl, event.lng, event.lat,
+              event.imageUrl, event.wikipediaUrl,
+              event.youtubeVideoId ?? null,
+            ]);
+            inserted += res.rowCount || 0;
+          } catch { /* skip duplicates */ }
+        }
+
+        results.push({ topic, events: inserted, status: "ok" });
+        app.log.info(`  → ${inserted} events inserted for "${topic}"`);
+      } catch (err) {
+        results.push({ topic, events: 0, status: `error: ${(err as Error).message}` });
+      }
+    }
+
+    const totalInserted = results.reduce((sum, r) => sum + r.events, 0);
+    return reply.send({
+      message: `Batch ingestion complete: ${totalInserted} total events from ${topics.length} topics`,
+      totalInserted,
+      results,
+    });
+  });
+
+  // GET curated topics list
+  app.get("/topics", async () => {
+    return { topics: CURATED_TOPICS };
   });
 
   // Original endpoint (kept for backwards compatibility)
@@ -266,11 +376,13 @@ export const ingestionPlugin: FastifyPluginAsync = async (app) => {
           INSERT INTO events (
             title, summary, category, region_name,
             precision_level, confidence_score, time_start, time_end,
-            source_id, source_url, location, image_url, wikipedia_url
+            source_id, source_url, location, image_url, wikipedia_url,
+            youtube_video_id
           ) VALUES (
             $1, $2, $3, $4,
             $5, $6, $7, $8,
-            $9, $10, ST_SetSRID(ST_MakePoint($11, $12), 4326), $13, $14
+            $9, $10, ST_SetSRID(ST_MakePoint($11, $12), 4326), $13, $14,
+            $15
           )
           ON CONFLICT (source_url) DO NOTHING
         `, [
@@ -287,7 +399,8 @@ export const ingestionPlugin: FastifyPluginAsync = async (app) => {
           event.lng,
           event.lat,
           event.imageUrl,
-          event.wikipediaUrl
+          event.wikipediaUrl,
+          event.youtubeVideoId ?? null,
         ]);
 
         insertedCount += res.rowCount || 0;
