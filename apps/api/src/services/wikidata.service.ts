@@ -42,6 +42,7 @@ type WikidataEvent = {
     lng: number;
     imageUrl: string | null;
     wikipediaUrl: string | null;
+    youtubeVideoId: string | null;
     license: "CC0";  // Wikidata content is always CC0
     dataSource: "wikidata";
     wikidataQid: string;  // Keep QID for traceability
@@ -210,7 +211,7 @@ export class WikidataService {
         // original topic QID to avoid SPARQL timeouts on broad entities like
         // countries (e.g. Q148 "China" would cause a 60s timeout).
         const sparqlQuery = `
-      SELECT DISTINCT ?event ?eventLabel ?eventDescription ?date ?endDate ?coord ?article ?image ?typeLabel WHERE {
+      SELECT DISTINCT ?event ?eventLabel ?eventDescription ?date ?endDate ?coord ?article ?image ?typeLabel ?youtube WHERE {
         {
           # P31/P279* only with original topic QID (avoid expensive traversal on countries)
           ?event wdt:P31/wdt:P279* wd:${qid}.
@@ -241,8 +242,10 @@ export class WikidataService {
         OPTIONAL { ?event wdt:P31 ?type. }
         OPTIONAL { ?article schema:about ?event; schema:isPartOf <https://en.wikipedia.org/>. }
         OPTIONAL { ?event wdt:P18 ?image. }
-        SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+        OPTIONAL { ?event wdt:P1651 ?youtube. }
+        SERVICE wikibase:label { bd:serviceParam wikibase:language "en,zh,zh-tw,zh-cn". }
       }
+      ORDER BY DESC(BOUND(?image)) DESC(BOUND(?youtube))
       LIMIT ${limit}
     `;
 
@@ -294,7 +297,7 @@ export class WikidataService {
                     title: item.eventLabel.value,
                     summary: item.eventDescription?.value || "No description available.",
                     category,
-                    regionName: "", // Would need reverse geocoding or another property
+                    regionName: "",
                     precisionLevel: "year",
                     confidenceScore: 1.0,
                     timeStart: year,
@@ -304,6 +307,7 @@ export class WikidataService {
                     lng,
                     imageUrl: item.image?.value || null,
                     wikipediaUrl: item.article?.value || null,
+                    youtubeVideoId: item.youtube?.value || null,
                     license: "CC0",
                     dataSource: "wikidata",
                     wikidataQid: qid
