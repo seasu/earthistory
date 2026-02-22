@@ -1,0 +1,118 @@
+name: Data Refresh (Wikidata Bulk Ingest)
+
+on:
+  # Run every Sunday at 02:00 UTC
+  schedule:
+    - cron: "0 2 * * 0"
+  # Allow manual trigger with options
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "Ingestion mode"
+        required: true
+        default: "full"
+        type: choice
+        options:
+          - full
+          - youtube-only
+          - images-only
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # Use a deploy key or PAT so the push can trigger downstream workflows
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.6.0
+          run_install: false
+
+      - name: Install root dependencies
+        run: pnpm install --frozen-lockfile=false --filter=. --ignore-workspace
+
+      - name: Run bulk ingestion
+        id: ingest
+        run: |
+          MODE="${{ github.event.inputs.mode || 'full' }}"
+          FLAG=""
+          if [ "$MODE" = "youtube-only" ]; then FLAG="--youtube-only"; fi
+          if [ "$MODE" = "images-only" ]; then FLAG="--images-only"; fi
+
+          echo "Running bulk-ingest with mode: $MODE (flag: $FLAG)"
+          node scripts/bulk-ingest.mjs $FLAG 2>&1 | tee /tmp/ingest.log
+
+          # Extract final stats for PR description
+          TOTAL=$(grep "Total events:" /tmp/ingest.log | tail -1 | grep -oE '[0-9]+' | head -1)
+          WITH_IMG=$(grep "With images:" /tmp/ingest.log | tail -1 | grep -oP '\d+(?= \()' | head -1)
+          WITH_YT=$(grep "With YouTube:" /tmp/ingest.log | tail -1 | grep -oP '\d+(?= \()' | head -1)
+
+          echo "total=$TOTAL" >> "$GITHUB_OUTPUT"
+          echo "with_img=$WITH_IMG" >> "$GITHUB_OUTPUT"
+          echo "with_yt=$WITH_YT" >> "$GITHUB_OUTPUT"
+
+      - name: Check for changes
+        id: diff
+        run: |
+          if git diff --quiet infra/data/seed/events.seed.json; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            OLD=$(git show HEAD:infra/data/seed/events.seed.json | python3 -c "import sys,json; d=json.load(sys.stdin); print(len(d.get('events', [])))" 2>/dev/null || echo "?")
+            echo "old_count=$OLD" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create Pull Request
+        if: steps.diff.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: |
+            data: refresh Wikidata seed (${{ steps.ingest.outputs.total }} events)
+
+            - Total events: ${{ steps.ingest.outputs.total }} (was ~${{ steps.diff.outputs.old_count }})
+            - With images:  ${{ steps.ingest.outputs.with_img }}
+            - With YouTube: ${{ steps.ingest.outputs.with_yt }}
+          branch: data/wikidata-refresh-${{ github.run_number }}
+          title: "data: Wikidata seed refresh — ${{ steps.ingest.outputs.total }} events (${{ steps.ingest.outputs.with_yt }} with YouTube)"
+          body: |
+            ## Automated Wikidata Data Refresh
+
+            | Metric | Value |
+            |--------|-------|
+            | Total events | ${{ steps.ingest.outputs.total }} |
+            | With images | ${{ steps.ingest.outputs.with_img }} |
+            | With YouTube | ${{ steps.ingest.outputs.with_yt }} |
+            | Previous count | ~${{ steps.diff.outputs.old_count }} |
+
+            ### How to deploy
+            After merging, run the seed ingestion on the API server:
+            ```bash
+            pnpm --filter @earthistory/api ingest:seed
+            ```
+
+            <details>
+            <summary>Ingestion log</summary>
+
+            ```
+            $(cat /tmp/ingest.log | tail -80)
+            ```
+            </details>
+
+            *Triggered by: ${{ github.event_name }} / mode: ${{ github.event.inputs.mode || 'full' }}*
+          labels: "data,automated"
+          delete-branch: true
