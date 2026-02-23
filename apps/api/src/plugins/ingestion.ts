@@ -3,6 +3,7 @@ import { FastifyPluginAsync } from "fastify";
 import { WikidataService } from "../services/wikidata.service.js";
 import { TopicService } from "../services/topic.service.js";
 import { getPool } from "../db.js";
+import { invalidateStatsCache } from "./query.js";
 
 // Helper function to suggest better topics when 0 events found
 async function getTopicSuggestions(topic: string): Promise<string[]> {
@@ -190,6 +191,7 @@ export const ingestionPlugin: FastifyPluginAsync = async (app) => {
       }
     }
 
+    if (insertedCount > 0) invalidateStatsCache();
     return reply.send({
       message: `Successfully ingested ${insertedCount} events for topic: ${topic}`,
       qid,
@@ -410,6 +412,7 @@ export const ingestionPlugin: FastifyPluginAsync = async (app) => {
       }
     }
 
+    if (insertedCount > 0) invalidateStatsCache();
     return reply.send({
       message: `Successfully ingested events for topic: ${searchResult.label}`,
       qid: searchResult.id,

@@ -1,11 +1,13 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { MapViewport } from "./map/MapViewport";
 import { MapMode } from "./map/types";
 import { useLocale } from "./i18n";
 import { YearCarousel } from "./YearCarousel";
 
 import { EventDetail } from "./components/EventDetail";
-import { TopicIngest } from "./components/TopicIngest";
+const TopicIngest = lazy(() =>
+  import("./components/TopicIngest").then((m) => ({ default: m.TopicIngest }))
+);
 
 type EventRecord = {
   id: number;
@@ -698,15 +700,19 @@ export const App = () => {
         </>
       )}
 
-      {/* Topic Ingest Dialog */}
-      <TopicIngest
-        isOpen={topicIngestOpen}
-        onClose={() => setTopicIngestOpen(false)}
-        onConfirm={() => {
-          // Reload events after confirmation
-          setReloadToken((v) => v + 1);
-        }}
-      />
+      {/* Topic Ingest Dialog — lazy-loaded, only fetched when first opened */}
+      {topicIngestOpen && (
+        <Suspense fallback={null}>
+          <TopicIngest
+            isOpen={topicIngestOpen}
+            onClose={() => setTopicIngestOpen(false)}
+            onConfirm={() => {
+              // Reload events after confirmation
+              setReloadToken((v) => v + 1);
+            }}
+          />
+        </Suspense>
+      )}
     </div>
   );
 };
