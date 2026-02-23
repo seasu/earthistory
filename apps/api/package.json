@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "ingest:seed": "node scripts/ingest-seed.mjs",
+    "ingest:seed-db": "node scripts/load-seed-to-db.mjs",
     "build": "tsc -p tsconfig.json",
     "start": "node dist/server.js",
     "db:migrate": "node scripts/migrate.js",
