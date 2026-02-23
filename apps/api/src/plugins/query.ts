@@ -29,6 +29,16 @@ const localizeEvent = (event: typeof mockEvents[number], locale: string | undefi
   return event;
 };
 
+// Simple in-memory cache for /stats to avoid a full COUNT(*) table scan on every page load.
+// Invalidated when the cache TTL expires or explicitly cleared (e.g. after ingest).
+const statsCache: { value: number | null; expiresAt: number } = { value: null, expiresAt: 0 };
+const STATS_CACHE_TTL_MS = 60_000; // 60 seconds
+
+export const invalidateStatsCache = () => {
+  statsCache.value = null;
+  statsCache.expiresAt = 0;
+};
+
 export const queryPlugin: FastifyPluginAsync = async (app) => {
   app.get("/health/query", async () => {
     const pool = getPool();
@@ -39,8 +49,13 @@ export const queryPlugin: FastifyPluginAsync = async (app) => {
     const pool = getPool();
     if (pool) {
       try {
+        if (statsCache.value !== null && Date.now() < statsCache.expiresAt) {
+          return { totalEvents: statsCache.value };
+        }
         const result = await pool.query("SELECT COUNT(*)::int AS total FROM events");
-        return { totalEvents: result.rows[0].total };
+        statsCache.value = result.rows[0].total as number;
+        statsCache.expiresAt = Date.now() + STATS_CACHE_TTL_MS;
+        return { totalEvents: statsCache.value };
       } catch (err) {
         request.log.warn(`DB stats query failed, falling back to mock: ${(err as Error).message}`);
       }

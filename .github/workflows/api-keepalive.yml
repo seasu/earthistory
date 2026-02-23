@@ -1,0 +1,23 @@
+name: API Keep-Alive
+
+on:
+  schedule:
+    # Ping every 9 minutes to prevent Render.com free tier from sleeping (15-min idle timeout)
+    - cron: "*/9 * * * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping staging API
+        run: |
+          echo "Pinging staging API to prevent cold start..."
+          STATUS=$(curl -sf --max-time 60 -o /dev/null -w "%{http_code}" \
+            "${{ vars.STAGING_API_URL || 'https://earthistory-api-staging.onrender.com' }}/health")
+          echo "HTTP status: $STATUS"
+          if [ "$STATUS" = "200" ]; then
+            echo "API is warm and healthy."
+          else
+            echo "Warning: API returned status $STATUS (may still be warming up)."
+          fi
